@@ -12,7 +12,7 @@ public class User {
     private String password;
 
     public User() {
-        this.userId = UUID.randomUUID().timestamp();
+        this.userId = UUID.randomUUID().timestamp();//TODO unique ID because generated ID can be the same with DB ID
     }
 
     public long getUserId() {
