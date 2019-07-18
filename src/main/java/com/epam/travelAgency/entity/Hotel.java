@@ -1,11 +1,14 @@
 package com.epam.travelAgency.entity;
 
+import org.postgis.PGgeometry;
+import org.postgresql.util.PGobject;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Component
-public class Hotel {
+public class Hotel extends Entity {
 
     enum Feature {
 
@@ -32,8 +35,8 @@ public class Hotel {
     private long hotelId;
     private String name;
     private int stars;
-    private Object website;//TODO Postgres inet type create
-    private Object coordinate;//TODO PostGIS geometry type create;
+    private PGobject website;//TODO Postgres inet type create
+    private PGgeometry coordinate;
     private String feature;//TODO equals, hash, toString for each entity
 
     public Hotel() {
@@ -64,19 +67,19 @@ public class Hotel {
         this.stars = stars;
     }
 
-    public Object getWebsite() {
+    public PGobject getWebsite() {
         return website;
     }
 
-    public void setWebsite(Object website) {
+    public void setWebsite(PGobject website) {
         this.website = website;
     }
 
-    public Object getCoordinate() {
+    public PGgeometry getCoordinate() {
         return coordinate;
     }
 
-    public void setCoordinate(Object coordinate) {
+    public void setCoordinate(PGgeometry coordinate) {
         this.coordinate = coordinate;
     }
 
@@ -86,5 +89,39 @@ public class Hotel {
 
     public void setFeature(String feature) {
         this.feature = feature;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Hotel)) {
+            return false;
+        } else {
+            Hotel hotel = (Hotel) o;
+            return getHotelId() == hotel.getHotelId() &&
+                    getStars() == hotel.getStars() &&
+                    getName().equals(hotel.getName()) &&
+                    getWebsite().equals(hotel.getWebsite()) &&
+                    getCoordinate().equals(hotel.getCoordinate()) &&
+                    getFeature().equals(hotel.getFeature());
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getHotelId(), getName(), getStars(), getWebsite(), getCoordinate(), getFeature());
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder(getClass().getSimpleName()).append("hotelId=").append(hotelId)
+                .append(", name='").append(name).append('\'').append(", stars=").append(stars)
+                .append(", website=").append(website).append(", coordinate=").append(coordinate)
+                .append(", feature='").append(feature).append('\'').append('}').toString();
     }
 }

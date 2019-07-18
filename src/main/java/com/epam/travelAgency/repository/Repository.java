@@ -1,15 +1,14 @@
 package com.epam.travelAgency.repository;
 
-import com.epam.travelAgency.specification.Specification;
+import com.epam.travelAgency.specification.*;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface Repository<E> {
 
-    E add(E entity);
-    E update(E entity);
-    E remove(E entity);
-
-    List<E> query(SqlOperator sqlOperator, Specification<E> specification);
+    void add(AddSpecification<E> specification);//INSERT
+    void update(UpdateSpecification<E> specification);//UPDATE
+    void remove(RemoveSpecification<E> specification);//DELETE
+    Collection<E> query(FindSpecification<E, Object> specification);//SELECT
 
 }

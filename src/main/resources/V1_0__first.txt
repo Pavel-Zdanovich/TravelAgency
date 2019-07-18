@@ -148,12 +148,12 @@ ALTER SEQUENCE public.hotels_stars_seq OWNED BY public.hotels.stars;
 
 CREATE TABLE public.reviews (
     review_id integer NOT NULL,
-    date timestamp with time zone,
+    startDate timestamp with time zone,
     text character varying(255),
     user_id integer NOT NULL,
     tour_id integer NOT NULL,
-    CONSTRAINT review_date_check CHECK ((date >= now())),
-    CONSTRAINT review_date_not_null CHECK ((date IS NOT NULL)),
+    CONSTRAINT review_date_check CHECK ((startDate >= now())),
+    CONSTRAINT review_date_not_null CHECK ((startDate IS NOT NULL)),
     CONSTRAINT review_text_not_null CHECK ((text IS NOT NULL)),
     CONSTRAINT review_tour_id_not_null CHECK ((tour_id IS NOT NULL)),
     CONSTRAINT review_user_not_null CHECK ((user_id IS NOT NULL))
@@ -283,8 +283,8 @@ ALTER SEQUENCE public.sets_of_features_id_of_hotel_seq OWNED BY public.sets_of_f
 CREATE TABLE public.tours (
     tour_id integer NOT NULL,
     photo bytea,
-    date timestamp with time zone,
-    duration timestamp with time zone,
+    startDate timestamp with time zone,
+    endDate timestamp with time zone,
     description text,
     cost money,
     tour_type public.types_of_tours,
@@ -293,10 +293,10 @@ CREATE TABLE public.tours (
     CONSTRAINT tour_cost_check CHECK ((cost > '$0.00'::money)),
     CONSTRAINT tour_cost_not_null CHECK ((cost IS NOT NULL)),
     CONSTRAINT tour_country_not_null CHECK ((country_id IS NOT NULL)),
-    CONSTRAINT tour_date_check CHECK ((date >= now())),
-    CONSTRAINT tour_date_not_null CHECK ((date IS NOT NULL)),
-    CONSTRAINT tour_duration_check CHECK ((age(duration, date) > '1 day'::interval)),
-    CONSTRAINT tour_duration_not_null CHECK ((duration IS NOT NULL)),
+    CONSTRAINT tour_date_check CHECK ((startDate >= now())),
+    CONSTRAINT tour_date_not_null CHECK ((startDate IS NOT NULL)),
+    CONSTRAINT tour_duration_check CHECK ((age(endDate, startDate) > '1 day'::interval)),
+    CONSTRAINT tour_duration_not_null CHECK ((endDate IS NOT NULL)),
     CONSTRAINT tour_hotel_not_null CHECK ((hotel_id IS NOT NULL))
 );
 

@@ -1,28 +1,33 @@
 package com.epam.travelAgency.entity;
 
+import org.postgresql.util.PGmoney;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.nio.file.Path;
 import java.sql.Timestamp;
-import java.time.OffsetDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 @Component
-public class Tour {
+public class Tour extends Entity {
 
     enum Type {
+
         TREATMENT,
         TOURISM,
         LEISURE,
         BUSINESS
+
     }
 
     private long tourId;
-    private Path photoPath;
-    private Timestamp date;
-    private Timestamp duration;
+    private Path photoPath;//TODO PGbytea exist
+    private Timestamp startDate;
+    private Timestamp endDate;
     private String description;
-    private Type type;
+    private PGmoney cost;
+    private Type type;//TODO make the same as Hotel.Feature
     private Hotel hotel;//TODO DI
     private Country country;
 
@@ -46,20 +51,20 @@ public class Tour {
         this.photoPath = photoPath;
     }
 
-    public Timestamp getDate() {
-        return date;
+    public Timestamp getStartDate() {
+        return startDate;
     }
 
-    public void setDate(Timestamp date) {
-        this.date = date;
+    public void setStartDate(Timestamp startDate) {
+        this.startDate = startDate;
     }
 
-    public Timestamp getDuration() {
-        return duration;
+    public Timestamp getEndDate() {
+        return endDate;
     }
 
-    public void setDuration(Timestamp duration) {
-        this.duration = duration;
+    public void setEndDate(Timestamp endDate) {
+        this.endDate = endDate;
     }
 
     public String getDescription() {
@@ -70,8 +75,16 @@ public class Tour {
         this.description = description;
     }
 
-    public Type getType() {
-        return type;
+    public PGmoney getCost() {
+        return cost;
+    }
+
+    public void setCost(PGmoney cost) {
+        this.cost = cost;
+    }
+
+    public String getType() {
+        return type.name();
     }
 
     public void setType(Type type) {
@@ -82,6 +95,7 @@ public class Tour {
         return hotel;
     }
 
+    @Autowired
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
     }
@@ -90,7 +104,49 @@ public class Tour {
         return country;
     }
 
+    @Autowired
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public static Type defineType(String type) {
+        return Type.valueOf(type);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Tour)) {
+            return false;
+        } else {
+            Tour tour = (Tour) o;
+            return getTourId() == tour.getTourId() &&
+                    getPhotoPath().equals(tour.getPhotoPath()) &&
+                    getStartDate().equals(tour.getStartDate()) &&
+                    getEndDate().equals(tour.getEndDate()) &&
+                    getDescription().equals(tour.getDescription()) &&
+                    getType() == tour.getType() &&
+                    getHotel().equals(tour.getHotel()) &&
+                    getCountry().equals(tour.getCountry());
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTourId(), getPhotoPath(), getStartDate(), getEndDate(), getDescription(), getType(), getHotel(), getCountry());
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder(getClass().getSimpleName()).append("tourId=").append(tourId)
+                .append(", photoPath=").append(photoPath).append(", startDate=").append(startDate)
+                .append(", endDate=").append(endDate).append(", description='")
+                .append(description).append('\'').append(", type=").append(type)
+                .append(", hotel=").append(hotel).append(", country=").append(country).append('}').toString();
     }
 }

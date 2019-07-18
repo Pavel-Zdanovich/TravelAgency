@@ -3,10 +3,11 @@ package com.epam.travelAgency.entity;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 import java.util.UUID;
 
 @Component
-public class Review {
+public class Review extends Entity {
 
     private long reviewId;
     private Timestamp date;//TODO find timestamp with time zone mapping type in java
@@ -39,4 +40,28 @@ public class Review {
     public void setText(String text) {
         this.text = text;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Review)) {
+            return false;
+        } else {
+            Review review = (Review) o;
+            return getReviewId() == review.getReviewId() &&
+                    getDate().equals(review.getDate()) &&
+                    getText().equals(review.getText());
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getReviewId(), getDate(), getText());
+    }
+
 }

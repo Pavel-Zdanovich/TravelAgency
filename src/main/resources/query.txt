@@ -1,0 +1,4 @@
+SELECT (fields) FROM (table) WHERE (filed = ?)
+UPDATE (table) SET (field = ?) WHERE (field = ?)
+INSERT INTO table (fields) VALUES (?,?,?,?)
+DELETE FROM table WHERE (field = ?)
