@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class UpdateReviewSpecification implements UpdateSpecification<Review> {
 
-    public static final String UPDATE_REVIEW =  "UPDATE reviews SET id = ?, date = ?, text = ?";
+    public static final String UPDATE_REVIEW =  "UPDATE reviews SET review_id = ?, date = ?, text = ?";
     private Review review;
 
     public UpdateReviewSpecification(Review review) {

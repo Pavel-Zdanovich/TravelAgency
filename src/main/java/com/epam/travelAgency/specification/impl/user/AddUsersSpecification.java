@@ -9,7 +9,7 @@ import java.util.Collection;
 
 public class AddUsersSpecification implements AddSpecification<User> {
 
-    public static final String INSERT_USER = "INSERT INTO users (id, login, password) VALUES (?,?,?)";
+    public static final String INSERT_USER = "INSERT INTO users (user_id, login, password) VALUES (?,?,?)";
     private Collection<User> users;
 
     public AddUsersSpecification(Collection<User> users) {

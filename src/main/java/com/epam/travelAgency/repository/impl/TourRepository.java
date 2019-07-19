@@ -1,7 +1,5 @@
 package com.epam.travelAgency.repository.impl;
 
-import com.epam.travelAgency.entity.Country;
-import com.epam.travelAgency.entity.Hotel;
 import com.epam.travelAgency.entity.Tour;
 import com.epam.travelAgency.pool.ConnectionPool;
 import com.epam.travelAgency.repository.Repository;
@@ -75,12 +73,9 @@ public class TourRepository implements Repository<Tour> {
                 tour.setEndDate(resultSet.getTimestamp(4));
                 tour.setDescription(resultSet.getString(5));
                 tour.setCost(new PGmoney(resultSet.getDouble(6)));//TODO pgObject check
-                tour.setType(Tour.defineType(resultSet.getString(7)));
-                Country country = new Country();
-                country.setCountryId(resultSet.getLong(8));
-                country.setName(resultSet.getString("country.name"));//TODO nested query
-                tour.setCountry(country);
-                tour.setHotel(new Hotel());
+                tour.setType(Tour.Type.valueOf(resultSet.getString(7)));
+                tour.setHotelId(resultSet.getLong(8));//TODO change specifications to ID
+                tour.setCountryId(resultSet.getLong(9));
                 selectedTours.add(tour);
             }
         } catch (SQLException e) {

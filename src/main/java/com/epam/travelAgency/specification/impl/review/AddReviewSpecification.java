@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class AddReviewSpecification implements AddSpecification<Review> {
 
-    public static final String INSERT_REVIEW = "INSERT INTO reviews (id, date, text) VALUES (?,?,?)";
+    public static final String INSERT_REVIEW = "INSERT INTO reviews (review_id, date, text) VALUES (?,?,?)";
     private Review review;
 
     public AddReviewSpecification(Review review) {

@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 public class FindTourSpecification implements FindSpecification<Tour, Tour> {
 
     private static final Logger logger = LoggerFactory.getLogger(FindTourSpecification.class);//TODO FindTourWithoutPhoto because its blob
-    public static final String SELECT_TOUR = "SELECT * FROM tours WHERE id = %d, date = %s, duration = %s, description = %s, cost = %s, tour_type = %s, hotel_id = %d, country_id = %d";
+    public static final String SELECT_TOUR = "SELECT * FROM tours WHERE tour_id = %d, date = %s, duration = %s, description = %s, cost = %s, tour_type = %s, hotel_id = %d, country_id = %d";
     private Tour tour;
 
     public FindTourSpecification() {}
@@ -47,7 +47,7 @@ public class FindTourSpecification implements FindSpecification<Tour, Tour> {
     @Override
     public String getSQLQuery() {
         return String.format(SELECT_TOUR, tour.getTourId(), tour.getStartDate(), tour.getEndDate(), tour.getDescription(),
-                tour.getCost().val,  tour.getType(), tour.getCountry().getCountryId(), tour.getHotel().getHotelId());
+                tour.getCost().val,  tour.getType(), tour.getCountryId(), tour.getHotelId());
     }
 
 }

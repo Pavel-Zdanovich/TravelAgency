@@ -5,7 +5,7 @@ import com.epam.travelAgency.specification.FindSpecification;
 
 public class FindReviewSpecification implements FindSpecification<Review, Review> {
 
-    public static final String SELECT_REVIEW = "SELECT * FROM reviews WHERE id = %d, date = %s, text = %s";
+    public static final String SELECT_REVIEW = "SELECT * FROM reviews WHERE review_id = %d, date = %s, text = %s";
     private Review review;
 
     public FindReviewSpecification() {}

@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class AddTourSpecification implements AddSpecification<Tour> {
 
     private static final Logger logger = LoggerFactory.getLogger(AddTourSpecification.class);
-    public static final String INSERT_TOUR = "INSERT INTO tours (id, photo, date, duration, description, cost, tour_type, hotel_id, country_id) VALUES (?,?,?,?,?,?,?,?,?)";
+    public static final String INSERT_TOUR = "INSERT INTO tours (tour_id, photo, date, duration, description, cost, tour_type, hotel_id, country_id) VALUES (?,?,?,?,?,?,?,?,?)";
     private Tour tour;
 
     public AddTourSpecification(Tour tour) {
@@ -31,9 +31,9 @@ public class AddTourSpecification implements AddSpecification<Tour> {
             preparedStatement.setTimestamp(4, tour.getEndDate());
             preparedStatement.setString(5, tour.getDescription());
             preparedStatement.setDouble(6, tour.getCost().val);
-            preparedStatement.setString(7, tour.getType());
-            preparedStatement.setLong(8, tour.getCountry().getCountryId());
-            preparedStatement.setLong(9, tour.getHotel().getHotelId());
+            preparedStatement.setString(7, tour.getType().toString());
+            preparedStatement.setLong(8, tour.getCountryId());
+            preparedStatement.setLong(9, tour.getHotelId());
             count++;
         } catch (FileNotFoundException e) {
             logger.error("Creating stream for reading file error");

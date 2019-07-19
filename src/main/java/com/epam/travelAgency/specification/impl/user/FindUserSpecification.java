@@ -3,9 +3,10 @@ package com.epam.travelAgency.specification.impl.user;
 import com.epam.travelAgency.entity.User;
 import com.epam.travelAgency.specification.FindSpecification;
 
+
 public class FindUserSpecification implements FindSpecification<User, User> {
 
-    public static final String SELECT_USER = "SELECT * FROM users WHERE id = ?, login = ?, password = ?";
+    public static final String SELECT_USER = "SELECT * FROM users WHERE user_id = ?, login = ?, password = ?";
     private User user;
 
     public FindUserSpecification() {

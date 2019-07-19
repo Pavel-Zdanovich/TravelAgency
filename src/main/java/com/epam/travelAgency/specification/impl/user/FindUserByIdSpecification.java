@@ -5,7 +5,7 @@ import com.epam.travelAgency.specification.FindSpecification;
 
 public class FindUserByIdSpecification implements FindSpecification<User, Long> {
 
-    public static final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE id = %d";
+    public static final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE user_id = %d";
     private long userId;
 
     public FindUserByIdSpecification() {}

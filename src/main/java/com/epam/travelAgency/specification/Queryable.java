@@ -1,7 +1,7 @@
 package com.epam.travelAgency.specification;
 
 @FunctionalInterface
-public interface SqlSpecification<P> {
+public interface Queryable<P> {
 
     String getSQLQuery();
 

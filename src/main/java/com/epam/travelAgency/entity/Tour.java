@@ -1,7 +1,6 @@
 package com.epam.travelAgency.entity;
 
 import org.postgresql.util.PGmoney;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.nio.file.Path;
@@ -12,13 +11,30 @@ import java.util.UUID;
 @Component
 public class Tour extends Entity {
 
-    enum Type {
+    public enum Type {
 
-        TREATMENT,
-        TOURISM,
-        LEISURE,
-        BUSINESS
+        TREATMENT("treatment"),
+        TOURISM("tourism"),
+        LEISURE("leisure"),
+        BUSINESS("business"),
+        PILGRIMAGE("pilgrimage"),
+        TRAINING("training"),
+        SPORT_COMPETITION("sport competition"),
+        RURAL_TOURISM("rural tourism"),
+        SCIENTIFIC_EXPEDITION("scientific expedition"),
+        ECOTOURISM("ecotourism");
 
+        private final String type;
+
+        Type(String type) {
+            this.type = type;
+        }
+
+
+        @Override
+        public String toString() {
+            return this.type;
+        }
     }
 
     private long tourId;
@@ -27,9 +43,9 @@ public class Tour extends Entity {
     private Timestamp endDate;
     private String description;
     private PGmoney cost;
-    private Type type;//TODO make the same as Hotel.Feature
-    private Hotel hotel;//TODO DI
-    private Country country;
+    private Type type;
+    private long hotelId;
+    private long countryId;
 
     public Tour() {
         this.tourId = UUID.randomUUID().timestamp();
@@ -83,34 +99,28 @@ public class Tour extends Entity {
         this.cost = cost;
     }
 
-    public String getType() {
-        return type.name();
+    public Type getType() {
+        return type;
     }
 
     public void setType(Type type) {
         this.type = type;
     }
 
-    public Hotel getHotel() {
-        return hotel;
+    public long getHotelId() {
+        return hotelId;
     }
 
-    @Autowired
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
+    public void setHotelId(long hotelId) {
+        this.hotelId = hotelId;
     }
 
-    public Country getCountry() {
-        return country;
+    public long getCountryId() {
+        return countryId;
     }
 
-    @Autowired
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
-    public static Type defineType(String type) {
-        return Type.valueOf(type);
+    public void setCountryId(long countryId) {
+        this.countryId = countryId;
     }
 
     @Override
@@ -130,15 +140,15 @@ public class Tour extends Entity {
                     getStartDate().equals(tour.getStartDate()) &&
                     getEndDate().equals(tour.getEndDate()) &&
                     getDescription().equals(tour.getDescription()) &&
-                    getType() == tour.getType() &&
-                    getHotel().equals(tour.getHotel()) &&
-                    getCountry().equals(tour.getCountry());
+                    getType().equals(tour.getType()) &&
+                    getHotelId() == tour.getHotelId() &&
+                    getCountryId() == tour.getCountryId();
         }
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTourId(), getPhotoPath(), getStartDate(), getEndDate(), getDescription(), getType(), getHotel(), getCountry());
+        return Objects.hash(getTourId(), getPhotoPath(), getStartDate(), getEndDate(), getDescription(), getType(), getHotelId(), getCountryId());
     }
 
     @Override
@@ -147,6 +157,6 @@ public class Tour extends Entity {
                 .append(", photoPath=").append(photoPath).append(", startDate=").append(startDate)
                 .append(", endDate=").append(endDate).append(", description='")
                 .append(description).append('\'').append(", type=").append(type)
-                .append(", hotel=").append(hotel).append(", country=").append(country).append('}').toString();
+                .append(", hotelId=").append(hotelId).append(", countryId=").append(countryId).append('}').toString();
     }
 }

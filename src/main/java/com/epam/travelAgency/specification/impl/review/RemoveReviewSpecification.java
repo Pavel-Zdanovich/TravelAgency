@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class RemoveReviewSpecification implements RemoveSpecification<Review> {
 
-    public static final String DELETE_REVIEW = "DELETE FROM reviews WHERE id = ?, date = ?, text = ?";
+    public static final String DELETE_REVIEW = "DELETE FROM reviews WHERE review_id = ?, date = ?, text = ?";
     private Review review;
 
     public RemoveReviewSpecification(Review review) {

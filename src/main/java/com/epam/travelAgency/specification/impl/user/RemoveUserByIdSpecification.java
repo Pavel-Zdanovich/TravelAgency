@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class RemoveUserByIdSpecification implements RemoveSpecification<User> {
 
-    public static final String DELETE_USER_BY_ID = "DELETE FROM users WHERE id = ?";
+    public static final String DELETE_USER_BY_ID = "DELETE FROM users WHERE user_id = ?";
     private User user;
 
     public RemoveUserByIdSpecification(long userId) {

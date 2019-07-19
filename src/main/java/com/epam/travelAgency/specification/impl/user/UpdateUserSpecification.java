@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class UpdateUserSpecification implements UpdateSpecification<User> {
 
-    public static final String UPDATE_USER_LOGIN = "UPDATE users SET id = ?, login = ?, password = ?";
+    public static final String UPDATE_USER_LOGIN = "UPDATE users SET user_id = ?, login = ?, password = ?";
     private User user;
 
     public UpdateUserSpecification(User user) {

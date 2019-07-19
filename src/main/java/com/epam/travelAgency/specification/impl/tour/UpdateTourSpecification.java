@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class UpdateTourSpecification implements UpdateSpecification<Tour> {
 
     private static final Logger logger = LoggerFactory.getLogger(UpdateTourSpecification.class);
-    public static final String UPDATE_TOUR = "UPDATE tours SET id = ?, photo = ?, date = ?, duration = ?, description = ?, cost = ?, tour_type = ?, hotel_id = ?, country_id = ?";
+    public static final String UPDATE_TOUR = "UPDATE tours SET tour_id = ?, photo = ?, date = ?, duration = ?, description = ?, cost = ?, tour_type = ?, hotel_id = ?, country_id = ?";
     private Tour tour;
 
     public UpdateTourSpecification(Tour tour) {
@@ -31,9 +31,9 @@ public class UpdateTourSpecification implements UpdateSpecification<Tour> {
             preparedStatement.setTimestamp(4, tour.getEndDate());
             preparedStatement.setString(5, tour.getDescription());
             preparedStatement.setDouble(6, tour.getCost().val);
-            preparedStatement.setString(7, tour.getType());
-            preparedStatement.setLong(8, tour.getCountry().getCountryId());
-            preparedStatement.setLong(9, tour.getHotel().getHotelId());
+            preparedStatement.setString(7, tour.getType().toString());
+            preparedStatement.setLong(8, tour.getCountryId());
+            preparedStatement.setLong(9, tour.getHotelId());
             count++;
         } catch (FileNotFoundException e) {
             logger.error("Creating stream for reading file error");

@@ -5,7 +5,6 @@ import com.epam.travelAgency.specification.RemoveSpecification;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Collection;
 
 public class RemoveHotelSpecification implements RemoveSpecification<Hotel> {
 
@@ -24,7 +23,7 @@ public class RemoveHotelSpecification implements RemoveSpecification<Hotel> {
         preparedStatement.setInt(3, hotel.getStars());
         preparedStatement.setObject(4, hotel.getWebsite());
         preparedStatement.setObject(5, hotel.getCoordinate());
-        preparedStatement.setString(6, hotel.getFeature());
+        preparedStatement.setString(6, hotel.getFeature().toString());
         return 1;
     }
 

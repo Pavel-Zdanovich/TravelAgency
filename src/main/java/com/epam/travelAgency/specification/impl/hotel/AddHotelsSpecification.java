@@ -26,7 +26,7 @@ public class AddHotelsSpecification implements AddSpecification<Hotel> {
             preparedStatement.setInt(3, hotel.getStars());
             preparedStatement.setObject(4, hotel.getWebsite());
             preparedStatement.setObject(5, hotel.getCoordinate());
-            preparedStatement.setString(6, hotel.getFeature());
+            preparedStatement.setString(6, hotel.getFeature().toString());
             count++;
         }
         return count;

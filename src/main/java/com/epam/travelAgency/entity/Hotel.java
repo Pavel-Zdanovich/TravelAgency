@@ -10,14 +10,18 @@ import java.util.UUID;
 @Component
 public class Hotel extends Entity {
 
-    enum Feature {
+    public enum Feature {
 
         WI_FI("wi-fi"),
         AIR_CONDITIONER("air conditioner"),
         MINI_BAR("mini-bar"),
         CAR_RENTAL("car rental"),
         ROOM_SERVICE("room service"),
-        CABLE_TV("cable tv");
+        CABLE_TV("cable tv"),
+        SPA("spa"),
+        SWIMMING_POOL("swimming pool"),
+        RESTAURANT("restaurant"),
+        PARKING("parking");
 
         private final String name;
 
@@ -37,7 +41,7 @@ public class Hotel extends Entity {
     private int stars;
     private PGobject website;//TODO Postgres inet type create
     private PGgeometry coordinate;
-    private String feature;//TODO equals, hash, toString for each entity
+    private Feature feature;
 
     public Hotel() {
         setHotelId(UUID.randomUUID().timestamp());
@@ -83,11 +87,11 @@ public class Hotel extends Entity {
         this.coordinate = coordinate;
     }
 
-    public String getFeature() {
+    public Feature getFeature() {
         return feature;
     }
 
-    public void setFeature(String feature) {
+    public void setFeature(Feature feature) {
         this.feature = feature;
     }
 

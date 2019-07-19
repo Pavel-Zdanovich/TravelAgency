@@ -8,7 +8,10 @@ import org.postgis.PGgeometry;
 import org.postgresql.util.PGobject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,6 +20,12 @@ import java.util.Collection;
 public class HotelRepository implements Repository<Hotel> {
 
     private static final Logger logger = LoggerFactory.getLogger(HotelRepository.class);
+    private static JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public HotelRepository(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
 
     @Override
     public void add(AddSpecification<Hotel> specification) {
@@ -71,7 +80,7 @@ public class HotelRepository implements Repository<Hotel> {
                 hotel.setStars(resultSet.getInt(3));
                 hotel.setWebsite((PGobject) resultSet.getObject(4));
                 hotel.setCoordinate((PGgeometry) resultSet.getObject(5));
-                hotel.setFeature(resultSet.getString(6));
+                hotel.setFeature(Hotel.Feature.valueOf(resultSet.getString(6)));
                 selectedHotels.add(hotel);
             }
         } catch (SQLException e) {
