@@ -2,11 +2,14 @@ package com.epam.travelAgency.specification.impl.user;
 
 import com.epam.travelAgency.entity.User;
 import com.epam.travelAgency.specification.FindSpecification;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class FindUserSpecification implements FindSpecification<User, User> {
 
-    public static final String SELECT_USER = "SELECT * FROM users WHERE user_id = ?, login = ?, password = ?";
+    public static final String SELECT_USER = "SELECT * FROM users WHERE user_id = %s AND login = '%s' AND password = '%s'";
+    @Autowired
     private User user;
 
     public FindUserSpecification() {
@@ -25,13 +28,6 @@ public class FindUserSpecification implements FindSpecification<User, User> {
     public User getSpecification() {
         return this.user;
     }
-
-    /*@Override
-    public void specified(PreparedStatement preparedStatement, User user) throws SQLException {
-        preparedStatement.setLong(1, user.getUserId());
-        preparedStatement.setString(2, user.getLogin());
-        preparedStatement.setString(3, user.getPassword());
-    }*/
 
     @Override
     public String getSQLQuery() {

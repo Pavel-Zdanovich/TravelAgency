@@ -1,5 +1,6 @@
 package com.epam.travelAgency.entity;
 
+import com.fasterxml.uuid.Generators;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -12,9 +13,11 @@ public class Review extends Entity {
     private long reviewId;
     private Timestamp date;//TODO find timestamp with time zone mapping type in java
     private String text;
+    private long userId;
+    private long tourId;
 
     public Review() {
-        this.reviewId = UUID.randomUUID().timestamp();
+        this.reviewId = Generators.timeBasedGenerator().generate().timestamp();
     }
 
     public long getReviewId() {
@@ -39,6 +42,22 @@ public class Review extends Entity {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public long getTourId() {
+        return tourId;
+    }
+
+    public void setTourId(long tourId) {
+        this.tourId = tourId;
     }
 
     @Override

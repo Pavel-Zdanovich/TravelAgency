@@ -2,10 +2,12 @@ package com.epam.travelAgency.specification.impl.common;
 
 import com.epam.travelAgency.entity.Review;
 import com.epam.travelAgency.specification.FindSpecification;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FindReviewByUserLoginSpecification implements FindSpecification<Review, String> {
 
-    public static final String SELECT_REVIEW_BY_USER_LOGIN = "SELECT * FROM review WHERE user_id IN (SELECT user_id FROM users WHERE login = %s)";
+    public static final String SELECT_REVIEW_BY_USER_LOGIN = "SELECT * FROM review WHERE user_id IN (SELECT user_id FROM users WHERE login = '%s')";
     private String login;
 
     public FindReviewByUserLoginSpecification() {}

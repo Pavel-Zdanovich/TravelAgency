@@ -1,12 +1,12 @@
 package com.epam.travelAgency.entity;
 
+import com.fasterxml.uuid.Generators;
 import org.postgresql.util.PGmoney;
 import org.springframework.stereotype.Component;
 
 import java.nio.file.Path;
 import java.sql.Timestamp;
 import java.util.Objects;
-import java.util.UUID;
 
 @Component
 public class Tour extends Entity {
@@ -24,21 +24,30 @@ public class Tour extends Entity {
         SCIENTIFIC_EXPEDITION("scientific expedition"),
         ECOTOURISM("ecotourism");
 
-        private final String type;
+        private final String name;
 
-        Type(String type) {
-            this.type = type;
+        Type(String name) {
+            this.name = name;
         }
-
 
         @Override
         public String toString() {
-            return this.type;
+            return this.name;
         }
+
+        public static Type getType(String stringType) {
+            for (Type type : values()) {
+                if (type.name.equals(stringType)) {
+                    return type;
+                }
+            }
+            throw new IllegalArgumentException("Illegal tour name : " + stringType);
+        }
+
     }
 
     private long tourId;
-    private Path photoPath;//TODO PGbytea exist
+    private Path photoPath;
     private Timestamp startDate;
     private Timestamp endDate;
     private String description;
@@ -48,7 +57,7 @@ public class Tour extends Entity {
     private long countryId;
 
     public Tour() {
-        this.tourId = UUID.randomUUID().timestamp();
+        this.tourId = Generators.timeBasedGenerator().generate().timestamp();
     }
 
     public long getTourId() {
@@ -156,7 +165,7 @@ public class Tour extends Entity {
         return new StringBuilder(getClass().getSimpleName()).append("tourId=").append(tourId)
                 .append(", photoPath=").append(photoPath).append(", startDate=").append(startDate)
                 .append(", endDate=").append(endDate).append(", description='")
-                .append(description).append('\'').append(", type=").append(type)
+                .append(description).append('\'').append(", name=").append(type)
                 .append(", hotelId=").append(hotelId).append(", countryId=").append(countryId).append('}').toString();
     }
 }

@@ -2,7 +2,9 @@ package com.epam.travelAgency.specification.impl.tour;
 
 import com.epam.travelAgency.entity.Tour;
 import com.epam.travelAgency.specification.FindSpecification;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FindTourByCountryIdSpecification implements FindSpecification<Tour, Long> {
 
     public static final String SELECT_TOUR_BY_COUNTRY_ID = "SELECT * FROM tours WHERE country_id = %d";

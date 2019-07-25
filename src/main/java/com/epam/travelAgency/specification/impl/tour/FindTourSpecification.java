@@ -2,13 +2,14 @@ package com.epam.travelAgency.specification.impl.tour;
 
 import com.epam.travelAgency.entity.Tour;
 import com.epam.travelAgency.specification.FindSpecification;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FindTourSpecification implements FindSpecification<Tour, Tour> {
 
-    private static final Logger logger = LoggerFactory.getLogger(FindTourSpecification.class);//TODO FindTourWithoutPhoto because its blob
-    public static final String SELECT_TOUR = "SELECT * FROM tours WHERE tour_id = %d, date = %s, duration = %s, description = %s, cost = %s, tour_type = %s, hotel_id = %d, country_id = %d";
+    public static final String SELECT_TOUR = "SELECT * FROM tours WHERE tour_id = %d AND photo = '%s' AND start_date = '%s' AND end_date = '%s' AND description = '%s' AND cost = '%s' AND tour_type = '%s' AND hotel_id = %d AND country_id = %d";
+    @Autowired
     private Tour tour;
 
     public FindTourSpecification() {}
@@ -27,27 +28,10 @@ public class FindTourSpecification implements FindSpecification<Tour, Tour> {
         return this.tour;
     }
 
-    /*@Override
-    public void specified(PreparedStatement preparedStatement, Tour tour) throws SQLException {
-        try {
-            preparedStatement.setLong(1, tour.getTourId());
-            preparedStatement.setBlob(2, new FileInputStream(tour.getPhotoPath().toFile()));
-            preparedStatement.setTimestamp(3, tour.getStartDate());
-            preparedStatement.setTimestamp(4, tour.getEndDate());
-            preparedStatement.setString(5, tour.getDescription());
-            preparedStatement.setDouble(6, tour.getCost().val);
-            preparedStatement.setString(7, tour.getType());
-            preparedStatement.setLong(8, tour.getCountry().getCountryId());
-            preparedStatement.setLong(9, tour.getHotel().getHotelId());
-        } catch (FileNotFoundException e) {
-            logger.error("Creating stream for reading file error");
-        }
-    }*/
-
     @Override
     public String getSQLQuery() {
-        return String.format(SELECT_TOUR, tour.getTourId(), tour.getStartDate(), tour.getEndDate(), tour.getDescription(),
-                tour.getCost().val,  tour.getType(), tour.getCountryId(), tour.getHotelId());
+        return String.format(SELECT_TOUR, tour.getTourId(), tour.getPhotoPath().toAbsolutePath().toString(), tour.getStartDate(),
+                tour.getEndDate(), tour.getDescription(), tour.getCost().val,  tour.getType(), tour.getCountryId(), tour.getHotelId());
     }
 
 }

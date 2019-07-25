@@ -2,11 +2,12 @@ package com.epam.travelAgency.specification.impl.tour;
 
 import com.epam.travelAgency.entity.Tour;
 import com.epam.travelAgency.specification.FindSpecification;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class FindTourByStarsSpecification implements FindSpecification<Tour, Integer> {
 
-    public static final String SELECT_TOUR_BY_STARS = "SELECT * FROM tours WHERE stars = %d";
+    public static final String SELECT_TOUR_BY_STARS = "SELECT * FROM tours WHERE hotel_id IN (SELECT hotel_id FROM hotels WHERE stars = %d)";
     private Integer stars;
 
     public FindTourByStarsSpecification() {}

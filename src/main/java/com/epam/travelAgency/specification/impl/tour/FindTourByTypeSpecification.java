@@ -2,11 +2,13 @@ package com.epam.travelAgency.specification.impl.tour;
 
 import com.epam.travelAgency.entity.Tour;
 import com.epam.travelAgency.specification.FindSpecification;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FindTourByTypeSpecification implements FindSpecification<Tour, Tour.Type> {
 
-    public static final String SELECT_TOUR_BY_TYPE = "SELECT * FROM tours WHERE tour_type = %s";
-    private Tour.Type type;//TODO decide string or enum
+    public static final String SELECT_TOUR_BY_TYPE = "SELECT * FROM tours WHERE tour_type = '%s'";
+    private Tour.Type type;
 
     public FindTourByTypeSpecification() {}
 

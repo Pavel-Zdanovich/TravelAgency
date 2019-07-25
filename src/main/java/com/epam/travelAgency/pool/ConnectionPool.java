@@ -9,11 +9,13 @@ import java.sql.SQLException;
 
 public class ConnectionPool {
 
-    public static final String HIKARI_CONFIG_PROPERTY_FILE = "hikariConfig.properties";
+    public static final String HIKARI_CONFIG_PROPERTY_FILE = "src/main/resources/hikariConfig.properties";
 
     private static class DataSourceHolder {
+
         public static final HikariConfig HIKARI_CONFIG = new HikariConfig(HIKARI_CONFIG_PROPERTY_FILE);
         public static final DataSource DATA_SOURCE = new HikariDataSource(HIKARI_CONFIG);
+
     }
 
     private ConnectionPool() {

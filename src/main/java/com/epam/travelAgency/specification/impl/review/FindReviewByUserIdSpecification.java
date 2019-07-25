@@ -2,7 +2,9 @@ package com.epam.travelAgency.specification.impl.review;
 
 import com.epam.travelAgency.entity.Review;
 import com.epam.travelAgency.specification.FindSpecification;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FindReviewByUserIdSpecification implements FindSpecification<Review, Long> {
 
     public static final String SELECT_REVIEW_BY_USER_ID = "SELECT * FROM reviews WHERE user_id = %d";

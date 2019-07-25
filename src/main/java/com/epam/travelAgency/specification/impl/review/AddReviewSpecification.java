@@ -2,26 +2,41 @@ package com.epam.travelAgency.specification.impl.review;
 
 import com.epam.travelAgency.entity.Review;
 import com.epam.travelAgency.specification.AddSpecification;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+@Component
 public class AddReviewSpecification implements AddSpecification<Review> {
 
-    public static final String INSERT_REVIEW = "INSERT INTO reviews (review_id, date, text) VALUES (?,?,?)";
+    public static final String INSERT_REVIEW = "INSERT INTO reviews (review_id, date, text, user_id, tour_id) VALUES (?,?,?,?,?)";
+    @Autowired
     private Review review;
+
+    public AddReviewSpecification() {
+    }
 
     public AddReviewSpecification(Review review) {
         this.review = review;
     }
 
+    public Review getReview() {
+        return review;
+    }
+
+    public void setReview(Review review) {
+        this.review = review;
+    }
+
     @Override
-    public int specified(PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement.addBatch(INSERT_REVIEW);
+    public void setValues(PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setLong(1, review.getReviewId());
         preparedStatement.setTimestamp(2, review.getDate());
         preparedStatement.setString(3, review.getText());
-        return 1;
+        preparedStatement.setLong(4, review.getUserId());
+        preparedStatement.setLong(5 ,review.getTourId());
     }
 
     @Override

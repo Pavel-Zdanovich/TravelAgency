@@ -1,11 +1,10 @@
 package com.epam.travelAgency.entity;
 
+import com.fasterxml.uuid.Generators;
 import org.postgis.PGgeometry;
-import org.postgresql.util.PGobject;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
-import java.util.UUID;
 
 @Component
 public class Hotel extends Entity {
@@ -34,17 +33,26 @@ public class Hotel extends Entity {
             return this.name;
         }
 
+        public static Feature getFeature(String stringFeature) {
+            for (Feature feature : values()) {
+                if (feature.name.equals(stringFeature)) {
+                    return feature;
+                }
+            }
+            throw new IllegalArgumentException("Illegal feature name : " + stringFeature);
+        }
+
     }
 
     private long hotelId;
     private String name;
     private int stars;
-    private PGobject website;//TODO Postgres inet type create
+    private String website;
     private PGgeometry coordinate;
-    private Feature feature;
+    private Feature[] features;
 
     public Hotel() {
-        setHotelId(UUID.randomUUID().timestamp());
+        this.hotelId = Generators.timeBasedGenerator().generate().timestamp();
     }
 
     public long getHotelId() {
@@ -71,11 +79,11 @@ public class Hotel extends Entity {
         this.stars = stars;
     }
 
-    public PGobject getWebsite() {
+    public String getWebsite() {
         return website;
     }
 
-    public void setWebsite(PGobject website) {
+    public void setWebsite(String website) {
         this.website = website;
     }
 
@@ -87,12 +95,12 @@ public class Hotel extends Entity {
         this.coordinate = coordinate;
     }
 
-    public Feature getFeature() {
-        return feature;
+    public Feature[] getFeatures() {
+        return features;
     }
 
-    public void setFeature(Feature feature) {
-        this.feature = feature;
+    public void setFeatures(Feature[] features) {
+        this.features = features;
     }
 
     @Override
@@ -112,13 +120,13 @@ public class Hotel extends Entity {
                     getName().equals(hotel.getName()) &&
                     getWebsite().equals(hotel.getWebsite()) &&
                     getCoordinate().equals(hotel.getCoordinate()) &&
-                    getFeature().equals(hotel.getFeature());
+                    getFeatures().equals(hotel.getFeatures());
         }
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getHotelId(), getName(), getStars(), getWebsite(), getCoordinate(), getFeature());
+        return Objects.hash(getHotelId(), getName(), getStars(), getWebsite(), getCoordinate(), getFeatures());
     }
 
     @Override
@@ -126,6 +134,6 @@ public class Hotel extends Entity {
         return new StringBuilder(getClass().getSimpleName()).append("hotelId=").append(hotelId)
                 .append(", name='").append(name).append('\'').append(", stars=").append(stars)
                 .append(", website=").append(website).append(", coordinate=").append(coordinate)
-                .append(", feature='").append(feature).append('\'').append('}').toString();
+                .append(", features={").append(features.toString()).append('}').append('}').toString();
     }
 }

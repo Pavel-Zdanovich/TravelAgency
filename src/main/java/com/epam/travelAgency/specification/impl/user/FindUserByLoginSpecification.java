@@ -2,10 +2,12 @@ package com.epam.travelAgency.specification.impl.user;
 
 import com.epam.travelAgency.entity.User;
 import com.epam.travelAgency.specification.FindSpecification;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FindUserByLoginSpecification implements FindSpecification<User, String> {
 
-    public static final String SELECT_USER_BY_LOGIN = "SELECT * FROM users WHERE login = %s";
+    public static final String SELECT_USER_BY_LOGIN = "SELECT * FROM users WHERE login = '%s'";
     private String login;
 
     public FindUserByLoginSpecification() {
@@ -24,11 +26,6 @@ public class FindUserByLoginSpecification implements FindSpecification<User, Str
     public String getSpecification() {
         return this.login;
     }
-
-    /*@Override
-    public void specified(PreparedStatement preparedStatement, User user) throws SQLException {
-        preparedStatement.setString(1, user.getLogin());
-    }*/
 
     @Override
     public String getSQLQuery() {

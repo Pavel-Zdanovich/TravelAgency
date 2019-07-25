@@ -1,5 +1,6 @@
 package com.epam.travelAgency.entity;
 
+import com.fasterxml.uuid.Generators;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -13,13 +14,7 @@ public class User extends Entity {
     private String password;
 
     public User() {
-        this.userId = UUID.randomUUID().timestamp();//TODO unique ID because generated ID can be the same with DB ID
-    }
-
-    public User(long userId, String login, String password) {
-        this.userId = userId;
-        this.login = login;
-        this.password = password;
+        this.userId = Generators.timeBasedGenerator().generate().timestamp();//TODO unique ID because generated ID can be the same with DB ID
     }
 
     public long getUserId() {

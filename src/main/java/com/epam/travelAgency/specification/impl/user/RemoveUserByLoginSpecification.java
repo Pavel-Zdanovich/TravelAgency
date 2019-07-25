@@ -2,24 +2,35 @@ package com.epam.travelAgency.specification.impl.user;
 
 import com.epam.travelAgency.entity.User;
 import com.epam.travelAgency.specification.RemoveSpecification;
+import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+@Component
 public class RemoveUserByLoginSpecification implements RemoveSpecification<User> {
 
     public static final String DELETE_USER_BY_LOGIN = "DELETE FROM users WHERE login = ?";
-    private User user;
+    private String login;
 
-    public RemoveUserByLoginSpecification(User user) {
-        this.user = user;
+    public RemoveUserByLoginSpecification() {
+    }
+
+    public RemoveUserByLoginSpecification(String login) {
+        this.login = login;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     @Override
-    public int specified(PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement.addBatch(DELETE_USER_BY_LOGIN);
-        preparedStatement.setString(1, user.getLogin());
-        return 1;
+    public void setValues(PreparedStatement preparedStatement) throws SQLException {
+        preparedStatement.setString(1, login);
     }
 
     @Override

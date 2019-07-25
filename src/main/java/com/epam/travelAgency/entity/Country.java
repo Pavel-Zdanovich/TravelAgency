@@ -1,9 +1,9 @@
 package com.epam.travelAgency.entity;
 
+import com.fasterxml.uuid.Generators;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
-import java.util.UUID;
 
 @Component
 public class Country extends Entity {
@@ -12,7 +12,7 @@ public class Country extends Entity {
     private String name;
 
     public Country() {
-        this.countryId = UUID.randomUUID().timestamp();
+        this.countryId = Generators.timeBasedGenerator().generate().timestamp();
     }
 
     public long getCountryId() {

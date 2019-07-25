@@ -2,10 +2,14 @@ package com.epam.travelAgency.specification.impl.review;
 
 import com.epam.travelAgency.entity.Review;
 import com.epam.travelAgency.specification.FindSpecification;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FindReviewSpecification implements FindSpecification<Review, Review> {
 
-    public static final String SELECT_REVIEW = "SELECT * FROM reviews WHERE review_id = %d, date = %s, text = %s";
+    public static final String SELECT_REVIEW = "SELECT * FROM reviews WHERE review_id = %d AND date = '%s' AND text = '%s' AND user_id = %s AND tour_id = %s";
+    @Autowired
     private Review review;
 
     public FindReviewSpecification() {}
@@ -24,16 +28,9 @@ public class FindReviewSpecification implements FindSpecification<Review, Review
         return this.review;
     }
 
-    /*@Override
-    public void specified(PreparedStatement preparedStatement, Review review) throws SQLException {
-        preparedStatement.setLong(1, review.getReviewId());
-        preparedStatement.setTimestamp(2, review.getDate());
-        preparedStatement.setString(3, review.getText());
-    }*/
-
     @Override
     public String getSQLQuery() {
-        return String.format(SELECT_REVIEW, review.getReviewId(), review.getDate(), review.getText());
+        return String.format(SELECT_REVIEW, review.getReviewId(), review.getDate(), review.getText(), review.getUserId(), review.getTourId());
     }
 
 }

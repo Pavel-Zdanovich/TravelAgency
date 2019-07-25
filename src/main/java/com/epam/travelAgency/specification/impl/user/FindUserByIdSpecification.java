@@ -2,7 +2,9 @@ package com.epam.travelAgency.specification.impl.user;
 
 import com.epam.travelAgency.entity.User;
 import com.epam.travelAgency.specification.FindSpecification;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FindUserByIdSpecification implements FindSpecification<User, Long> {
 
     public static final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE user_id = %d";

@@ -1,10 +1,12 @@
 package com.epam.travelAgency.specification;
 
+import org.springframework.jdbc.core.PreparedStatementSetter;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public interface AddSpecification<E> extends Queryable<E> {
+public interface AddSpecification<E> extends Queryable<E>, PreparedStatementSetter {
 
-    int specified(PreparedStatement preparedStatement) throws SQLException;
+
 
 }
