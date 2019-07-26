@@ -4,7 +4,6 @@ import com.fasterxml.uuid.Generators;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
-import java.util.UUID;
 
 @Component
 public class User extends Entity {
@@ -14,7 +13,7 @@ public class User extends Entity {
     private String password;
 
     public User() {
-        this.userId = Generators.timeBasedGenerator().generate().timestamp();//TODO unique ID because generated ID can be the same with DB ID
+        this.userId = Generators.timeBasedGenerator().generate().timestamp();
     }
 
     public long getUserId() {

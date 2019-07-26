@@ -5,13 +5,12 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
 import java.util.Objects;
-import java.util.UUID;
 
 @Component
 public class Review extends Entity {
 
     private long reviewId;
-    private Timestamp date;//TODO find timestamp with time zone mapping type in java
+    private Timestamp date;
     private String text;
     private long userId;
     private long tourId;

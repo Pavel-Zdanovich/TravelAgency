@@ -1,5 +1,6 @@
 package com.epam.travelAgency.embedded;
 
+import de.flapdoodle.embed.process.config.IRuntimeConfig;
 import de.flapdoodle.embed.process.runtime.Network;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -39,7 +40,9 @@ public class EmbeddedPostgresConfig {
     @Bean(destroyMethod = "stop")
     @DependsOn("postgresConfig")
     public PostgresProcess postgresProcess(PostgresConfig postgresConfig) throws IOException {
-        PostgresStarter<PostgresExecutable, PostgresProcess> runtime = PostgresStarter.getInstance(EmbeddedPostgres.cachedRuntimeConfig(Paths.get("src/test/resources/db/extracted_pg_embedded_db")));//PostgresStarter.getInstance(EmbeddedPostgres.cachedRuntimeConfig(Paths.get("src/main/test/resources/hikariConfig.properties")));
+        Path extractedEmbeddedPostgres = Paths.get("src/test/resources/db/extracted_pg_embedded_db/pgsql-9.6.11-1/pgsql/bin");
+        IRuntimeConfig runtimeConfig = EmbeddedPostgres.cachedRuntimeConfig(extractedEmbeddedPostgres);
+        PostgresStarter<PostgresExecutable, PostgresProcess> runtime = PostgresStarter.getInstance(runtimeConfig);
         PostgresExecutable exec = runtime.prepare(postgresConfig);
         PostgresProcess process = exec.start();
         /*EmbeddedPostgres embeddedPostgres = new EmbeddedPostgres(postgresConfig.version());
@@ -50,32 +53,24 @@ public class EmbeddedPostgresConfig {
         return process;
     }
 
-    /*@Bean()
-    public HikariConfig hikariConfig(PostgresConfig postgresConfig) {
-        HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setDriverClassName("org.postgresql.Driver");
-        hikariConfig.setJdbcUrl(String.format("jdbc:postgresql://%s:%s/%s", postgresConfig.net().host(), postgresConfig.net().port(), postgresConfig.storage().dbName()));
-        hikariConfig.setUsername(postgresConfig.credentials().username());
-        hikariConfig.setPassword(postgresConfig.credentials().password());
-        *//*hikariConfig.addDataSourceProperty("databaseName", postgresConfig.storage().dbName());
-        hikariConfig.addDataSourceProperty("serverName", postgresConfig.net().host());
-        hikariConfig.addDataSourceProperty("portNumber", postgresConfig.net().port());*//*
-        return hikariConfig;
+    @Bean(destroyMethod = "stop")
+    public EmbeddedPostgres embeddedPostgres() throws IOException {
+        EmbeddedPostgres postgres = new EmbeddedPostgres();
+        String url = postgres.start("localhost", Network.getFreeServerPort(), "test", "admin", "root");
+        //postgres.getProcess().get().importFromFile(new File(Thread.currentThread().getContextClassLoader().getResource("db/schema.ddl").getFile()));
+        //postgres.getProcess().get().importFromFile(new File(Thread.currentThread().getContextClassLoader().getResource("db/test-data.ddl").getFile()));
+        return postgres;
     }
 
-    @Bean(destroyMethod = "close")
-    public DataSource hikariDataSource(HikariConfig hikariConfig) {
-        return new HikariDataSource(hikariConfig);
-    }*/
-
     @Bean
-    @DependsOn("postgresProcess")
-    public DataSource dataSource(PostgresConfig config) {
+    @DependsOn("embeddedPostgres")//postgresProcess
+    public DataSource dataSource(PostgresConfig postgresConfig) {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName("org.postgresql.Driver");
-        driverManagerDataSource.setUrl(String.format("jdbc:postgresql://%s:%s/%s", config.net().host(), config.net().port(), config.storage().dbName()));
-        driverManagerDataSource.setUsername(config.credentials().username());
-        driverManagerDataSource.setPassword(config.credentials().password());
+        driverManagerDataSource.setUrl(String.format("jdbc:postgresql://%s:%s/%s", postgresConfig.net().host(),
+                                                        postgresConfig.net().port(), postgresConfig.storage().dbName()));
+        driverManagerDataSource.setUsername(postgresConfig.credentials().username());
+        driverManagerDataSource.setPassword(postgresConfig.credentials().password());
         return driverManagerDataSource;
     }
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class FindReviewByUserSpecification implements FindSpecification<Review, User> {
 
-    public static final String SELECT_REVIEW_BY_USER = "SELECT * FROM review WHERE user_id IN (SELECT user_id FROM users WHERE user_id = %d, login = '%s', password = '%s')";
+    public static final String SELECT_REVIEW_BY_USER = "SELECT * FROM reviews WHERE user_id IN (SELECT user_id FROM users WHERE user_id = %d AND login = '%s' AND password = '%s')";
     @Autowired
     private User user;
 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class FindTourByMinCostSpecification implements FindSpecification<Tour, PGmoney> {
 
-    public static final String SELECT_TOUR_BY_MIN_COST = "SELECT * FROM tours WHERE cost = '%s'";//TODO min(cost) specification
+    public static final String SELECT_TOUR_BY_MIN_COST = "SELECT * FROM tours WHERE cost >= '%s'";
     private PGmoney minCost;
 
     public FindTourByMinCostSpecification() {}

@@ -12,7 +12,6 @@ import javax.sql.DataSource;
 @Configuration
 public class JDBCConfig {
 
-
     public static final String HIKARI_CONFIG_PROPERTY_FILE = "src/main/resources/hikariConfig.properties";
 
     @Bean

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 @Component
 public class UpdateReviewSpecification implements UpdateSpecification<Review> {
 
-    public static final String UPDATE_REVIEW =  "UPDATE reviews SET review_id = ?, date = ?, text = ?, user_id = ?, tour_id = ?";
+    public static final String UPDATE_REVIEW =  "UPDATE reviews SET date = ?, text = ?, user_id = ?, tour_id = ? WHERE review_id = ?";
     @Autowired
     private Review review;
 
@@ -32,11 +32,11 @@ public class UpdateReviewSpecification implements UpdateSpecification<Review> {
 
     @Override
     public void setValues(PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement.setLong(1, review.getReviewId());
-        preparedStatement.setTimestamp(2, review.getDate());
-        preparedStatement.setString(3, review.getText());
-        preparedStatement.setLong(4, review.getUserId());
-        preparedStatement.setLong(5 ,review.getTourId());
+        preparedStatement.setTimestamp(1, review.getDate());
+        preparedStatement.setString(2, review.getText());
+        preparedStatement.setLong(3, review.getUserId());
+        preparedStatement.setLong(4 ,review.getTourId());
+        preparedStatement.setLong(5, review.getReviewId());
     }
 
     @Override

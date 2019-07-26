@@ -10,7 +10,7 @@ import java.util.Arrays;
 @Component
 public class FindHotelSpecification implements FindSpecification<Hotel, Hotel> {
 
-    public static final String SELECT_HOTEL = "SELECT * FROM hotels WHERE hotel_id = %d AND name = '%s' AND stars = %d AND website = '%s' AND coordinate = %s AND features = %s";
+    public static final String SELECT_HOTEL = "SELECT * FROM hotels WHERE hotel_id = %d AND name = '%s' AND stars = %d AND website = '%s' AND coordinate = '%s' AND features = '%s'";
     @Autowired
     private Hotel hotel;
 
@@ -32,7 +32,10 @@ public class FindHotelSpecification implements FindSpecification<Hotel, Hotel> {
 
     @Override
     public String getSQLQuery() {
-        return String.format(SELECT_HOTEL, hotel.getHotelId(), hotel.getName(), hotel.getStars(), hotel.getWebsite(), hotel.getCoordinate(), hotel.getFeatures());//TODO
+        StringBuilder stringBuilder = new StringBuilder("{");
+        Arrays.stream(hotel.getFeatures()).forEach(feature -> stringBuilder.append(feature.toString()).append(","));
+        return String.format(SELECT_HOTEL, hotel.getHotelId(), hotel.getName(), hotel.getStars(), hotel.getWebsite(),
+                hotel.getCoordinate(), stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(",")).append("}").toString());
     }
 
 }

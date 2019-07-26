@@ -28,12 +28,12 @@ public class HotelRepository implements Repository<Hotel> {
 
     @Override
     public void update(UpdateSpecification<Hotel> specification) {
-        jdbcTemplate.query(specification.getSQLQuery(), specification, rowCallbackHandler -> {});
+        jdbcTemplate.update(specification.getSQLQuery(), specification);
     }
 
     @Override
     public void remove(RemoveSpecification<Hotel> specification) {
-        jdbcTemplate.query(specification.getSQLQuery(), specification, rowCallbackHandler -> {});
+        jdbcTemplate.update(specification.getSQLQuery(), specification);
     }
 
     @Override

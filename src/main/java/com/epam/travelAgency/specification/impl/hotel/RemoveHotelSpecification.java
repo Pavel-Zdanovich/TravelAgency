@@ -11,7 +11,7 @@ import java.sql.SQLException;
 @Component
 public class RemoveHotelSpecification implements RemoveSpecification<Hotel> {
 
-    public static final String DELETE_HOTEL = "DELETE FROM hotels WHERE id = ? AND name = '?' AND stars = ? AND website = '?' AND coordinate = ? AND feature = ?";
+    public static final String DELETE_HOTEL = "DELETE FROM hotels WHERE hotel_id = ? AND name = ? AND stars = ? AND website = ? AND coordinate = ? AND features = ?";
     @Autowired
     private Hotel hotel;
 
@@ -32,7 +32,6 @@ public class RemoveHotelSpecification implements RemoveSpecification<Hotel> {
 
     @Override
     public void setValues(PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement.addBatch(DELETE_HOTEL);
         preparedStatement.setLong(1, hotel.getHotelId());
         preparedStatement.setString(2, hotel.getName());
         preparedStatement.setInt(3, hotel.getStars());

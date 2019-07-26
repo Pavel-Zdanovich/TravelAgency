@@ -11,7 +11,7 @@ import java.sql.SQLException;
 @Component
 public class UpdateHotelSpecification implements UpdateSpecification<Hotel> {
 
-    public static final String UPDATE_HOTEL = "UPDATE hotels SET hotel_id = ?, name = ?, stars = ?, website = ?, coordinate = ?, feature = ?";
+    public static final String UPDATE_HOTEL = "UPDATE hotels SET name = ?, stars = ?, website = ?, coordinate = ?, features = ? WHERE hotel_id = ?";
     @Autowired
     private Hotel hotel;
 
@@ -32,12 +32,12 @@ public class UpdateHotelSpecification implements UpdateSpecification<Hotel> {
 
     @Override
     public void setValues(PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement.setLong(1, hotel.getHotelId());
-        preparedStatement.setString(2, hotel.getName());
-        preparedStatement.setInt(3, hotel.getStars());
-        preparedStatement.setObject(4, hotel.getWebsite());
-        preparedStatement.setObject(5, hotel.getCoordinate());
-        preparedStatement.setArray(6, preparedStatement.getConnection().createArrayOf("types_of_features", hotel.getFeatures()));
+        preparedStatement.setString(1, hotel.getName());
+        preparedStatement.setInt(2, hotel.getStars());
+        preparedStatement.setObject(3, hotel.getWebsite());
+        preparedStatement.setObject(4, hotel.getCoordinate());
+        preparedStatement.setArray(5, preparedStatement.getConnection().createArrayOf("types_of_features", hotel.getFeatures()));
+        preparedStatement.setLong(6, hotel.getHotelId());
     }
 
     @Override

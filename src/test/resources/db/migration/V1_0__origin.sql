@@ -107,3 +107,8 @@ CREATE TABLE public.users (
     CONSTRAINT user_password_check CHECK ((length((password)::text) > 4)),
     CONSTRAINT user_password_not_null CHECK ((password IS NOT NULL))
 );
+
+CREATE TABLE public.users_tours (
+    user_id bigint NOT NULL,
+    tour_id bigint NOT NULL
+);

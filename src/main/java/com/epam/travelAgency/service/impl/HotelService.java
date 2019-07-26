@@ -7,6 +7,7 @@ import org.postgis.PGgeometry;
 import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class HotelService implements Service<Hotel> {
@@ -19,7 +20,13 @@ public class HotelService implements Service<Hotel> {
         hotel.setStars(resultSet.getInt("stars"));
         hotel.setWebsite(resultSet.getString("website"));
         hotel.setCoordinate((PGgeometry) resultSet.getObject("coordinate"));
-        hotel.setFeatures((Hotel.Feature[])(resultSet.getArray("features").getArray()));
+        Array array = resultSet.getArray("features");
+        String[] stringFeatures = (String[]) array.getArray();
+        Hotel.Feature[] features = new Hotel.Feature[stringFeatures.length];
+        for (int j = 0; j < stringFeatures.length; j++) {
+            features[j] = Hotel.Feature.getFeature(stringFeatures[j]);
+        }
+        hotel.setFeatures(features);
         return hotel;
     }
 }

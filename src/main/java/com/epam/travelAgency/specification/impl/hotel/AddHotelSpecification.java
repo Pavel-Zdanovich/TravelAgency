@@ -5,16 +5,13 @@ import com.epam.travelAgency.specification.AddSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Array;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Collection;
 
 @Component
 public class AddHotelSpecification implements AddSpecification<Hotel> {
 
-    public static final String INSERT_HOTEL = "INSERT INTO hotels (hotel_id, name, stars, website, coordinate, features) VALUES (?,?,?,?,?,?)";
+    public static final String INSERT_HOTEL = "INSERT INTO hotels (hotel_id, name, stars, website, coordinate, features) VALUES (?,?,?,?,?::\"geometry\",?)";
     @Autowired
     private Hotel hotel;
 
@@ -40,7 +37,7 @@ public class AddHotelSpecification implements AddSpecification<Hotel> {
         preparedStatement.setInt(3, hotel.getStars());
         preparedStatement.setObject(4, hotel.getWebsite());
         preparedStatement.setObject(5, hotel.getCoordinate());
-        preparedStatement.setArray(6, preparedStatement.getConnection().createArrayOf("types_of_features", hotel.getFeatures()));//Unable to find server array type for provided name types_of_features.
+        preparedStatement.setArray(6, preparedStatement.getConnection().createArrayOf("types_of_features", hotel.getFeatures()));
     }
 
     @Override

@@ -4,6 +4,10 @@ import com.epam.travelAgency.config.EntityConfig;
 import com.epam.travelAgency.embedded.EmbeddedPostgresConfig;
 import com.epam.travelAgency.embedded.FlywayConfig;
 import com.epam.travelAgency.entity.Tour;
+import com.epam.travelAgency.entity.User;
+import com.epam.travelAgency.specification.impl.common.FindTourByUserIdSpecification;
+import com.epam.travelAgency.specification.impl.common.FindTourByUserLoginSpecification;
+import com.epam.travelAgency.specification.impl.common.FindTourByUserSpecification;
 import com.epam.travelAgency.specification.impl.tour.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +16,7 @@ import org.postgresql.util.PGmoney;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -58,6 +63,12 @@ public class TourRepositoryTest {
     private FindTourByStartDateSpecification findTourByStartDateSpecification;
     @Autowired
     private FindTourByTypeSpecification findTourByTypeSpecification;
+    @Autowired
+    private FindTourByUserIdSpecification findTourByUserIdSpecification;
+    @Autowired
+    private FindTourByUserLoginSpecification findTourByUserLoginSpecification;
+    @Autowired
+    private FindTourByUserSpecification findTourByUserSpecification;
 
     @Before
     public void setUp() throws Exception {
@@ -152,6 +163,28 @@ public class TourRepositoryTest {
     public void query_tour_by_findTourByTypeSpecification() {
         findTourByTypeSpecification.setSpecification(Tour.Type.SCIENTIFIC_EXPEDITION);
         tourRepository.query(findTourByTypeSpecification);
+    }
+
+    @Test
+    public void query_tour_by_findTourByUserIdSpecification() {
+        findTourByUserIdSpecification.setSpecification(Long.MAX_VALUE);
+        tourRepository.query(findTourByUserIdSpecification);
+    }
+
+    @Test
+    public void query_tour_by_findTourByUserLoginSpecification() {
+        findTourByUserLoginSpecification.setSpecification("ElonMusk");
+        tourRepository.query(findTourByUserLoginSpecification);
+    }
+
+    @Test
+    public void query_tour_by_findTourByUserSpecification() {
+        User user = new User();
+        user.setUserId(Long.MAX_VALUE);
+        user.setLogin("ElonMusk");
+        user.setPassword("SpaceXXX");
+        findTourByUserSpecification.setSpecification(user);
+        tourRepository.query(findTourByUserSpecification);
     }
 
 }

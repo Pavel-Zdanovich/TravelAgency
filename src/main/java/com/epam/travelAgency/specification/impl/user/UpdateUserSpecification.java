@@ -11,7 +11,7 @@ import java.sql.SQLException;
 @Component
 public class UpdateUserSpecification implements UpdateSpecification<User> {
 
-    public static final String UPDATE_USER_LOGIN = "UPDATE users SET user_id = ?, login = ?, password = ?";
+    public static final String UPDATE_USER_LOGIN = "UPDATE users SET login = ?, password = ? WHERE user_id = ?";
     @Autowired
     private User user;
 
@@ -32,9 +32,9 @@ public class UpdateUserSpecification implements UpdateSpecification<User> {
 
     @Override
     public void setValues(PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement.setLong(1, user.getUserId());
-        preparedStatement.setString(2, user.getLogin());
-        preparedStatement.setString(3, user.getPassword());
+        preparedStatement.setString(1, user.getLogin());
+        preparedStatement.setString(2, user.getPassword());
+        preparedStatement.setLong(3, user.getUserId());
     }
 
     @Override
