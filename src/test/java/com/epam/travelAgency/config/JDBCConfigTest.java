@@ -7,9 +7,9 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.flywaydb.core.Flyway;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,15 +21,19 @@ import ru.yandex.qatools.embed.postgresql.config.PostgresConfig;
 
 import javax.sql.DataSource;
 
-@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {JDBCConfig.class, EmbeddedPostgresConfig.class, FlywayConfig.class})
 public class JDBCConfigTest {
 
+    @Autowired
     private HikariConfig hikariConfig;
+    @Autowired
     private PostgresConfig postgresConfig;
+    @Autowired
     private DataSource dataSource;
+    @Autowired
     private EmbeddedPostgres embeddedPostgres;
+    @Autowired
     private Flyway flyway;
     private ApplicationContext hikariJdbcContext;
     private ApplicationContext embeddedPostgresContext;

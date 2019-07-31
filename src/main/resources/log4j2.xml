@@ -9,6 +9,12 @@
         <Logger name="com.epam.travelAgency" level="trace" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
+        <!--<Logger name="org.hibernate.SQL" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>-->
+        <Logger name="org.hibernate" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
         <Root level="error">
             <AppenderRef ref="Console"/>
         </Root>

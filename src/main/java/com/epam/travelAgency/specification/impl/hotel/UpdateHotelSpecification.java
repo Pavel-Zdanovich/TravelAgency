@@ -34,7 +34,7 @@ public class UpdateHotelSpecification implements UpdateSpecification<Hotel> {
     public void setValues(PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setString(1, hotel.getName());
         preparedStatement.setInt(2, hotel.getStars());
-        preparedStatement.setObject(3, hotel.getWebsite());
+        preparedStatement.setString(3, hotel.getWebsite().toString());
         preparedStatement.setObject(4, hotel.getCoordinate());
         preparedStatement.setArray(5, preparedStatement.getConnection().createArrayOf("types_of_features", hotel.getFeatures()));
         preparedStatement.setLong(6, hotel.getHotelId());

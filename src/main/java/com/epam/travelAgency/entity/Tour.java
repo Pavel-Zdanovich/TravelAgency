@@ -1,171 +1,82 @@
 package com.epam.travelAgency.entity;
 
-import com.fasterxml.uuid.Generators;
+import com.vladmihalcea.hibernate.type.basic.PostgreSQLEnumType;
+import lombok.*;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import org.postgresql.util.PGmoney;
 import org.springframework.stereotype.Component;
 
-import java.nio.file.Path;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
-public class Tour extends Entity {
+@Entity(name = "Tour")
+@Table(name = "tours")
+@TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType.class, defaultForType = TourType.class)
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+public class Tour extends TravelAgencyEntity {
 
-    public enum Type {
-
-        TREATMENT("treatment"),
-        TOURISM("tourism"),
-        LEISURE("leisure"),
-        BUSINESS("business"),
-        PILGRIMAGE("pilgrimage"),
-        TRAINING("training"),
-        SPORT_COMPETITION("sport competition"),
-        RURAL_TOURISM("rural tourism"),
-        SCIENTIFIC_EXPEDITION("scientific expedition"),
-        ECOTOURISM("ecotourism");
-
-        private final String name;
-
-        Type(String name) {
-            this.name = name;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
-        public static Type getType(String stringType) {
-            for (Type type : values()) {
-                if (type.name.equals(stringType)) {
-                    return type;
-                }
-            }
-            throw new IllegalArgumentException("Illegal tour name : " + stringType);
-        }
-
-    }
-
+    @Column(name = "tour_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @NotNull(message = "Please enter tour id")
     private long tourId;
-    private Path photoPath;
+
+    @Column(name = "photo")
+    private String photoPath;
+
+    @Column(name = "start_date")
+    @NotNull(message = "Please enter tour start date")
     private Timestamp startDate;
+
+    @Column(name = "end_date")
+    @NotNull(message = "Please enter tour end date")
     private Timestamp endDate;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "cost")
+    @Type(type = "org.hibernate.type.BigDecimalType")
+    @NotNull(message = "Please enter tour cost")
     private PGmoney cost;
-    private Type type;
-    private long hotelId;
-    private long countryId;
 
-    public Tour() {
-        this.tourId = Generators.timeBasedGenerator().generate().timestamp();
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "tour_type", columnDefinition = "types_of_tours")
+    @Type(type = "pgsql_enum")
+    @NotNull(message = "Please enter tour type")
+    private TourType tourType;
+
+    @ManyToMany(mappedBy = "tours")
+    private List<User> users = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hotel_id", referencedColumnName = "hotel_id", foreignKey = @ForeignKey(name = "tour_hotel_id_fkey"))
+    private Hotel hotel;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id", referencedColumnName = "country_id", foreignKey = @ForeignKey(name = "tour_country_id_fkey"))
+    private Country country;
+
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
+
+    public boolean addReview(Review review) {
+        review.setTour(this);
+        return reviews.add(review);
     }
 
-    public long getTourId() {
-        return tourId;
+    public boolean removeReview(Review review) {
+        review.setTour(null);
+        return reviews.remove(review);
     }
 
-    public void setTourId(long tourId) {
-        this.tourId = tourId;
-    }
-
-    public Path getPhotoPath() {
-        return photoPath;
-    }
-
-    public void setPhotoPath(Path photoPath) {
-        this.photoPath = photoPath;
-    }
-
-    public Timestamp getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Timestamp startDate) {
-        this.startDate = startDate;
-    }
-
-    public Timestamp getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Timestamp endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public PGmoney getCost() {
-        return cost;
-    }
-
-    public void setCost(PGmoney cost) {
-        this.cost = cost;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
-
-    public long getHotelId() {
-        return hotelId;
-    }
-
-    public void setHotelId(long hotelId) {
-        this.hotelId = hotelId;
-    }
-
-    public long getCountryId() {
-        return countryId;
-    }
-
-    public void setCountryId(long countryId) {
-        this.countryId = countryId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null) {
-            return false;
-        }
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Tour)) {
-            return false;
-        } else {
-            Tour tour = (Tour) o;
-            return getTourId() == tour.getTourId() &&
-                    getPhotoPath().equals(tour.getPhotoPath()) &&
-                    getStartDate().equals(tour.getStartDate()) &&
-                    getEndDate().equals(tour.getEndDate()) &&
-                    getDescription().equals(tour.getDescription()) &&
-                    getType().equals(tour.getType()) &&
-                    getHotelId() == tour.getHotelId() &&
-                    getCountryId() == tour.getCountryId();
-        }
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getTourId(), getPhotoPath(), getStartDate(), getEndDate(), getDescription(), getType(), getHotelId(), getCountryId());
-    }
-
-    @Override
-    public String toString() {
-        return new StringBuilder(getClass().getSimpleName()).append("tourId=").append(tourId)
-                .append(", photoPath=").append(photoPath).append(", startDate=").append(startDate)
-                .append(", endDate=").append(endDate).append(", description='")
-                .append(description).append('\'').append(", name=").append(type)
-                .append(", hotelId=").append(hotelId).append(", countryId=").append(countryId).append('}').toString();
-    }
 }

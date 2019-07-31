@@ -4,37 +4,34 @@ import com.epam.travelAgency.repository.impl.HotelRepository;
 import com.epam.travelAgency.repository.impl.ReviewRepository;
 import com.epam.travelAgency.repository.impl.TourRepository;
 import com.epam.travelAgency.repository.impl.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.sql.DataSource;
 
 @Configuration
 public class RepositoryConfig {
 
     @Bean
-    @Autowired
-    public HotelRepository hotelRepository(DataSource dataSource) {
-        return new HotelRepository(dataSource);
+    //@Autowired(datasource)
+    public HotelRepository hotelRepository() {
+        return new HotelRepository();
     }
 
     @Bean
-    @Autowired
-    public ReviewRepository reviewRepository(DataSource dataSource) {
-        return new ReviewRepository(dataSource);
+    //@Autowired
+    public ReviewRepository reviewRepository() {
+        return new ReviewRepository();
     }
 
     @Bean
-    @Autowired
-    public TourRepository tourRepository(DataSource dataSource) {
-        return new TourRepository(dataSource);
+    //@Autowired
+    public TourRepository tourRepository() {
+        return new TourRepository();
     }
 
     @Bean
-    @Autowired
-    public UserRepository userRepository(DataSource dataSource) {
-        return new UserRepository(dataSource);
+    //@Autowired
+    public UserRepository userRepository() {
+        return new UserRepository();
     }
 
 }

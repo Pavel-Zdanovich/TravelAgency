@@ -34,7 +34,7 @@ public class FindHotelSpecification implements FindSpecification<Hotel, Hotel> {
     public String getSQLQuery() {
         StringBuilder stringBuilder = new StringBuilder("{");
         Arrays.stream(hotel.getFeatures()).forEach(feature -> stringBuilder.append(feature.toString()).append(","));
-        return String.format(SELECT_HOTEL, hotel.getHotelId(), hotel.getName(), hotel.getStars(), hotel.getWebsite(),
+        return String.format(SELECT_HOTEL, hotel.getHotelId(), hotel.getName(), hotel.getStars(), hotel.getWebsite().toString(),
                 hotel.getCoordinate(), stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(",")).append("}").toString());
     }
 

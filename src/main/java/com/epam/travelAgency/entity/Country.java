@@ -1,61 +1,47 @@
 package com.epam.travelAgency.entity;
 
-import com.fasterxml.uuid.Generators;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
-public class Country extends Entity {
+@Entity(name = "Country")
+@Table(name = "countries", uniqueConstraints = @UniqueConstraint(name = "country_name_unique", columnNames = {"name"}))
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+public class Country extends TravelAgencyEntity {
 
+    @Column(name = "country_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @NotNull(message = "Please enter country id")
     private long countryId;
+
+    @Column(name = "name", length = 50)
+    @Size(min = 3, max = 50, message = "Please enter country name [3, 50] characters")
+    @NotEmpty(message = "Please enter country name")
     private String name;
 
-    public Country() {
-        this.countryId = Generators.timeBasedGenerator().generate().timestamp();
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Tour> tours = new ArrayList<>();
+
+    public boolean addTour(Tour tour) {
+        tour.setCountry(this);
+        return tours.add(tour);
     }
 
-    public long getCountryId() {
-        return countryId;
+    public boolean removeTour(Tour tour) {
+        tour.setCountry(null);
+        return tours.remove(tour);
     }
 
-    public void setCountryId(long countryId) {
-        this.countryId = countryId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null) {
-            return false;
-        }
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Country)) {
-            return false;
-        } else {
-            Country country = (Country) o;
-            return getCountryId() == country.getCountryId() &&
-                    getName().equals(country.getName());
-        }
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getCountryId(), getName());
-    }
-
-    @Override
-    public String toString() {
-        return new StringBuilder(getClass().getSimpleName()).append("countryId=").append(countryId)
-                .append(", name='").append(name).append('\'').append('}').toString();
-    }
 }

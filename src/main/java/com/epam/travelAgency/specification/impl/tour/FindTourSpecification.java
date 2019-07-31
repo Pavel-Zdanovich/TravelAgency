@@ -30,8 +30,8 @@ public class FindTourSpecification implements FindSpecification<Tour, Tour> {
 
     @Override
     public String getSQLQuery() {
-        return String.format(SELECT_TOUR, tour.getTourId(), tour.getPhotoPath().toAbsolutePath().toString(), tour.getStartDate(),
-                tour.getEndDate(), tour.getDescription(), tour.getCost().val,  tour.getType(), tour.getCountryId(), tour.getHotelId());
+        return String.format(SELECT_TOUR, tour.getTourId(), tour.getPhotoPath(), tour.getStartDate(),
+                tour.getEndDate(), tour.getDescription(), tour.getCost().val,  tour.getTourType(), tour.getCountry().getCountryId(), tour.getHotel().getHotelId());
     }
 
 }

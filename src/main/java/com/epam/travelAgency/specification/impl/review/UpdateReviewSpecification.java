@@ -34,8 +34,8 @@ public class UpdateReviewSpecification implements UpdateSpecification<Review> {
     public void setValues(PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setTimestamp(1, review.getDate());
         preparedStatement.setString(2, review.getText());
-        preparedStatement.setLong(3, review.getUserId());
-        preparedStatement.setLong(4 ,review.getTourId());
+        preparedStatement.setLong(3, review.getUser().getUserId());
+        preparedStatement.setLong(4 ,review.getTour().getTourId());
         preparedStatement.setLong(5, review.getReviewId());
     }
 

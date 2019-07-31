@@ -1,16 +1,62 @@
 package com.epam.travelAgency.service.impl;
 
+import com.epam.travelAgency.entity.Feature;
 import com.epam.travelAgency.entity.Hotel;
+import com.epam.travelAgency.repository.impl.HotelRepository;
 import com.epam.travelAgency.service.Service;
+import com.epam.travelAgency.specification.FindSpecification;
+import com.epam.travelAgency.specification.impl.hotel.*;
 import org.postgis.PGgeometry;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.stream.Stream;
+import java.util.Collection;
 
+@org.springframework.stereotype.Service
+@Transactional
 public class HotelService implements Service<Hotel> {
+
+    @Autowired
+    private HotelRepository hotelRepository;
+
+    @Override
+    public Collection<Hotel> findAll() {
+        FindSpecification<Hotel, Object> findSpecification = new FindAllHotelsSpecification();
+        return hotelRepository.query(findSpecification);
+    }
+
+    @Override
+    public Hotel findById(long hotelId) {
+        FindHotelByIdSpecification findHotelByIdSpecification = new FindHotelByIdSpecification(hotelId);
+        return hotelRepository.query(findHotelByIdSpecification).iterator().next();
+    }
+
+    @Override
+    public void update(Hotel hotel) {
+        UpdateHotelSpecification updateHotelSpecification = new UpdateHotelSpecification(hotel);
+        hotelRepository.update(updateHotelSpecification);
+    }
+
+    @Override
+    public void save(Hotel hotel) {
+        AddHotelSpecification addHotelSpecification = new AddHotelSpecification(hotel);
+        hotelRepository.add(addHotelSpecification);
+    }
+
+    @Override
+    public void delete(Hotel hotel) {
+        RemoveHotelSpecification removeHotelSpecification = new RemoveHotelSpecification(hotel);
+        hotelRepository.remove(removeHotelSpecification);
+    }
+
+    @Override
+    public void deleteById(long hotelId) {
+        RemoveHotelByIdSpecification removeHotelByIdSpecification = new RemoveHotelByIdSpecification(hotelId);
+        hotelRepository.remove(removeHotelByIdSpecification);
+    }
 
     @Override
     public Hotel mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -18,13 +64,13 @@ public class HotelService implements Service<Hotel> {
         hotel.setHotelId(resultSet.getLong("hotel_id"));
         hotel.setName(resultSet.getString("name"));
         hotel.setStars(resultSet.getInt("stars"));
-        hotel.setWebsite(resultSet.getString("website"));
+        hotel.setWebsite(resultSet.getURL("website"));
         hotel.setCoordinate((PGgeometry) resultSet.getObject("coordinate"));
         Array array = resultSet.getArray("features");
         String[] stringFeatures = (String[]) array.getArray();
-        Hotel.Feature[] features = new Hotel.Feature[stringFeatures.length];
+        Feature[] features = new Feature[stringFeatures.length];
         for (int j = 0; j < stringFeatures.length; j++) {
-            features[j] = Hotel.Feature.getFeature(stringFeatures[j]);
+            features[j] = Feature.getFeature(stringFeatures[j]);
         }
         hotel.setFeatures(features);
         return hotel;

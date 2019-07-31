@@ -33,14 +33,14 @@ public class RemoveTourSpecification implements RemoveSpecification<Tour> {
     @Override
     public void setValues(PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setLong(1, tour.getTourId());
-        preparedStatement.setString(2, tour.getPhotoPath().toAbsolutePath().toString());
+        preparedStatement.setString(2, tour.getPhotoPath());
         preparedStatement.setTimestamp(3, tour.getStartDate());
         preparedStatement.setTimestamp(4, tour.getEndDate());
         preparedStatement.setString(5, tour.getDescription());
         preparedStatement.setObject(6, tour.getCost());
-        preparedStatement.setString(7, tour.getType().toString());
-        preparedStatement.setLong(8, tour.getCountryId());
-        preparedStatement.setLong(9, tour.getHotelId());
+        preparedStatement.setString(7, tour.getTourType().toString());
+        preparedStatement.setLong(8, tour.getCountry().getCountryId());
+        preparedStatement.setLong(9, tour.getHotel().getHotelId());
     }
 
     @Override

@@ -30,7 +30,7 @@ public class FindReviewSpecification implements FindSpecification<Review, Review
 
     @Override
     public String getSQLQuery() {
-        return String.format(SELECT_REVIEW, review.getReviewId(), review.getDate(), review.getText(), review.getUserId(), review.getTourId());
+        return String.format(SELECT_REVIEW, review.getReviewId(), review.getDate(), review.getText(), review.getUser().getUserId(), review.getTour().getTourId());
     }
 
 }

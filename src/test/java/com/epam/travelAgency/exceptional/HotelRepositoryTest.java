@@ -2,6 +2,8 @@ package com.epam.travelAgency.exceptional;
 
 import com.epam.travelAgency.config.EntityConfig;
 import com.epam.travelAgency.config.JDBCConfig;
+import com.epam.travelAgency.config.RepositoryConfig;
+import com.epam.travelAgency.entity.Feature;
 import com.epam.travelAgency.entity.Hotel;
 import com.epam.travelAgency.repository.impl.HotelRepository;
 import com.epam.travelAgency.specification.impl.hotel.AddHotelSpecification;
@@ -21,10 +23,12 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.SQLException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {EntityConfig.class, JDBCConfig.class, HotelRepository.class,
+@ContextConfiguration(classes = {EntityConfig.class, JDBCConfig.class, RepositoryConfig.class,
         AddHotelSpecification.class, UpdateHotelSpecification.class, RemoveHotelSpecification.class, FindHotelSpecification.class})
 public class HotelRepositoryTest {
 
@@ -50,13 +54,13 @@ public class HotelRepositoryTest {
         fillHotel(hotel);
     }
 
-    private void fillHotel(Hotel hotel) throws SQLException {
+    private void fillHotel(Hotel hotel) throws SQLException, MalformedURLException {
         hotel.setHotelId(1L);
         hotel.setName("Marriott");
         hotel.setStars(5);
-        hotel.setWebsite("https://marriott.com");
+        hotel.setWebsite(new URL("https://marriott.com"));
         hotel.setCoordinate(new PGgeometry(PGgeometry.geomFromString("SRID=4326;POINT(37.617635 55.755814 42.419420)")));
-        hotel.setFeatures(new Hotel.Feature[]{Hotel.Feature.AIR_CONDITIONER, Hotel.Feature.MINI_BAR});
+        hotel.setFeatures(new Feature[]{Feature.AIR_CONDITIONER, Feature.MINI_BAR});
     }
 
     @Test
@@ -70,16 +74,16 @@ public class HotelRepositoryTest {
     }
 
     @Test
-    public void update_hotel_by_updateHotelSpecification() {
+    public void update_hotel_by_updateHotelSpecification() throws MalformedURLException {
         addHotel(hotel);
         Hotel hotel = new Hotel();
         hotel.setHotelId(1);
         hotel.setName("Hilton");
         hotel.setStars(3);
-        hotel.setWebsite("http://hilton.com");
+        hotel.setWebsite(new URL("http://hilton.com"));
         try {
             hotel.setCoordinate(new PGgeometry(PGgeometry.geomFromString("SRID=4326;POINT(42.419420 69.666139 27.337318)")));
-            hotel.setFeatures(new Hotel.Feature[]{Hotel.Feature.CABLE_TV, Hotel.Feature.PARKING});
+            hotel.setFeatures(new Feature[]{Feature.CABLE_TV, Feature.PARKING});
             updateHotelSpecification.setHotel(hotel);
             hotelRepository.update(updateHotelSpecification);
         } catch (SQLException e) {

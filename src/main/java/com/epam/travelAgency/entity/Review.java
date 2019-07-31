@@ -1,85 +1,42 @@
 package com.epam.travelAgency.entity;
 
-import com.fasterxml.uuid.Generators;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
-import java.util.Objects;
 
 @Component
-public class Review extends Entity {
+@Entity(name = "Review")
+@Table(name = "reviews")
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+public class Review extends TravelAgencyEntity {
 
+    @Column(name = "review_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @NotNull(message = "Please enter review id")
     private long reviewId;
+
+    @Column(name = "date")
+    @NotNull(message = "Please enter review date")
     private Timestamp date;
+
+    @Column(name = "text")
+    @NotNull(message = "Please enter review text")
     private String text;
-    private long userId;
-    private long tourId;
 
-    public Review() {
-        this.reviewId = Generators.timeBasedGenerator().generate().timestamp();
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", foreignKey = @ForeignKey(name = "review_user_id_fkey"))
+    private User user;
 
-    public long getReviewId() {
-        return reviewId;
-    }
-
-    public void setReviewId(long reviewId) {
-        this.reviewId = reviewId;
-    }
-
-    public Timestamp getDate() {
-        return date;
-    }
-
-    public void setDate(Timestamp date) {
-        this.date = date;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public long getTourId() {
-        return tourId;
-    }
-
-    public void setTourId(long tourId) {
-        this.tourId = tourId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null) {
-            return false;
-        }
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Review)) {
-            return false;
-        } else {
-            Review review = (Review) o;
-            return getReviewId() == review.getReviewId() &&
-                    getDate().equals(review.getDate()) &&
-                    getText().equals(review.getText());
-        }
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getReviewId(), getDate(), getText());
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tour_id", referencedColumnName = "tour_id", foreignKey = @ForeignKey(name = "review_tour_id_fkey"))
+    private Tour tour;
 
 }

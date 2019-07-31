@@ -3,22 +3,28 @@ package com.epam.travelAgency.repository.impl;
 import com.epam.travelAgency.entity.Review;
 import com.epam.travelAgency.repository.Repository;
 import com.epam.travelAgency.service.impl.ReviewService;
-import com.epam.travelAgency.specification.*;
+import com.epam.travelAgency.specification.AddSpecification;
+import com.epam.travelAgency.specification.FindSpecification;
+import com.epam.travelAgency.specification.RemoveSpecification;
+import com.epam.travelAgency.specification.UpdateSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import javax.sql.DataSource;
 import java.util.Collection;
 
 @org.springframework.stereotype.Repository
 public class ReviewRepository implements Repository<Review> {
 
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired
+    public ReviewRepository() {
+    }
+
+    /*@Autowired
     public ReviewRepository(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }
+    }*/
 
     @Override
     public void add(AddSpecification<Review> specification) {

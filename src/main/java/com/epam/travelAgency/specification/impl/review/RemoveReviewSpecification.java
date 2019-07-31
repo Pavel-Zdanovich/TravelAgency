@@ -35,8 +35,8 @@ public class RemoveReviewSpecification implements RemoveSpecification<Review> {
         preparedStatement.setLong(1, review.getReviewId());
         preparedStatement.setTimestamp(2, review.getDate());
         preparedStatement.setString(3, review.getText());
-        preparedStatement.setLong(4, review.getUserId());
-        preparedStatement.setLong(5 ,review.getTourId());
+        preparedStatement.setLong(4, review.getUser().getUserId());
+        preparedStatement.setLong(5 ,review.getTour().getTourId());
     }
 
     @Override

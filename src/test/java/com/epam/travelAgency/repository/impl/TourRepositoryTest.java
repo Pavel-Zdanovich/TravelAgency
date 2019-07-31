@@ -1,14 +1,18 @@
 package com.epam.travelAgency.repository.impl;
 
 import com.epam.travelAgency.config.EntityConfig;
+import com.epam.travelAgency.config.RepositoryConfig;
 import com.epam.travelAgency.embedded.EmbeddedPostgresConfig;
 import com.epam.travelAgency.embedded.FlywayConfig;
 import com.epam.travelAgency.entity.Tour;
+import com.epam.travelAgency.entity.TourType;
 import com.epam.travelAgency.entity.User;
 import com.epam.travelAgency.specification.impl.common.FindTourByUserIdSpecification;
 import com.epam.travelAgency.specification.impl.common.FindTourByUserLoginSpecification;
 import com.epam.travelAgency.specification.impl.common.FindTourByUserSpecification;
 import com.epam.travelAgency.specification.impl.tour.*;
+import com.epam.travelAgency.util.CostRange;
+import com.epam.travelAgency.util.Criterion;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,19 +20,16 @@ import org.postgresql.util.PGmoney;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.io.File;
-import java.nio.file.Paths;
 import java.sql.Timestamp;
-import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {EmbeddedPostgresConfig.class, FlywayConfig.class, EntityConfig.class})
+@ContextConfiguration(classes = {EmbeddedPostgresConfig.class, FlywayConfig.class, EntityConfig.class, RepositoryConfig.class})
 public class TourRepositoryTest {
 
     @Autowired
@@ -69,21 +70,23 @@ public class TourRepositoryTest {
     private FindTourByUserLoginSpecification findTourByUserLoginSpecification;
     @Autowired
     private FindTourByUserSpecification findTourByUserSpecification;
+    @Autowired
+    private FindTourByCriterionSpecification findTourByCriterionSpecification;
 
     @Before
     public void setUp() throws Exception {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(EntityConfig.class);
         tour = applicationContext.getBean(Tour.class);
         tour.setTourId(Long.MAX_VALUE);
-        tour.setPhotoPath(Paths.get("src/main/resources/applicationContext.xml"));
+        tour.setPhotoPath("src/main/resources/applicationContext.xml");
         Timestamp timestamp = Timestamp.valueOf("2019-08-31 00:00:00");
         tour.setStartDate(timestamp);
         tour.setEndDate(Timestamp.from(timestamp.toInstant().plus(10, ChronoUnit.DAYS)));
         tour.setDescription("description of tour");
         tour.setCost(new PGmoney(100.0));
-        tour.setType(Tour.Type.SCIENTIFIC_EXPEDITION);
-        tour.setHotelId(Long.MAX_VALUE);
-        tour.setCountryId(Long.MAX_VALUE);
+        tour.setTourType(TourType.SCIENTIFIC_EXPEDITION);
+        tour.getHotel().setHotelId(Long.MAX_VALUE);
+        tour.getCountry().setCountryId(Long.MAX_VALUE);
     }
 
     @Test
@@ -112,7 +115,7 @@ public class TourRepositoryTest {
 
     @Test
     public void query_tour_by_findTourByCostRangeSpecification() {
-        findTourByCostRangeSpecification.setSpecification(new FindTourByCostRangeSpecification.CostRange(new PGmoney(100), new PGmoney(200)));
+        findTourByCostRangeSpecification.setSpecification(new CostRange(new PGmoney(100), new PGmoney(200)));
         tourRepository.query(findTourByCostRangeSpecification);
     }
 
@@ -161,7 +164,7 @@ public class TourRepositoryTest {
 
     @Test
     public void query_tour_by_findTourByTypeSpecification() {
-        findTourByTypeSpecification.setSpecification(Tour.Type.SCIENTIFIC_EXPEDITION);
+        findTourByTypeSpecification.setSpecification(TourType.SCIENTIFIC_EXPEDITION);
         tourRepository.query(findTourByTypeSpecification);
     }
 
@@ -185,6 +188,17 @@ public class TourRepositoryTest {
         user.setPassword("SpaceXXX");
         findTourByUserSpecification.setSpecification(user);
         tourRepository.query(findTourByUserSpecification);
+    }
+
+    @Test
+    public void query_tour_by_findTourByCriterionCpesification() {
+        Criterion criterion = new Criterion();
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        criterion.setStartDate(timestamp);
+        criterion.setEndDate(Timestamp.valueOf(LocalDateTime.of(2019, 8, 31, 0, 0, 0)));
+        criterion.setTourType(TourType.TOURISM);
+        findTourByCriterionSpecification.setSpecification(criterion);
+        tourRepository.query(findTourByCriterionSpecification);
     }
 
 }

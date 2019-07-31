@@ -32,14 +32,14 @@ public class UpdateTourSpecification implements UpdateSpecification<Tour> {
 
     @Override
     public void setValues(PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement.setString(1, tour.getPhotoPath().toAbsolutePath().toString());
+        preparedStatement.setString(1, tour.getPhotoPath());
         preparedStatement.setTimestamp(2, tour.getStartDate());
         preparedStatement.setTimestamp(3, tour.getEndDate());
         preparedStatement.setString(4, tour.getDescription());
         preparedStatement.setObject(5, tour.getCost());
-        preparedStatement.setString(6, tour.getType().toString());
-        preparedStatement.setLong(7, tour.getCountryId());
-        preparedStatement.setLong(8, tour.getHotelId());
+        preparedStatement.setString(6, tour.getTourType().toString());
+        preparedStatement.setLong(7, tour.getCountry().getCountryId());
+        preparedStatement.setLong(8, tour.getHotel().getHotelId());
         preparedStatement.setLong(9, tour.getTourId());
     }
 
