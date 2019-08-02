@@ -11,7 +11,7 @@ import java.util.List;
 
 @Component
 @Entity(name = "User")
-@Table(name = "users", uniqueConstraints = @UniqueConstraint(name = "user_login_unique", columnNames = "login"))
+@Table(name = "users", schema = "public", uniqueConstraints = @UniqueConstraint(name = "user_login_unique", columnNames = "login"))
 @NoArgsConstructor
 @Getter
 @Setter
@@ -36,7 +36,7 @@ public class User extends TravelAgencyEntity {
     private String password;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JoinTable(name = "users_tours", uniqueConstraints = @UniqueConstraint(name = "user_tour_primary_key", columnNames = {"user_id", "tour_id"}),
+    @JoinTable(name = "users_tours", uniqueConstraints = @UniqueConstraint(name = "user_tour_unique_key", columnNames = {"user_id", "tour_id"}),
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id", foreignKey = @ForeignKey(name = "user_tour_user_id_fkey")),
             inverseJoinColumns = @JoinColumn(name = "tour_id", referencedColumnName = "tour_id", foreignKey = @ForeignKey(name = "user_tour_tour_id_fkey")))
     private List<Tour> tours = new ArrayList<>();

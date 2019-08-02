@@ -22,8 +22,9 @@ public class UpdateHotelSpecification implements UpdateSpecification<Hotel> {
         this.hotel = hotel;
     }
 
-    public Hotel getHotel() {
-        return hotel;
+    @Override
+    public Hotel getEntity() {
+        return this.hotel;
     }
 
     public void setHotel(Hotel hotel) {

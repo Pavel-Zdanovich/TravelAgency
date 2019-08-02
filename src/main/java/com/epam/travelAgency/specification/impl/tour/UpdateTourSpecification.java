@@ -22,8 +22,9 @@ public class UpdateTourSpecification implements UpdateSpecification<Tour> {
         this.tour = tour;
     }
 
-    public Tour getTour() {
-        return tour;
+    @Override
+    public Tour getEntity() {
+        return this.tour;
     }
 
     public void setTour(Tour tour) {

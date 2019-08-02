@@ -1,9 +1,10 @@
 package com.epam.travelAgency.embedded;
 
 import org.flywaydb.core.Flyway;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 
 import javax.sql.DataSource;
 
@@ -11,9 +12,9 @@ import javax.sql.DataSource;
 public class FlywayConfig {
 
     @Bean(initMethod = "migrate")
-    @DependsOn("dataSource")
-    public Flyway flyway(DataSource dataSource) {
-        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
+    @Autowired
+    public Flyway flyway(@Qualifier("simpleDriverDataSource") DataSource dataSource) {
+        Flyway flyway = Flyway.configure().dataSource(dataSource).baselineOnMigrate(true).locations("src/test/resources/db/migration").load();
         return flyway;
     }
 

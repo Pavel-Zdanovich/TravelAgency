@@ -22,12 +22,13 @@ public class AddHotelSpecification implements AddSpecification<Hotel> {
         this.hotel = hotel;
     }
 
-    public Hotel getHotel() {
-        return hotel;
-    }
-
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
+    }
+
+    @Override
+    public Hotel getEntity() {
+        return this.hotel;
     }
 
     @Override

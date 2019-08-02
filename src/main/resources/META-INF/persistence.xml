@@ -4,22 +4,20 @@
              version="2.2">
     <persistence-unit name="travelAgency" >
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>com.epam.travelAgency.entity.Country</class>
-        <class>com.epam.travelAgency.entity.Hotel</class>
-        <class>com.epam.travelAgency.entity.Review</class>
-        <class>com.epam.travelAgency.entity.Tour</class>
-        <class>com.epam.travelAgency.entity.User</class>
         <properties>
-            <property name="hibernate.archive.autodetection" value="class" />
-            <property name="hibernate.dialect" value="org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect" />
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
             <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/travel_agency_hibernate" />
+            <!--<property name="hibernate.connection.provider_class" value="com.zaxxer.hikari.hibernate.HikariConnectionProvider" />
+            <property name="hibernate.hikari.dataSourceClassName" value="org.postgresql.ds.PGSimpleDataSource" />
+            <property name="hibernate.hikari.dataSource.url" value="jdbc:postgresql://localhost:5432/travel_agency_hibernate" />
+            <property name="hibernate.hikari.username" value="postgres" />
+            <property name="hibernate.hikari.password" value="root" />-->
             <property name="hibernate.connection.username" value="postgres" />
             <property name="hibernate.connection.password" value="root" />
+            <property name="hibernate.archive.autodetection" value="class" />
+            <property name="hibernate.dialect" value="org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect" />
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.show_sql" value="true" />
-            <!--<property name="hibernate.default_schema" value="myschema" />-->
-            <!--<property name="hibernate.flushMode" value="FLUSH_AUTO"/>-->
         </properties>
     </persistence-unit>
 </persistence>

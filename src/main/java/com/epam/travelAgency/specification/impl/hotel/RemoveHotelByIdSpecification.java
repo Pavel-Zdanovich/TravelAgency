@@ -29,6 +29,13 @@ public class RemoveHotelByIdSpecification implements RemoveSpecification<Hotel> 
     }
 
     @Override
+    public Hotel getEntity() {
+        Hotel hotel = new Hotel();
+        hotel.setHotelId(this.hotelId);
+        return hotel;
+    }
+
+    @Override
     public void setValues(PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setLong(1, this.hotelId);
     }

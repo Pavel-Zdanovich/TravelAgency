@@ -21,7 +21,7 @@ public class JDBCConfig {
         return new HikariConfig(HIKARI_CONFIG_PROPERTY_FILE);
     }
 
-    @Bean(destroyMethod = "close")
+    @Bean(name = "dataSource", destroyMethod = "close")
     public DataSource hikariDataSource() {
         return new HikariDataSource(hikariConfig());
     }
@@ -31,7 +31,7 @@ public class JDBCConfig {
         return new JdbcTemplate(hikariDataSource());
     }
 
-    @Bean
+    @Bean(name = "dataSourceTransactionManager")
     public DataSourceTransactionManager dataSourceTransactionManager() {
         return new DataSourceTransactionManager(hikariDataSource());
     }

@@ -29,6 +29,13 @@ public class RemoveTourByIdSpecification implements RemoveSpecification<Tour> {
     }
 
     @Override
+    public Tour getEntity() {
+        Tour tour = new Tour();
+        tour.setTourId(this.tourId);
+        return tour;
+    }
+
+    @Override
     public void setValues(PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setLong(1, this.tourId);
     }

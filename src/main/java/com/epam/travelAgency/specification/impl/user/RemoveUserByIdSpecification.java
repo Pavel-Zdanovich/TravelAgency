@@ -30,6 +30,13 @@ public class RemoveUserByIdSpecification implements RemoveSpecification<User> {
     }
 
     @Override
+    public User getEntity() {
+        User user = new User();
+        user.setUserId(this.userId);
+        return user;
+    }
+
+    @Override
     public void setValues(PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setLong(1, userId);
     }

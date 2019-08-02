@@ -12,7 +12,7 @@ import java.util.List;
 
 @Component
 @Entity(name = "Country")
-@Table(name = "countries", uniqueConstraints = @UniqueConstraint(name = "country_name_unique", columnNames = {"name"}))
+@Table(name = "countries", schema = "public", uniqueConstraints = @UniqueConstraint(name = "country_name_unique", columnNames = {"name"}))
 @NoArgsConstructor
 @Getter
 @Setter

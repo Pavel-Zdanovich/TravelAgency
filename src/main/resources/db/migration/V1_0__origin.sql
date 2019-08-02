@@ -54,7 +54,7 @@ CREATE TABLE public.hotels (
     name character varying(50) NOT NULL,
     stars integer NOT NULL,
     website character varying(75),
-    --coordinate public.geometry(PointZ,4326),
+    coordinate public.geometry(PointZ,4326),
     features public.types_of_features[] NOT NULL,
     CONSTRAINT hotel_name_check CHECK ((length((name)::text) >= 3)),
     CONSTRAINT hotel_name_not_null CHECK ((name IS NOT NULL)),

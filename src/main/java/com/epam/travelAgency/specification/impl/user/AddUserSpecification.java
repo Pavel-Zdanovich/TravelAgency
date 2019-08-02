@@ -22,8 +22,9 @@ public class AddUserSpecification implements AddSpecification<User> {
         this.user = user;
     }
 
-    public User getUser() {
-        return user;
+    @Override
+    public User getEntity() {
+        return this.user;
     }
 
     public void setUser(User user) {

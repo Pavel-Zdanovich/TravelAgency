@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.postgis.PGgeometry;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,7 @@ import java.util.List;
 
 @Component
 @Entity(name = "Hotel")
-@Table(name = "hotels", uniqueConstraints = {@UniqueConstraint(name = "hotel_name_unique", columnNames = "name"),
+@Table(name = "hotels", schema = "public", uniqueConstraints = {@UniqueConstraint(name = "hotel_name_unique", columnNames = "name"),
                                             @UniqueConstraint(name = "hotel_website_unique", columnNames = "website")})
 @TypeDef(name = "types_of_features", typeClass = EnumArrayType.class, defaultForType = Feature[].class,
         parameters = @org.hibernate.annotations.Parameter(name = EnumArrayType.SQL_ARRAY_TYPE, value = "types_of_features"))
@@ -56,6 +57,7 @@ public class Hotel extends TravelAgencyEntity {
     private PGgeometry coordinate;
 
     @Column(name = "types_of_features", columnDefinition = "types_of_features[]")
+    @UniqueElements(message = "Please enter unique features")
     private Feature[] features;
 
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)

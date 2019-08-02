@@ -2,7 +2,12 @@ package com.epam.travelAgency.specification.impl.hotel;
 
 import com.epam.travelAgency.entity.Hotel;
 import com.epam.travelAgency.specification.FindSpecification;
+import org.hibernate.Session;
 import org.springframework.stereotype.Component;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 @Component
 public class FindHotelByIdSpecification implements FindSpecification<Hotel, Long> {
@@ -32,4 +37,12 @@ public class FindHotelByIdSpecification implements FindSpecification<Hotel, Long
         return String.format(SELECT_HOTEL_BY_ID, this.hotelId);
     }
 
+    @Override
+    public CriteriaQuery<Hotel> toCriteriaQuery(Session session) {
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Hotel> criteriaQuery = criteriaBuilder.createQuery(Hotel.class);
+        Root<Hotel> root = criteriaQuery.from(Hotel.class);
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("hotel_id"), this.hotelId));
+        return criteriaQuery;
+    }
 }

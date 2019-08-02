@@ -29,6 +29,13 @@ public class RemoveReviewByIdSpecification implements RemoveSpecification<Review
     }
 
     @Override
+    public Review getEntity() {
+        Review review = new Review();
+        review.setReviewId(this.reviewId);
+        return review;
+    }
+
+    @Override
     public void setValues(PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setLong(1, this.reviewId);
     }

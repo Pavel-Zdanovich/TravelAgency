@@ -22,8 +22,9 @@ public class UpdateReviewSpecification implements UpdateSpecification<Review> {
         this.review = review;
     }
 
-    public Review getReview() {
-        return review;
+    @Override
+    public Review getEntity() {
+        return this.review;
     }
 
     public void setReview(Review review) {

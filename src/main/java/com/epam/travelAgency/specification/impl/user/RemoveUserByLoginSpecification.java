@@ -29,6 +29,13 @@ public class RemoveUserByLoginSpecification implements RemoveSpecification<User>
     }
 
     @Override
+    public User getEntity() {
+        User user = new User();
+        user.setLogin(this.login);
+        return user;
+    }
+
+    @Override
     public void setValues(PreparedStatement preparedStatement) throws SQLException {
         preparedStatement.setString(1, login);
     }

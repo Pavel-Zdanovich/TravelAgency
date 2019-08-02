@@ -21,8 +21,9 @@ public class AddTourSpecification implements AddSpecification<Tour> {
         this.tour = tour;
     }
 
-    public Tour getTour() {
-        return tour;
+    @Override
+    public Tour getEntity() {
+        return this.tour;
     }
 
     public void setTour(Tour tour) {

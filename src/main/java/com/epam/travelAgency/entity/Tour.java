@@ -4,10 +4,13 @@ import com.vladmihalcea.hibernate.type.basic.PostgreSQLEnumType;
 import lombok.*;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
+import org.hibernate.validator.constraints.Currency;
 import org.postgresql.util.PGmoney;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -15,7 +18,7 @@ import java.util.List;
 
 @Component
 @Entity(name = "Tour")
-@Table(name = "tours")
+@Table(name = "tours", schema = "public")
 @TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType.class, defaultForType = TourType.class)
 @NoArgsConstructor
 @Getter
@@ -34,10 +37,12 @@ public class Tour extends TravelAgencyEntity {
     private String photoPath;
 
     @Column(name = "start_date")
-    @NotNull(message = "Please enter tour start date")
+    @FutureOrPresent(message = "Please enter a start date corresponding to the current or future date")
+    @NotNull(message = "Please enter a tour start date")
     private Timestamp startDate;
 
     @Column(name = "end_date")
+    @Future(message = "Please enter a end date corresponding to the future date")
     @NotNull(message = "Please enter tour end date")
     private Timestamp endDate;
 
@@ -46,6 +51,7 @@ public class Tour extends TravelAgencyEntity {
 
     @Column(name = "cost")
     @Type(type = "org.hibernate.type.BigDecimalType")
+    @Currency(value = "USD", message = "Please enter the cost of the tour in currency format")
     @NotNull(message = "Please enter tour cost")
     private PGmoney cost;
 

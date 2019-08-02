@@ -7,6 +7,7 @@ import com.epam.travelAgency.embedded.FlywayConfig;
 import com.epam.travelAgency.entity.Tour;
 import com.epam.travelAgency.entity.TourType;
 import com.epam.travelAgency.entity.User;
+import com.epam.travelAgency.specification.impl.common.FindTourByStarsSpecification;
 import com.epam.travelAgency.specification.impl.common.FindTourByUserIdSpecification;
 import com.epam.travelAgency.specification.impl.common.FindTourByUserLoginSpecification;
 import com.epam.travelAgency.specification.impl.common.FindTourByUserSpecification;
