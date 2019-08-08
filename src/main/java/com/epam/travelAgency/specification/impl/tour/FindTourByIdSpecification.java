@@ -1,8 +1,8 @@
 package com.epam.travelAgency.specification.impl.tour;
 
 import com.epam.travelAgency.entity.Tour;
+import com.epam.travelAgency.entity.metamodel.Tour_;
 import com.epam.travelAgency.specification.FindSpecification;
-import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -46,12 +46,10 @@ public class FindTourByIdSpecification implements FindSpecification<Tour, Long> 
     }
 
     @Override
-    public CriteriaQuery<Tour> toCriteriaQuery(Session session) {
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+    public CriteriaQuery<Tour> getCriteriaQuery(CriteriaBuilder criteriaBuilder) {
         CriteriaQuery<Tour> criteriaQuery = criteriaBuilder.createQuery(Tour.class);
         Root<Tour> root = criteriaQuery.from(Tour.class);
-        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("tour_id"), this.tourId));
-        return criteriaQuery;
+        return criteriaQuery.select(root).where(criteriaBuilder.equal(root.get(Tour_.TOUR_ID), this.tourId));
     }
 
 }

@@ -27,7 +27,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 public class Hotel extends TravelAgencyEntity {
 
     @Column(name = "hotel_id")

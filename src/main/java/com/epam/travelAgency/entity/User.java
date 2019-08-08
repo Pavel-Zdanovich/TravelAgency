@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 public class User extends TravelAgencyEntity {
 
     @Column(name = "user_id")
@@ -35,7 +35,7 @@ public class User extends TravelAgencyEntity {
     @NotNull(message = "Please enter user password")
     private String password;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)//{CascadeType.PERSIST, CascadeType.MERGE}
     @JoinTable(name = "users_tours", uniqueConstraints = @UniqueConstraint(name = "user_tour_unique_key", columnNames = {"user_id", "tour_id"}),
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id", foreignKey = @ForeignKey(name = "user_tour_user_id_fkey")),
             inverseJoinColumns = @JoinColumn(name = "tour_id", referencedColumnName = "tour_id", foreignKey = @ForeignKey(name = "user_tour_tour_id_fkey")))

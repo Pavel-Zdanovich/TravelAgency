@@ -2,7 +2,6 @@ package com.epam.travelAgency.specification.impl.hotel;
 
 import com.epam.travelAgency.entity.Hotel;
 import com.epam.travelAgency.specification.FindSpecification;
-import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -30,11 +29,9 @@ public class FindAllHotelsSpecification implements FindSpecification<Hotel, Obje
     }
 
     @Override
-    public CriteriaQuery<Hotel> toCriteriaQuery(Session session) {
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+    public CriteriaQuery<Hotel> getCriteriaQuery(CriteriaBuilder criteriaBuilder) {
         CriteriaQuery<Hotel> criteriaQuery = criteriaBuilder.createQuery(Hotel.class);
         Root<Hotel> root = criteriaQuery.from(Hotel.class);
-        criteriaQuery.select(root);
-        return criteriaQuery;
+        return criteriaQuery.select(root);
     }
 }

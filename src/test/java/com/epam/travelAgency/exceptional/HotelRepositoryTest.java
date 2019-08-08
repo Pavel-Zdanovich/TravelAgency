@@ -1,21 +1,19 @@
 package com.epam.travelAgency.exceptional;
 
 import com.epam.travelAgency.config.EntityConfig;
-import com.epam.travelAgency.config.HibernateConfig;
 import com.epam.travelAgency.config.JDBCConfig;
 import com.epam.travelAgency.config.RepositoryConfig;
+import com.epam.travelAgency.config.TransactionConfig;
 import com.epam.travelAgency.entity.Feature;
 import com.epam.travelAgency.entity.Hotel;
+import com.epam.travelAgency.repository.Repository;
 import com.epam.travelAgency.repository.impl.HotelRepository;
 import com.epam.travelAgency.specification.impl.hotel.AddHotelSpecification;
 import com.epam.travelAgency.specification.impl.hotel.FindHotelSpecification;
 import com.epam.travelAgency.specification.impl.hotel.RemoveHotelSpecification;
 import com.epam.travelAgency.specification.impl.hotel.UpdateHotelSpecification;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.postgis.PGgeometry;
@@ -32,14 +30,14 @@ import java.util.List;
 @Slf4j
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {EntityConfig.class, RepositoryConfig.class, JDBCConfig.class, HibernateConfig.class,
+@ContextConfiguration(classes = {EntityConfig.class, RepositoryConfig.class, JDBCConfig.class, TransactionConfig.class,
         AddHotelSpecification.class, UpdateHotelSpecification.class, RemoveHotelSpecification.class, FindHotelSpecification.class})
 public class HotelRepositoryTest {
 
     @Autowired
     private Hotel hotel;
     @Autowired
-    private HotelRepository hotelRepository;
+    private Repository<Hotel> hotelRepository;
     @Autowired
     private AddHotelSpecification addHotelSpecification;
     @Autowired

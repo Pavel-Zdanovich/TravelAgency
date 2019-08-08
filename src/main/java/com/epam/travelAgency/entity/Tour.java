@@ -5,13 +5,13 @@ import lombok.*;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.validator.constraints.Currency;
-import org.postgresql.util.PGmoney;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 public class Tour extends TravelAgencyEntity {
 
     @Column(name = "tour_id")
@@ -49,11 +49,11 @@ public class Tour extends TravelAgencyEntity {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "cost")
+    @Column(name = "cost", length = 19, precision = 4, scale = 4)
     @Type(type = "org.hibernate.type.BigDecimalType")
     @Currency(value = "USD", message = "Please enter the cost of the tour in currency format")
     @NotNull(message = "Please enter tour cost")
-    private PGmoney cost;
+    private BigDecimal cost;
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "tour_type", columnDefinition = "types_of_tours")
@@ -61,14 +61,14 @@ public class Tour extends TravelAgencyEntity {
     @NotNull(message = "Please enter tour type")
     private TourType tourType;
 
-    @ManyToMany(mappedBy = "tours")
+    @ManyToMany(mappedBy = "tours", cascade = CascadeType.ALL)
     private List<User> users = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "hotel_id", referencedColumnName = "hotel_id", foreignKey = @ForeignKey(name = "tour_hotel_id_fkey"))
     private Hotel hotel;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id", referencedColumnName = "country_id", foreignKey = @ForeignKey(name = "tour_country_id_fkey"))
     private Country country;
 

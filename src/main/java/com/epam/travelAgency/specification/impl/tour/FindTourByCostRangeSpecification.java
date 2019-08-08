@@ -1,9 +1,9 @@
 package com.epam.travelAgency.specification.impl.tour;
 
 import com.epam.travelAgency.entity.Tour;
+import com.epam.travelAgency.entity.metamodel.Tour_;
 import com.epam.travelAgency.specification.FindSpecification;
 import com.epam.travelAgency.util.CostRange;
-import org.hibernate.Session;
 import org.postgresql.util.PGmoney;
 import org.springframework.stereotype.Component;
 
@@ -56,11 +56,9 @@ public class FindTourByCostRangeSpecification implements FindSpecification<Tour,
     }
 
     @Override
-    public CriteriaQuery<Tour> toCriteriaQuery(Session session) {
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+    public CriteriaQuery<Tour> getCriteriaQuery(CriteriaBuilder criteriaBuilder) {
         CriteriaQuery<Tour> criteriaQuery = criteriaBuilder.createQuery(Tour.class);
         Root<Tour> root = criteriaQuery.from(Tour.class);
-        criteriaQuery.select(root).where(criteriaBuilder.between(root.get("cost"), this.costRange.getMinCost().val, this.costRange.getMaxCost().val));
-        return criteriaQuery;
+        return criteriaQuery.select(root).where(criteriaBuilder.between(root.get(Tour_.COST), costRange.getMinCost().val, costRange.getMaxCost().val));
     }
 }

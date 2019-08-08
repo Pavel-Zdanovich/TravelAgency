@@ -7,6 +7,7 @@ import com.epam.travelAgency.embedded.FlywayConfig;
 import com.epam.travelAgency.entity.Tour;
 import com.epam.travelAgency.entity.TourType;
 import com.epam.travelAgency.entity.User;
+import com.epam.travelAgency.repository.Repository;
 import com.epam.travelAgency.specification.impl.common.FindTourByStarsSpecification;
 import com.epam.travelAgency.specification.impl.common.FindTourByUserIdSpecification;
 import com.epam.travelAgency.specification.impl.common.FindTourByUserLoginSpecification;
@@ -19,11 +20,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.postgresql.util.PGmoney;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -36,7 +36,7 @@ public class TourRepositoryTest {
     @Autowired
     private Tour tour;
     @Autowired
-    private TourRepository tourRepository;
+    private Repository<Tour> tourRepository;
     @Autowired
     private AddTourSpecification addTourSpecification;
     @Autowired
@@ -44,7 +44,11 @@ public class TourRepositoryTest {
     @Autowired
     private RemoveTourSpecification removeTourSpecification;
     @Autowired
+    private FindAllToursSpecification findAllToursSpecification;
+    @Autowired
     private FindTourSpecification findTourSpecification;
+    @Autowired
+    private FindTourByIdSpecification findTourByIdSpecification;
     @Autowired
     private FindTourByCostRangeSpecification findTourByCostRangeSpecification;
     @Autowired
@@ -76,18 +80,15 @@ public class TourRepositoryTest {
 
     @Before
     public void setUp() throws Exception {
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(EntityConfig.class);
-        tour = applicationContext.getBean(Tour.class);
-        tour.setTourId(Long.MAX_VALUE);
-        tour.setPhotoPath("src/main/resources/applicationContext.xml");
+        tour.setPhotoPath("src/main/resources/renamed.applicationContext.xml");
         Timestamp timestamp = Timestamp.valueOf("2019-08-31 00:00:00");
         tour.setStartDate(timestamp);
         tour.setEndDate(Timestamp.from(timestamp.toInstant().plus(10, ChronoUnit.DAYS)));
         tour.setDescription("description of tour");
-        tour.setCost(new PGmoney(100.0));
+        tour.setCost(BigDecimal.valueOf(100));
         tour.setTourType(TourType.SCIENTIFIC_EXPEDITION);
-        tour.getHotel().setHotelId(Long.MAX_VALUE);
-        tour.getCountry().setCountryId(Long.MAX_VALUE);
+        //tour.getHotel().setHotelId(Long.MAX_VALUE);
+        //tour.getCountry().setCountryId(Long.MAX_VALUE);
     }
 
     @Test
@@ -109,9 +110,20 @@ public class TourRepositoryTest {
     }
 
     @Test
+    public void query_all_tours_by_findAllToursSpecification() {
+        tourRepository.query(findAllToursSpecification);
+    }
+
+    @Test
     public void query_tour_by_findTourSpecification() {
         findTourSpecification.setSpecification(tour);
         tourRepository.query(findTourSpecification);
+    }
+
+    @Test
+    public void query_tour_by_findTourByIdSpecification() {
+        findTourByIdSpecification.setSpecification(Long.MAX_VALUE);
+        tourRepository.query(findTourByIdSpecification);
     }
 
     @Test
@@ -184,7 +196,7 @@ public class TourRepositoryTest {
     @Test
     public void query_tour_by_findTourByUserSpecification() {
         User user = new User();
-        user.setUserId(Long.MAX_VALUE);
+        //user.setUserId(Long.MAX_VALUE);
         user.setLogin("ElonMusk");
         user.setPassword("SpaceXXX");
         findTourByUserSpecification.setSpecification(user);

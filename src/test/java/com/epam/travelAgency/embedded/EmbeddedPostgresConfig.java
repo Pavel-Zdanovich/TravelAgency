@@ -63,8 +63,7 @@ public class EmbeddedPostgresConfig {
         return new SimpleDriverDataSource(new Driver(), embeddedPostgres.getConnectionUrl().get());
     }
 
-    //@Bean
-    //@Autowired//postgresProcess//embeddedPostgres
+    @Bean(name = "driverManagerDataSource")
     public DataSource driverManagerDataSource(PostgresConfig postgresConfig) {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName(Driver.class.getName());//"org.postgresql.Driver"

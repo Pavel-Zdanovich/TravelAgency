@@ -1,9 +1,6 @@
 package com.epam.travelAgency.config;
 
-import com.epam.travelAgency.entity.Country;
-import com.epam.travelAgency.entity.Hotel;
-import com.epam.travelAgency.entity.Review;
-import com.epam.travelAgency.entity.Tour;
+import com.epam.travelAgency.entity.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,5 +40,8 @@ public class TravelAgencyEntityConfigTest {
     public void getTour() {
         Assert.assertNotNull(entityContext.getBean(Tour.class));
     }
+
+    @Test
+    public void getUser() {Assert.assertNotNull(entityContext.getBean(User.class));}
 
 }

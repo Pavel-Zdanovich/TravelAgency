@@ -2,7 +2,6 @@ package com.epam.travelAgency.specification.impl.review;
 
 import com.epam.travelAgency.entity.Review;
 import com.epam.travelAgency.specification.FindSpecification;
-import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -30,12 +29,10 @@ public class FindAllReviewsSpecification implements FindSpecification<Review, Ob
     }
 
     @Override
-    public CriteriaQuery<Review> toCriteriaQuery(Session session) {
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+    public CriteriaQuery<Review> getCriteriaQuery(CriteriaBuilder criteriaBuilder) {
         CriteriaQuery<Review> criteriaQuery = criteriaBuilder.createQuery(Review.class);
         Root<Review> root = criteriaQuery.from(Review.class);
-        criteriaQuery.select(root);
-        return criteriaQuery;
+        return criteriaQuery.select(root);
     }
 
 }

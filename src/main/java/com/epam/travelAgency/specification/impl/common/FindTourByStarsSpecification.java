@@ -1,9 +1,9 @@
 package com.epam.travelAgency.specification.impl.common;
 
-import com.epam.travelAgency.entity.Hotel;
 import com.epam.travelAgency.entity.Tour;
+import com.epam.travelAgency.entity.metamodel.Hotel_;
+import com.epam.travelAgency.entity.metamodel.Tour_;
 import com.epam.travelAgency.specification.FindSpecification;
-import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -38,15 +38,10 @@ public class FindTourByStarsSpecification implements FindSpecification<Tour, Int
     }
 
     @Override
-    public CriteriaQuery<Tour> toCriteriaQuery(Session session) {
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+    public CriteriaQuery<Tour> getCriteriaQuery(CriteriaBuilder criteriaBuilder) {
         CriteriaQuery<Tour> tourCriteriaQuery = criteriaBuilder.createQuery(Tour.class);
-        CriteriaQuery<Hotel> hotelCriteriaQuery = criteriaBuilder.createQuery(Hotel.class);
         Root<Tour> tourRoot = tourCriteriaQuery.from(Tour.class);
-        Root<Hotel> hotelRoot = tourCriteriaQuery.from(Hotel.class);
-        hotelCriteriaQuery.select(hotelRoot.get("hotel_id")).where(criteriaBuilder.equal(hotelRoot.get("stars"), this.stars));//select only hotel_id
-        tourCriteriaQuery.select(tourRoot).where(criteriaBuilder.equal(tourRoot.get("hotel_id"), hotelCriteriaQuery));//Does hotel criteria return stars?
-        return tourCriteriaQuery;
+        return tourCriteriaQuery.select(tourRoot).where(criteriaBuilder.equal(tourRoot.get(Tour_.HOTEL).get(Hotel_.STARS), this.stars));
     }
 
 }

@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 public class Review extends TravelAgencyEntity {
 
     @Column(name = "review_id")
@@ -33,11 +33,11 @@ public class Review extends TravelAgencyEntity {
     @NotNull(message = "Please enter review text")
     private String text;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id", foreignKey = @ForeignKey(name = "review_user_id_fkey"))
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "tour_id", referencedColumnName = "tour_id", foreignKey = @ForeignKey(name = "review_tour_id_fkey"))
     private Tour tour;
 

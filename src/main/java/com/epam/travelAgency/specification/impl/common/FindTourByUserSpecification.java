@@ -2,8 +2,8 @@ package com.epam.travelAgency.specification.impl.common;
 
 import com.epam.travelAgency.entity.Tour;
 import com.epam.travelAgency.entity.User;
+import com.epam.travelAgency.entity.metamodel.User_;
 import com.epam.travelAgency.specification.FindSpecification;
-import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.criteria.*;
@@ -36,16 +36,15 @@ public class FindTourByUserSpecification implements FindSpecification<Tour, User
     }
 
     @Override
-    public CriteriaQuery<Tour> toCriteriaQuery(Session session) {
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+    public CriteriaQuery<Tour> getCriteriaQuery(CriteriaBuilder criteriaBuilder) {
         CriteriaQuery<Tour> tourCriteriaQuery = criteriaBuilder.createQuery(Tour.class);
         CriteriaQuery<User> userCriteriaQuery = criteriaBuilder.createQuery(User.class);
         Root<Tour> tourRoot = tourCriteriaQuery.from(Tour.class);
         Root<User> userRoot = userCriteriaQuery.from(User.class);
-        Join<User, Tour> tours = userRoot.join("tours", JoinType.INNER);
-        userCriteriaQuery.select(userRoot.get("user_id")).where(criteriaBuilder.equal(userRoot.get("login"), user.getLogin()),
-                criteriaBuilder.equal(userRoot.get("password"), user.getPassword()));
-        tourCriteriaQuery.select(tourRoot).where(criteriaBuilder.equal(tours.get("user_id"), userCriteriaQuery));
+        Join<User, Tour> tours = userRoot.join(User_.TOURS, JoinType.INNER);
+        userCriteriaQuery.select(userRoot.get(User_.USER_ID)).where(criteriaBuilder.equal(userRoot.get(User_.LOGIN), user.getLogin()),
+                criteriaBuilder.equal(userRoot.get(User_.PASSWORD), user.getPassword()));
+        tourCriteriaQuery.select(tourRoot).where(criteriaBuilder.equal(tours.get(User_.USER_ID), userCriteriaQuery));
         return tourCriteriaQuery;
     }
 

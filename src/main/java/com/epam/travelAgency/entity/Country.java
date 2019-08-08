@@ -12,12 +12,12 @@ import java.util.List;
 
 @Component
 @Entity(name = "Country")
-@Table(name = "countries", schema = "public", uniqueConstraints = @UniqueConstraint(name = "country_name_unique", columnNames = {"name"}))
+@Table(name = "countries", schema = "public", uniqueConstraints = @UniqueConstraint(name = "country_name_unique", columnNames = "name"))
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 public class Country extends TravelAgencyEntity {
 
     @Column(name = "country_id")

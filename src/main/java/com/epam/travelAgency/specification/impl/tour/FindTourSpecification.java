@@ -1,8 +1,8 @@
 package com.epam.travelAgency.specification.impl.tour;
 
 import com.epam.travelAgency.entity.Tour;
+import com.epam.travelAgency.entity.metamodel.Tour_;
 import com.epam.travelAgency.specification.FindSpecification;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,23 +36,20 @@ public class FindTourSpecification implements FindSpecification<Tour, Tour> {
     @Override
     public String getSQLQuery() {
         return String.format(SELECT_TOUR, tour.getTourId(), tour.getPhotoPath(), tour.getStartDate(),
-                tour.getEndDate(), tour.getDescription(), tour.getCost().val,  tour.getTourType(), tour.getCountry().getCountryId(), tour.getHotel().getHotelId());
+                tour.getEndDate(), tour.getDescription(), tour.getCost(),  tour.getTourType(), tour.getCountry().getCountryId(), tour.getHotel().getHotelId());//can produce null pointer
     }
 
     @Override
-    public CriteriaQuery<Tour> toCriteriaQuery(Session session) {
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+    public CriteriaQuery<Tour> getCriteriaQuery(CriteriaBuilder criteriaBuilder) {
         CriteriaQuery<Tour> criteriaQuery = criteriaBuilder.createQuery(Tour.class);
         Root<Tour> root = criteriaQuery.from(Tour.class);
-        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("tour_id"), tour.getTourId()),
-                criteriaBuilder.equal(root.get("photo"), tour.getPhotoPath()),
-                criteriaBuilder.equal(root.get("start_date"), tour.getStartDate()),
-                criteriaBuilder.equal(root.get("end_date"), tour.getEndDate()),
-                criteriaBuilder.equal(root.get("description"), tour.getDescription()),
-                criteriaBuilder.equal(root.get("cost"), tour.getCost()),
-                criteriaBuilder.equal(root.get("tour_type"), tour.getTourType()),
-                criteriaBuilder.equal(root.get("country_id"), tour.getCountry().getCountryId()),
-                criteriaBuilder.equal(root.get("hotel_id"), tour.getHotel().getHotelId()));
-        return criteriaQuery;
+        return criteriaQuery.select(root).where(criteriaBuilder.equal(root.get(Tour_.TOUR_ID), tour.getTourId()),
+                criteriaBuilder.equal(root.get(Tour_.PHOTO_PATH), tour.getPhotoPath()),
+                criteriaBuilder.equal(root.get(Tour_.START_DATE), tour.getStartDate()),
+                criteriaBuilder.equal(root.get(Tour_.END_DATE), tour.getEndDate()),
+                criteriaBuilder.equal(root.get(Tour_.DESCRIPTION), tour.getDescription()),
+                criteriaBuilder.equal(root.get(Tour_.COST), tour.getCost()),
+                criteriaBuilder.equal(root.get(Tour_.TOUR_TYPE), tour.getTourType()));//criteriaBuilder.equal(root.get(Tour_.COUNTRY).get(Country_.COUNTRY_ID), tour.getCountry().getCountryId()),
+                                                                                      //criteriaBuilder.equal(root.get(Tour_.HOTEL).get(Hotel_.HOTEL_ID), tour.getHotel().getHotelId())
     }
 }

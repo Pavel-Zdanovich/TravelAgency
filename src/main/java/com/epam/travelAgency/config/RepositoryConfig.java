@@ -11,25 +11,21 @@ import org.springframework.context.annotation.Configuration;
 public class RepositoryConfig {
 
     @Bean
-    //@Autowired(datasource)
     public HotelRepository hotelRepository() {
         return new HotelRepository();
     }
 
     @Bean
-    //@Autowired
     public ReviewRepository reviewRepository() {
         return new ReviewRepository();
     }
 
     @Bean
-    //@Autowired
     public TourRepository tourRepository() {
         return new TourRepository();
     }
 
     @Bean
-    //@Autowired
     public UserRepository userRepository() {
         return new UserRepository();
     }

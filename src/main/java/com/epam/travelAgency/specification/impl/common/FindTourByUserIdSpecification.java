@@ -2,8 +2,9 @@ package com.epam.travelAgency.specification.impl.common;
 
 import com.epam.travelAgency.entity.Tour;
 import com.epam.travelAgency.entity.User;
+import com.epam.travelAgency.entity.metamodel.Tour_;
+import com.epam.travelAgency.entity.metamodel.User_;
 import com.epam.travelAgency.specification.FindSpecification;
-import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.criteria.*;
@@ -37,16 +38,14 @@ public class FindTourByUserIdSpecification implements FindSpecification<Tour, Lo
     }
 
     @Override
-    public CriteriaQuery<Tour> toCriteriaQuery(Session session) {
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+    public CriteriaQuery<Tour> getCriteriaQuery(CriteriaBuilder criteriaBuilder) {
         CriteriaQuery<Tour> tourCriteriaQuery = criteriaBuilder.createQuery(Tour.class);
         CriteriaQuery<User> userCriteriaQuery = criteriaBuilder.createQuery(User.class);
         Root<Tour> tourRoot = tourCriteriaQuery.from(Tour.class);
         Root<User> userRoot = userCriteriaQuery.from(User.class);
-        Join<User, Tour> tours = userRoot.join("tours", JoinType.INNER);
-        tourCriteriaQuery.select(tourRoot).where(criteriaBuilder.equal(tours.get("user_id"), this.userId));
-        /*Path<List<Tour>> tours = userRoot.get("tours");
-        tourCriteriaQuery.select(tourRoot).where(criteriaBuilder.equal(userRoot.join("tours"), tours));*/
+        Join<User, Tour> tours = userRoot.join(User_.TOURS, JoinType.INNER);
+        ParameterExpression<Long> userIdParameter = criteriaBuilder.parameter(Long.class, User_.USER_ID);
+        tourCriteriaQuery.select(tourRoot).where(criteriaBuilder.equal(tours.get(Tour_.USERS).get(User_.USER_ID), this.userId));
         return tourCriteriaQuery;
     }
 

@@ -1,9 +1,13 @@
 package com.epam.travelAgency.repository;
 
-import com.epam.travelAgency.specification.*;
+import com.epam.travelAgency.specification.AddSpecification;
+import com.epam.travelAgency.specification.FindSpecification;
+import com.epam.travelAgency.specification.RemoveSpecification;
+import com.epam.travelAgency.specification.UpdateSpecification;
 
 import java.util.Collection;
 
+@org.springframework.stereotype.Repository
 public interface Repository<E> {
 
     void add(AddSpecification<E> specification);//INSERT

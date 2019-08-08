@@ -5,13 +5,12 @@ import com.epam.travelAgency.config.RepositoryConfig;
 import com.epam.travelAgency.embedded.EmbeddedPostgresConfig;
 import com.epam.travelAgency.embedded.FlywayConfig;
 import com.epam.travelAgency.entity.User;
+import com.epam.travelAgency.repository.Repository;
 import com.epam.travelAgency.specification.impl.user.*;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -20,7 +19,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class UserRepositoryTest {
 
     @Autowired
-    private static User user;
+    private User user;
+    @Autowired
+    private Repository<User> userRepository;
     @Autowired
     private AddUserSpecification addUserSpecification;
     @Autowired
@@ -32,20 +33,16 @@ public class UserRepositoryTest {
     @Autowired
     private RemoveUserByLoginSpecification removeUserByLoginSpecification;
     @Autowired
+    private FindAllUsersSpecification findAllUsersSpecification;
+    @Autowired
     private FindUserSpecification findUserSpecification;
     @Autowired
     private FindUserByIdSpecification findUserByIdSpecification;
     @Autowired
     private FindUserByLoginSpecification findUserByLoginSpecification;
-    @Autowired
-    private UserRepository userRepository;
 
-    @Autowired
-    @BeforeClass
-    public static void setUp() throws Exception {
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(EntityConfig.class);
-        user = applicationContext.getBean(User.class);
-        user.setUserId(1);
+    @Before
+    public void setUp() throws Exception {
         user.setLogin("ElonMusk");
         user.setPassword("SpaceXXX");
     }
@@ -70,7 +67,7 @@ public class UserRepositoryTest {
 
     @Test
     public void remove_user_by_removeUserByIdSpecification() {
-        removeUserByIdSpecification.setUserId(1L);
+        removeUserByIdSpecification.setUserId(Long.MAX_VALUE);
         userRepository.remove(removeUserByIdSpecification);
     }
 
@@ -81,6 +78,11 @@ public class UserRepositoryTest {
     }
 
     @Test
+    public void query_all_users_by_findAllUsersSpecification() {
+        userRepository.query(findAllUsersSpecification);
+    }
+
+    @Test
     public void query_user_by_findUserSpecification() {
         findUserSpecification.setSpecification(user);
         userRepository.query(findUserSpecification);
@@ -88,7 +90,7 @@ public class UserRepositoryTest {
 
     @Test
     public void query_user_by_findUserByIdSpecification() {
-        findUserByIdSpecification.setSpecification(1L);
+        findUserByIdSpecification.setSpecification(Long.MAX_VALUE);
         userRepository.query(findUserByIdSpecification);
     }
 

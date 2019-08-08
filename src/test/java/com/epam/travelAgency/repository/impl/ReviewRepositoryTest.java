@@ -6,6 +6,7 @@ import com.epam.travelAgency.embedded.EmbeddedPostgresConfig;
 import com.epam.travelAgency.embedded.FlywayConfig;
 import com.epam.travelAgency.entity.Review;
 import com.epam.travelAgency.entity.User;
+import com.epam.travelAgency.repository.Repository;
 import com.epam.travelAgency.specification.impl.common.FindReviewByUserLoginSpecification;
 import com.epam.travelAgency.specification.impl.common.FindReviewByUserSpecification;
 import com.epam.travelAgency.specification.impl.review.*;
@@ -13,8 +14,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -28,7 +27,7 @@ public class ReviewRepositoryTest {
     @Autowired
     private Review review;
     @Autowired
-    private ReviewRepository reviewRepository;
+    private Repository<Review> reviewRepository;
     @Autowired
     private AddReviewSpecification addReviewSpecification;
     @Autowired
@@ -36,7 +35,11 @@ public class ReviewRepositoryTest {
     @Autowired
     private RemoveReviewSpecification removeReviewSpecification;
     @Autowired
+    private FindAllReviewsSpecification findAllReviewsSpecification;
+    @Autowired
     private FindReviewSpecification findReviewSpecification;
+    @Autowired
+    private FindReviewByIdSpecification findReviewByIdSpecification;
     @Autowired
     private FindReviewByUserIdSpecification findReviewByUserIdSpecification;
     @Autowired
@@ -48,9 +51,6 @@ public class ReviewRepositoryTest {
 
     @Before
     public void setUp() throws Exception {
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(EntityConfig.class);
-        review = applicationContext.getBean(Review.class);
-        review.setReviewId(1L);
         Timestamp timestamp = Timestamp.from(new Timestamp(System.currentTimeMillis()).toInstant().plus(1, ChronoUnit.DAYS));
         review.setDate(timestamp);
         review.setText("some text");
@@ -75,27 +75,38 @@ public class ReviewRepositoryTest {
     }
 
     @Test
+    public void query_all_reviews_by_findAllReviewsSpecification() {
+        reviewRepository.query(findAllReviewsSpecification);
+    }
+
+    @Test
     public void query_review_by_findReviewSpecification() {
         findReviewSpecification.setSpecification(review);
         reviewRepository.query(findReviewSpecification);
     }
 
     @Test
+    public void query_review_by_findReviewByIdSpecification() {
+        findReviewByIdSpecification.setSpecification(Long.MAX_VALUE);
+        reviewRepository.query(findReviewByIdSpecification);
+    }
+
+    @Test
     public void query_review_by_findReviewByUserIdSpecification() {
-        findReviewByUserIdSpecification.setSpecification(1L);
+        findReviewByUserIdSpecification.setSpecification(Long.MAX_VALUE);
         reviewRepository.query(findReviewByUserIdSpecification);
     }
 
     @Test
     public void query_review_by_fingReviewByTourIdSpecification() {
-        findReviewByTourIdSpecification.setSpecification(1L);
+        findReviewByTourIdSpecification.setSpecification(Long.MAX_VALUE);
         reviewRepository.query(findReviewByTourIdSpecification);
     }
 
     @Test
     public void query_review_by_findReviewByUserSpecification() {
         User user = new User();
-        user.setUserId(Long.MAX_VALUE);
+        //user.setUserId(Long.MAX_VALUE);
         user.setLogin("ElonMusk");
         user.setPassword("SpaceXXX");
         findReviewByUserSpecification.setSpecification(user);

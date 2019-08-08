@@ -1,8 +1,8 @@
 package com.epam.travelAgency.specification.impl.user;
 
 import com.epam.travelAgency.entity.User;
+import com.epam.travelAgency.entity.metamodel.User_;
 import com.epam.travelAgency.specification.FindSpecification;
-import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -37,12 +37,10 @@ public class FindUserByIdSpecification implements FindSpecification<User, Long> 
     }
 
     @Override
-    public CriteriaQuery<User> toCriteriaQuery(Session session) {
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+    public CriteriaQuery<User> getCriteriaQuery(CriteriaBuilder criteriaBuilder) {
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         Root<User> root = criteriaQuery.from(User.class);
-        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("user_id"), this.userId));
-        return criteriaQuery;
+        return criteriaQuery.select(root).where(criteriaBuilder.equal(root.get(User_.USER_ID), this.userId));
     }
 
 }

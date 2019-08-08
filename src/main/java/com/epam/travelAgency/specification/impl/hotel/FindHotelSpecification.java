@@ -2,8 +2,8 @@ package com.epam.travelAgency.specification.impl.hotel;
 
 import com.epam.travelAgency.entity.Feature;
 import com.epam.travelAgency.entity.Hotel;
+import com.epam.travelAgency.entity.metamodel.Hotel_;
 import com.epam.travelAgency.specification.FindSpecification;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -42,15 +42,14 @@ public class FindHotelSpecification implements FindSpecification<Hotel, Hotel> {
     }
 
     @Override
-    public CriteriaQuery<Hotel> toCriteriaQuery(Session session) {
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+    public CriteriaQuery<Hotel> getCriteriaQuery(CriteriaBuilder criteriaBuilder) {
         CriteriaQuery<Hotel> criteriaQuery = criteriaBuilder.createQuery(Hotel.class);
         Root<Hotel> root = criteriaQuery.from(Hotel.class);
-        criteriaQuery.where(criteriaBuilder.equal(root.get("hotel_id"), hotel.getHotelId()),
-                criteriaBuilder.equal(root.get("name"), hotel.getName()),
-                criteriaBuilder.equal(root.get("website"), hotel.getWebsite().toString()),
-                criteriaBuilder.equal(root.get("coordinate"), hotel.getCoordinate()),
-                criteriaBuilder.equal(root.get("feature"), featuresToString(hotel.getFeatures())));
+        criteriaQuery.where(criteriaBuilder.equal(root.get(Hotel_.HOTEL_ID), hotel.getHotelId()),
+                criteriaBuilder.equal(root.get(Hotel_.NAME), hotel.getName()),
+                criteriaBuilder.equal(root.get(Hotel_.WEBSITE), hotel.getWebsite()),
+                criteriaBuilder.equal(root.get(Hotel_.COORDINATE), hotel.getCoordinate()),
+                criteriaBuilder.equal(root.get(Hotel_.FEATURES), featuresToString(hotel.getFeatures())));
         return criteriaQuery;
     }
 

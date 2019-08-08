@@ -1,8 +1,8 @@
 package com.epam.travelAgency.specification.impl.review;
 
 import com.epam.travelAgency.entity.Review;
+import com.epam.travelAgency.entity.metamodel.Review_;
 import com.epam.travelAgency.specification.FindSpecification;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -39,15 +39,14 @@ public class FindReviewSpecification implements FindSpecification<Review, Review
     }
 
     @Override
-    public CriteriaQuery<Review> toCriteriaQuery(Session session) {
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+    public CriteriaQuery<Review> getCriteriaQuery(CriteriaBuilder criteriaBuilder) {
         CriteriaQuery<Review> criteriaQuery = criteriaBuilder.createQuery(Review.class);
         Root<Review> root = criteriaQuery.from(Review.class);
-        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("review_id"), review.getReviewId()),
-                criteriaBuilder.equal(root.get("date"), review.getDate()),
-                criteriaBuilder.equal(root.get("text"), review.getText()),
-                criteriaBuilder.equal(root.get("user_id"), review.getUser().getUserId()),
-                criteriaBuilder.equal(root.get("tour_id"), review.getTour().getTourId()));
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get(Review_.REVIEW_ID), review.getReviewId()),
+                criteriaBuilder.equal(root.get(Review_.DATE), review.getDate()),
+                criteriaBuilder.equal(root.get(Review_.TEXT), review.getText()),
+                criteriaBuilder.equal(root.get(Review_.USER), review.getUser()),
+                criteriaBuilder.equal(root.get(Review_.TOUR), review.getTour()));
         return criteriaQuery;
     }
 }

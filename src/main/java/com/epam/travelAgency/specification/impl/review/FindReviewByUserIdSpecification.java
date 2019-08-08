@@ -1,8 +1,9 @@
 package com.epam.travelAgency.specification.impl.review;
 
 import com.epam.travelAgency.entity.Review;
+import com.epam.travelAgency.entity.metamodel.Review_;
+import com.epam.travelAgency.entity.metamodel.User_;
 import com.epam.travelAgency.specification.FindSpecification;
-import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -37,11 +38,9 @@ public class FindReviewByUserIdSpecification implements FindSpecification<Review
     }
 
     @Override
-    public CriteriaQuery<Review> toCriteriaQuery(Session session) {
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        CriteriaQuery<Review> criteriaQuery = criteriaBuilder.createQuery(Review.class);
-        Root<Review> root = criteriaQuery.from(Review.class);
-        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("user_id"), this.userId));
-        return criteriaQuery;
+    public CriteriaQuery<Review> getCriteriaQuery(CriteriaBuilder criteriaBuilder) {
+        CriteriaQuery<Review> reviewCriteriaQuery = criteriaBuilder.createQuery(Review.class);
+        Root<Review> reviewRoot = reviewCriteriaQuery.from(Review.class);
+        return reviewCriteriaQuery.select(reviewRoot).where(criteriaBuilder.equal(reviewRoot.get(Review_.USER).get(User_.USER_ID), this.userId));
     }
 }
