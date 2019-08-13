@@ -13,6 +13,6 @@ public interface Repository<E> {
     void add(AddSpecification<E> specification);//INSERT
     void update(UpdateSpecification<E> specification);//UPDATE
     void remove(RemoveSpecification<E> specification);//DELETE
-    Collection<E> query(FindSpecification<E, ? extends Object> specification);//SELECT
+    Collection<E> query(FindSpecification<E, ?> specification);//SELECT
 
 }

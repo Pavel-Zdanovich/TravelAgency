@@ -1,12 +1,14 @@
 package com.epam.travelAgency.repository.impl;
 
+import com.epam.travelAgency.config.ApplicationConfig;
 import com.epam.travelAgency.config.EntityConfig;
 import com.epam.travelAgency.config.RepositoryConfig;
+import com.epam.travelAgency.config.TransactionConfig;
 import com.epam.travelAgency.embedded.EmbeddedPostgresConfig;
 import com.epam.travelAgency.embedded.FlywayConfig;
 import com.epam.travelAgency.entity.Review;
 import com.epam.travelAgency.entity.User;
-import com.epam.travelAgency.repository.Repository;
+import com.epam.travelAgency.repository.ReviewRepository;
 import com.epam.travelAgency.specification.impl.common.FindReviewByUserLoginSpecification;
 import com.epam.travelAgency.specification.impl.common.FindReviewByUserSpecification;
 import com.epam.travelAgency.specification.impl.review.*;
@@ -14,20 +16,25 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.temporal.ChronoUnit;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {EmbeddedPostgresConfig.class, FlywayConfig.class, EntityConfig.class, RepositoryConfig.class})
+@ContextConfiguration(classes = {EmbeddedPostgresConfig.class, FlywayConfig.class, TransactionConfig.class, EntityConfig.class,
+        RepositoryConfig.class, ApplicationConfig.class})
+@ActiveProfiles(profiles = {"dev", "test", "test_dataSource"})
+@Transactional(transactionManager = "jpaTransactionManager")
 public class ReviewRepositoryTest {
 
     @Autowired
     private Review review;
     @Autowired
-    private Repository<Review> reviewRepository;
+    private ReviewRepository reviewRepository;
     @Autowired
     private AddReviewSpecification addReviewSpecification;
     @Autowired
@@ -87,26 +94,26 @@ public class ReviewRepositoryTest {
 
     @Test
     public void query_review_by_findReviewByIdSpecification() {
-        findReviewByIdSpecification.setSpecification(Long.MAX_VALUE);
+        findReviewByIdSpecification.setSpecification(1L);
         reviewRepository.query(findReviewByIdSpecification);
     }
 
     @Test
     public void query_review_by_findReviewByUserIdSpecification() {
-        findReviewByUserIdSpecification.setSpecification(Long.MAX_VALUE);
+        findReviewByUserIdSpecification.setSpecification(1L);
         reviewRepository.query(findReviewByUserIdSpecification);
     }
 
     @Test
     public void query_review_by_fingReviewByTourIdSpecification() {
-        findReviewByTourIdSpecification.setSpecification(Long.MAX_VALUE);
+        findReviewByTourIdSpecification.setSpecification(1L);
         reviewRepository.query(findReviewByTourIdSpecification);
     }
 
     @Test
     public void query_review_by_findReviewByUserSpecification() {
         User user = new User();
-        //user.setUserId(Long.MAX_VALUE);
+        user.setUserId(1L);
         user.setLogin("ElonMusk");
         user.setPassword("SpaceXXX");
         findReviewByUserSpecification.setSpecification(user);

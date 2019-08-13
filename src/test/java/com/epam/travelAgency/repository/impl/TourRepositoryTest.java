@@ -1,13 +1,13 @@
 package com.epam.travelAgency.repository.impl;
 
+import com.epam.travelAgency.config.ApplicationConfig;
 import com.epam.travelAgency.config.EntityConfig;
 import com.epam.travelAgency.config.RepositoryConfig;
+import com.epam.travelAgency.config.TransactionConfig;
 import com.epam.travelAgency.embedded.EmbeddedPostgresConfig;
 import com.epam.travelAgency.embedded.FlywayConfig;
-import com.epam.travelAgency.entity.Tour;
-import com.epam.travelAgency.entity.TourType;
-import com.epam.travelAgency.entity.User;
-import com.epam.travelAgency.repository.Repository;
+import com.epam.travelAgency.entity.*;
+import com.epam.travelAgency.repository.TourRepository;
 import com.epam.travelAgency.specification.impl.common.FindTourByStarsSpecification;
 import com.epam.travelAgency.specification.impl.common.FindTourByUserIdSpecification;
 import com.epam.travelAgency.specification.impl.common.FindTourByUserLoginSpecification;
@@ -18,10 +18,11 @@ import com.epam.travelAgency.util.Criterion;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.postgresql.util.PGmoney;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -30,13 +31,16 @@ import java.time.Period;
 import java.time.temporal.ChronoUnit;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {EmbeddedPostgresConfig.class, FlywayConfig.class, EntityConfig.class, RepositoryConfig.class})
+@ContextConfiguration(classes = {EmbeddedPostgresConfig.class, FlywayConfig.class, TransactionConfig.class, EntityConfig.class,
+        RepositoryConfig.class, ApplicationConfig.class})
+@ActiveProfiles(profiles = {"dev", "test", "test_dataSource"})
+@Transactional(transactionManager = "jpaTransactionManager")
 public class TourRepositoryTest {
 
     @Autowired
     private Tour tour;
     @Autowired
-    private Repository<Tour> tourRepository;
+    private TourRepository tourRepository;
     @Autowired
     private AddTourSpecification addTourSpecification;
     @Autowired
@@ -87,8 +91,12 @@ public class TourRepositoryTest {
         tour.setDescription("description of tour");
         tour.setCost(BigDecimal.valueOf(100));
         tour.setTourType(TourType.SCIENTIFIC_EXPEDITION);
-        //tour.getHotel().setHotelId(Long.MAX_VALUE);
-        //tour.getCountry().setCountryId(Long.MAX_VALUE);
+        Hotel hotel = new Hotel();
+        hotel.setHotelId(1L);
+        tour.setHotel(hotel);
+        Country country = new Country();
+        country.setCountryId(1L);
+        tour.setCountry(country);
     }
 
     @Test
@@ -122,19 +130,19 @@ public class TourRepositoryTest {
 
     @Test
     public void query_tour_by_findTourByIdSpecification() {
-        findTourByIdSpecification.setSpecification(Long.MAX_VALUE);
+        findTourByIdSpecification.setSpecification(1L);
         tourRepository.query(findTourByIdSpecification);
     }
 
     @Test
     public void query_tour_by_findTourByCostRangeSpecification() {
-        findTourByCostRangeSpecification.setSpecification(new CostRange(new PGmoney(100), new PGmoney(200)));
+        findTourByCostRangeSpecification.setSpecification(new CostRange(BigDecimal.valueOf(100), BigDecimal.valueOf(200)));
         tourRepository.query(findTourByCostRangeSpecification);
     }
 
     @Test
     public void query_tour_by_findTourByCountryIdSpecification() {
-        findTourByCountryIdSpecification.setSpecification(Long.MAX_VALUE);
+        findTourByCountryIdSpecification.setSpecification(1L);
         tourRepository.query(findTourByCountryIdSpecification);
     }
 
@@ -153,19 +161,19 @@ public class TourRepositoryTest {
 
     @Test
     public void query_tour_by_findTourByHotelIdSpecification() {
-        findTourByHotelIdSpecification.setSpecification(Long.MAX_VALUE);
+        findTourByHotelIdSpecification.setSpecification(1L);
         tourRepository.query(findTourByHotelIdSpecification);
     }
 
     @Test
     public void query_tour_by_findTourByMaxCostSpecification() {
-        findTourByMaxCostSpecification.setSpecification(new PGmoney(1000));
+        findTourByMaxCostSpecification.setSpecification(BigDecimal.valueOf(1000));
         tourRepository.query(findTourByMaxCostSpecification);
     }
 
     @Test
     public void query_tour_by_findTourByMinCostSpecification() {
-        findTourByMinCostSpecification.setSpecification(new PGmoney(0));
+        findTourByMinCostSpecification.setSpecification(BigDecimal.valueOf(100));
         tourRepository.query(findTourByMinCostSpecification);
     }
 
@@ -183,7 +191,7 @@ public class TourRepositoryTest {
 
     @Test
     public void query_tour_by_findTourByUserIdSpecification() {
-        findTourByUserIdSpecification.setSpecification(Long.MAX_VALUE);
+        findTourByUserIdSpecification.setSpecification(1L);
         tourRepository.query(findTourByUserIdSpecification);
     }
 
@@ -196,7 +204,7 @@ public class TourRepositoryTest {
     @Test
     public void query_tour_by_findTourByUserSpecification() {
         User user = new User();
-        //user.setUserId(Long.MAX_VALUE);
+        user.setUserId(1L);
         user.setLogin("ElonMusk");
         user.setPassword("SpaceXXX");
         findTourByUserSpecification.setSpecification(user);

@@ -1,27 +1,34 @@
 package com.epam.travelAgency.repository.impl;
 
+import com.epam.travelAgency.config.ApplicationConfig;
 import com.epam.travelAgency.config.EntityConfig;
 import com.epam.travelAgency.config.RepositoryConfig;
+import com.epam.travelAgency.config.TransactionConfig;
 import com.epam.travelAgency.embedded.EmbeddedPostgresConfig;
 import com.epam.travelAgency.embedded.FlywayConfig;
 import com.epam.travelAgency.entity.User;
-import com.epam.travelAgency.repository.Repository;
+import com.epam.travelAgency.repository.UserRepository;
 import com.epam.travelAgency.specification.impl.user.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {EmbeddedPostgresConfig.class, FlywayConfig.class, EntityConfig.class, RepositoryConfig.class})
+@ContextConfiguration(classes = {EmbeddedPostgresConfig.class, FlywayConfig.class, TransactionConfig.class, EntityConfig.class,
+        RepositoryConfig.class, ApplicationConfig.class})
+@ActiveProfiles(profiles = {"dev", "test", "test_dataSource"})
+@Transactional(transactionManager = "jpaTransactionManager")
 public class UserRepositoryTest {
 
     @Autowired
     private User user;
     @Autowired
-    private Repository<User> userRepository;
+    private UserRepository userRepository;
     @Autowired
     private AddUserSpecification addUserSpecification;
     @Autowired

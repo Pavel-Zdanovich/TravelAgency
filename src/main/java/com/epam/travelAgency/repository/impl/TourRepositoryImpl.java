@@ -1,7 +1,7 @@
 package com.epam.travelAgency.repository.impl;
 
-import com.epam.travelAgency.entity.Hotel;
-import com.epam.travelAgency.repository.Repository;
+import com.epam.travelAgency.entity.Tour;
+import com.epam.travelAgency.repository.TourRepository;
 import com.epam.travelAgency.specification.AddSpecification;
 import com.epam.travelAgency.specification.FindSpecification;
 import com.epam.travelAgency.specification.RemoveSpecification;
@@ -10,34 +10,36 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.Collection;
 
-@org.springframework.stereotype.Repository
+@org.springframework.stereotype.Repository(value = "tourRepository")
 @Transactional(transactionManager = "jpaTransactionManager")
-public class HotelRepository implements Repository<Hotel> {
+public class TourRepositoryImpl implements TourRepository {
 
     /*@Autowired
     private JdbcTemplate jdbcTemplate;
     @Autowired
     @Qualifier(value = "sessionFactory")
     private SessionFactory sessionFactory;*/
-    @PersistenceContext(unitName = "travelAgency")
+    @PersistenceContext(unitName = "travelAgency", type = PersistenceContextType.EXTENDED)
     private EntityManager entityManager;
 
-    public HotelRepository() {
+    public TourRepositoryImpl() {
     }
 
     @Transactional
     @Override
-    public void add(AddSpecification<Hotel> specification) {
-        Hotel hotel = specification.getEntity();
-        if (hotel.getHotelId() == 0) {
-            entityManager.persist(hotel);
+    public void add(AddSpecification<Tour> specification) {
+        Tour tour = specification.getEntity();
+        if (tour != null && tour.getTourId() == 0) {
+            entityManager.persist(tour);
+            entityManager.flush();
         } else {
-            entityManager.merge(hotel);
+            entityManager.merge(tour);
         }
         /*Session session = sessionFactory.openSession();
         session.merge(specification.getEntity());
@@ -47,7 +49,7 @@ public class HotelRepository implements Repository<Hotel> {
 
     @Transactional
     @Override
-    public void update(UpdateSpecification<Hotel> specification) {
+    public void update(UpdateSpecification<Tour> specification) {
         entityManager.merge(specification.getEntity());
         /*Session session = sessionFactory.openSession();
         session.update(specification.getEntity());
@@ -57,32 +59,32 @@ public class HotelRepository implements Repository<Hotel> {
 
     @Transactional
     @Override
-    public void remove(RemoveSpecification<Hotel> specification) {
-        Hotel hotel = specification.getEntity();
-        if (entityManager.contains(hotel)) {
-            entityManager.remove(specification.getEntity());
+    public void remove(RemoveSpecification<Tour> specification) {
+        Tour tour = specification.getEntity();
+        if (entityManager.contains(tour)) {
+            entityManager.remove(tour);
         } else {
-            entityManager.merge(hotel);
+            entityManager.merge(tour);
         }
         /*Session session = sessionFactory.openSession();
-        session.remove(specification.getEntity());//Hibernate execute DELETE FROM hotels WHERE hotel_id = ?
+        session.remove(specification.getEntity());
         session.close();*/
         //jdbcTemplate.update(specification.getSQLQuery(), specification);
     }
 
     @Transactional
     @Override
-    public Collection<Hotel> query(FindSpecification<Hotel, ? extends Object> specification) {
+    public Collection<Tour> query(FindSpecification<Tour, ? extends Object> specification) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Hotel> criteriaQuery = specification.getCriteriaQuery(criteriaBuilder);
-        TypedQuery<Hotel> typedQuery = entityManager.createQuery(criteriaQuery);
-        return typedQuery.getResultList();
+        CriteriaQuery<Tour> criteriaQuery = specification.getCriteriaQuery(criteriaBuilder);
+        TypedQuery<Tour> tourTypedQuery = entityManager.createQuery(criteriaQuery);
+        return tourTypedQuery.getResultList();
         /*Session session = sessionFactory.openSession();
-        org.hibernate.query.Query<Hotel> query = session.createQuery(specification.toCriteriaQuery(session));
-        Collection<Hotel> hotels = query.stream().collect(Collectors.toCollection(ArrayList::new));
+        org.hibernate.query.Query<Tour> query = session.createQuery(specification.toCriteriaQuery(session));
+        Collection<Tour> tours = query.stream().collect(Collectors.toCollection(ArrayList::new));
         session.close();
-        return hotels;*/
-        //return jdbcTemplate.query(specification.getSQLQuery(), new HotelService());//TODO DI
+        return tours;*/
+        //return jdbcTemplate.query(specification.getSQLQuery(), new TourService());//TODO DI
     }
 
 }

@@ -1,8 +1,8 @@
 package com.epam.travelAgency.service.impl;
 
 import com.epam.travelAgency.entity.Review;
-import com.epam.travelAgency.repository.Repository;
-import com.epam.travelAgency.service.Service;
+import com.epam.travelAgency.repository.ReviewRepository;
+import com.epam.travelAgency.service.ReviewService;
 import com.epam.travelAgency.specification.impl.review.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,13 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Optional;
 
-@org.springframework.stereotype.Service
+@org.springframework.stereotype.Service(value = "reviewService")
 @Transactional(transactionManager = "jpaTransactionManager")
-public class ReviewService implements Service<Review> {
+public class ReviewServiceImpl implements ReviewService {
 
     @Autowired
-    private Repository<Review> reviewRepository;
+    private ReviewRepository reviewRepository;
 
     @Transactional
     @Override
@@ -29,7 +30,8 @@ public class ReviewService implements Service<Review> {
     @Override
     public Review findById(long reviewId) {
         FindReviewByIdSpecification reviewByIdSpecification = new FindReviewByIdSpecification(reviewId);
-        return reviewRepository.query(reviewByIdSpecification).iterator().next();
+        Optional<Review> optionalReview = reviewRepository.query(reviewByIdSpecification).stream().findFirst();
+        return optionalReview.orElse(null);
     }
 
     @Transactional

@@ -37,7 +37,7 @@ public class UpdateTourSpecification implements UpdateSpecification<Tour> {
         preparedStatement.setTimestamp(2, tour.getStartDate());
         preparedStatement.setTimestamp(3, tour.getEndDate());
         preparedStatement.setString(4, tour.getDescription());
-        preparedStatement.setObject(5, tour.getCost());
+        preparedStatement.setBigDecimal(5, tour.getCost());
         preparedStatement.setString(6, tour.getTourType().toString());
         preparedStatement.setLong(7, tour.getCountry().getCountryId());
         preparedStatement.setLong(8, tour.getHotel().getHotelId());

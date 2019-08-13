@@ -38,7 +38,7 @@ public class RemoveTourSpecification implements RemoveSpecification<Tour> {
         preparedStatement.setTimestamp(3, tour.getStartDate());
         preparedStatement.setTimestamp(4, tour.getEndDate());
         preparedStatement.setString(5, tour.getDescription());
-        preparedStatement.setObject(6, tour.getCost());
+        preparedStatement.setBigDecimal(6, tour.getCost());
         preparedStatement.setString(7, tour.getTourType().toString());
         preparedStatement.setLong(8, tour.getCountry().getCountryId());
         preparedStatement.setLong(9, tour.getHotel().getHotelId());

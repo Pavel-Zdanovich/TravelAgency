@@ -3,7 +3,7 @@ package com.epam.travelAgency.entity.metamodel;
 import com.epam.travelAgency.entity.Feature;
 import com.epam.travelAgency.entity.Hotel;
 import com.epam.travelAgency.entity.Tour;
-import org.postgis.PGgeometry;
+import org.postgis.Geometry;
 
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
@@ -13,7 +13,7 @@ import java.net.URL;
 @StaticMetamodel(Hotel.class)
 public abstract class Hotel_ {
 
-	public static volatile SingularAttribute<Hotel, PGgeometry> coordinate;
+	public static volatile SingularAttribute<Hotel, Geometry> coordinate;
 	public static volatile SingularAttribute<Hotel, Feature[]> features;
 	public static volatile SingularAttribute<Hotel, URL> website;
 	public static volatile SingularAttribute<Hotel, String> name;

@@ -19,7 +19,7 @@ public class JPAUtil {
         return ENTITY_MANAGER_FACTORY;
     }
 
-    public static void shutdown() {
+    public static void close() {
         ENTITY_MANAGER_FACTORY.close();
     }
 

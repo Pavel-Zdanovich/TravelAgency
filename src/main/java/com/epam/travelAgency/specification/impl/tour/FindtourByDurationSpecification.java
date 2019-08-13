@@ -57,7 +57,8 @@ public class FindtourByDurationSpecification implements FindSpecification<Tour, 
         CriteriaQuery<Tour> criteriaQuery = criteriaBuilder.createQuery(Tour.class);
         Root<Tour> root = criteriaQuery.from(Tour.class);
         Expression<PGInterval> duration = criteriaBuilder.function("age", PGInterval.class, root.get(Tour_.START_DATE), root.get(Tour_.END_DATE));
-        criteriaQuery.select(root).where(criteriaBuilder.equal(duration.as(PGInterval.class), new Date(LocalDateTime.of(period.getYears(), period.getMonths(), period.getDays() + 1, 0, 0).toEpochSecond(ZoneOffset.UTC))));//TODO Invalid value for DayOfMonth (valid values 1 - 28/31): 0
+        criteriaQuery.select(root).where(criteriaBuilder.equal(duration.as(PGInterval.class),
+                new Date(LocalDateTime.of(period.getYears(), period.getMonths(), period.getDays() + 1, 0, 0).toEpochSecond(ZoneOffset.UTC))));//TODO Invalid value for DayOfMonth (valid values 1 - 28/31): 0
         return criteriaQuery;
     }
 

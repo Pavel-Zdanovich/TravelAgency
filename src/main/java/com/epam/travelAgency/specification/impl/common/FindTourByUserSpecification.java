@@ -2,6 +2,7 @@ package com.epam.travelAgency.specification.impl.common;
 
 import com.epam.travelAgency.entity.Tour;
 import com.epam.travelAgency.entity.User;
+import com.epam.travelAgency.entity.metamodel.Tour_;
 import com.epam.travelAgency.entity.metamodel.User_;
 import com.epam.travelAgency.specification.FindSpecification;
 import org.springframework.stereotype.Component;
@@ -44,7 +45,7 @@ public class FindTourByUserSpecification implements FindSpecification<Tour, User
         Join<User, Tour> tours = userRoot.join(User_.TOURS, JoinType.INNER);
         userCriteriaQuery.select(userRoot.get(User_.USER_ID)).where(criteriaBuilder.equal(userRoot.get(User_.LOGIN), user.getLogin()),
                 criteriaBuilder.equal(userRoot.get(User_.PASSWORD), user.getPassword()));
-        tourCriteriaQuery.select(tourRoot).where(criteriaBuilder.equal(tours.get(User_.USER_ID), userCriteriaQuery));
+        tourCriteriaQuery.select(tourRoot).where(criteriaBuilder.equal(tours.get(Tour_.USERS), userCriteriaQuery));
         return tourCriteriaQuery;
     }
 

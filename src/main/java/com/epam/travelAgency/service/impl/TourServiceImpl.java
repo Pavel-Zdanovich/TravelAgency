@@ -2,8 +2,8 @@ package com.epam.travelAgency.service.impl;
 
 import com.epam.travelAgency.entity.Tour;
 import com.epam.travelAgency.entity.TourType;
-import com.epam.travelAgency.repository.Repository;
-import com.epam.travelAgency.service.Service;
+import com.epam.travelAgency.repository.TourRepository;
+import com.epam.travelAgency.service.TourService;
 import com.epam.travelAgency.specification.impl.tour.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,13 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Optional;
 
-@org.springframework.stereotype.Service
+@org.springframework.stereotype.Service(value = "tourService")
 @Transactional(transactionManager = "jpaTransactionManager")
-public class TourService implements Service<Tour> {
+public class TourServiceImpl implements TourService {
 
     @Autowired
-    private Repository<Tour> tourRepository;
+    private TourRepository tourRepository;
 
     @Transactional
     @Override
@@ -30,7 +31,8 @@ public class TourService implements Service<Tour> {
     @Override
     public Tour findById(long tourId) {
         FindTourByIdSpecification findTourByIdSpecification = new FindTourByIdSpecification(tourId);
-        return tourRepository.query(findTourByIdSpecification).iterator().next();
+        Optional<Tour> optionalTour = tourRepository.query(findTourByIdSpecification).stream().findFirst();
+        return optionalTour.orElse(null);
     }
 
     @Transactional

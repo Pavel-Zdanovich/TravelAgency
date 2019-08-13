@@ -1,30 +1,44 @@
 package com.epam.travelAgency.service.impl;
 
-import com.epam.travelAgency.config.EntityConfig;
-import com.epam.travelAgency.config.RepositoryConfig;
-import com.epam.travelAgency.config.ServiceConfig;
+import com.epam.travelAgency.config.*;
 import com.epam.travelAgency.embedded.EmbeddedPostgresConfig;
 import com.epam.travelAgency.embedded.FlywayConfig;
+import com.epam.travelAgency.entity.Tour;
 import com.epam.travelAgency.entity.User;
-import com.epam.travelAgency.repository.Repository;
-import com.epam.travelAgency.service.Service;
+import com.epam.travelAgency.service.UserService;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {EmbeddedPostgresConfig.class, FlywayConfig.class, EntityConfig.class, RepositoryConfig.class, ServiceConfig.class})
+@ContextConfiguration(classes = {EmbeddedPostgresConfig.class, FlywayConfig.class, TransactionConfig.class, EntityConfig.class,
+        RepositoryConfig.class, ServiceConfig.class, ApplicationConfig.class})
+@ActiveProfiles(profiles = {"dev", "test", "test_dataSource"})
+@Transactional(transactionManager = "jpaTransactionManager")
 public class UserServiceTest {
 
-    @Autowired
     private User user;
     @Autowired
-    private Repository<User> userRepository;
-    @Autowired
-    private Service<User> userService;
+    private UserService userService;
+
+    @Before
+    public void setUp() throws Exception {
+        user = new User();
+        user.setUserId(1L);
+        user.setLogin("ElonMusk");
+        user.setPassword("SpaceXXX");
+        Tour tour = new Tour();
+        tour.setTourId(1L);
+        user.setTours(List.of(tour));
+    }
 
     @Test
     public void findAll() {
@@ -38,16 +52,13 @@ public class UserServiceTest {
 
     @Test
     public void update() {
-        user.setLogin(user.getLogin() + "LMAO");
+        user.setLogin("NicolaTesla");
+        user.setPassword("AC/DC");
         userService.update(user);
     }
 
     @Test
     public void save() {
-        User user = new User();
-        user.setUserId(0);
-        user.setLogin("ElonMusk");
-        user.setPassword("SpaceXXX");
         userService.save(user);
     }
 
@@ -58,6 +69,6 @@ public class UserServiceTest {
 
     @Test
     public void deleteById() {
-        userService.deleteById(0);
+        userService.deleteById(1L);
     }
 }

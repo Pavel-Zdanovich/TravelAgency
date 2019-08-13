@@ -2,12 +2,11 @@ package com.epam.travelAgency.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.postgresql.Driver;
 import org.postgresql.ds.PGSimpleDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -18,26 +17,19 @@ public class JDBCConfig {
     public static final String HIKARI_CONFIG_PROPERTY_FILE = "src/main/resources/hikariConfig.properties";
 
     @Bean
+    @Profile(value = "dev")
     public HikariConfig hikariConfig() {
         return new HikariConfig(HIKARI_CONFIG_PROPERTY_FILE);
     }
 
     @Bean(name = "hikariDataSource", destroyMethod = "close")
+    @Profile(value = "dev")
     public DataSource hikariDataSource() {
         return new HikariDataSource(hikariConfig());
     }
 
-    @Bean(name = "simpleDriverDataSource")
-    public DataSource simpleDriverDataSource() {
-        Properties properties = hikariConfig().getDataSourceProperties();
-        String url = new StringBuilder("jdbc:").append(properties.getProperty("user")).append("://").append(properties.getProperty("serverName"))
-                .append(":").append(properties.getProperty("portNumber")).append("/").append(properties.getProperty("databaseName")).toString();
-        Driver driver = new Driver();
-        driver.acceptsURL(url);
-        return new SimpleDriverDataSource(driver, url);
-    }
-
     @Bean(name = "pgSimpleDataSource")
+    @Profile(value = "real_dataSource")
     public DataSource pgSimpleDataSource() {
         Properties properties = hikariConfig().getDataSourceProperties();
         PGSimpleDataSource pgSimpleDataSource = new PGSimpleDataSource();
@@ -50,6 +42,7 @@ public class JDBCConfig {
     }
 
     @Bean
+    @Profile(value = "dev")
     public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(hikariDataSource());
     }

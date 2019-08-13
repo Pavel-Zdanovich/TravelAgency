@@ -1,7 +1,7 @@
 package com.epam.travelAgency.repository.impl;
 
 import com.epam.travelAgency.entity.User;
-import com.epam.travelAgency.repository.Repository;
+import com.epam.travelAgency.repository.UserRepository;
 import com.epam.travelAgency.specification.AddSpecification;
 import com.epam.travelAgency.specification.FindSpecification;
 import com.epam.travelAgency.specification.RemoveSpecification;
@@ -10,32 +10,34 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.Collection;
 
-@org.springframework.stereotype.Repository
+@org.springframework.stereotype.Repository(value = "userRepository")
 @Transactional(transactionManager = "jpaTransactionManager")
-public class UserRepository implements Repository<User> {
+public class UserRepositoryImpl implements UserRepository {
 
     /*@Autowired
     private JdbcTemplate jdbcTemplate;
     @Autowired
     @Qualifier(value = "sessionFactory")
     private SessionFactory sessionFactory;*/
-    @PersistenceContext(unitName = "travelAgency")
+    @PersistenceContext(unitName = "travelAgency", type = PersistenceContextType.EXTENDED)
     private EntityManager entityManager;
 
-    public UserRepository() {
+    public UserRepositoryImpl() {
     }
 
     @Transactional
     @Override
     public void add(AddSpecification<User> specification) {
         User user = specification.getEntity();
-        if (user.getUserId() == 0) {
+        if (user != null && user.getUserId() == 0) {
             entityManager.persist(user);
+            entityManager.flush();
         } else {
             entityManager.merge(user);
         }

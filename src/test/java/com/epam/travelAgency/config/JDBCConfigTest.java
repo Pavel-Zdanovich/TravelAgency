@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -21,7 +22,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {JDBCConfig.class, TransactionConfig.class, EmbeddedPostgresConfig.class, FlywayConfig.class})
+@ContextConfiguration(classes = {JDBCConfig.class, TransactionConfig.class, HibernateConfig.class, EmbeddedPostgresConfig.class, FlywayConfig.class})
+@ActiveProfiles(profiles = {"dev", "test", "test_dataSource"})
 public class JDBCConfigTest {
 
     @Autowired
@@ -51,7 +53,7 @@ public class JDBCConfigTest {
     private EntityManager sessionEntityManager;
     @Autowired
     @Qualifier(value = "localContainerEntityManagerFactoryBean")
-    private EntityManager localContainerEntityManagerFactoryBean;
+    private EntityManagerFactory localContainerEntityManagerFactoryBean;
     @Autowired
     @Qualifier(value = "sessionFactory")
     private EntityManagerFactory sessionFactory;

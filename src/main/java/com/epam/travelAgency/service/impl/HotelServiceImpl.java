@@ -2,8 +2,8 @@ package com.epam.travelAgency.service.impl;
 
 import com.epam.travelAgency.entity.Feature;
 import com.epam.travelAgency.entity.Hotel;
-import com.epam.travelAgency.repository.Repository;
-import com.epam.travelAgency.service.Service;
+import com.epam.travelAgency.repository.HotelRepository;
+import com.epam.travelAgency.service.HotelService;
 import com.epam.travelAgency.specification.FindSpecification;
 import com.epam.travelAgency.specification.impl.hotel.*;
 import org.postgis.PGgeometry;
@@ -14,13 +14,14 @@ import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Optional;
 
-@org.springframework.stereotype.Service
+@org.springframework.stereotype.Service(value = "hotelService")
 @Transactional(transactionManager = "jpaTransactionManager")
-public class HotelService implements Service<Hotel> {
+public class HotelServiceImpl implements HotelService {
 
     @Autowired
-    private Repository<Hotel> hotelRepository;
+    private HotelRepository hotelRepository;
 
     @Transactional
     @Override
@@ -33,7 +34,8 @@ public class HotelService implements Service<Hotel> {
     @Override
     public Hotel findById(long hotelId) {
         FindHotelByIdSpecification findHotelByIdSpecification = new FindHotelByIdSpecification(hotelId);
-        return hotelRepository.query(findHotelByIdSpecification).iterator().next();
+        Optional<Hotel> optionalHotel = hotelRepository.query(findHotelByIdSpecification).stream().findFirst();
+        return optionalHotel.orElse(null);
     }
 
     @Transactional
@@ -71,7 +73,7 @@ public class HotelService implements Service<Hotel> {
         hotel.setName(resultSet.getString("name"));
         hotel.setStars(resultSet.getInt("stars"));
         hotel.setWebsite(resultSet.getURL("website"));
-        hotel.setCoordinate((PGgeometry) resultSet.getObject("coordinate"));
+        hotel.setCoordinate(PGgeometry.geomFromString(resultSet.getString("coordinate")));
         Array array = resultSet.getArray("features");
         String[] stringFeatures = (String[]) array.getArray();
         Feature[] features = new Feature[stringFeatures.length];
@@ -81,4 +83,5 @@ public class HotelService implements Service<Hotel> {
         hotel.setFeatures(features);
         return hotel;
     }
+
 }

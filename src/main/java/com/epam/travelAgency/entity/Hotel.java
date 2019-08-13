@@ -6,7 +6,7 @@ import org.hibernate.annotations.TypeDef;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 import org.hibernate.validator.constraints.UniqueElements;
-import org.postgis.PGgeometry;
+import org.postgis.Geometry;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -53,10 +53,10 @@ public class Hotel extends TravelAgencyEntity {
     @NotNull(message = "Please enter hotel website")
     private java.net.URL website;
 
-    @Column(name = "coordinate", columnDefinition = "GEOMETRY(Point, 4326)")
-    private PGgeometry coordinate;
+    @Column(name = "coordinate", columnDefinition = "GEOMETRY(PointZ, 4326)")//GEOMETRY(Point, 4326)
+    private Geometry coordinate;
 
-    @Column(name = "types_of_features", columnDefinition = "types_of_features[]")
+    @Column(name = "features", columnDefinition = "types_of_features[]")
     @UniqueElements(message = "Please enter unique features")
     private Feature[] features;
 

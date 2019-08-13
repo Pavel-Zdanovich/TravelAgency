@@ -13,7 +13,7 @@ import javax.persistence.criteria.Root;
 @Component
 public class FindTourSpecification implements FindSpecification<Tour, Tour> {
 
-    public static final String SELECT_TOUR = "SELECT * FROM tours WHERE tour_id = %d AND photo = '%s' AND start_date = '%s' AND end_date = '%s' AND description = '%s' AND cost = '%s' AND tour_type = '%s' AND hotel_id = %d AND country_id = %d";
+    public static final String SELECT_TOUR = "SELECT * FROM tours WHERE tour_id = %d AND photo = '%s' AND start_date = '%s' AND end_date = '%s' AND description = '%s' AND cost = %f AND tour_type = '%s' AND hotel_id = %d AND country_id = %d";
     @Autowired
     private Tour tour;
 

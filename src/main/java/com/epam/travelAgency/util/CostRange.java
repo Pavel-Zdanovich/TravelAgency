@@ -1,7 +1,8 @@
 package com.epam.travelAgency.util;
 
 import lombok.*;
-import org.postgresql.util.PGmoney;
+
+import java.math.BigDecimal;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,8 +13,8 @@ import org.postgresql.util.PGmoney;
 public class CostRange {
 
     @NonNull
-    private PGmoney minCost;
+    private BigDecimal minCost;
     @NonNull
-    private PGmoney maxCost;
+    private BigDecimal maxCost;
 
 }

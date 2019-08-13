@@ -47,9 +47,10 @@ public class FindHotelSpecification implements FindSpecification<Hotel, Hotel> {
         Root<Hotel> root = criteriaQuery.from(Hotel.class);
         criteriaQuery.where(criteriaBuilder.equal(root.get(Hotel_.HOTEL_ID), hotel.getHotelId()),
                 criteriaBuilder.equal(root.get(Hotel_.NAME), hotel.getName()),
+                criteriaBuilder.equal(root.get(Hotel_.STARS), hotel.getStars()),
                 criteriaBuilder.equal(root.get(Hotel_.WEBSITE), hotel.getWebsite()),
-                criteriaBuilder.equal(root.get(Hotel_.COORDINATE), hotel.getCoordinate()),
-                criteriaBuilder.equal(root.get(Hotel_.FEATURES), featuresToString(hotel.getFeatures())));
+                criteriaBuilder.equal(root.get(Hotel_.COORDINATE).as(String.class), hotel.getCoordinate().getValue()),
+                criteriaBuilder.equal(root.get(Hotel_.FEATURES), hotel.getFeatures()));
         return criteriaQuery;
     }
 

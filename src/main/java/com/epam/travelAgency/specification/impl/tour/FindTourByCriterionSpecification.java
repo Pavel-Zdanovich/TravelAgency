@@ -1,6 +1,8 @@
 package com.epam.travelAgency.specification.impl.tour;
 
 import com.epam.travelAgency.entity.Tour;
+import com.epam.travelAgency.entity.metamodel.Country_;
+import com.epam.travelAgency.entity.metamodel.Hotel_;
 import com.epam.travelAgency.entity.metamodel.Tour_;
 import com.epam.travelAgency.specification.FindSpecification;
 import com.epam.travelAgency.util.Criterion;
@@ -42,7 +44,15 @@ public class FindTourByCriterionSpecification implements FindSpecification<Tour,
     public CriteriaQuery<Tour> getCriteriaQuery(CriteriaBuilder criteriaBuilder) {
         CriteriaQuery<Tour> criteriaQuery = criteriaBuilder.createQuery(Tour.class);
         Root<Tour> root = criteriaQuery.from(Tour.class);
-        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get(Tour_.TOUR_ID), this.criterion.getTourId()));//TODO criterion to criteria
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get(Tour_.TOUR_ID), this.criterion.getTourId()),
+                criteriaBuilder.equal(root.get(Tour_.PHOTO_PATH), this.criterion.getPhotoPath()),
+                criteriaBuilder.equal(root.get(Tour_.START_DATE), this.criterion.getStartDate()),
+                criteriaBuilder.equal(root.get(Tour_.END_DATE), this.criterion.getEndDate()),
+                criteriaBuilder.equal(root.get(Tour_.DESCRIPTION), this.criterion.getDescription()),
+                criteriaBuilder.equal(root.get(Tour_.COST), this.criterion.getCost()),
+                criteriaBuilder.equal(root.get(Tour_.TOUR_TYPE), this.criterion.getTourType()),
+                criteriaBuilder.equal(root.get(Tour_.HOTEL).get(Hotel_.HOTEL_ID), this.criterion.getHotelId()),
+                criteriaBuilder.equal(root.get(Tour_.COUNTRY).get(Country_.COUNTRY_ID), this.criterion.getCountryId()));
         return criteriaQuery;
     }
 }

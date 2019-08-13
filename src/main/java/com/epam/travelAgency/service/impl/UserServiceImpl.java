@@ -1,8 +1,8 @@
 package com.epam.travelAgency.service.impl;
 
 import com.epam.travelAgency.entity.User;
-import com.epam.travelAgency.repository.Repository;
-import com.epam.travelAgency.service.Service;
+import com.epam.travelAgency.repository.UserRepository;
+import com.epam.travelAgency.service.UserService;
 import com.epam.travelAgency.specification.impl.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,13 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Optional;
 
-@org.springframework.stereotype.Service
+@org.springframework.stereotype.Service(value = "userService")
 @Transactional(transactionManager = "jpaTransactionManager")
-public class UserService implements Service<User> {
+public class UserServiceImpl implements UserService {
 
     @Autowired
-    private Repository<User> userRepository;
+    private UserRepository userRepository;
 
     @Transactional
     @Override
@@ -29,7 +30,8 @@ public class UserService implements Service<User> {
     @Override
     public User findById(long userId) {
         FindUserByIdSpecification findUserByIdSpecification = new FindUserByIdSpecification(userId);
-        return userRepository.query(findUserByIdSpecification).iterator().next();
+        Optional<User> optionalUser = userRepository.query(findUserByIdSpecification).stream().findFirst();
+        return optionalUser.orElse(null);
     }
 
     @Transactional
