@@ -660,7 +660,6 @@ public class GeneralRepositoryJPA2Test {
         Country country = new Country();
         country.setCountryId(19);
         country.setName("Iraq");
-
         generalRepositoryJPA2.update(country);
 
         countryIterable = generalRepositoryJPA2.findBy(Country.class, countryGeneralCriterion);
@@ -779,7 +778,6 @@ public class GeneralRepositoryJPA2Test {
         user.setUserId(2);
         user.setLogin("StephenHawking");
         user.setPassword("BlackHole");
-
         generalRepositoryJPA2.update(user);
 
         userIterable = generalRepositoryJPA2.findBy(User.class, userGeneralCriterion);
