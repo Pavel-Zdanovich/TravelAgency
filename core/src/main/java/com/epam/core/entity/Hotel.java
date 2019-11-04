@@ -1,91 +1,93 @@
 package com.epam.core.entity;
 
-import com.vladmihalcea.hibernate.type.array.EnumArrayType;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.annotations.TypeDef;
+import lombok.*;
 import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.URL;
-import org.hibernate.validator.constraints.UniqueElements;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-@Component
 @Entity(name = "Hotel")
-@Table(name = "hotels", schema = "public", uniqueConstraints = {@UniqueConstraint(name = "hotel_name_unique", columnNames = "name"),
-                                            @UniqueConstraint(name = "hotel_website_unique", columnNames = "website")})
-@TypeDef(name = "types_of_features", typeClass = EnumArrayType.class, defaultForType = Feature[].class,
-        parameters = @org.hibernate.annotations.Parameter(name = EnumArrayType.SQL_ARRAY_TYPE, value = "types_of_features"))
+@Table(name = "HOTEL", uniqueConstraints = {@UniqueConstraint(name = "HOTEL_NAME_UNIQUE", columnNames = "NAME"),
+        @UniqueConstraint(name = "HOTEL_WEBSITE_UNIQUE", columnNames = "WEBSITE")})
+@AttributeOverride(name = "id", column = @Column(name = "HOTEL_ID"))
 @NoArgsConstructor
-@Getter
-@Setter
-@EqualsAndHashCode
-public class Hotel implements Serializable {
+@EqualsAndHashCode(exclude = "tours", callSuper = false)
+@ToString(exclude = "tours")
+public class Hotel extends AbstractEntity {
 
-    @Column(name = "hotel_id")
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
-    @SequenceGenerator(name = "generator", sequenceName = "generator_sequence", initialValue = 1_000_000, allocationSize = 9_999_999)
-    @NotNull(message = "Please enter hotel id")
-    private long hotelId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "HOTEL_SEQUENCE")
+    @SequenceGenerator(name = "HOTEL_SEQUENCE", sequenceName = "HOTEL_SEQUENCE", allocationSize = 1)
+    public Long getId() {
+        return this.id;
+    }
 
-    @Column(name = "name", length = 50)
+    public void setId(Long hotelId) {
+        this.id = hotelId;
+    }
+
+    @Column(name = "NAME", nullable = false, length = 50)
     @Size(min = 2, max = 50, message = "Please enter hotel name [2, 50] characters")
     @NotEmpty(message = "Please enter hotel name")
+    @Getter
+    @Setter
     private String name;
 
-    @Column(name = "stars")
+    @Column(name = "STARS", nullable = false, precision = 1)
     @Range(min = 1, max = 5, message = "Please enter hotel stars in the range [1, 5]")
     @NotNull(message = "Please enter hotel stars")
-    private int stars;
+    @Getter
+    @Setter
+    private Short stars;
 
-    @Column(name = "website", length = 75)
-    @URL
-    @Pattern(regexp = "^(http|https)://", message = "Please enter hotel website starting in 'http(s)://www.' and ending in '.com'")
-    @Pattern(regexp = "(/|(www(\\.))).{1,75}(\\.)com$", message = "Please enter hotel website starting in 'http(s)://www.' and ending in '.com'")
+    @Column(name = "WEBSITE", nullable = false, length = 75)
+    @Size(max = 75, message = "Please enter hotel website 75 characters long")
+    @Pattern(regexp = "https?\\:\\/\\/www\\.\\w+\\.[a-z]{2,3}($|\\/[\\w\\/\\-]+\\/$)", message = "Please enter hotel website starting a protocol and ending with a domain")
     @NotNull(message = "Please enter hotel website")
+    @Getter
+    @Setter
     private String website;
 
-    @Column(name = "coordinate")//GEOMETRY(Point, 4326)
-    private byte[] coordinate;//TODO Geometry
+    @Column(name = "LATITUDE", nullable = false, precision = 9, scale = 7)
+    @Size(min = -90, max = 90, message = "Latitude coordinate of hotel must be in range [-90,+90]")
+    @NotNull(message = "Please enter latitude coordinate of hotel")
+    @Getter
+    @Setter
+    private BigDecimal latitude;
 
-    @Column(name = "features", columnDefinition = "types_of_features[]")
-    @UniqueElements(message = "Please enter unique features")
-    private Feature[] features;
+    @Column(name = "LONGITUDE", nullable = false, precision = 10, scale = 7)
+    @Size(min = -180, max = 180, message = "Longitude coordinate of hotel must be in range [-180,+180]")
+    @NotNull(message = "Please enter longitude coordinate of hotel")
+    @Getter
+    @Setter
+    private BigDecimal longitude;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hotel", orphanRemoval = true)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "hotels")
+    @Getter
+    private Set<Feature> features = new HashSet<>();
+
+    @OneToMany(targetEntity = Tour.class, cascade = CascadeType.ALL, mappedBy = "hotel")
     private List<Tour> tours = new ArrayList<>();
 
-    public boolean addTour(Tour tour) {
-        tour.setHotel(this);
-        return tours.add(tour);
+    public boolean addFeature(Feature feature) {
+        feature.getHotels().add(this);
+        return this.features.add(feature);
     }
 
-    public boolean removeTour(Tour tour) {
-        tour.setHotel(null);
-        return tours.remove(tour);
+    public boolean removeFeature(Feature feature) {
+        feature.getHotels().remove(this);
+        return this.features.remove(feature);
     }
 
-    @Override
-    public String toString() {
-        return "Hotel{" +
-                "hotelId=" + hotelId +
-                ", name='" + name + '\'' +
-                ", stars=" + stars +
-                ", website='" + website + '\'' +
-                ", coordinate=" + Arrays.toString(coordinate) +
-                ", features=" + Arrays.toString(features) +
-                '}';
+    List<Tour> getTours() {
+        return this.tours;
     }
+
 }

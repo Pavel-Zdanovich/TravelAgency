@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="Create table COUNTRY" author="Liquibase">
+
+        <!--                                            COUNTRY                                                      -->
+        <createTable tableName="COUNTRY">
+            <column name="COUNTRY_ID" type="NUMBER">
+                <constraints primaryKey="true" primaryKeyName="COUNTRY_PK"/>
+            </column>
+            <column name="NAME" type="VARCHAR">
+                <constraints nullable="false" checkConstraint="CHECK (LENGTH(NAME) &gt; 3)" unique="true" />
+            </column>
+        </createTable>
+        <createSequence sequenceName="COUNTRY_SEQUENCE" startValue="1" cacheSize="0"/>
+        <!--                                            COUNTRY                                                      -->
+        <!--                                            FEATURE                                                      -->
+        <createTable tableName="Create table FEATURE">
+            <column name="FEATURE_ID" type="NUMBER">
+                <constraints primaryKey="true" primaryKeyName="FEATURE_PK"/>
+            </column>
+            <column name="NAME" type="VARCHAR">
+                <constraints nullable="false" checkConstraint="CHECK (LENGTH(NAME) &gt; 3)" unique="true"/>
+            </column>
+        </createTable>
+        <createSequence sequenceName="FEATURE_SEQUENCE" startValue="1" cacheSize="0"/>
+        <!--                                            FEATURE                                                      -->
+        <!--                                             HOTEL                                                       -->
+        <createTable tableName="Create table HOTEL">
+            <column name="HOTEL_ID" type="NUMBER">
+                <constraints primaryKey="true" primaryKeyName="HOTEL_PK"/>
+            </column>
+            <column name="NAME" type="VARCHAR">
+                <constraints nullable="false" checkConstraint="CHECK (LENGTH(NAME) &gt; 3)" unique="true"/>
+            </column>
+            <column name="STARS" type="SMALLINT">
+                <constraints nullable="false" checkConstraint="CHECK (STARS &gt; 0 AND STARS &lt; 6)"/>
+            </column>
+            <column name="WEBSITE" type="VARCHAR">
+                <constraints checkConstraint="CHECK (LENGTH(NAME) &gt; 3 AND REGEXP_INSTR(WEBSITE, 'https?\:\/\/www\.\w+\.[a-z]{2,3}($|\/[\w\/\-]+\/$)') &gt; 0)" unique="true"/>
+            </column>
+            <column name="LATITUDE" type="NUMBER(9,7)">
+                <constraints nullable="false" checkConstraint="CHECK (LATITUDE &gt; -90.000000 AND LATITUDE &lt; 90.000000)"/>
+            </column>
+            <column name="LONGITUDE" type="NUMBER(9,7)">
+                <constraints nullable="false" checkConstraint="CHECK (LONGITUDE &gt; -180.000000 AND LONGITUDE &lt; 180.000000)"/>
+            </column>
+        </createTable>
+        <createSequence sequenceName="HOTEL_SEQUENCE" startValue="1" cacheSize="0"/>
+        <!--                                             HOTEL                                                       -->
+        <!--                                         HOTEL_FEATURE                                                   -->
+        <createTable tableName="HOTEL_FEATURE">
+            <column name="HOTEL_ID" type="NUMBER">
+                <constraints nullable="false" foreignKeyName="HOTEL_FEATURE_HOTEL_ID_FK"/>
+            </column>
+            <column name="FEATURE_ID" type="NUMBER">
+                <constraints nullable="false" foreignKeyName="HOTEL_FEATURE_FEATURE_ID_FK"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="HOTEL_FEATURE" columnNames="HOTEL_ID, FEATURE_ID"/>
+        <addForeignKeyConstraint baseTableName="HOTEL_FEATURE" baseColumnNames="HOTEL_ID"
+                                 constraintName="HOTEL_FEATURE_HOTEL_ID_FK" referencedTableName="HOTEL"
+                                 referencedColumnNames="HOTEL_ID"/>
+        <addForeignKeyConstraint baseTableName="HOTEL_FEATURE" baseColumnNames="FEATURE_ID"
+                                 constraintName="HOTEL_FEATURE_FEATURE_ID_FK" referencedTableName="FEATURE"
+                                 referencedColumnNames="FEATURE_ID"/>
+        <!--                                         HOTEL_FEATURE                                                   -->
+        <!--                                             USER                                                        -->
+        <createTable tableName="USER">
+            <column name="USER_ID" type="NUMBER">
+                <constraints primaryKey="true" primaryKeyName="USER_PK"/>
+            </column>
+            <column name="LOGIN" type="VARCHAR">
+                <constraints nullable="false" checkConstraint="CHECK (LENGTH(LOGIN) &gt; 4)" unique="true"/>
+            </column>
+            <column name="PASSWORD" type="VARCHAR">
+                <constraints nullable="false" checkConstraint="CHECK (LENGTH(PASSWORD) &gt; 4)"  unique="true"/>
+            </column>
+            <column name="ROLE" type="VARCHAR" defaultValue="USER">
+                <constraints nullable="false" checkConstraint="CHECK (LENGTH(ROLE) &gt; 3 AND ROLE IN ('USER', 'ADMIN'))"/>
+            </column>
+        </createTable>
+        <createSequence sequenceName="USER_SEQUENCE" startValue="1" cacheSize="0"/>
+        <!--                                             USER                                                        -->
+        <!--                                             TOUR                                                        -->
+        <createTable tableName="TOUR">
+            <column name="TOUR_ID" type="NUMBER">
+                <constraints primaryKey="true" primaryKeyName="TOUR_PK"/>
+            </column>
+            <column name="PHOTO_PATH" type="NVARCHAR"/>
+            <column name="START_DATE" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="END_DATE" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" type="NVARCHAR"/>
+            <column name="COST" type="CURRENCY">
+                <constraints nullable="false" checkConstraint="CHECK (COST &gt; 0.0000)"/>
+            </column>
+            <column name="TOUR_TYPE" type="VARCHAR">
+                <constraints nullable="false" checkConstraint="CHECK(TOUR_TYPE IN ('BUSINESS', 'ECOTOURISM', 'LEISURE',
+                 'PILGRIMAGE', 'RURAL_TOURISM', 'SCIENTIFIC_EXPEDITION', 'SPORT_COMPETITION', 'TOURISM', 'TRAINING', 'TREATMENT')"/>
+            </column>
+            <column name="HOTEL_ID" type="NUMBER">
+                <constraints foreignKeyName="TOUR_HOTEL_ID_FK"/>
+            </column>
+            <column name="COUNTRY_ID" type="NUMBER">
+                <constraints foreignKeyName="TOUR_COUNTRY_ID_FK"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="TOUR" baseColumnNames="HOTEL_ID" constraintName="TOUR_HOTEL_ID_FK"
+                                 referencedTableName="HOTEL" referencedColumnNames="HOTEL_ID"/>
+        <addForeignKeyConstraint baseTableName="TOUR" baseColumnNames="COUNTRY_ID" constraintName="TOUR_COUNTRY_ID_FK"
+                                 referencedTableName="COUNTRY" referencedColumnNames="COUNTRY_ID"/>
+        <createSequence sequenceName="TOUR_SEQUENCE" startValue="1" cacheSize="0"/>
+        <!--                                             TOUR                                                        -->
+        <!--                                          USER_TOUR                                                      -->
+        <createTable tableName="USER_TOUR">
+            <column name="USER_ID" type="NUMBER">
+                <constraints nullable="false" foreignKeyName="USER_TOUR_USER_ID_FK"/>
+            </column>
+            <column name="TOUR_ID" type="NUMBER">
+                <constraints nullable="false" foreignKeyName="USER_TOUR_TOUR_ID_FK"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="USER_TOUR" columnNames="USER_ID, TOUR_ID"/>
+        <addForeignKeyConstraint baseTableName="USER_TOUR" baseColumnNames="USER_ID" constraintName="USER_TOUR_USER_ID_FK"
+                                 referencedTableName="USER" referencedColumnNames="USER_ID"/>
+        <addForeignKeyConstraint baseTableName="USER_TOUR" baseColumnNames="TOUR_ID" constraintName="USER_TOUR_TOUR_ID_FK"
+                                 referencedTableName="TOUR" referencedColumnNames="TOUR_ID"/>
+        <!--                                          USER_TOUR                                                      -->
+        <createTable tableName="REVIEW">
+            <column name="REVIEW_ID" type="NUMBER">
+                <constraints primaryKey="true" primaryKeyName="REVIEW_PK"/>
+            </column>
+            <column name="REVIEW_DATE" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REVIEW_TEXT" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TOUR_ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="REVIEW" baseColumnNames="USER_ID" constraintName="REVIEW_USER_ID_FK"
+                                 referencedTableName="USER" referencedColumnNames="USER_ID"/>
+        <addForeignKeyConstraint baseTableName="REVIEW" baseColumnNames="TOUR_ID" constraintName="REVIEW_TOUR_ID_FK"
+                                 referencedTableName="TOUR" referencedColumnNames="TOUR_ID"/>
+        <createSequence sequenceName="REVIEW_SEQUENCE" startValue="1" cacheSize="0"/>
+    </changeSet>
+
+</databaseChangeLog>

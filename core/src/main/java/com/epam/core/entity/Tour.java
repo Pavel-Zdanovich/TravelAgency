@@ -1,90 +1,129 @@
 package com.epam.core.entity;
 
-import com.vladmihalcea.hibernate.type.basic.PostgreSQLEnumType;
+import com.epam.core.entity.enums.TourType;
 import lombok.*;
 import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
 import org.hibernate.validator.constraints.Currency;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-@Component
 @Entity(name = "Tour")
-@Table(name = "tours", schema = "public")
-@TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType.class, defaultForType = TourType.class)
+@Table(name = "TOUR")
+@AttributeOverride(name = "id", column = @Column(name = "TOUR_ID"))
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
-public class Tour implements Serializable {
+@EqualsAndHashCode(exclude = {"users", "reviews"}, callSuper = false)
+@ToString(exclude = {"users", "reviews"})
+public class Tour extends AbstractEntity {
 
-    @Column(name = "tour_id")
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
-    @SequenceGenerator(name = "generator", sequenceName = "generator_sequence", initialValue = 1_000_000, allocationSize = 9_999_999)
-    @NotNull(message = "Please enter tour id")
-    private long tourId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TOUR_SEQUENCE")
+    @SequenceGenerator(name = "TOUR_SEQUENCE", sequenceName = "TOUR_SEQUENCE", allocationSize = 1)
+    public Long getId() {
+        return this.id;
+    }
 
-    @Column(name = "photo")
+    public void setId(Long tourId) {
+        this.id = tourId;
+    }
+
+    @Column(name = "PHOTO_PATH")
+    @NotBlank(message = "Please enter not blank photo path")
+    @Getter
+    @Setter
     private String photoPath;
 
-    @Column(name = "start_date")
+    @Column(name = "START_DATE", nullable = false)
     @FutureOrPresent(message = "Please enter a start date corresponding to the current or future date")
     @NotNull(message = "Please enter a tour start date")
+    @Getter
+    @Setter
     private Timestamp startDate;
 
-    @Column(name = "end_date")
+    @Column(name = "END_DATE", nullable = false)
     @Future(message = "Please enter a end date corresponding to the future date")
     @NotNull(message = "Please enter tour end date")
+    @Getter
+    @Setter
     private Timestamp endDate;
 
-    @Column(name = "description")
+    @Column(name = "DESCRIPTION", length = 1000)
+    @Getter
+    @Setter
     private String description;
 
-    @Column(name = "cost", precision = 19, scale = 4)
+    @Column(name = "COST", nullable = false, precision = 14, scale = 4)
     @Type(type = "org.hibernate.type.BigDecimalType")
     @Currency(value = "USD", message = "Please enter the cost of the tour in currency format")
     @NotNull(message = "Please enter tour cost")
-    private BigDecimal cost;//double
+    @Getter
+    @Setter
+    private BigDecimal cost;
 
+    @Column(name = "TOUR_TYPE", nullable = false, length = 30)
     @Enumerated(value = EnumType.STRING)
-    @Column(name = "tour_type", columnDefinition = "types_of_tours")
-    @Type(type = "pgsql_enum")
+    @Size(min = 3, max = 30, message = "Please enter tour type [3, 30] characters")
     @NotNull(message = "Please enter tour type")
+    @Getter
+    @Setter
     private TourType tourType;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "tours")
-    private List<User> users = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "tours")
+    @Getter
+    private Set<User> users = new HashSet<>();
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "hotel_id", referencedColumnName = "hotel_id", foreignKey = @ForeignKey(name = "tour_hotel_id_fkey"))
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "HOTEL_ID", foreignKey = @ForeignKey(name = "TOUR_HOTEL_ID_FK"))
+    @Getter
     private Hotel hotel;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "country_id", referencedColumnName = "country_id", foreignKey = @ForeignKey(name = "tour_country_id_fkey"))
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "COUNTRY_ID", foreignKey = @ForeignKey(name = "TOUR_COUNTRY_ID_FK"))
+    @Getter
     private Country country;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tour", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tour")
+    @Getter
     private List<Review> reviews = new ArrayList<>();
 
-    public boolean addReview(Review review) {
-        review.setTour(this);
-        return reviews.add(review);
+    public boolean addHotel(Hotel hotel) {
+        this.hotel = hotel;
+        return this.hotel.getTours().add(this);
     }
 
-    public boolean removeReview(Review review) {
-        review.setTour(null);
-        return reviews.remove(review);
+    public boolean removeHotel() {
+        boolean result = false;
+        if (this.hotel != null) {
+            result = this.hotel.getTours().remove(this);
+            this.hotel = null;
+        }
+        return result;
     }
 
+    public boolean addCountry(Country country) {
+        this.country = country;
+        return this.country.getTours().add(this);
+    }
+
+    public boolean removeCountry() {
+        boolean result = false;
+        if (this.country != null) {
+            result = this.country.getTours().remove(this);
+            this.country = null;
+        }
+        return result;
+    }
+
+    public boolean addUser(User user) {
+        return user.addTour(this);
+    }
+
+    public boolean removeUser(User user) {
+        return user.removeTour(this);
+    }
 }

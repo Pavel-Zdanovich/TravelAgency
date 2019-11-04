@@ -1,49 +1,43 @@
 package com.epam.core.entity;
 
 import lombok.*;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-@Component
 @Entity(name = "Country")
-@Table(name = "countries", schema = "public", uniqueConstraints = @UniqueConstraint(name = "country_name_unique", columnNames = "name"))
+@Table(name = "COUNTRY", uniqueConstraints = @UniqueConstraint(name = "COUNTRY_NAME_UNIQUE", columnNames = "NAME"))
+@AttributeOverride(name = "id", column = @Column(name = "COUNTRY_ID"))
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
-public class Country implements Serializable {
+@EqualsAndHashCode(exclude = "tours", callSuper = false)
+@ToString(exclude = "tours")
+public class Country extends AbstractEntity {
 
-    @Column(name = "country_id")
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
-    @SequenceGenerator(name = "generator", sequenceName = "generator_sequence", initialValue = 1_000_000, allocationSize = 9_999_999)
-    @NotNull(message = "Please enter country id")
-    private long countryId;
-
-    @Column(name = "name", length = 50)
-    @Size(min = 3, max = 50, message = "Please enter country name [3, 50] characters")
-    @NotEmpty(message = "Please enter country name")
-    private String name;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "country", orphanRemoval = true)
-    private List<Tour> tours = new ArrayList<>();
-
-    public boolean addTour(Tour tour) {
-        tour.setCountry(this);
-        return tours.add(tour);
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "COUNTRY_SEQUENCE")
+    @SequenceGenerator(name = "COUNTRY_SEQUENCE", sequenceName = "COUNTRY_SEQUENCE", allocationSize = 1)
+    public Long getId() {
+        return this.id;
     }
 
-    public boolean removeTour(Tour tour) {
-        tour.setCountry(null);
-        return tours.remove(tour);
+    public void setId(Long countryId) {
+        this.id = countryId;
+    }
+
+    @Column(name = "NAME", nullable = false, length = 50)
+    @Size(min = 3, max = 50, message = "Please enter country name [3, 50] characters")
+    @NotEmpty(message = "Please enter country name")
+    @Getter
+    @Setter
+    private String name;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "country")
+    private Set<Tour> tours = new HashSet<>();
+
+    Set<Tour> getTours() {
+        return this.tours;
     }
 
 }

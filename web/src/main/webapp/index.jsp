@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored = "false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -5,8 +7,11 @@
 	</head>
 	<body>
 		
-		<h2>Hello World!</h2>
-		<a href="jsp/hello.jsp">go to hello page</a>
+		<h1>Index JSP!</h2>
+		<h2>Message : ${message}</h2>
+		<form action="/login" method="GET">
+		    <input type = "submit" value = "Go!"/>
+		</form>
 		
 	</body>
 </html>

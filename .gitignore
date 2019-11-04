@@ -1,7 +1,6 @@
 .idea/
 target/
 Main.java
-filler/
 data/
 postgis-2.5/
 scripts/

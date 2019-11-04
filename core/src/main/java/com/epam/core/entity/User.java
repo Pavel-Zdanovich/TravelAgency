@@ -1,53 +1,71 @@
 package com.epam.core.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.epam.core.entity.enums.UserRole;
+import lombok.*;
 import org.hibernate.annotations.NaturalId;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-@Component
 @Entity(name = "User")
-@Table(name = "users", schema = "public", uniqueConstraints = @UniqueConstraint(name = "user_login_unique", columnNames = "login"))
+@Table(name = "USER", uniqueConstraints = @UniqueConstraint(name = "USER_LOGIN_UNIQUE", columnNames = "LOGIN"))
+@AttributeOverride(name = "id", column = @Column(name = "USER_ID"))
 @NoArgsConstructor
-@Getter
-@Setter
-@EqualsAndHashCode
-public class User implements Serializable {
+@EqualsAndHashCode(exclude = {"tours", "reviews"}, callSuper = false)
+@ToString(exclude = {"tours", "reviews"})
+public class User extends AbstractEntity {
 
-    @Column(name = "user_id")
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
-    @SequenceGenerator(name = "generator", sequenceName = "generator_sequence", initialValue = 1_000_000, allocationSize = 9_999_999)
-    @NotNull(message = "Please enter user id")
-    private long userId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQUENCE")
+    @SequenceGenerator(name = "USER_SEQUENCE", sequenceName = "USER_SEQUENCE", allocationSize = 1)
+    public Long getId() {
+        return this.id;
+    }
 
-    @Column(name = "login", length = 30)
+    public void setId(Long userId) {
+        this.id = userId;
+    }
+
+    @Column(name = "LOGIN", nullable = false, length = 30)
     @NaturalId
     @Size(min = 5, max = 30, message = "Please enter user login [5, 30] characters")
     @NotNull(message = "Please enter user login")
+    @Getter
+    @Setter
     private String login;
 
-    @Column(name = "password", length = 30)
+    @Column(name = "PASSWORD", nullable = false, length = 30)
     @Size(min = 5, max = 30, message = "Please enter user password [5, 30] characters")
     @NotNull(message = "Please enter user password")
+    @Getter
+    @Setter
     private String password;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)//{CascadeType.PERSIST, CascadeType.MERGE}
-    @JoinTable(name = "users_tours", joinColumns = @JoinColumn(name = "user_id",
-            referencedColumnName = "user_id", foreignKey = @ForeignKey(name = "user_tour_user_id_fkey")),
-            inverseJoinColumns = @JoinColumn(name = "tour_id", referencedColumnName = "tour_id", foreignKey = @ForeignKey(name = "user_tour_tour_id_fkey")))
-    private List<Tour> tours = new ArrayList<>();
+    @Column(name = "ROLE", nullable = false, length = 10)
+    @Enumerated(value = EnumType.STRING)
+    @Size(min = 3, max = 10, message = "Please enter feature name [3, 10] characters")
+    @NotNull(message = "Please enter tour type")
+    @Getter
+    @Setter
+    private UserRole role;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "USER_TOUR",
+            joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID",
+                    foreignKey = @ForeignKey(name = "USER_TOUR_USER_ID_FK")),
+            foreignKey = @ForeignKey(name = "USER_TOUR_USER_ID_FK"),
+            inverseJoinColumns = @JoinColumn(name = "TOUR_ID", referencedColumnName = "TOUR_ID",
+                    foreignKey = @ForeignKey(name = "USER_TOUR_TOUR_ID_FK")),
+            inverseForeignKey = @ForeignKey(name = "USER_TOUR_TOUR_ID_FK"))
+    @Getter
+    private Set<Tour> tours = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @Getter
     private List<Review> reviews = new ArrayList<>();
 
     public boolean addTour(Tour tour) {
@@ -60,22 +78,4 @@ public class User implements Serializable {
         return this.tours.remove(tour);
     }
 
-    public boolean addReview(Review review) {
-        review.setUser(this);
-        return reviews.add(review);
-    }
-
-    public boolean removeReview(Review review) {
-        review.setUser(null);
-        return reviews.remove(review);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }

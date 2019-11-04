@@ -1,0 +1,23 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="Delete all" author="Liquibase">
+        <dropTable tableName="COUNTRY" cascadeConstraints="true"/>
+        <dropSequence sequenceName="COUNTRY_SEQUENCE"/>
+        <dropTable tableName="FEATURE" cascadeConstraints="true"/>
+        <dropSequence sequenceName="FEATURE_SEQUENCE"/>
+        <dropTable tableName="HOTEL" cascadeConstraints="true"/>
+        <dropSequence sequenceName="HOTEL_SEQUENCE"/>
+        <dropTable tableName="HOTEL_FEATURE" cascadeConstraints="true"/>
+        <dropTable tableName="USER" cascadeConstraints="true"/>
+        <dropSequence sequenceName="USER_SEQUENCE"/>
+        <dropTable tableName="TOUR" cascadeConstraints="true"/>
+        <dropSequence sequenceName="TOUR_SEQUENCE"/>
+        <dropTable tableName="USER_TOUR" cascadeConstraints="true"/>
+        <dropTable tableName="REVIEW" cascadeConstraints="true"/>
+        <dropSequence sequenceName="REVIEW_SEQUENCE"/>
+    </changeSet>
+
+</databaseChangeLog>

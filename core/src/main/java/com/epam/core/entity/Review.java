@@ -1,46 +1,79 @@
 package com.epam.core.entity;
 
 import lombok.*;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
-import java.io.Serializable;
 import java.sql.Timestamp;
 
-@Component
 @Entity(name = "Review")
-@Table(name = "reviews", schema = "public")
+@Table(name = "REVIEW")
+@AttributeOverride(name = "id", column = @Column(name = "REVIEW_ID", precision = 10))
 @NoArgsConstructor
-@Getter
-@Setter
+@EqualsAndHashCode(callSuper = false)
 @ToString
-@EqualsAndHashCode
-public class Review implements Serializable {
+public class Review extends AbstractEntity {
 
-    @Column(name = "review_id")
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
-    @SequenceGenerator(name = "generator", sequenceName = "generator_sequence", initialValue = 1_000_000, allocationSize = 9_999_999)
-    @NotNull(message = "Please enter review id")
-    private long reviewId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REVIEW_SEQUENCE")
+    @SequenceGenerator(name = "REVIEW_SEQUENCE", sequenceName = "REVIEW_SEQUENCE", allocationSize = 1)
+    public Long getId() {
+        return this.id;
+    }
 
-    @Column(name = "date")
-    @PastOrPresent
+    public void setId(Long reviewId) {
+        this.id = reviewId;
+    }
+
+    @Column(name = "REVIEW_DATE", nullable = false)
+    @FutureOrPresent(message = "Please enter review date no later than today")
     @NotNull(message = "Please enter review date")
-    private Timestamp date;
+    @Getter
+    @Setter
+    private Timestamp reviewDate;
 
-    @Column(name = "text")
+    @Column(name = "REVIEW_TEXT", nullable = false, length = 1000)
     @NotNull(message = "Please enter review text")
-    private String text;
+    @Getter
+    @Setter
+    private String reviewText;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id", foreignKey = @ForeignKey(name = "review_user_id_fkey"))
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "USER_ID", nullable = false, foreignKey = @ForeignKey(name = "REVIEW_USER_ID_FK"))
+    @Getter
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "tour_id", referencedColumnName = "tour_id", foreignKey = @ForeignKey(name = "review_tour_id_fkey"))
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "TOUR_ID", nullable = false, foreignKey = @ForeignKey(name = "REVIEW_TOUR_ID_FK"))
+    @Getter
     private Tour tour;
+
+    public boolean addUser(User user) {
+        this.user = user;
+        return this.user.getReviews().add(this);
+    }
+
+    public boolean removeUser() {
+        boolean result = false;
+        if (this.user != null) {
+            result = this.user.getReviews().remove(this);
+            this.user = null;
+        }
+        return result;
+    }
+
+    public boolean addTour(Tour tour) {
+        this.tour = tour;
+        return this.tour.getReviews().add(this);
+    }
+
+    public boolean removeTour() {
+        boolean result = false;
+        if (this.tour != null) {
+            result = this.tour.getReviews().remove(this);
+            this.user = null;
+        }
+        return result;
+    }
 
 }

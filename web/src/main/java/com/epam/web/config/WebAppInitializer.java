@@ -1,19 +1,22 @@
 package com.epam.web.config;
 
-import com.epam.core.config.ApplicationConfig;
 import com.epam.core.config.CoreModuleConfig;
+import com.epam.web.security.WebSecurityConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] {ApplicationConfig.class, CoreModuleConfig.class, WebModuleConfig.class};
+        return new Class[] {CoreModuleConfig.class, WebSecurityConfig.class};
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] {WebMVCConfig.class};
+        return new Class[] {WebModuleConfig.class, WebMVCConfig.class};
     }
 
     @Override
@@ -21,30 +24,13 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
         return new String[] {"/"};
     }
 
-    /*@Override//  implements WebApplicationInitializer
+    @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-        AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
-        applicationContext.register(CoreModuleConfig.class);
-        applicationContext.register(WebModuleConfig.class);
-        applicationContext.register(WebMVCConfig.class);
-        applicationContext.setServletContext(servletContext);
-        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("SpringDispatcher", new DispatcherServlet(applicationContext));
-        dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/");
-        dispatcher.setInitParameter("contextClass", applicationContext.getClass().getName());
-        servletContext.addListener(new ContextLoaderListener(applicationContext));
-        servletContext.addListener(RequestContextListener.class);
-        FilterRegistration.Dynamic encodingFilter = servletContext.addFilter("encodingFilter", CharacterEncodingFilter.class);
-        encodingFilter.setInitParameter("encoding", "UTF-8");
-        encodingFilter.setInitParameter("forceEncoding", "true");
-        encodingFilter.addMappingForUrlPatterns(null, true, "/*");
-        FilterRegistration.Dynamic securityFilter = servletContext.addFilter("securityFilter", DelegatingFilterProxy.class);
-        securityFilter.addMappingForUrlPatterns(null, true, "/*");
-        private String TMP_FOLDER = "/tmp";
-        private int MAX_UPLOAD_SIZE = 5 * 1024 * 1024;
-        MultipartConfigElement multipartConfigElement = new MultipartConfigElement(TMP_FOLDER, MAX_UPLOAD_SIZE, MAX_UPLOAD_SIZE * 2, MAX_UPLOAD_SIZE / 2);
-        appServlet.setMultipartConfig(multipartConfigElement);
-    }*/
+        super.onStartup(servletContext);
+        servletContext.setInitParameter("contextInitializerClasses", ContextProfileInitializer.class.getTypeName());
+    }
+
+
 
 }
 

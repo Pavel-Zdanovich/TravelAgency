@@ -10,6 +10,6 @@
     <aop:aspectj-autoproxy/>
 
     <!-- Definition for logging aspect -->
-    <bean id="logging" class="com.epam.core.config.AOPConfig"/>
+    <bean id="logging" class="com.epam.core.config.AspectConfig"/>
 
 </beans>
