@@ -5,7 +5,6 @@ import com.epam.core.integration.config.EntityManagerConfig;
 import com.epam.core.integration.config.MigrationConfig;
 import com.epam.core.integration.config.TestDataSourceConfig;
 import com.epam.core.repository.FeatureRepository;
-import de.flapdoodle.embed.process.collections.Collections;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -160,7 +160,10 @@ public class FeatureRepositoryTest {
         Feature feature2 = new Feature();
         feature2.setId(6L);
         feature2.setName("restaurant");
-        featureRepository.deleteAll(Collections.newArrayList(feature1, feature2));
+        featureRepository.deleteAll(new ArrayList<Feature>() {{
+            add(feature1);
+            add(feature2);
+        }});
         long numberOfFeaturesAfterDeletion = featureRepository.count();
         Assert.assertEquals(numberOfFeaturesBeforeDeletion - numberOfFeaturesAfterDeletion, 2);
     }

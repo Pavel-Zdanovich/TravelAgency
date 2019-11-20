@@ -6,7 +6,6 @@ import com.epam.core.integration.config.EntityManagerConfig;
 import com.epam.core.integration.config.MigrationConfig;
 import com.epam.core.integration.config.TestDataSourceConfig;
 import com.epam.core.repository.TourRepository;
-import de.flapdoodle.embed.process.collections.Collections;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -385,7 +385,10 @@ public class TourRepositoryTest {
         tour2.setDescription("updatedDescription");
         tour2.setCost(BigDecimal.valueOf(101).setScale(4, RoundingMode.HALF_UP));
         tour2.setTourType(TourType.LEISURE);
-        tourRepository.deleteAll(Collections.newArrayList(tour1, tour2));
+        tourRepository.deleteAll(new ArrayList<Tour>() {{
+            add(tour1);
+            add(tour2);
+        }});
         long numberOfToursAfterDeletion = tourRepository.count();
         Assert.assertEquals(numberOfToursBeforeDeletion - numberOfToursAfterDeletion, 2);
     }

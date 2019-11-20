@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity(name = "Hotel")
-@Table(name = "HOTEL", uniqueConstraints = {@UniqueConstraint(name = "HOTEL_NAME_UNIQUE", columnNames = "NAME"),
+@Table(name = "HOTELS", uniqueConstraints = {@UniqueConstraint(name = "HOTEL_NAME_UNIQUE", columnNames = "NAME"),
         @UniqueConstraint(name = "HOTEL_WEBSITE_UNIQUE", columnNames = "WEBSITE")})
 @AttributeOverride(name = "id", column = @Column(name = "HOTEL_ID"))
 @NoArgsConstructor

@@ -1,5 +1,6 @@
 package com.epam.web.security;
 
+import com.epam.core.entity.enums.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -18,11 +19,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    private UserDetailsService userDetailsServiceImpl;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(new UserDetailsServiceImpl()).passwordEncoder(passwordEncoder);
+        System.out.println("\nSET USER DETAILS SERVICE AND PASSWORD ENCODER\n");
+        auth.userDetailsService(userDetailsServiceImpl).passwordEncoder(passwordEncoder);
     }
 
     @Override
@@ -31,45 +35,34 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/", "/home")
+                .antMatchers("/login")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
-                .and();
-
-        http.formLogin()
-                // указываем страницу с формой логина
+                .and()
+                .formLogin()
+                .loginProcessingUrl("/login")
                 .loginPage("/login")
-                // указываем action с формы логина
-                .loginProcessingUrl("/login_action")
-                // указываем URL при неудачном логине
-                .failureUrl("/login?error")
-                // Указываем параметры логина и пароля с формы логина
-                .usernameParameter("username")
-                .passwordParameter("password")
-                // даем доступ к форме логина всем
-                .permitAll();
-
-        http.logout()
-                // разрешаем делать логаут всем
-                .permitAll()
-                // указываем URL логаута
+                .successForwardUrl("/")
+                .failureForwardUrl("/login")
+                .and()
+                .logout()
                 .logoutUrl("/logout")
-                // указываем URL при удачном логауте
-                .logoutSuccessUrl("/login?logout")
-                // делаем не валидной текущую сессию
-                .invalidateHttpSession(true);
+                .logoutSuccessUrl("/main")
+                .clearAuthentication(true);
     }
 
     @Bean
     @Override
-    public UserDetailsService userDetailsService() {
+    protected UserDetailsService userDetailsService() {
+        System.out.println("\nCREATE USER DETAILS BEAN\n");
         return new UserDetailsServiceImpl();
     }
 
     @Bean
     PasswordEncoder passwordEncoder(){
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        System.out.println("\nCREATE PASSWORD ENCODER\n");
+        return new BCryptPasswordEncoder();
     }
 
 }

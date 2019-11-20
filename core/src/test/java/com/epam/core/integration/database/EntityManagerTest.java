@@ -7,7 +7,6 @@ import com.epam.core.integration.config.MigrationConfig;
 import com.epam.core.integration.config.TestDataSourceConfig;
 import liquibase.integration.spring.SpringLiquibase;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +20,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {DataSourceConfig.class, PersistenceConfig.class, TestDataSourceConfig.class,
@@ -42,20 +38,9 @@ public class EntityManagerTest {
     @Autowired
     private EntityManagerFactory entityManagerFactory;
     @Autowired
-    private EntityManager entityManager;
-    @Autowired
     private PlatformTransactionManager jpaTransactionManager;
-
-    @Before
-    public void setUp() throws Exception {
-        try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM USER");) {
-            while (resultSet.next()) {
-                System.out.println(resultSet.getString("table_name"));
-            }
-        }
-    }
+    @Autowired
+    private EntityManager entityManager;
 
     @Test
     public void get_Database() {
@@ -83,13 +68,13 @@ public class EntityManagerTest {
     }
 
     @Test
-    public void get_EntityManager() {
-        Assert.assertNotNull(entityManager);
+    public void get_PlatformTransactionManager_JpaTransactionManager() {
+        Assert.assertNotNull(jpaTransactionManager);
     }
 
     @Test
-    public void get_PlatformTransactionManager_JpaTransactionManager() {
-        Assert.assertNotNull(jpaTransactionManager);
+    public void get_EntityManager() {
+        Assert.assertNotNull(entityManager);
     }
 
 }

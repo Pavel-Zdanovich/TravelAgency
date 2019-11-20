@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "Feature")
-@Table(name = "FEATURE", uniqueConstraints = @UniqueConstraint(name = "FEATURE_NAME_UNIQUE", columnNames = "NAME"))
+@Table(name = "FEATURES", uniqueConstraints = @UniqueConstraint(name = "FEATURE_NAME_UNIQUE", columnNames = "NAME"))
 @AttributeOverride(name = "id", column = @Column(name = "FEATURE_ID"))
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = "hotels", callSuper = false)
@@ -34,7 +34,7 @@ public class Feature extends AbstractEntity {
     private String name;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "HOTEL_FEATURE",
+    @JoinTable(name = "HOTELS_FEATURES",
             joinColumns = @JoinColumn(name = "FEATURE_ID", referencedColumnName = "FEATURE_ID",
                     foreignKey = @ForeignKey(name = "HOTEL_FEATURE_FEATURE_ID_FK")),
             foreignKey = @ForeignKey(name = "HOTEL_FEATURE_FEATURE_ID_FK"),

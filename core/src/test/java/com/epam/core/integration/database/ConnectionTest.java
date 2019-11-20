@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -33,32 +34,40 @@ public class ConnectionTest {
     @Test
     public void get_Real_PostgreSQLDataSource() throws SQLException {
         Connection realPostgreSQLConnection = realPostgreSQLDataSource.getConnection();
-        log.info("Real PostgreSQL database url : " + realPostgreSQLConnection.getMetaData().getURL());
-        Assert.assertTrue(realPostgreSQLConnection.getMetaData().getURL().contains("travel_agency"));
+        DatabaseMetaData databaseMetaData = realPostgreSQLConnection.getMetaData();
+        String url = databaseMetaData.getURL();
+        log.info("REAL PostgreSQL database url: " + url);
+        Assert.assertTrue(url.contains("travel_agency"));
         realPostgreSQLConnection.close();
     }
 
     @Test
     public void get_Real_OracleDataSource() throws SQLException {
         Connection realOracleConnection = realOracleDataSource.getConnection();
-        log.info("Real Oracle database url : " + realOracleConnection.getMetaData().getURL());
-        Assert.assertTrue(realOracleConnection.getMetaData().getURL().contains("xe"));
+        DatabaseMetaData databaseMetaData = realOracleConnection.getMetaData();
+        String url = databaseMetaData.getURL();
+        log.info("REAL Oracle database url: " + url);
+        Assert.assertTrue(url.contains("xe"));
         realOracleConnection.close();
     }
 
     @Test
     public void get_Test_PostgreSQLDataSource() throws SQLException {
         Connection testPostgreSQLConnection = testPostgreSQLDataSource.getConnection();
-        log.info("Test PotgreSQL database utl: " + testPostgreSQLConnection.getMetaData().getURL());
-        Assert.assertTrue(testPostgreSQLConnection.getMetaData().getURL().contains("travel_agency_test"));
+        DatabaseMetaData databaseMetaData = testPostgreSQLConnection.getMetaData();
+        String url = databaseMetaData.getURL();
+        log.info("TEST PotgreSQL database url: " + url);
+        Assert.assertTrue(url.contains("jdbc:h2"));
         testPostgreSQLConnection.close();
     }
 
     @Test
     public void get_Test_OracleDataSource() throws SQLException {
         Connection testOracleConnection = testOracleDataSource.getConnection();
-        log.info("Test Oracle database url: " + testOracleConnection.getMetaData().getURL());
-        Assert.assertTrue(testOracleConnection.getMetaData().getURL().contains("jdbc:h2:~/test"));
+        DatabaseMetaData databaseMetaData = testOracleConnection.getMetaData();
+        String url = databaseMetaData.getURL();
+        log.info("TEST Oracle database url: " + url);
+        Assert.assertTrue(url.contains("jdbc:h2"));
         testOracleConnection.close();
     }
 

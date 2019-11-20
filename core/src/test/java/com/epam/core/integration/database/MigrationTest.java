@@ -20,7 +20,7 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestDataSourceConfig.class, MigrationConfig.class})
-@ActiveProfiles(value = {"test", "create-drop", "oracle"})
+@ActiveProfiles(value = {"test", "oracle"})
 @Slf4j
 public class MigrationTest {
 
@@ -29,145 +29,157 @@ public class MigrationTest {
     @Autowired
     private SpringLiquibase liquibase;
 
-    @Before
-    public void setUp() throws Exception {
-        try (Connection connection = dataSource.getConnection()) {
-            log.info("\nSchema : " + connection.getSchema());
-            log.info("\nCatalog : " + connection.getCatalog());
+    @Test
+    public void check_meta_data() throws Exception {
+        try (Connection connection = dataSource.getConnection();
+             ResultSet resultSet = connection.getMetaData().getClientInfoProperties()) {
+            log.info("Catalog: " + connection.getCatalog());
+            log.info("Schema: " + connection.getSchema());
             DatabaseMetaData databaseMetaData = connection.getMetaData();
-            log.info("\nDriver name : " + databaseMetaData.getDriverName());
-            log.info("\nURL : " + databaseMetaData.getURL());
-            log.info("\nClient info : " + connection.getClientInfo());
-        } catch (SQLException e) {
-            log.error("Connection failed");
+            log.info("Driver name: " + databaseMetaData.getDriverName());
+            log.info("URL: " + databaseMetaData.getURL());
+            log.info("Username: " + databaseMetaData.getUserName());
+            while (resultSet.next()) {
+                ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+                for (int i = 1; i <= resultSetMetaData.getColumnCount(); i++) {
+                    log.info(String.format("%s (%s) %s", resultSetMetaData.getColumnTypeName(i),
+                            resultSetMetaData.getColumnClassName(i), resultSetMetaData.getColumnName(i)));
+                }
+            }
         }
     }
 
     @Test
-    public void check_table_creation() {
-        try (Connection connection = dataSource.getConnection()) {
-            DatabaseMetaData databaseMetaData = connection.getMetaData();
-            ResultSet resultSet = databaseMetaData.getTables(null, null, "%", new String[]{"TABLE"});
-            List<String> tables = new ArrayList<>(7);
+    public void check_table_creation() throws SQLException {
+        try (Connection connection = dataSource.getConnection();
+             ResultSet resultSet = connection.getMetaData()
+                     .getTables(null, null, "%", new String[]{"TABLE"})) {
+            int expected = 10;
+            List<String> tables = new ArrayList<>(10);
             while (resultSet.next()) {
                 tables.add(resultSet.getString(3));
                 log.info("Table name : " + resultSet.getString(3));
             }
-            Assert.assertEquals(tables.size(), 7);
-        } catch (SQLException e) {
-            log.error("Connection failed");
+            Assert.assertEquals(expected, tables.size());
         }
     }
 
     @Test
     public void check_filling_of_countries() throws SQLException {
         try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM COUNTRIES");
-            StringBuilder countries = new StringBuilder("\nCountries : { ");
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM COUNTRIES")) {
+            StringBuilder countries = new StringBuilder("Countries : { ");
             while (resultSet.next()) {
-                countries.append(resultSet.next());
+                countries.append(resultSet.getString("NAME"));
             }
-            log.info(countries.append("}\n").toString());
-            resultSet.close();
+            log.info(countries.append("}").toString());
+            log.info("isFirst: " + resultSet.isFirst());
+            log.info("isBeforeFirst: " + resultSet.isBeforeFirst());
+            log.info("isAfterLast: " + resultSet.isAfterLast());
+            log.info("isLast: " + resultSet.isLast());
+            Assert.assertTrue(resultSet.isLast());
         }
     }
 
     @Test
     public void check_filling_of_hotels() throws SQLException {
         try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM HOTELS");
-            StringBuilder hotels = new StringBuilder("\nHotels : { ");
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM HOTELS")) {
+            StringBuilder hotels = new StringBuilder("Hotels : { ");
             while (resultSet.next()) {
-                hotels.append(resultSet.next());
+                hotels.append(resultSet.getString("NAME"));
             }
             log.info(hotels.append("}\n").toString());
-            resultSet.close();
+            Assert.assertTrue(resultSet.isLast());
         }
     }
 
     @Test
     public void check_filling_of_features() throws SQLException {
         try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM FEATURES");
-            StringBuilder features = new StringBuilder("\nFeatures : { ");
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM FEATURES")) {
+            StringBuilder features = new StringBuilder("Features : { ");
             while (resultSet.next()) {
-                features.append(resultSet.next());
+                features.append(resultSet.getString("NAME"));
             }
             log.info(features.append("}\n").toString());
-            resultSet.close();
+            Assert.assertTrue(resultSet.isLast());
         }
     }
 
     @Test
     public void check_filling_of_hotels_features() throws SQLException {
         try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM HOTELS_FEATURES");
-            StringBuilder hotelsFeatures = new StringBuilder("\nHotels Features : { ");
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM HOTELS_FEATURES")) {
+            StringBuilder hotelsFeatures = new StringBuilder("Hotels Features : { ");
             while (resultSet.next()) {
-                hotelsFeatures.append(resultSet.next());
+                hotelsFeatures.append(String.format("%d-%d",
+                        resultSet.getLong("HOTEL_ID"),
+                        resultSet.getLong("FEATURE_ID")
+                ));
             }
             log.info(hotelsFeatures.append("}\n").toString());
-            resultSet.close();
+            Assert.assertTrue(resultSet.isLast());
         }
     }
 
     @Test
     public void check_filling_of_users() throws SQLException {
         try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM USERS");
-            StringBuilder users = new StringBuilder("\nUser : { ");
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM USERS")) {
+            StringBuilder users = new StringBuilder("User : { ");
             while (resultSet.next()) {
-                users.append(resultSet.next());
+                users.append(resultSet.getString("LOGIN"));
             }
             log.info(users.append("}\n").toString());
-            resultSet.close();
+            Assert.assertTrue(resultSet.isLast());
         }
     }
 
     @Test
     public void check_filling_of_tours() throws SQLException {
         try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM TOURS");
-            StringBuilder tours = new StringBuilder("\nTours : { ");
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM TOURS")) {
+            StringBuilder tours = new StringBuilder("Tours : { ");
             while (resultSet.next()) {
-                tours.append(resultSet.next());
+                tours.append(resultSet.getString("DESCRIPTION"));
             }
             log.info(tours.append("}\n").toString());
-            resultSet.close();
+            Assert.assertTrue(resultSet.isLast());
         }
     }
 
     @Test
     public void check_filling_of_user_tours() throws SQLException {
         try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM USERS_TOURS");
-            StringBuilder usersTours = new StringBuilder("\nUsers Tours : { ");
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM USERS_TOURS")) {
+            StringBuilder usersTours = new StringBuilder("Users Tours : { ");
             while (resultSet.next()) {
                 usersTours.append(resultSet.next());
             }
             log.info(usersTours.append("}\n").toString());
-            resultSet.close();
+            Assert.assertTrue(resultSet.isLast());
         }
     }
 
     @Test
     public void check_filling_of_reviews() throws SQLException {
         try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM REVIEWS");
-            StringBuilder reviews = new StringBuilder("\nReviews : { ");
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM REVIEWS")) {
+            StringBuilder reviews = new StringBuilder("Reviews : { ");
             while (resultSet.next()) {
-                reviews.append(resultSet.next());
+                reviews.append(resultSet.getString("REVIEW_TEXT"));
             }
             log.info(reviews.append("}\n").toString());
-            resultSet.close();
+            Assert.assertTrue(resultSet.isLast());
         }
     }
 

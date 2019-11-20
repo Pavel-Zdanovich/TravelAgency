@@ -2,23 +2,25 @@ package com.epam.web.security;
 
 import com.epam.core.entity.User;
 import com.epam.core.repository.UserRepository;
-import com.epam.core.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
 
+    public UserDetailsServiceImpl() {
+        System.out.println("\nUSER DETAILS SERVICE CREATED\n");
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("\nSEARCH USER IN DATABASE\n");
         UserDetails userDetails = null;
         Optional<User> optionalUser = userRepository.findByLogin(username);
         if (optionalUser.isPresent()) {

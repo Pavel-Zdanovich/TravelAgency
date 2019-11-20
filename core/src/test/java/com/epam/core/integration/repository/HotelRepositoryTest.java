@@ -6,7 +6,6 @@ import com.epam.core.integration.config.EntityManagerConfig;
 import com.epam.core.integration.config.MigrationConfig;
 import com.epam.core.integration.config.TestDataSourceConfig;
 import com.epam.core.repository.HotelRepository;
-import de.flapdoodle.embed.process.collections.Collections;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -240,7 +240,10 @@ public class HotelRepositoryTest {
         hotel2.setName("Marriott");
         hotel2.setWebsite("https://www.marriott.com");
         hotel2.setStars(Short.valueOf("5"));
-        hotelRepository.deleteAll(Collections.newArrayList(hotel1, hotel2));
+        hotelRepository.deleteAll(new ArrayList<Hotel>() {{
+            add(hotel1);
+            add(hotel2);
+        }});
         long numberOfHotelsAfterDeletion = hotelRepository.count();
         Assert.assertEquals(numberOfHotelsBeforeDeletion - numberOfHotelsAfterDeletion, 2);
     }

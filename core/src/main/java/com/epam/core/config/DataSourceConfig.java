@@ -55,12 +55,12 @@ public class DataSourceConfig {
     @Profile(value = "postgresql")
     DataSource realPostgreSQLDataSource() {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
-        dataSource.setURL(environment.getProperty("jdbc.postgresql.url"));
-        dataSource.setServerName(environment.getProperty("jdbc.postgresql.serverName"));
-        dataSource.setPortNumber(Integer.parseInt(Objects.requireNonNull(environment.getProperty("jdbc.postgresql.portNumber"))));
-        dataSource.setDatabaseName(environment.getProperty("jdbc.postgresql.dataBaseName"));
-        dataSource.setUser(environment.getProperty("jdbc.postgresql.userName"));
-        dataSource.setPassword(environment.getProperty("jdbc.postgresql.password"));
+        dataSource.setURL(environment.getProperty("postgresql.url"));
+        dataSource.setServerName(environment.getProperty("postgresql.serverName"));
+        dataSource.setPortNumber(Integer.parseInt(Objects.requireNonNull(environment.getProperty("postgresql.portNumber"))));
+        dataSource.setDatabaseName(environment.getProperty("postgresql.dataBaseName"));
+        dataSource.setUser(environment.getProperty("postgresql.userName"));
+        dataSource.setPassword(environment.getProperty("postgresql.password"));
         return dataSource;
     }
 
@@ -70,14 +70,14 @@ public class DataSourceConfig {
         OracleDataSource dataSource = null;
         try {
             dataSource = new OracleDataSource();
-            dataSource.setDriverType(environment.getProperty("jdbc.oracle.driverType"));
-            dataSource.setURL(environment.getProperty("jdbc.oracle.url"));
-            dataSource.setNetworkProtocol(environment.getProperty("jdbc.oracle.networkProtocol"));
-            dataSource.setServerName(environment.getProperty("jdbc.oracle.serverName"));
-            dataSource.setPortNumber(Integer.parseInt(Objects.requireNonNull(environment.getProperty("jdbc.oracle.portNumber"))));
-            dataSource.setDatabaseName(environment.getProperty("jdbc.oracle.dataBaseName"));
-            dataSource.setUser(environment.getProperty("jdbc.oracle.userName"));
-            dataSource.setPassword(environment.getProperty("jdbc.oracle.password"));
+            dataSource.setDriverType(environment.getProperty("oracle.driverType"));
+            dataSource.setURL(environment.getProperty("oracle.url"));
+            dataSource.setNetworkProtocol(environment.getProperty("oracle.networkProtocol"));
+            dataSource.setServerName(environment.getProperty("oracle.serverName"));
+            dataSource.setPortNumber(Integer.parseInt(Objects.requireNonNull(environment.getProperty("oracle.portNumber"))));
+            dataSource.setDatabaseName(environment.getProperty("oracle.dataBaseName"));
+            dataSource.setUser(environment.getProperty("oracle.userName"));
+            dataSource.setPassword(environment.getProperty("oracle.password"));
         }  catch (SQLException e) {
             log.error("Connect to data source oracle error");
         }

@@ -22,8 +22,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login(@RequestParam(name = "username") String username,
                               @RequestParam(name = "password") String password) {
-        ModelAndView modelAndView = new ModelAndView("main");
-        return modelAndView;
+        return new ModelAndView("main", "username", username);
     }
 
 }

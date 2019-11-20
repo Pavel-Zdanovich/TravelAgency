@@ -20,7 +20,6 @@
         <flyway.version>5.2.4</flyway.version>
         <flyway.plugin.version>6.0.4</flyway.plugin.version>
         <liquibase.version>3.8.0</liquibase.version>
-        <postgresql.embedded.version>2.10</postgresql.embedded.version>
         <h2.version>1.4.199</h2.version>
     </properties>
 
@@ -135,17 +134,6 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.5</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-maven-plugin -->
-        <!--<dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-maven-plugin</artifactId>
-            <version>${flyway.plugin.version}</version>
-        </dependency>-->
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-            <version>${flyway.version}</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-maven-plugin -->
         <!--<dependency>
             <groupId>org.liquibase</groupId>
@@ -157,12 +145,6 @@
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
             <version>${liquibase.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ru.yandex.qatools.embed</groupId>
-            <artifactId>postgresql-embedded</artifactId>
-            <version>${postgresql.embedded.version}</version>
-            <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
         <dependency>
@@ -200,16 +182,12 @@
                 <version>3.0.2</version>
             </plugin>
             <plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <version>${flyway.plugin.version}</version>
-            </plugin>
-            <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>${liquibase.version}</version>
                 <configuration>
-                    <propertyFile>liquibase.properties</propertyFile>
+                    <propertyFile>${profile.propertyFile}</propertyFile>
+                    <changeLogFile>${basedir}/src/main/resources/changelog/changelog-master.xml</changeLogFile>
                     <verbose>true</verbose>
                     <logging>debug</logging>
                     <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
@@ -217,5 +195,34 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <!-- Development settings, -Denv=dev -->
+        <profile>
+            <id>oracle</id>
+            <activation>
+                <property>
+                    <name>database</name>
+                    <value>oracle</value>
+                </property>
+            </activation>
+            <properties>
+                <profile.propertyFile>${basedir}\src\main\resources\oracle.properties</profile.propertyFile>
+            </properties>
+        </profile>
+        <!-- Production settings, -Denv=prod -->
+        <profile>
+            <id>postgresql</id>
+            <activation>
+                <property>
+                    <name>database</name>
+                    <value>postgresql</value>
+                </property>
+            </activation>
+            <properties>
+                <profile.propertyFile>${basedir}\src\main\resources\postgresql.properties</profile.propertyFile>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

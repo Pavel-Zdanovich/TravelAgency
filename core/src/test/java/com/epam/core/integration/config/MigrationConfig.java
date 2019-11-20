@@ -16,28 +16,13 @@ public class MigrationConfig {
 
     @Autowired
     private DataSource dataSource;
-    @Autowired
-    private String migrationFilePath;
 
     @Bean
-
     SpringLiquibase liquibase() {
         SpringLiquibase liquibase = new SpringLiquibase();
         liquibase.setDataSource(dataSource);
         liquibase.setChangeLog("db/migration/changelog-master.xml");
         return liquibase;
-    }
-
-    @Bean
-    @Profile(value = "postgresql")
-    String postgresqlMigrationFilePath() {
-        return "db/migration/postgresql/changelog-master.xml";
-    }
-
-    @Bean
-    @Profile(value = "oracle")
-    String oracleMigrationFilePah() {
-        return "db/migration/changelog-master.xml";
     }
 
 }

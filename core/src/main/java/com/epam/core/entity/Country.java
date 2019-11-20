@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "Country")
-@Table(name = "COUNTRY", uniqueConstraints = @UniqueConstraint(name = "COUNTRY_NAME_UNIQUE", columnNames = "NAME"))
+@Table(name = "COUNTRIES", uniqueConstraints = @UniqueConstraint(name = "COUNTRY_NAME_UNIQUE", columnNames = "NAME"))
 @AttributeOverride(name = "id", column = @Column(name = "COUNTRY_ID"))
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = "tours", callSuper = false)

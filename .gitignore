@@ -2,9 +2,4 @@
 target/
 Main.java
 data/
-postgis-2.5/
 scripts/
-extracted/
-uui/
-HelloController
-pgsql-11.1-1/

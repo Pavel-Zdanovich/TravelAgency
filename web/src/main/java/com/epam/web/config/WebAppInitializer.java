@@ -2,8 +2,10 @@ package com.epam.web.config;
 
 import com.epam.core.config.CoreModuleConfig;
 import com.epam.web.security.WebSecurityConfig;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.Filter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
@@ -23,6 +25,11 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     protected String[] getServletMappings() {
         return new String[] {"/"};
     }
+
+    /*@Override
+    protected Filter[] getServletFilters() {
+        return new Filter[] {new DelegatingFilterProxy("springSecurityFilterChain")};
+    }*/
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {

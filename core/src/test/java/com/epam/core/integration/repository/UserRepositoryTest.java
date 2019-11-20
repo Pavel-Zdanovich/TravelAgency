@@ -5,7 +5,6 @@ import com.epam.core.integration.config.EntityManagerConfig;
 import com.epam.core.integration.config.MigrationConfig;
 import com.epam.core.integration.config.TestDataSourceConfig;
 import com.epam.core.repository.UserRepository;
-import de.flapdoodle.embed.process.collections.Collections;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -201,7 +201,10 @@ public class UserRepositoryTest {
         user2.setId(2L);
         user2.setLogin("ElonMusk");
         user2.setPassword("SpaceXXX");
-        userRepository.deleteAll(Collections.newArrayList(user1, user2));
+        userRepository.deleteAll(new ArrayList<User>(){{
+            add(user1);
+            add(user2);
+        }});
         long numberOfUsersAfterDeletion = userRepository.count();
         Assert.assertEquals(numberOfUsersBeforeDeletion - numberOfUsersAfterDeletion, 2);
     }

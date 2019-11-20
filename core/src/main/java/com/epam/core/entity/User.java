@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity(name = "User")
-@Table(name = "USER", uniqueConstraints = @UniqueConstraint(name = "USER_LOGIN_UNIQUE", columnNames = "LOGIN"))
+@Table(name = "USERS", uniqueConstraints = @UniqueConstraint(name = "USER_LOGIN_UNIQUE", columnNames = "LOGIN"))
 @AttributeOverride(name = "id", column = @Column(name = "USER_ID"))
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {"tours", "reviews"}, callSuper = false)
@@ -54,7 +54,7 @@ public class User extends AbstractEntity {
     private UserRole role;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "USER_TOUR",
+    @JoinTable(name = "USERS_TOURS",
             joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID",
                     foreignKey = @ForeignKey(name = "USER_TOUR_USER_ID_FK")),
             foreignKey = @ForeignKey(name = "USER_TOUR_USER_ID_FK"),

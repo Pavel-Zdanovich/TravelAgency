@@ -5,7 +5,6 @@ import com.epam.core.integration.config.EntityManagerConfig;
 import com.epam.core.integration.config.MigrationConfig;
 import com.epam.core.integration.config.TestDataSourceConfig;
 import com.epam.core.repository.CountryRepository;
-import de.flapdoodle.embed.process.collections.Collections;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -156,7 +156,10 @@ public class CountryRepositoryTest {
         Country country2 = new Country();
         country2.setId(6L);
         country2.setName("Russia");
-        countryRepository.deleteAll(Collections.newArrayList(country1, country2));
+        countryRepository.deleteAll(new ArrayList<Country>() {{
+            add(country1);
+            add(country2);
+        }});
         long numberOfCountriesAfterDeletion = countryRepository.count();
         Assert.assertEquals(numberOfCountriesBeforeDeletion - numberOfCountriesAfterDeletion, 2);
     }
