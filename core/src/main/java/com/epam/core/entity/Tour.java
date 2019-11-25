@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity(name = "Tour")
+@Entity
 @Table(name = "TOURS")
 @AttributeOverride(name = "id", column = @Column(name = "TOUR_ID"))
 @NoArgsConstructor

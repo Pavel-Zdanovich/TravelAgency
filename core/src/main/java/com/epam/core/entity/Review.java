@@ -7,7 +7,7 @@ import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
-@Entity(name = "Review")
+@Entity
 @Table(name = "REVIEWS")
 @AttributeOverride(name = "id", column = @Column(name = "REVIEW_ID", precision = 10))
 @NoArgsConstructor

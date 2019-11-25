@@ -10,7 +10,7 @@
             <dbms type="postgresql"/>
         </or>
     </preConditions>
-    
+
     <include file="drop.xml" relativeToChangelogFile="true"/>
     <include file="changelog.xml" relativeToChangelogFile="true"/>
     <include file="data.xml" relativeToChangelogFile="true"/>

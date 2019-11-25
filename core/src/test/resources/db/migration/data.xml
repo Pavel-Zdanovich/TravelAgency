@@ -1,221 +1,223 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+				   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-	<!--<changeSet id="Initialize sequences" author="Liquibase" runAlways="true" failOnError="false">
-		<sql>COUNTRY_SEQUENCE.NEXTVAL</sql>
+	<!--<changeSet id="Insert test" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+		<insert tableName="COUNTRIES">
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="France"/>
+		</insert>
 	</changeSet>-->
 
-    <changeSet id="Insert data into tables" author="Liquibase" runAlways="true" failOnError="false">
-		<!--_____________________________________________________COUNTRY_____________________________________________________-->
-        <insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="France"/>
-        </insert>
+	<changeSet id="Insert into COUNTRIES" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>			
-            <column name="NAME" value="SPAIN"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="France"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>			
-            <column name="NAME" value="Great Britain"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="SPAIN"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>			
-            <column name="NAME" value="China"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="China"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>			
-            <column name="NAME" value="Netherlands"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Great Britain"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>			
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Netherlands"/>
+		</insert>
+		<insert tableName="COUNTRIES">
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
 			<column name="NAME" value="Israel"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>			
-            <column name="NAME" value="USA"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="USA"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>			
-            <column name="NAME" value="Turkey"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Turkey"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>			
-            <column name="NAME" value="Germany"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Germany"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Thailand"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Thailand"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Italy"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Italy"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Japan"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Japan"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Austria"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Austria"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Greece"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Greece"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Russia"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Russia"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Canada"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Canada"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Australia"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Australia"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Egypt"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Egypt"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Mehico"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Mehico"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="India"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="India"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Vietnam"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Vietnam"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Brazil"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Brazil"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Indonesia"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Indonesia"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Switzerland"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Switzerland"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Bulgaria"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Bulgaria"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Maldives"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Maldives"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Sri Lanka"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Sri Lanka"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Bali"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Bali"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Sweden"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Sweden"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Tanzania"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Tanzania"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Malaysia"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Malaysia"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Seychelles"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Seychelles"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Tunisia"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Tunisia"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Quatar"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Quatar"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Morocco"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Morocco"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Argentina"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Argentina"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Dominican Republic"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Dominican Republic"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Panama"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Panama"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Saudi Arabia"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Saudi Arabia"/>
 		</insert>
 		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" defaultValueSequenceNext="COUNTRY_SEQUENCE"/>
-            <column name="NAME" value="Belarus"/>
+			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
+			<column name="NAME" value="Belarus"/>
 		</insert>
-		<!--_____________________________________________________COUNTRY_____________________________________________________-->
-		
-		<!--_____________________________________________________FEATURE_____________________________________________________-->
+	</changeSet>
+
+	<changeSet id="Insert into FEATURES" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
 		<insert tableName="FEATURES">
-			<column name="FEATURE_ID" defaultValueSequenceNext="FEATURE_SEQUENCE.NEXTVAL"/> 
-            <column name="NAME" value="air conditioner"/>
-        </insert>
+			<column name="FEATURE_ID" valueSequenceNext="FEATURE_SEQUENCE"/>
+			<column name="NAME" value="air conditioner"/>
+		</insert>
 		<insert tableName="FEATURES">
-			<column name="FEATURE_ID" defaultValueSequenceNext="FEATURE_SEQUENCE.NEXTVAL"/>
-            <column name="NAME" value="cable TV"/>
-        </insert>
+			<column name="FEATURE_ID" valueSequenceNext="FEATURE_SEQUENCE"/>
+			<column name="NAME" value="cable TV"/>
+		</insert>
 		<insert tableName="FEATURES">
-			<column name="FEATURE_ID" defaultValueSequenceNext="FEATURE_SEQUENCE.NEXTVAL"/>
-            <column name="NAME" value="car rental"/>
-        </insert>
+			<column name="FEATURE_ID" valueSequenceNext="FEATURE_SEQUENCE"/>
+			<column name="NAME" value="car rental"/>
+		</insert>
 		<insert tableName="FEATURES">
-			<column name="FEATURE_ID" defaultValueSequenceNext="FEATURE_SEQUENCE.NEXTVAL"/>
-            <column name="NAME" value="mini-bar"/>
-        </insert>
+			<column name="FEATURE_ID" valueSequenceNext="FEATURE_SEQUENCE"/>
+			<column name="NAME" value="mini-bar"/>
+		</insert>
 		<insert tableName="FEATURES">
-			<column name="FEATURE_ID" defaultValueSequenceNext="FEATURE_SEQUENCE.NEXTVAL"/>
-            <column name="NAME" value="parking"/>
-        </insert>
+			<column name="FEATURE_ID" valueSequenceNext="FEATURE_SEQUENCE"/>
+			<column name="NAME" value="parking"/>
+		</insert>
 		<insert tableName="FEATURES">
-			<column name="FEATURE_ID" defaultValueSequenceNext="FEATURE_SEQUENCE.NEXTVAL"/>
-            <column name="NAME" value="restaurant"/>
-        </insert>
+			<column name="FEATURE_ID" valueSequenceNext="FEATURE_SEQUENCE"/>
+			<column name="NAME" value="restaurant"/>
+		</insert>
 		<insert tableName="FEATURES">
-			<column name="FEATURE_ID" defaultValueSequenceNext="FEATURE_SEQUENCE.NEXTVAL"/>
-            <column name="NAME" value="room service"/>
-        </insert>
+			<column name="FEATURE_ID" valueSequenceNext="FEATURE_SEQUENCE"/>
+			<column name="NAME" value="room service"/>
+		</insert>
 		<insert tableName="FEATURES">
-			<column name="FEATURE_ID" defaultValueSequenceNext="FEATURE_SEQUENCE.NEXTVAL"/>
-            <column name="NAME" value="spa"/>
-        </insert>
+			<column name="FEATURE_ID" valueSequenceNext="FEATURE_SEQUENCE"/>
+			<column name="NAME" value="spa"/>
+		</insert>
 		<insert tableName="FEATURES">
-			<column name="FEATURE_ID" defaultValueSequenceNext="FEATURE_SEQUENCE.NEXTVAL"/>
-            <column name="NAME" value="swimming pool"/>
-        </insert>
+			<column name="FEATURE_ID" valueSequenceNext="FEATURE_SEQUENCE"/>
+			<column name="NAME" value="swimming pool"/>
+		</insert>
 		<insert tableName="FEATURES">
-			<column name="FEATURE_ID" defaultValueSequenceNext="FEATURE_SEQUENCE.NEXTVAL"/>
-            <column name="NAME" value="wi-fi"/>
-        </insert>
-		<!--_____________________________________________________FEATURE_____________________________________________________-->
-		
-		<!--______________________________________________________HOTEL______________________________________________________-->
+			<column name="FEATURE_ID" valueSequenceNext="FEATURE_SEQUENCE"/>
+			<column name="NAME" value="wi-fi"/>
+		</insert>
+	</changeSet>
+
+	<changeSet id="Insert into HOTELS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
 		<insert tableName="HOTELS">
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="Cromlix Hotel"/>
@@ -291,7 +293,7 @@
 		<insert tableName="HOTELS">
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="The Taj Mahal Palace"/>
-			<column name="WEBSITE" value="https://www.tajhotelS.com/en-in/taj/taj-mahal-palace-mumbai/"/>
+			<column name="WEBSITE" value="https://www.tajhotels.com/en-in/taj/taj-mahal-palace-mumbai/"/>
 			<column name="STARS" value="5"/>
 			<column name="LATITUDE" value="18.9217342"/>
 			<column name="LONGITUDE" value="72.8308422"/>
@@ -347,7 +349,7 @@
 		<insert tableName="HOTELS">
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="Aranwa Cusco Boutique Hotel"/>
-			<column name="WEBSITE" value="'https://aranwahotels.com"/>
+			<column name="WEBSITE" value="https://aranwahotels.com"/>
 			<column name="STARS" value="5"/>
 			<column name="LATITUDE" value="-13.5168818"/>
 			<column name="LONGITUDE" value="-71.9830917"/>
@@ -415,7 +417,7 @@
 			<column name="STARS" value="5"/>
 			<column name="LATITUDE" value="-13.5151718"/>
 			<column name="LONGITUDE" value="-71.9796147"/>
-		</insert> 
+		</insert>
 		<insert tableName="HOTELS">
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="Sagamore Pendry Baltimore"/>
@@ -616,975 +618,975 @@
 			<column name="LATITUDE" value="19.0410281"/>
 			<column name="LONGITUDE" value="-98.1961018"/>
 		</insert>
-		<!--______________________________________________________HOTEL______________________________________________________-->
-		
-		<!--__________________________________________________HOTEL_FEATURE__________________________________________________-->
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="1"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="1"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="1"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="2"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="2"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="2"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="3"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="3"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="3"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="4"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="4"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="4"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="5"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="5"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="5"/>
-			<column name="FEATURE_ID" value="7"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="6"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="6"/>
-			<column name="FEATURE_ID" value="7"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="6"/>
-			<column name="FEATURE_ID" value="8"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="7"/>
-			<column name="FEATURE_ID" value="7"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="7"/>
-			<column name="FEATURE_ID" value="8"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="7"/>
-			<column name="FEATURE_ID" value="9"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="8"/>
-			<column name="FEATURE_ID" value="8"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="8"/>
-			<column name="FEATURE_ID" value="9"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="8"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="9"/>
-			<column name="FEATURE_ID" value="9"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="9"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="9"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="10"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="10"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="10"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="11"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="11"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="11"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="12"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="12"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="12"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="13"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="13"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="13"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="14"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="14"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="14"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="15"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="15"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="15"/>
-			<column name="FEATURE_ID" value="7"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="16"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="16"/>
-			<column name="FEATURE_ID" value="7"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="16"/>
-			<column name="FEATURE_ID" value="8"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="17"/>
-			<column name="FEATURE_ID" value="7"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="17"/>
-			<column name="FEATURE_ID" value="8"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="17"/>
-			<column name="FEATURE_ID" value="9"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="18"/>
-			<column name="FEATURE_ID" value="8"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="18"/>
-			<column name="FEATURE_ID" value="9"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="18"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="19"/>
-			<column name="FEATURE_ID" value="9"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="19"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="19"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="20"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="20"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="20"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="21"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="21"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="21"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="22"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="22"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="22"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="23"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="23"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="23"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="24"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="24"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="24"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="25"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="25"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="25"/>
-			<column name="FEATURE_ID" value="7"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="26"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="26"/>
-			<column name="FEATURE_ID" value="7"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="26"/>
-			<column name="FEATURE_ID" value="8"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="27"/>
-			<column name="FEATURE_ID" value="7"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="27"/>
-			<column name="FEATURE_ID" value="8"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="27"/>
-			<column name="FEATURE_ID" value="9"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="28"/>
-			<column name="FEATURE_ID" value="8"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="28"/>
-			<column name="FEATURE_ID" value="9"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="28"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="29"/>
-			<column name="FEATURE_ID" value="9"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="29"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="29"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="30"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="30"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="30"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="31"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="31"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="31"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="32"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="32"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="32"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="33"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="33"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="33"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="34"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="34"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="34"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="35"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="35"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="35"/>
-			<column name="FEATURE_ID" value="7"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="36"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="36"/>
-			<column name="FEATURE_ID" value="7"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="36"/>
-			<column name="FEATURE_ID" value="8"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="37"/>
-			<column name="FEATURE_ID" value="7"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="37"/>
-			<column name="FEATURE_ID" value="8"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="37"/>
-			<column name="FEATURE_ID" value="9"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="38"/>
-			<column name="FEATURE_ID" value="8"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="38"/>
-			<column name="FEATURE_ID" value="9"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="38"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="39"/>
-			<column name="FEATURE_ID" value="9"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="39"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="39"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="40"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="40"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="40"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="41"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="41"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="41"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="42"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="42"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="42"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="43"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="43"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="43"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="44"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="44"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="44"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="45"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="45"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="45"/>
-			<column name="FEATURE_ID" value="7"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="46"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="46"/>
-			<column name="FEATURE_ID" value="7"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="46"/>
-			<column name="FEATURE_ID" value="8"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="47"/>
-			<column name="FEATURE_ID" value="7"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="47"/>
-			<column name="FEATURE_ID" value="8"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="47"/>
-			<column name="FEATURE_ID" value="9"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="48"/>
-			<column name="FEATURE_ID" value="8"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="48"/>
-			<column name="FEATURE_ID" value="9"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="48"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="49"/>
-			<column name="FEATURE_ID" value="9"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="49"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="49"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="50"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="50"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="50"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		<!--__________________________________________________HOTEL_FEATURE__________________________________________________-->
+	</changeSet>
 
-		<!--______________________________________________________USER_______________________________________________________-->
+	<changeSet id="Insert into HOTELS_FEATURES" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="1"/>
+			<column name="FEATURE_ID" value="1"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="1"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="1"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="2"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="2"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="2"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="3"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="3"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="3"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="4"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="4"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="4"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="5"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="5"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="5"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="6"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="6"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="6"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="7"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="7"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="7"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="8"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="8"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="8"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="9"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="9"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="9"/>
+			<column name="FEATURE_ID" value="1"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="10"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="10"/>
+			<column name="FEATURE_ID" value="1"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="10"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="11"/>
+			<column name="FEATURE_ID" value="1"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="11"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="11"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="12"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="12"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="12"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="13"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="13"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="13"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="14"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="14"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="14"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="15"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="15"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="15"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="16"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="16"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="16"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="17"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="17"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="17"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="18"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="18"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="18"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="19"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="19"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="19"/>
+			<column name="FEATURE_ID" value="1"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="20"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="20"/>
+			<column name="FEATURE_ID" value="1"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="20"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="21"/>
+			<column name="FEATURE_ID" value="1"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="21"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="21"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="22"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="22"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="22"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="23"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="23"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="23"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="24"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="24"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="24"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="25"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="25"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="25"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="26"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="26"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="26"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="27"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="27"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="27"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="28"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="28"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="28"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="29"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="29"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="29"/>
+			<column name="FEATURE_ID" value="1"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="30"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="30"/>
+			<column name="FEATURE_ID" value="1"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="30"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="31"/>
+			<column name="FEATURE_ID" value="1"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="31"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="31"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="32"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="32"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="32"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="33"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="33"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="33"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="34"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="34"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="34"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="35"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="35"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="35"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="36"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="36"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="36"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="37"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="37"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="37"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="38"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="38"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="38"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="39"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="39"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="39"/>
+			<column name="FEATURE_ID" value="1"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="40"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="40"/>
+			<column name="FEATURE_ID" value="1"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="40"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="41"/>
+			<column name="FEATURE_ID" value="1"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="41"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="41"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="42"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="42"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="42"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="43"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="43"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="43"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="44"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="44"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="44"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="45"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="45"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="45"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="46"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="46"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="46"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="47"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="47"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="47"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="48"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="48"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="48"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="49"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="49"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="49"/>
+			<column name="FEATURE_ID" value="1"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="50"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="50"/>
+			<column name="FEATURE_ID" value="1"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="50"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+	</changeSet>
+
+	<changeSet id="Insert into USERS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="ElonMusk"/>
 			<column name="PASSWORD" value="SpaceXXX"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="StefenHawking"/>
 			<column name="PASSWORD" value="StefenHawking"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="TeslaNicola"/>
 			<column name="PASSWORD" value="HighVoltage"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="CharlesDarwin"/>
 			<column name="PASSWORD" value="Evolution"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="AlbertEinstein"/>
 			<column name="PASSWORD" value="TheoryOfRelativity"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="LeonardoDaVinci"/>
 			<column name="PASSWORD" value="MonaLisa"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="MaxPlanck"/>
 			<column name="PASSWORD" value="Constant"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="MarieCurie"/>
 			<column name="PASSWORD" value="Radium"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="ThomasEdison"/>
 			<column name="PASSWORD" value="ElectricPower"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="IsaacNEWton"/>
 			<column name="PASSWORD" value="Gravity"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="GalileoGalilei"/>
 			<column name="PASSWORD" value="SunSystem"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="MichaelFaradey"/>
 			<column name="PASSWORD" value="ElectroChemistry"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="KarlMarx"/>
 			<column name="PASSWORD" value="Capital"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="SigmundFreud"/>
 			<column name="PASSWORD" value="EgoAndIt"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="Maxwell"/>
 			<column name="PASSWORD" value="ElectroMagnetism"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="MichailLomonosov"/>
 			<column name="PASSWORD" value="Venus"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="DmitriMendeleev"/>
 			<column name="PASSWORD" value="PeriodicTable"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="NicolausCopernicus"/>
 			<column name="PASSWORD" value="Heliocentrism"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="LouisPasteur"/>
 			<column name="PASSWORD" value="Vaccination"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="Aristotle"/>
 			<column name="PASSWORD" value="Philosophy"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="NeilsBohr"/>
 			<column name="PASSWORD" value="AtomStructure"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="AlexanderBell"/>
 			<column name="PASSWORD" value="Telephone"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="RosalindFranklin"/>
 			<column name="PASSWORD" value="Viruses"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="FrancisCrick"/>
 			<column name="PASSWORD" value="DNAMolecule"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="JamesWatson"/>
 			<column name="PASSWORD" value="DNAMolecule"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="Archimedes"/>
 			<column name="PASSWORD" value="Mathematic"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="JohannesKepler"/>
 			<column name="PASSWORD" value="PlanetaryMotion"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="RichardFeynman"/>
 			<column name="PASSWORD" value="QuantumDinamics"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="ErnestRutherford"/>
 			<column name="PASSWORD" value="NuclearPhisic"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="AlfredNobel"/>
 			<column name="PASSWORD" value="NobelPremium"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="GregorMendel"/>
 			<column name="PASSWORD" value="Genetic"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="AlexanderFleming"/>
 			<column name="PASSWORD" value="MicroBiology"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="CarlSagan"/>
 			<column name="PASSWORD" value="Astonaut"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="AdaLovelace"/>
 			<column name="PASSWORD" value="Analytical"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="EdwinHubble"/>
 			<column name="PASSWORD" value="Astonomer"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="CarlLinnaeus"/>
 			<column name="PASSWORD" value="Taxonometry"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="EnricoFermi"/>
 			<column name="PASSWORD" value="AtomicBomb"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="LuisAlvarez"/>
 			<column name="PASSWORD" value="Dinosaur"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="AndreMarieAmpere"/>
 			<column name="PASSWORD" value="Ampere"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="AmedeoAvogadro"/>
 			<column name="PASSWORD" value="Molecule"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="DanielBernouli"/>
 			<column name="PASSWORD" value="RiskTheory"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="RobertBoyle"/>
 			<column name="PASSWORD" value="GasLaw"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="JohnDalton"/>
 			<column name="PASSWORD" value="AtomicTheory"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="Democritus"/>
 			<column name="PASSWORD" value="MilkyWay"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="Democritus"/>
 			<column name="PASSWORD" value="MilkyWay"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="ReneDescartes"/>
 			<column name="PASSWORD" value="AnalGeometry"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="LeonhardEuler"/>
-			<column name="PASSWORD" value="MATH"/>
+			<column name="PASSWORD" value="MATHEMATICS"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="Fibonacci"/>
 			<column name="PASSWORD" value="Calculation"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="BenjaminFranklin"/>
 			<column name="PASSWORD" value="PositiveAndNegative"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="HeinrichHertz"/>
 			<column name="PASSWORD" value="PhotoElectric"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
-			<column name="USER_ID" defaultValue="USER_SEQUENCE.NEXTVAL"/>
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="DavidHilbert"/>
 			<column name="PASSWORD" value="HilbertSpace"/>
 			<column name="ROLE" value="USER"/>
 		</insert>
-		<!--______________________________________________________USER_______________________________________________________-->
-
-		<!--______________________________________________________TOUR_______________________________________________________-->
+	</changeSet>
+	
+	<changeSet id="Insert into TOURS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/oracle.properties"/>
-			<column name="START_DATE" valueDate="2020-01-01 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-01-02 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-01T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-01-02T00:00:00"/>
 			<column name="DESCRIPTION" value="good TOUR"/>
 			<column name="COST" value="100.0000"/>
 			<column name="TOUR_TYPE" value="BUSINESS"/>
@@ -1592,10 +1594,10 @@
 			<column name="COUNTRY_ID" value="1"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-02 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-01-04 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-02T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-01-04T00:00:00"/>
 			<column name="DESCRIPTION" value="best sale"/>
 			<column name="COST" value="200.0000"/>
 			<column name="TOUR_TYPE" value="ECOTOURISM"/>
@@ -1603,10 +1605,10 @@
 			<column name="COUNTRY_ID" value="2"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/META-INF/persistence.xml"/>
-			<column name="START_DATE" valueDate="2020-01-03 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-01-06 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-03T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-01-06T00:00:00"/>
 			<column name="DESCRIPTION" value="two for one deal"/>
 			<column name="COST" value="300.0000"/>
 			<column name="TOUR_TYPE" value="LEISURE"/>
@@ -1614,10 +1616,10 @@
 			<column name="COUNTRY_ID" value="3"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-04 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-01-08 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-04T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-01-08T00:00:00"/>
 			<column name="DESCRIPTION" value="back to the future"/>
 			<column name="COST" value="400.0000"/>
 			<column name="TOUR_TYPE" value="PILGRIMAGE"/>
@@ -1625,10 +1627,10 @@
 			<column name="COUNTRY_ID" value="4"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-05 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-01-10 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-05T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-01-10T00:00:00"/>
 			<column name="DESCRIPTION" value="time travel"/>
 			<column name="COST" value="500.0000"/>
 			<column name="TOUR_TYPE" value="RURAL_TOURISM"/>
@@ -1636,10 +1638,10 @@
 			<column name="COUNTRY_ID" value="5"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-06 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-01-12 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-06T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-01-12T00:00:00"/>
 			<column name="DESCRIPTION" value="school trip"/>
 			<column name="COST" value="600.0000"/>
 			<column name="TOUR_TYPE" value="SCIENTIFIC_EXPEDITION"/>
@@ -1647,10 +1649,10 @@
 			<column name="COUNTRY_ID" value="6"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-07 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-01-14 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-07T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-01-14T00:00:00"/>
 			<column name="DESCRIPTION" value="safe and fast"/>
 			<column name="COST" value="700.0000"/>
 			<column name="TOUR_TYPE" value="SPORT_COMPETITION"/>
@@ -1658,10 +1660,10 @@
 			<column name="COUNTRY_ID" value="7"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-08 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-01-16 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-08T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-01-16T00:00:00"/>
 			<column name="DESCRIPTION" value="discovery"/>
 			<column name="COST" value="800.0000"/>
 			<column name="TOUR_TYPE" value="TOURISM"/>
@@ -1669,10 +1671,10 @@
 			<column name="COUNTRY_ID" value="8"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-09 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-01-18 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-09T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-01-18T00:00:00"/>
 			<column name="DESCRIPTION" value="just relax"/>
 			<column name="COST" value="900.0000"/>
 			<column name="TOUR_TYPE" value="TRAINING"/>
@@ -1680,10 +1682,10 @@
 			<column name="COUNTRY_ID" value="9"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-10 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-01-20 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-10T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-01-20T00:00:00"/>
 			<column name="DESCRIPTION" value="boat trip"/>
 			<column name="COST" value="1000.0000"/>
 			<column name="TOUR_TYPE" value="TREATMENT"/>
@@ -1691,10 +1693,10 @@
 			<column name="COUNTRY_ID" value="10"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-11 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-01-22 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-11T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-01-22T00:00:00"/>
 			<column name="DESCRIPTION" value="space trip"/>
 			<column name="COST" value="1100.0000"/>
 			<column name="TOUR_TYPE" value="BUSINESS"/>
@@ -1702,10 +1704,10 @@
 			<column name="COUNTRY_ID" value="11"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-12 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-01-24 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-12T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-01-24T00:00:00"/>
 			<column name="DESCRIPTION" value="seaside"/>
 			<column name="COST" value="1200.0000"/>
 			<column name="TOUR_TYPE" value="ECOTOURISM"/>
@@ -1713,10 +1715,10 @@
 			<column name="COUNTRY_ID" value="12"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-13 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-01-26 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-13T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-01-26T00:00:00"/>
 			<column name="DESCRIPTION" value="mountain expedition"/>
 			<column name="COST" value="1300.0000"/>
 			<column name="TOUR_TYPE" value="LEISURE"/>
@@ -1724,10 +1726,10 @@
 			<column name="COUNTRY_ID" value="13"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-14 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-01-28 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-14T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-01-28T00:00:00"/>
 			<column name="DESCRIPTION" value="holy shit"/>
 			<column name="COST" value="1400.0000"/>
 			<column name="TOUR_TYPE" value="PILGRIMAGE"/>
@@ -1735,10 +1737,10 @@
 			<column name="COUNTRY_ID" value="14"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-15 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-01-30 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-15T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-01-30T00:00:00"/>
 			<column name="DESCRIPTION" value="business trip"/>
 			<column name="COST" value="1500.0000"/>
 			<column name="TOUR_TYPE" value="RURAL_TOURISM"/>
@@ -1746,10 +1748,10 @@
 			<column name="COUNTRY_ID" value="15"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-16 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-02-01 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-16T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-02-01T00:00:00"/>
 			<column name="DESCRIPTION" value="comfortable movenment"/>
 			<column name="COST" value="1600.0000"/>
 			<column name="TOUR_TYPE" value="SCIENTIFIC_EXPEDITION"/>
@@ -1757,10 +1759,10 @@
 			<column name="COUNTRY_ID" value="16"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-17 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-02-03 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-17T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-02-03T00:00:00"/>
 			<column name="DESCRIPTION" value="village views"/>
 			<column name="COST" value="1700.0000"/>
 			<column name="TOUR_TYPE" value="SPORT_COMPETITION"/>
@@ -1768,10 +1770,10 @@
 			<column name="COUNTRY_ID" value="17"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-18 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-02-05 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-18T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-02-05T00:00:00"/>
 			<column name="DESCRIPTION" value="just tourism"/>
 			<column name="COST" value="1800.0000"/>
 			<column name="TOUR_TYPE" value="TOURISM"/>
@@ -1779,10 +1781,10 @@
 			<column name="COUNTRY_ID" value="18"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-19 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-02-07 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-19T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-02-07T00:00:00"/>
 			<column name="DESCRIPTION" value="just leisure"/>
 			<column name="COST" value="1900.0000"/>
 			<column name="TOUR_TYPE" value="TRAINING"/>
@@ -1790,10 +1792,10 @@
 			<column name="COUNTRY_ID" value="19"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-20 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-02-09 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-20T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-02-09T00:00:00"/>
 			<column name="DESCRIPTION" value="rehabilitation"/>
 			<column name="COST" value="2000.0000"/>
 			<column name="TOUR_TYPE" value="TREATMENT"/>
@@ -1801,10 +1803,10 @@
 			<column name="COUNTRY_ID" value="20"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-21 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-02-11 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-21T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-02-11T00:00:00"/>
 			<column name="DESCRIPTION" value="just relax"/>
 			<column name="COST" value="2100.0000"/>
 			<column name="TOUR_TYPE" value="BUSINESS"/>
@@ -1812,10 +1814,10 @@
 			<column name="COUNTRY_ID" value="21"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-22 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-02-13 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-22T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-02-13T00:00:00"/>
 			<column name="DESCRIPTION" value="boat trip"/>
 			<column name="COST" value="2200.0000"/>
 			<column name="TOUR_TYPE" value="ECOTOURISM"/>
@@ -1823,10 +1825,10 @@
 			<column name="COUNTRY_ID" value="22"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/log4j2.xml"/>
-			<column name="START_DATE" valueDate="2020-01-23 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-02-15 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-23T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-02-15T00:00:00"/>
 			<column name="DESCRIPTION" value="space trip"/>
 			<column name="COST" value="2300.0000"/>
 			<column name="TOUR_TYPE" value="LEISURE"/>
@@ -1834,10 +1836,10 @@
 			<column name="COUNTRY_ID" value="23"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-24 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-02-17 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-24T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-02-17T00:00:00"/>
 			<column name="DESCRIPTION" value="seaside"/>
 			<column name="COST" value="2400.0000"/>
 			<column name="TOUR_TYPE" value="PILGRIMAGE"/>
@@ -1845,10 +1847,10 @@
 			<column name="COUNTRY_ID" value="24"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-25 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-02-19 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-25T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-02-19T00:00:00"/>
 			<column name="DESCRIPTION" value="mountain expedition"/>
 			<column name="COST" value="2500.0000"/>
 			<column name="TOUR_TYPE" value="RURAL_TOURISM"/>
@@ -1856,10 +1858,10 @@
 			<column name="COUNTRY_ID" value="25"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-26 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-02-21 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-26T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-02-21T00:00:00"/>
 			<column name="DESCRIPTION" value="holy places"/>
 			<column name="COST" value="2600.0000"/>
 			<column name="TOUR_TYPE" value="SCIENTIFIC_EXPEDITION"/>
@@ -1867,10 +1869,10 @@
 			<column name="COUNTRY_ID" value="26"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-27 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-02-23 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-27T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-02-23T00:00:00"/>
 			<column name="DESCRIPTION" value="attractive TOUR"/>
 			<column name="COST" value="2700.0000"/>
 			<column name="TOUR_TYPE" value="SPORT_COMPETITION"/>
@@ -1878,10 +1880,10 @@
 			<column name="COUNTRY_ID" value="27"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-28 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-02-25 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-28T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-02-25T00:00:00"/>
 			<column name="DESCRIPTION" value="road trip"/>
 			<column name="COST" value="2800.0000"/>
 			<column name="TOUR_TYPE" value="TOURISM"/>
@@ -1889,10 +1891,10 @@
 			<column name="COUNTRY_ID" value="28"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-29 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-02-27 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-29T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-02-27T00:00:00"/>
 			<column name="DESCRIPTION" value="just trip"/>
 			<column name="COST" value="2900.0000"/>
 			<column name="TOUR_TYPE" value="TRAINING"/>
@@ -1900,10 +1902,10 @@
 			<column name="COUNTRY_ID" value="29"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-30 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-02-29 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-30T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-02-29T00:00:00"/>
 			<column name="DESCRIPTION" value="bad trip"/>
 			<column name="COST" value="3000.0000"/>
 			<column name="TOUR_TYPE" value="TREATMENT"/>
@@ -1911,10 +1913,10 @@
 			<column name="COUNTRY_ID" value="30"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-01-31 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-03-02 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-01-31T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-02T00:00:00"/>
 			<column name="DESCRIPTION" value="sad trip"/>
 			<column name="COST" value="3100.0000"/>
 			<column name="TOUR_TYPE" value="BUSINESS"/>
@@ -1922,10 +1924,10 @@
 			<column name="COUNTRY_ID" value="31"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-02-01 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-03-04 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-02-01T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-04T00:00:00"/>
 			<column name="DESCRIPTION" value="mad trip"/>
 			<column name="COST" value="3200.0000"/>
 			<column name="TOUR_TYPE" value="ECOTOURISM"/>
@@ -1933,10 +1935,10 @@
 			<column name="COUNTRY_ID" value="32"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-02-02 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-03-06 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-02-02T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-06T00:00:00"/>
 			<column name="DESCRIPTION" value="gap trip"/>
 			<column name="COST" value="3300.0000"/>
 			<column name="TOUR_TYPE" value="LEISURE"/>
@@ -1944,10 +1946,10 @@
 			<column name="COUNTRY_ID" value="33"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-02-03 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-03-08 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-02-03T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-08T00:00:00"/>
 			<column name="DESCRIPTION" value="crap trip"/>
 			<column name="COST" value="3400.0000"/>
 			<column name="TOUR_TYPE" value="PILGRIMAGE"/>
@@ -1955,10 +1957,10 @@
 			<column name="COUNTRY_ID" value="34"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-02-04 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-03-10 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-02-04T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-10T00:00:00"/>
 			<column name="DESCRIPTION" value="cap trip"/>
 			<column name="COST" value="3500.0000"/>
 			<column name="TOUR_TYPE" value="RURAL_TOURISM"/>
@@ -1966,10 +1968,10 @@
 			<column name="COUNTRY_ID" value="35"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-02-05 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-03-12 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-02-05T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-12T00:00:00"/>
 			<column name="DESCRIPTION" value="had trip"/>
 			<column name="COST" value="3600.0000"/>
 			<column name="TOUR_TYPE" value="SCIENTIFIC_EXPEDITION"/>
@@ -1977,10 +1979,10 @@
 			<column name="COUNTRY_ID" value="36"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-02-06 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-03-14 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-02-06T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-14T00:00:00"/>
 			<column name="DESCRIPTION" value="fat trip"/>
 			<column name="COST" value="3700.0000"/>
 			<column name="TOUR_TYPE" value="SPORT_COMPETITION"/>
@@ -1988,10 +1990,10 @@
 			<column name="COUNTRY_ID" value="37"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-02-07 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-03-16 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-02-07T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-16T00:00:00"/>
 			<column name="DESCRIPTION" value="rat trip"/>
 			<column name="COST" value="3800.0000"/>
 			<column name="TOUR_TYPE" value="TOURISM"/>
@@ -1999,10 +2001,10 @@
 			<column name="COUNTRY_ID" value="38"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-02-08 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-03-18 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-02-08T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-18T00:00:00"/>
 			<column name="DESCRIPTION" value="red trip"/>
 			<column name="COST" value="3900.0000"/>
 			<column name="TOUR_TYPE" value="TRAINING"/>
@@ -2010,19 +2012,129 @@
 			<column name="COUNTRY_ID" value="39"/>
 		</insert>
 		<insert tableName="TOURS">
-			<column name="TOUR_ID" valueComputed="TOUR_SEQUENCE.NEXTVAL"/>
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
 			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
-			<column name="START_DATE" valueDate="2020-02-09 00:00:00"/>
-			<column name="END_DATE" valueDate="2020-03-20 00:00:00"/>
+			<column name="START_DATE" valueDate="2020-02-09T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-20T00:00:00"/>
 			<column name="DESCRIPTION" value="road trip"/>
 			<column name="COST" value="4000.0000"/>
 			<column name="TOUR_TYPE" value="TREATMENT"/>
 			<column name="HOTEL_ID" value="40"/>
 			<column name="COUNTRY_ID" value="40"/>
 		</insert>
-		<!--______________________________________________________TOUR_______________________________________________________-->
+		<insert tableName="TOURS">
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
+			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
+			<column name="START_DATE" valueDate="2020-02-09T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-20T00:00:00"/>
+			<column name="DESCRIPTION" value="lead trip"/>
+			<column name="COST" value="4100.0000"/>
+			<column name="TOUR_TYPE" value="BUSINESS"/>
+			<column name="HOTEL_ID" value="1"/>
+			<column name="COUNTRY_ID" value="1"/>
+		</insert>
+		<insert tableName="TOURS">
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
+			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
+			<column name="START_DATE" valueDate="2020-02-09T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-20T00:00:00"/>
+			<column name="DESCRIPTION" value="mid trip"/>
+			<column name="COST" value="4200.0000"/>
+			<column name="TOUR_TYPE" value="ECOTOURISM"/>
+			<column name="HOTEL_ID" value="4"/>
+			<column name="COUNTRY_ID" value="4"/>
+		</insert>
+		<insert tableName="TOURS">
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
+			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
+			<column name="START_DATE" valueDate="2020-02-09T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-20T00:00:00"/>
+			<column name="DESCRIPTION" value="med trip"/>
+			<column name="COST" value="4300.0000"/>
+			<column name="TOUR_TYPE" value="LEISURE"/>
+			<column name="HOTEL_ID" value="8"/>
+			<column name="COUNTRY_ID" value="8"/>
+		</insert>
+		<insert tableName="TOURS">
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
+			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
+			<column name="START_DATE" valueDate="2020-02-09T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-20T00:00:00"/>
+			<column name="DESCRIPTION" value="mood trip"/>
+			<column name="COST" value="4400.0000"/>
+			<column name="TOUR_TYPE" value="PILGRIMAGE"/>
+			<column name="HOTEL_ID" value="12"/>
+			<column name="COUNTRY_ID" value="12"/>
+		</insert>
+		<insert tableName="TOURS">
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
+			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
+			<column name="START_DATE" valueDate="2020-02-09T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-20T00:00:00"/>
+			<column name="DESCRIPTION" value="man trip"/>
+			<column name="COST" value="4500.0000"/>
+			<column name="TOUR_TYPE" value="RURAL_TOURISM"/>
+			<column name="HOTEL_ID" value="16"/>
+			<column name="COUNTRY_ID" value="16"/>
+		</insert>
+		<insert tableName="TOURS">
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
+			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
+			<column name="START_DATE" valueDate="2020-02-09T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-20T00:00:00"/>
+			<column name="DESCRIPTION" value="male trip"/>
+			<column name="COST" value="4600.0000"/>
+			<column name="TOUR_TYPE" value="SCIENTIFIC_EXPEDITION"/>
+			<column name="HOTEL_ID" value="20"/>
+			<column name="COUNTRY_ID" value="20"/>
+		</insert>
+		<insert tableName="TOURS">
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
+			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
+			<column name="START_DATE" valueDate="2020-02-09T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-20T00:00:00"/>
+			<column name="DESCRIPTION" value="small trip"/>
+			<column name="COST" value="4700.0000"/>
+			<column name="TOUR_TYPE" value="SPORT_COMPETITION"/>
+			<column name="HOTEL_ID" value="24"/>
+			<column name="COUNTRY_ID" value="24"/>
+		</insert>
+		<insert tableName="TOURS">
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
+			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
+			<column name="START_DATE" valueDate="2020-02-09T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-20T00:00:00"/>
+			<column name="DESCRIPTION" value="fall trip"/>
+			<column name="COST" value="4800.0000"/>
+			<column name="TOUR_TYPE" value="TOURISM"/>
+			<column name="HOTEL_ID" value="28"/>
+			<column name="COUNTRY_ID" value="28"/>
+		</insert>
+		<insert tableName="TOURS">
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
+			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
+			<column name="START_DATE" valueDate="2020-02-09T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-20T00:00:00"/>
+			<column name="DESCRIPTION" value="doll trip"/>
+			<column name="COST" value="4900.0000"/>
+			<column name="TOUR_TYPE" value="TRAINING"/>
+			<column name="HOTEL_ID" value="32"/>
+			<column name="COUNTRY_ID" value="32"/>
+		</insert>
+		<insert tableName="TOURS">
+			<column name="TOUR_ID" valueSequenceNext="TOUR_SEQUENCE"/>
+			<column name="PHOTO_PATH" value="src/main/resources/postgresql.properties"/>
+			<column name="START_DATE" valueDate="2020-02-09T00:00:00"/>
+			<column name="END_DATE" valueDate="2020-03-20T00:00:00"/>
+			<column name="DESCRIPTION" value="goal trip"/>
+			<column name="COST" value="5000.0000"/>
+			<column name="TOUR_TYPE" value="TREATMENT"/>
+			<column name="HOTEL_ID" value="36"/>
+			<column name="COUNTRY_ID" value="36"/>
+		</insert>
+	</changeSet>
 
-		<!--____________________________________________________USER_TOUR____________________________________________________-->
+	<changeSet id="Insert into USERS_TOURS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="1"/>
 			<column name="TOUR_ID" value="1"/>
@@ -2035,7 +2147,7 @@
 			<column name="USER_ID" value="1"/>
 			<column name="TOUR_ID" value="3"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="2"/>
 			<column name="TOUR_ID" value="2"/>
@@ -2048,7 +2160,7 @@
 			<column name="USER_ID" value="2"/>
 			<column name="TOUR_ID" value="4"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="3"/>
 			<column name="TOUR_ID" value="3"/>
@@ -2061,7 +2173,7 @@
 			<column name="USER_ID" value="3"/>
 			<column name="TOUR_ID" value="5"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="4"/>
 			<column name="TOUR_ID" value="4"/>
@@ -2074,7 +2186,7 @@
 			<column name="USER_ID" value="4"/>
 			<column name="TOUR_ID" value="6"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="5"/>
 			<column name="TOUR_ID" value="5"/>
@@ -2087,7 +2199,7 @@
 			<column name="USER_ID" value="5"/>
 			<column name="TOUR_ID" value="7"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="6"/>
 			<column name="TOUR_ID" value="6"/>
@@ -2100,7 +2212,7 @@
 			<column name="USER_ID" value="6"/>
 			<column name="TOUR_ID" value="8"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="7"/>
 			<column name="TOUR_ID" value="7"/>
@@ -2113,7 +2225,7 @@
 			<column name="USER_ID" value="7"/>
 			<column name="TOUR_ID" value="9"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="8"/>
 			<column name="TOUR_ID" value="8"/>
@@ -2126,7 +2238,7 @@
 			<column name="USER_ID" value="8"/>
 			<column name="TOUR_ID" value="10"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="9"/>
 			<column name="TOUR_ID" value="9"/>
@@ -2137,9 +2249,9 @@
 		</insert>
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="9"/>
-			<column name="TOUR_ID" value="10"/>
+			<column name="TOUR_ID" value="11"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="10"/>
 			<column name="TOUR_ID" value="10"/>
@@ -2152,7 +2264,7 @@
 			<column name="USER_ID" value="10"/>
 			<column name="TOUR_ID" value="12"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="11"/>
 			<column name="TOUR_ID" value="11"/>
@@ -2165,7 +2277,7 @@
 			<column name="USER_ID" value="11"/>
 			<column name="TOUR_ID" value="13"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="12"/>
 			<column name="TOUR_ID" value="12"/>
@@ -2178,7 +2290,7 @@
 			<column name="USER_ID" value="12"/>
 			<column name="TOUR_ID" value="14"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="13"/>
 			<column name="TOUR_ID" value="13"/>
@@ -2191,7 +2303,7 @@
 			<column name="USER_ID" value="13"/>
 			<column name="TOUR_ID" value="15"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="14"/>
 			<column name="TOUR_ID" value="14"/>
@@ -2204,7 +2316,7 @@
 			<column name="USER_ID" value="14"/>
 			<column name="TOUR_ID" value="16"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="15"/>
 			<column name="TOUR_ID" value="15"/>
@@ -2217,7 +2329,7 @@
 			<column name="USER_ID" value="15"/>
 			<column name="TOUR_ID" value="17"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="16"/>
 			<column name="TOUR_ID" value="16"/>
@@ -2230,7 +2342,7 @@
 			<column name="USER_ID" value="16"/>
 			<column name="TOUR_ID" value="18"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="17"/>
 			<column name="TOUR_ID" value="17"/>
@@ -2243,7 +2355,7 @@
 			<column name="USER_ID" value="17"/>
 			<column name="TOUR_ID" value="19"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="18"/>
 			<column name="TOUR_ID" value="18"/>
@@ -2256,7 +2368,7 @@
 			<column name="USER_ID" value="18"/>
 			<column name="TOUR_ID" value="20"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="19"/>
 			<column name="TOUR_ID" value="19"/>
@@ -2269,7 +2381,7 @@
 			<column name="USER_ID" value="19"/>
 			<column name="TOUR_ID" value="21"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="20"/>
 			<column name="TOUR_ID" value="20"/>
@@ -2282,7 +2394,7 @@
 			<column name="USER_ID" value="20"/>
 			<column name="TOUR_ID" value="22"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="21"/>
 			<column name="TOUR_ID" value="21"/>
@@ -2295,7 +2407,7 @@
 			<column name="USER_ID" value="21"/>
 			<column name="TOUR_ID" value="23"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="22"/>
 			<column name="TOUR_ID" value="22"/>
@@ -2308,7 +2420,7 @@
 			<column name="USER_ID" value="22"/>
 			<column name="TOUR_ID" value="24"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="23"/>
 			<column name="TOUR_ID" value="23"/>
@@ -2321,7 +2433,7 @@
 			<column name="USER_ID" value="23"/>
 			<column name="TOUR_ID" value="25"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="24"/>
 			<column name="TOUR_ID" value="24"/>
@@ -2334,7 +2446,7 @@
 			<column name="USER_ID" value="24"/>
 			<column name="TOUR_ID" value="26"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="25"/>
 			<column name="TOUR_ID" value="25"/>
@@ -2347,7 +2459,7 @@
 			<column name="USER_ID" value="25"/>
 			<column name="TOUR_ID" value="27"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="26"/>
 			<column name="TOUR_ID" value="26"/>
@@ -2360,7 +2472,7 @@
 			<column name="USER_ID" value="26"/>
 			<column name="TOUR_ID" value="28"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="27"/>
 			<column name="TOUR_ID" value="27"/>
@@ -2373,7 +2485,7 @@
 			<column name="USER_ID" value="27"/>
 			<column name="TOUR_ID" value="29"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="28"/>
 			<column name="TOUR_ID" value="28"/>
@@ -2386,7 +2498,7 @@
 			<column name="USER_ID" value="28"/>
 			<column name="TOUR_ID" value="30"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="29"/>
 			<column name="TOUR_ID" value="29"/>
@@ -2399,7 +2511,7 @@
 			<column name="USER_ID" value="29"/>
 			<column name="TOUR_ID" value="31"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="30"/>
 			<column name="TOUR_ID" value="30"/>
@@ -2412,7 +2524,7 @@
 			<column name="USER_ID" value="30"/>
 			<column name="TOUR_ID" value="32"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="31"/>
 			<column name="TOUR_ID" value="31"/>
@@ -2423,9 +2535,9 @@
 		</insert>
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="31"/>
-			<column name="TOUR_ID" value="32"/>
+			<column name="TOUR_ID" value="33"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="32"/>
 			<column name="TOUR_ID" value="32"/>
@@ -2438,7 +2550,7 @@
 			<column name="USER_ID" value="32"/>
 			<column name="TOUR_ID" value="34"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="33"/>
 			<column name="TOUR_ID" value="33"/>
@@ -2451,7 +2563,7 @@
 			<column name="USER_ID" value="33"/>
 			<column name="TOUR_ID" value="35"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="34"/>
 			<column name="TOUR_ID" value="34"/>
@@ -2464,7 +2576,7 @@
 			<column name="USER_ID" value="34"/>
 			<column name="TOUR_ID" value="36"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="35"/>
 			<column name="TOUR_ID" value="35"/>
@@ -2477,7 +2589,7 @@
 			<column name="USER_ID" value="35"/>
 			<column name="TOUR_ID" value="37"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="36"/>
 			<column name="TOUR_ID" value="36"/>
@@ -2490,7 +2602,7 @@
 			<column name="USER_ID" value="36"/>
 			<column name="TOUR_ID" value="38"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="37"/>
 			<column name="TOUR_ID" value="37"/>
@@ -2503,7 +2615,7 @@
 			<column name="USER_ID" value="37"/>
 			<column name="TOUR_ID" value="39"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="38"/>
 			<column name="TOUR_ID" value="38"/>
@@ -2516,7 +2628,7 @@
 			<column name="USER_ID" value="38"/>
 			<column name="TOUR_ID" value="40"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="39"/>
 			<column name="TOUR_ID" value="39"/>
@@ -2529,7 +2641,7 @@
 			<column name="USER_ID" value="39"/>
 			<column name="TOUR_ID" value="41"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="40"/>
 			<column name="TOUR_ID" value="40"/>
@@ -2542,7 +2654,7 @@
 			<column name="USER_ID" value="40"/>
 			<column name="TOUR_ID" value="42"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="41"/>
 			<column name="TOUR_ID" value="41"/>
@@ -2555,7 +2667,7 @@
 			<column name="USER_ID" value="41"/>
 			<column name="TOUR_ID" value="43"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="42"/>
 			<column name="TOUR_ID" value="42"/>
@@ -2568,7 +2680,7 @@
 			<column name="USER_ID" value="42"/>
 			<column name="TOUR_ID" value="44"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="43"/>
 			<column name="TOUR_ID" value="43"/>
@@ -2581,7 +2693,7 @@
 			<column name="USER_ID" value="43"/>
 			<column name="TOUR_ID" value="45"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="44"/>
 			<column name="TOUR_ID" value="44"/>
@@ -2594,7 +2706,7 @@
 			<column name="USER_ID" value="44"/>
 			<column name="TOUR_ID" value="46"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="45"/>
 			<column name="TOUR_ID" value="45"/>
@@ -2607,7 +2719,7 @@
 			<column name="USER_ID" value="45"/>
 			<column name="TOUR_ID" value="47"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="46"/>
 			<column name="TOUR_ID" value="46"/>
@@ -2620,7 +2732,7 @@
 			<column name="USER_ID" value="46"/>
 			<column name="TOUR_ID" value="48"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="47"/>
 			<column name="TOUR_ID" value="47"/>
@@ -2633,7 +2745,7 @@
 			<column name="USER_ID" value="47"/>
 			<column name="TOUR_ID" value="49"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="48"/>
 			<column name="TOUR_ID" value="48"/>
@@ -2646,7 +2758,7 @@
 			<column name="USER_ID" value="48"/>
 			<column name="TOUR_ID" value="50"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="49"/>
 			<column name="TOUR_ID" value="49"/>
@@ -2659,7 +2771,7 @@
 			<column name="USER_ID" value="49"/>
 			<column name="TOUR_ID" value="1"/>
 		</insert>
-		
+
 		<insert tableName="USERS_TOURS">
 			<column name="USER_ID" value="50"/>
 			<column name="TOUR_ID" value="50"/>
@@ -2672,1109 +2784,1108 @@
 			<column name="USER_ID" value="50"/>
 			<column name="TOUR_ID" value="2"/>
 		</insert>
-		<!--____________________________________________________USER_TOUR____________________________________________________-->
-		
-		<!--______________________________________________________REVIEW_____________________________________________________-->
+	</changeSet>
+
+	<changeSet id="Insert into REVIEWS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-03 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-03T00:00:00"/>
 			<column name="REVIEW_TEXT" value="sounds good"/>
 			<column name="USER_ID" value="1"/>
 			<column name="TOUR_ID" value="1"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-05 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-05T00:00:00"/>
 			<column name="REVIEW_TEXT" value="sounds great"/>
 			<column name="USER_ID" value="1"/>
 			<column name="TOUR_ID" value="2"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-07 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-07T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I have no hear"/>
 			<column name="USER_ID" value="1"/>
 			<column name="TOUR_ID" value="3"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-05 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-05T00:00:00"/>
 			<column name="REVIEW_TEXT" value="interesting"/>
 			<column name="USER_ID" value="2"/>
 			<column name="TOUR_ID" value="2"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-07 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-07T00:00:00"/>
 			<column name="REVIEW_TEXT" value="not interesting"/>
 			<column name="USER_ID" value="2"/>
 			<column name="TOUR_ID" value="3"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-09 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-09T00:00:00"/>
 			<column name="REVIEW_TEXT" value="not not interesting"/>
 			<column name="USER_ID" value="2"/>
 			<column name="TOUR_ID" value="4"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-07 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-07T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I hope I will die"/>
 			<column name="USER_ID" value="3"/>
 			<column name="TOUR_ID" value="3"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-09 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-09T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I hope i wille live"/>
 			<column name="USER_ID" value="3"/>
 			<column name="TOUR_ID" value="4"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-11 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-11T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am agnostic"/>
 			<column name="USER_ID" value="3"/>
 			<column name="TOUR_ID" value="5"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-09 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-09T00:00:00"/>
 			<column name="REVIEW_TEXT" value="must have"/>
 			<column name="USER_ID" value="4"/>
 			<column name="TOUR_ID" value="4"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-11 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-11T00:00:00"/>
 			<column name="REVIEW_TEXT" value="must avoid"/>
 			<column name="USER_ID" value="4"/>
 			<column name="TOUR_ID" value="5"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-13 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-13T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I must not"/>
 			<column name="USER_ID" value="4"/>
 			<column name="TOUR_ID" value="6"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-11 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-11T00:00:00"/>
 			<column name="REVIEW_TEXT" value="It was relatively well"/>
 			<column name="USER_ID" value="5"/>
 			<column name="TOUR_ID" value="5"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-13 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-13T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Electricity is cool"/>
 			<column name="USER_ID" value="5"/>
 			<column name="TOUR_ID" value="6"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-15 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-15T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I hate science"/>
 			<column name="USER_ID" value="5"/>
 			<column name="TOUR_ID" value="7"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-13 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-13T00:00:00"/>
 			<column name="REVIEW_TEXT" value="death better"/>
 			<column name="USER_ID" value="6"/>
 			<column name="TOUR_ID" value="6"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-15 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-15T00:00:00"/>
 			<column name="REVIEW_TEXT" value="live better"/>
 			<column name="USER_ID" value="6"/>
 			<column name="TOUR_ID" value="7"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-17 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-17T00:00:00"/>
 			<column name="REVIEW_TEXT" value="hadder better faster stronger"/>
 			<column name="USER_ID" value="6"/>
 			<column name="TOUR_ID" value="8"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-15 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-15T00:00:00"/>
 			<column name="REVIEW_TEXT" value="constantly having problems"/>
 			<column name="USER_ID" value="7"/>
 			<column name="TOUR_ID" value="7"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-17 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-17T00:00:00"/>
 			<column name="REVIEW_TEXT" value="constantly having advantages"/>
 			<column name="USER_ID" value="7"/>
 			<column name="TOUR_ID" value="8"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-19 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-19T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I invited constant"/>
 			<column name="USER_ID" value="7"/>
 			<column name="TOUR_ID" value="9"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-17 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-17T00:00:00"/>
 			<column name="REVIEW_TEXT" value="there was no radiation at all"/>
 			<column name="USER_ID" value="8"/>
 			<column name="TOUR_ID" value="8"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-19 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-19T00:00:00"/>
 			<column name="REVIEW_TEXT" value="there was radiation a lot"/>
 			<column name="USER_ID" value="8"/>
 			<column name="TOUR_ID" value="9"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-21 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-21T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Pripyat so piecful"/>
 			<column name="USER_ID" value="8"/>
 			<column name="TOUR_ID" value="10"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-19 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-19T00:00:00"/>
 			<column name="REVIEW_TEXT" value="not enough energy"/>
 			<column name="USER_ID" value="9"/>
 			<column name="TOUR_ID" value="9"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-21 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-21T00:00:00"/>
 			<column name="REVIEW_TEXT" value="energy enough"/>
 			<column name="USER_ID" value="9"/>
 			<column name="TOUR_ID" value="10"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-23 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-23T00:00:00"/>
 			<column name="REVIEW_TEXT" value="MAX POWER"/>
 			<column name="USER_ID" value="9"/>
 			<column name="TOUR_ID" value="11"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-21 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-21T00:00:00"/>
 			<column name="REVIEW_TEXT" value="attractive"/>
 			<column name="USER_ID" value="10"/>
 			<column name="TOUR_ID" value="10"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-23 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-23T00:00:00"/>
 			<column name="REVIEW_TEXT" value="attraction"/>
 			<column name="USER_ID" value="10"/>
 			<column name="TOUR_ID" value="11"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-25 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-25T00:00:00"/>
 			<column name="REVIEW_TEXT" value="protection"/>
 			<column name="USER_ID" value="10"/>
 			<column name="TOUR_ID" value="12"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-23 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-23T00:00:00"/>
 			<column name="REVIEW_TEXT" value="shine bright like a diamond"/>
 			<column name="USER_ID" value="11"/>
 			<column name="TOUR_ID" value="11"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-25 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-25T00:00:00"/>
 			<column name="REVIEW_TEXT" value="shine bright like a diamond"/>
 			<column name="USER_ID" value="11"/>
 			<column name="TOUR_ID" value="12"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-27 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-27T00:00:00"/>
 			<column name="REVIEW_TEXT" value="shine bright like a diamond"/>
 			<column name="USER_ID" value="11"/>
 			<column name="TOUR_ID" value="13"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-25 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-25T00:00:00"/>
 			<column name="REVIEW_TEXT" value="awesome"/>
 			<column name="USER_ID" value="12"/>
 			<column name="TOUR_ID" value="12"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-27 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-27T00:00:00"/>
 			<column name="REVIEW_TEXT" value="aweful"/>
 			<column name="USER_ID" value="12"/>
 			<column name="TOUR_ID" value="13"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-29 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-29T00:00:00"/>
 			<column name="REVIEW_TEXT" value="awa awa"/>
 			<column name="USER_ID" value="12"/>
 			<column name="TOUR_ID" value="14"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-27 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-27T00:00:00"/>
 			<column name="REVIEW_TEXT" value="capitalism everywhere"/>
 			<column name="USER_ID" value="13"/>
 			<column name="TOUR_ID" value="13"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-29 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-29T00:00:00"/>
 			<column name="REVIEW_TEXT" value="socialism everywhere"/>
 			<column name="USER_ID" value="13"/>
 			<column name="TOUR_ID" value="14"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-31 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-31T00:00:00"/>
 			<column name="REVIEW_TEXT" value="OMG"/>
 			<column name="USER_ID" value="13"/>
 			<column name="TOUR_ID" value="15"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-29 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-29T00:00:00"/>
 			<column name="REVIEW_TEXT" value="it force me"/>
 			<column name="USER_ID" value="14"/>
 			<column name="TOUR_ID" value="14"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-31 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-31T00:00:00"/>
 			<column name="REVIEW_TEXT" value="me force it"/>
 			<column name="USER_ID" value="14"/>
 			<column name="TOUR_ID" value="15"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-02 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-02T00:00:00"/>
 			<column name="REVIEW_TEXT" value="force me"/>
 			<column name="USER_ID" value="14"/>
 			<column name="TOUR_ID" value="16"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-01-31 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-01-31T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am electrifie"/>
 			<column name="USER_ID" value="15"/>
 			<column name="TOUR_ID" value="15"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-02 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-02T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am protonifie"/>
 			<column name="USER_ID" value="15"/>
 			<column name="TOUR_ID" value="16"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-04 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-04T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Jimie Newtron"/>
 			<column name="USER_ID" value="15"/>
 			<column name="TOUR_ID" value="17"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-02 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-02T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Random comment"/>
 			<column name="USER_ID" value="16"/>
 			<column name="TOUR_ID" value="16"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-04 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-04T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Random comment"/>
 			<column name="USER_ID" value="16"/>
 			<column name="TOUR_ID" value="17"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-06 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-06T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Fandom some end"/>
 			<column name="USER_ID" value="16"/>
 			<column name="TOUR_ID" value="18"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-04 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-04T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Who from 2020?"/>
 			<column name="USER_ID" value="17"/>
 			<column name="TOUR_ID" value="17"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-06 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-06T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Who from 2021?"/>
 			<column name="USER_ID" value="17"/>
 			<column name="TOUR_ID" value="18"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-08 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-08T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Who from 2022?"/>
 			<column name="USER_ID" value="17"/>
 			<column name="TOUR_ID" value="19"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-06 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-06T00:00:00"/>
 			<column name="REVIEW_TEXT" value="It was great"/>
 			<column name="USER_ID" value="18"/>
 			<column name="TOUR_ID" value="18"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-08 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-08T00:00:00"/>
 			<column name="REVIEW_TEXT" value="It was bread"/>
 			<column name="USER_ID" value="18"/>
 			<column name="TOUR_ID" value="19"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-10 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-10T00:00:00"/>
 			<column name="REVIEW_TEXT" value="HOLY SHIT"/>
 			<column name="USER_ID" value="18"/>
 			<column name="TOUR_ID" value="20"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-08 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-08T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am trying"/>
 			<column name="USER_ID" value="19"/>
 			<column name="TOUR_ID" value="19"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-10 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-10T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am crying"/>
 			<column name="USER_ID" value="19"/>
 			<column name="TOUR_ID" value="20"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-12 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-12T00:00:00"/>
 			<column name="REVIEW_TEXT" value="But, I am dying"/>
 			<column name="USER_ID" value="19"/>
 			<column name="TOUR_ID" value="21"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-10 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-10T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am crazy"/>
 			<column name="USER_ID" value="20"/>
 			<column name="TOUR_ID" value="20"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-12 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-12T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am amazing"/>
 			<column name="USER_ID" value="20"/>
 			<column name="TOUR_ID" value="21"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-14 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-14T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am Daizy"/>
 			<column name="USER_ID" value="20"/>
 			<column name="TOUR_ID" value="22"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-12 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-12T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Hello World!"/>
 			<column name="USER_ID" value="21"/>
 			<column name="TOUR_ID" value="21"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-14 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-14T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Bye, World!"/>
 			<column name="USER_ID" value="21"/>
 			<column name="TOUR_ID" value="22"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-16 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-16T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am lost"/>
 			<column name="USER_ID" value="21"/>
 			<column name="TOUR_ID" value="23"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-14 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-14T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Masons search for us"/>
 			<column name="USER_ID" value="22"/>
 			<column name="TOUR_ID" value="22"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-16 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-16T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Reptiloids search for us"/>
 			<column name="USER_ID" value="22"/>
 			<column name="TOUR_ID" value="23"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-18 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-18T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I search for us"/>
 			<column name="USER_ID" value="22"/>
 			<column name="TOUR_ID" value="24"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-16 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-16T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Like"/>
 			<column name="USER_ID" value="23"/>
 			<column name="TOUR_ID" value="23"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-18 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-18T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Dislike"/>
 			<column name="USER_ID" value="23"/>
 			<column name="TOUR_ID" value="24"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-20 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-20T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Subscribe"/>
 			<column name="USER_ID" value="23"/>
 			<column name="TOUR_ID" value="25"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-18 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-18T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Greate desicision"/>
 			<column name="USER_ID" value="24"/>
 			<column name="TOUR_ID" value="24"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-20 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-20T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Joy Division"/>
 			<column name="USER_ID" value="24"/>
 			<column name="TOUR_ID" value="25"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-22 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-22T00:00:00"/>
 			<column name="REVIEW_TEXT" value="My Coalision"/>
 			<column name="USER_ID" value="24"/>
 			<column name="TOUR_ID" value="26"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-20 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-20T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Awful"/>
 			<column name="USER_ID" value="25"/>
 			<column name="TOUR_ID" value="25"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-22 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-22T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Scoobedoo"/>
 			<column name="USER_ID" value="25"/>
 			<column name="TOUR_ID" value="26"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-24 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-24T00:00:00"/>
 			<column name="REVIEW_TEXT" value="All about the bas"/>
 			<column name="USER_ID" value="25"/>
 			<column name="TOUR_ID" value="27"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-22 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-22T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Unreal"/>
 			<column name="USER_ID" value="26"/>
 			<column name="TOUR_ID" value="26"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-24 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-24T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Real?"/>
 			<column name="USER_ID" value="26"/>
 			<column name="TOUR_ID" value="27"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-26 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-26T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Meal"/>
 			<column name="USER_ID" value="26"/>
 			<column name="TOUR_ID" value="28"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-24 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-24T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am hope i will return"/>
 			<column name="USER_ID" value="27"/>
 			<column name="TOUR_ID" value="27"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-26 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-26T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am hope i will not return"/>
 			<column name="USER_ID" value="27"/>
 			<column name="TOUR_ID" value="28"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-28 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-28T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am hourse"/>
 			<column name="USER_ID" value="27"/>
 			<column name="TOUR_ID" value="29"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-26 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-26T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Very strange"/>
 			<column name="USER_ID" value="28"/>
 			<column name="TOUR_ID" value="28"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-28 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-28T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Very change"/>
 			<column name="USER_ID" value="28"/>
 			<column name="TOUR_ID" value="29"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-01 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-01T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Very Mary"/>
 			<column name="USER_ID" value="28"/>
 			<column name="TOUR_ID" value="30"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-02-28 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-02-28T00:00:00"/>
 			<column name="REVIEW_TEXT" value="So cool"/>
 			<column name="USER_ID" value="29"/>
 			<column name="TOUR_ID" value="29"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-01 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-01T00:00:00"/>
 			<column name="REVIEW_TEXT" value="So pool"/>
 			<column name="USER_ID" value="29"/>
 			<column name="TOUR_ID" value="30"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-03 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-03T00:00:00"/>
 			<column name="REVIEW_TEXT" value="So lool"/>
 			<column name="USER_ID" value="29"/>
 			<column name="TOUR_ID" value="31"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-01 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-01T00:00:00"/>
 			<column name="REVIEW_TEXT" value="ABC"/>
 			<column name="USER_ID" value="30"/>
 			<column name="TOUR_ID" value="30"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-03 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-03T00:00:00"/>
 			<column name="REVIEW_TEXT" value="DEF"/>
 			<column name="USER_ID" value="30"/>
 			<column name="TOUR_ID" value="31"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-05 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-05T00:00:00"/>
 			<column name="REVIEW_TEXT" value="FBR"/>
 			<column name="USER_ID" value="30"/>
 			<column name="TOUR_ID" value="32"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-03 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-03T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I do not know what to say"/>
 			<column name="USER_ID" value="31"/>
 			<column name="TOUR_ID" value="31"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-05 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-05T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I know what to say"/>
 			<column name="USER_ID" value="31"/>
 			<column name="TOUR_ID" value="32"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-07 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-07T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I say something"/>
 			<column name="USER_ID" value="31"/>
 			<column name="TOUR_ID" value="33"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-05 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-05T00:00:00"/>
 			<column name="REVIEW_TEXT" value="It was strange"/>
 			<column name="USER_ID" value="32"/>
 			<column name="TOUR_ID" value="32"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-07 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-07T00:00:00"/>
 			<column name="REVIEW_TEXT" value="It was range"/>
 			<column name="USER_ID" value="32"/>
 			<column name="TOUR_ID" value="33"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-09 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-09T00:00:00"/>
 			<column name="REVIEW_TEXT" value="It was sandwich"/>
 			<column name="USER_ID" value="32"/>
 			<column name="TOUR_ID" value="34"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-07 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-07T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Simple trip"/>
 			<column name="USER_ID" value="33"/>
 			<column name="TOUR_ID" value="33"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-09 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-09T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Simple tip"/>
 			<column name="USER_ID" value="33"/>
 			<column name="TOUR_ID" value="34"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-11 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-11T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Simple keep"/>
 			<column name="USER_ID" value="33"/>
 			<column name="TOUR_ID" value="35"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-09 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-09T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Awesome!!!"/>
 			<column name="USER_ID" value="34"/>
 			<column name="TOUR_ID" value="34"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-11 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-11T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Aweful!!!"/>
 			<column name="USER_ID" value="34"/>
 			<column name="TOUR_ID" value="35"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-13 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-13T00:00:00"/>
 			<column name="REVIEW_TEXT" value="!!!"/>
 			<column name="USER_ID" value="34"/>
 			<column name="TOUR_ID" value="36"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-11 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-11T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am third"/>
 			<column name="USER_ID" value="35"/>
 			<column name="TOUR_ID" value="35"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-13 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-13T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am second"/>
 			<column name="USER_ID" value="35"/>
 			<column name="TOUR_ID" value="36"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-15 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-15T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am first"/>
 			<column name="USER_ID" value="35"/>
 			<column name="TOUR_ID" value="37"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-13 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-13T00:00:00"/>
 			<column name="REVIEW_TEXT" value="qwertyuiop"/>
 			<column name="USER_ID" value="36"/>
 			<column name="TOUR_ID" value="36"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-15 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-15T00:00:00"/>
 			<column name="REVIEW_TEXT" value="adfghjkl"/>
 			<column name="USER_ID" value="36"/>
 			<column name="TOUR_ID" value="37"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-17 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-17T00:00:00"/>
 			<column name="REVIEW_TEXT" value="zxcvbnm"/>
 			<column name="USER_ID" value="36"/>
 			<column name="TOUR_ID" value="38"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-15 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-15T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Somebody"/>
 			<column name="USER_ID" value="37"/>
 			<column name="TOUR_ID" value="37"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-17 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-17T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Once told me"/>
 			<column name="USER_ID" value="37"/>
 			<column name="TOUR_ID" value="38"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-19 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-19T00:00:00"/>
 			<column name="REVIEW_TEXT" value="The world is gonna roll me"/>
 			<column name="USER_ID" value="37"/>
 			<column name="TOUR_ID" value="39"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-17 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-17T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am the best"/>
 			<column name="USER_ID" value="38"/>
 			<column name="TOUR_ID" value="38"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-19 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-19T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am the worst"/>
 			<column name="USER_ID" value="38"/>
 			<column name="TOUR_ID" value="39"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-21 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-21T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Yes, I am"/>
 			<column name="USER_ID" value="38"/>
 			<column name="TOUR_ID" value="40"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-19 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-19T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Holy shit"/>
 			<column name="USER_ID" value="39"/>
 			<column name="TOUR_ID" value="39"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-21 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-21T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Holy bit"/>
 			<column name="USER_ID" value="39"/>
 			<column name="TOUR_ID" value="40"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-23 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-23T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Holy meat"/>
 			<column name="USER_ID" value="39"/>
 			<column name="TOUR_ID" value="41"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-21 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-21T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am tired"/>
 			<column name="USER_ID" value="40"/>
 			<column name="TOUR_ID" value="40"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-23 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-23T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am fire"/>
 			<column name="USER_ID" value="40"/>
 			<column name="TOUR_ID" value="41"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-25 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-25T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am lier"/>
 			<column name="USER_ID" value="40"/>
 			<column name="TOUR_ID" value="42"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-23 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-23T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am a creep"/>
 			<column name="USER_ID" value="41"/>
 			<column name="TOUR_ID" value="41"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-25 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-25T00:00:00"/>
 			<column name="REVIEW_TEXT" value="I am a wierdo"/>
 			<column name="USER_ID" value="41"/>
 			<column name="TOUR_ID" value="42"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-27 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-27T00:00:00"/>
 			<column name="REVIEW_TEXT" value="What the hell am I doing here?"/>
 			<column name="USER_ID" value="41"/>
 			<column name="TOUR_ID" value="43"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-25 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-25T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Thunder, feel the thunder"/>
 			<column name="USER_ID" value="42"/>
 			<column name="TOUR_ID" value="42"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-27 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-27T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Lightning and the thunder"/>
 			<column name="USER_ID" value="42"/>
 			<column name="TOUR_ID" value="43"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-29 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-29T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Thun-thunder"/>
 			<column name="USER_ID" value="42"/>
 			<column name="TOUR_ID" value="44"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-27 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-27T00:00:00"/>
 			<column name="REVIEW_TEXT" value="WTF?!?!"/>
 			<column name="USER_ID" value="43"/>
 			<column name="TOUR_ID" value="43"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-29 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-29T00:00:00"/>
 			<column name="REVIEW_TEXT" value="LOL?!?!"/>
 			<column name="USER_ID" value="43"/>
 			<column name="TOUR_ID" value="44"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-31 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-31T00:00:00"/>
 			<column name="REVIEW_TEXT" value="ROFL?!?!"/>
 			<column name="USER_ID" value="43"/>
 			<column name="TOUR_ID" value="45"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-29 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-29T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Who knows"/>
 			<column name="USER_ID" value="44"/>
 			<column name="TOUR_ID" value="44"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-31 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-31T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Who hows"/>
 			<column name="USER_ID" value="44"/>
 			<column name="TOUR_ID" value="45"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-04-02 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-04-02T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Who cows"/>
 			<column name="USER_ID" value="44"/>
 			<column name="TOUR_ID" value="46"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-03-01 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-03-01T00:00:00"/>
 			<column name="REVIEW_TEXT" value="May be"/>
 			<column name="USER_ID" value="45"/>
 			<column name="TOUR_ID" value="45"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-04-02 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-04-02T00:00:00"/>
 			<column name="REVIEW_TEXT" value="May ce"/>
 			<column name="USER_ID" value="45"/>
 			<column name="TOUR_ID" value="46"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-04-04 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-04-04T00:00:00"/>
 			<column name="REVIEW_TEXT" value="May de"/>
 			<column name="USER_ID" value="45"/>
 			<column name="TOUR_ID" value="47"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-04-02 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-04-02T00:00:00"/>
 			<column name="REVIEW_TEXT" value="SHUT UP AND TAKE MY MONEY"/>
 			<column name="USER_ID" value="46"/>
 			<column name="TOUR_ID" value="46"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-04-04 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-04-04T00:00:00"/>
 			<column name="REVIEW_TEXT" value="SHUT DOWN AND GIVE ME MONEY"/>
 			<column name="USER_ID" value="46"/>
 			<column name="TOUR_ID" value="47"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-04-06 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-04-06T00:00:00"/>
 			<column name="REVIEW_TEXT" value="JOKER"/>
 			<column name="USER_ID" value="46"/>
 			<column name="TOUR_ID" value="48"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-04-04 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-04-04T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Jimmy, Jimmy"/>
 			<column name="USER_ID" value="47"/>
 			<column name="TOUR_ID" value="47"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-04-06 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-04-06T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Yes, Papa"/>
 			<column name="USER_ID" value="47"/>
 			<column name="TOUR_ID" value="48"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-04-08 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-04-08T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Eating shugar?"/>
 			<column name="USER_ID" value="47"/>
 			<column name="TOUR_ID" value="49"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-04-06 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-04-06T00:00:00"/>
 			<column name="REVIEW_TEXT" value="No, Papa"/>
 			<column name="USER_ID" value="48"/>
 			<column name="TOUR_ID" value="48"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-04-08 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-04-08T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Telling lies?"/>
 			<column name="USER_ID" value="48"/>
 			<column name="TOUR_ID" value="49"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-04-10 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-04-10T00:00:00"/>
 			<column name="REVIEW_TEXT" value="No, Papa"/>
 			<column name="USER_ID" value="48"/>
 			<column name="TOUR_ID" value="50"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-04-08 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-04-08T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Open your mouce"/>
 			<column name="USER_ID" value="49"/>
 			<column name="TOUR_ID" value="49"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-04-10 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-04-10T00:00:00"/>
 			<column name="REVIEW_TEXT" value="AHAHAHAH"/>
 			<column name="USER_ID" value="49"/>
 			<column name="TOUR_ID" value="50"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-04-12 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-04-12T00:00:00"/>
 			<column name="REVIEW_TEXT" value="The end."/>
 			<column name="USER_ID" value="49"/>
 			<column name="TOUR_ID" value="1"/>
 		</insert>
-		
+
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-04-10 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-04-10T00:00:00"/>
 			<column name="REVIEW_TEXT" value="The last comment"/>
 			<column name="USER_ID" value="50"/>
 			<column name="TOUR_ID" value="50"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-04-12 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-04-12T00:00:00"/>
 			<column name="REVIEW_TEXT" value="Actually, the last"/>
 			<column name="USER_ID" value="50"/>
 			<column name="TOUR_ID" value="1"/>
 		</insert>
 		<insert tableName="REVIEWS">
-			<column name="REVIEW_ID" value="REVIEW_SEQUENCE.NEXTVAL"/>
-			<column name="REVIEW_DATE" valueDate="2020-04-14 00:00:00"/>
+			<column name="REVIEW_ID" valueSequenceNext="REVIEW_SEQUENCE"/>
+			<column name="REVIEW_DATE" valueDate="2020-04-14T00:00:00"/>
 			<column name="REVIEW_TEXT" value="The lastest in the world comment"/>
 			<column name="USER_ID" value="50"/>
 			<column name="TOUR_ID" value="2"/>
 		</insert>
-		<!--______________________________________________________REVIEW_____________________________________________________-->
-    </changeSet>
+	</changeSet>
 
 </databaseChangeLog>

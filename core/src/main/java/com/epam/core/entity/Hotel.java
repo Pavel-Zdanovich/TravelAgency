@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity(name = "Hotel")
+@Entity
 @Table(name = "HOTELS", uniqueConstraints = {@UniqueConstraint(name = "HOTEL_NAME_UNIQUE", columnNames = "NAME"),
         @UniqueConstraint(name = "HOTEL_WEBSITE_UNIQUE", columnNames = "WEBSITE")})
 @AttributeOverride(name = "id", column = @Column(name = "HOTEL_ID"))
@@ -47,9 +47,10 @@ public class Hotel extends AbstractEntity {
     @Setter
     private Short stars;
 
-    @Column(name = "WEBSITE", nullable = false, length = 75)
-    @Size(max = 75, message = "Please enter hotel website 75 characters long")
-    @Pattern(regexp = "https?\\:\\/\\/www\\.\\w+\\.[a-z]{2,3}($|\\/[\\w\\/\\-]+\\/$)", message = "Please enter hotel website starting a protocol and ending with a domain")
+    @Column(name = "WEBSITE", nullable = false, length = 100)
+    @Size(max = 100, message = "Please enter hotel website 75 characters long")
+    @Pattern(regexp = "^(https?:\\/\\/)?(www\\.)?([\\w\\d\\.-]+)\\.([\\w\\.]{2,6})(\\/[\\w\\.-]*)*\\/?$",
+            message = "Please enter hotel website starting a protocol and ending with a domain")
     @NotNull(message = "Please enter hotel website")
     @Getter
     @Setter

@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity(name = "User")
+@Entity
 @Table(name = "USERS", uniqueConstraints = @UniqueConstraint(name = "USER_LOGIN_UNIQUE", columnNames = "LOGIN"))
 @AttributeOverride(name = "id", column = @Column(name = "USER_ID"))
 @NoArgsConstructor

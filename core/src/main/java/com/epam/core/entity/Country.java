@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "Country")
+@Entity
 @Table(name = "COUNTRIES", uniqueConstraints = @UniqueConstraint(name = "COUNTRY_NAME_UNIQUE", columnNames = "NAME"))
 @AttributeOverride(name = "id", column = @Column(name = "COUNTRY_ID"))
 @NoArgsConstructor
