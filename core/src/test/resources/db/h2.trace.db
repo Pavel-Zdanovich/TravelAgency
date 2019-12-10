@@ -28242,3 +28242,24 @@ SELECT * FROM HOTELS [42102-199]
 2019-11-25 18:00:12 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "REVIEWS" not found; SQL statement:
 SELECT * FROM REVIEWS [42102-199]
+2019-11-25 21:58:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "FEATURES" not found; SQL statement:
+DROP TABLE PUBLIC.FEATURES CASCADE [42102-199]
+2019-11-25 21:58:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HOTELS" not found; SQL statement:
+DROP TABLE PUBLIC.HOTELS CASCADE [42102-199]
+2019-11-25 21:58:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HOTELS_FEATURES" not found; SQL statement:
+DROP TABLE PUBLIC.HOTELS_FEATURES CASCADE [42102-199]
+2019-11-25 21:58:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found; SQL statement:
+DROP TABLE PUBLIC.USERS CASCADE [42102-199]
+2019-11-25 21:58:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TOURS" not found; SQL statement:
+DROP TABLE PUBLIC.TOURS CASCADE [42102-199]
+2019-11-25 21:58:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS_TOURS" not found; SQL statement:
+DROP TABLE PUBLIC.USERS_TOURS CASCADE [42102-199]
+2019-11-25 21:58:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "REVIEWS" not found; SQL statement:
+DROP TABLE PUBLIC.REVIEWS CASCADE [42102-199]

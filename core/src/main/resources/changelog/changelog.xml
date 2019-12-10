@@ -38,7 +38,8 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="Create CONSTRAINTS for COUNTRIES" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+    <changeSet id="Create CONSTRAINTS for COUNTRIES" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="true">
         <sql dbms="oracle" endDelimiter="\nGO" stripComments="true">
             ALTER TABLE COUNTRIES ADD CONSTRAINT COUNTRY_NAME_CHECK CHECK (LENGTH(NAME) &gt;= 3)
         </sql>
@@ -56,7 +57,8 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="Create CONSTRAINTS for FEATURES" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+    <changeSet id="Create CONSTRAINTS for FEATURES" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="true">
         <sql dbms="oracle" endDelimiter="\nGO" stripComments="true">
             ALTER TABLE FEATURES ADD CONSTRAINT FEATURE_NAME_CHECK CHECK (LENGTH(NAME) &gt;= 3)
         </sql>
@@ -89,30 +91,39 @@
     </changeSet>
 
     <changeSet id="Create CONSTRAINTS for HOTELS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
-        <sql dbms="oracle" endDelimiter="\nGO" splitStatements="true" stripComments="true">
-            ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_NAME_CHECK CHECK (LENGTH(NAME) &gt; 3)
-        </sql>
-        <sql dbms="oracle" endDelimiter="\nGO" splitStatements="true" stripComments="true">
-            ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_STARS_CHECK CHECK (STARS &gt; 0 AND STARS &lt; 6)
-        </sql>
-        <sql dbms="oracle" endDelimiter="\nGO" splitStatements="true" stripComments="true">
+        <sql dbms="oracle" stripComments="true">
+            ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_NAME_CHECK CHECK (LENGTH(NAME) &gt; 3);
+            ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_STARS_CHECK CHECK (STARS &gt; 0 AND STARS &lt; 6);
             ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_WEBSITE_REGEX_CHECK CHECK (REGEXP_LIKE(WEBSITE,
-            '^(https?:\/\/)?(www\.)?([a-z0-9\.\-]+)\.([a-z\.]{2,6})(\/[a-z0-9\.\-]*)*\/?$'))
-        </sql>
-        <sql dbms="oracle" endDelimiter="\nGO" splitStatements="true" stripComments="true">
-            ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_LATITUDE_CHECK CHECK (LATITUDE &gt; -90.0000000 AND LATITUDE &lt; 90.0000000)
-        </sql>
-        <sql dbms="oracle" endDelimiter="\nGO" splitStatements="true" stripComments="true">
-            ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_LONGITUDE_CHECK CHECK (LONGITUDE &gt; -180.000000 AND LONGITUDE &lt; 180.000000)
+            '^(https?:\/\/)?(www\.)?([a-z0-9\.\-]+)\.([a-z\.]{2,6})(\/[a-z0-9\.\-]*)*\/?$'));
+            ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_LATITUDE_CHECK CHECK (LATITUDE &gt; -90.0000000 AND LATITUDE &lt;
+            90.0000000);
+            ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_LONGITUDE_CHECK CHECK (LONGITUDE &gt; -180.000000 AND LONGITUDE &lt;
+            180.000000);
         </sql>
         <sql dbms="postgresql" stripComments="true">
             ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_NAME_CHECK CHECK (LENGTH(NAME::TEXT) &gt; 3);
             ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_STARS_CHECK CHECK(STARS &gt; 0 AND STARS &lt; 6);
             ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_WEBSITE_REGEX_CHECK CHECK (WEBSITE::TEXT ~
             '^(https?:\/\/)?(www\.)?([a-z0-9\.-]+)\.([a-z\.]{2,6})(\/[a-z0-9\.-]*)*\/?$'::TEXT);
-            ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_LATITUDE_CHECK CHECK (LATITUDE &gt; -90.0000000 AND LATITUDE &lt; 90.0000000);
-            ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_LONGITUDE_CHECK CHECK (LONGITUDE &gt; -180.000000 AND LONGITUDE &lt; 180.000000);
+            ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_LATITUDE_CHECK CHECK (LATITUDE &gt; -90.0000000 AND LATITUDE &lt;
+            90.0000000);
+            ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_LONGITUDE_CHECK CHECK (LONGITUDE &gt; -180.000000 AND LONGITUDE &lt;
+            180.000000);
         </sql>
+    </changeSet>
+
+    <changeSet id="Create INDEXES for HOTELS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createIndex tableName="HOTELS" indexName="HOTEL_COORDINATES_INDEX">
+            <column name="LONGITUDE"/>
+            <column name="LATITUDE"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="Create VIEWS for HOTELS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createView viewName="HOTEL_5_STARS_VIEW" fullDefinition="false" replaceIfExists="true">
+            SELECT H.HOTEL_ID, H.NAME, H.STARS, H.WEBSITE, H.LONGITUDE, H.LATITUDE FROM HOTELS H WHERE H.STARS = 5
+        </createView>
     </changeSet>
 
     <changeSet id="Create table HOTELS_FEATURES" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
@@ -124,7 +135,8 @@
                 <constraints nullable="false" foreignKeyName="HOTEL_FEATURE_FEATURE_ID_FK"/>
             </column>
         </createTable>
-        <addPrimaryKey tableName="HOTELS_FEATURES" columnNames="HOTEL_ID, FEATURE_ID" constraintName="HOTELS_FEATURES_PK"/>
+        <addPrimaryKey tableName="HOTELS_FEATURES" columnNames="HOTEL_ID, FEATURE_ID"
+                       constraintName="HOTELS_FEATURES_PK"/>
         <addForeignKeyConstraint baseTableName="HOTELS_FEATURES" baseColumnNames="HOTEL_ID"
                                  constraintName="HOTEL_FEATURE_HOTEL_ID_FK" referencedTableName="HOTELS"
                                  referencedColumnNames="HOTEL_ID"/>
@@ -151,19 +163,16 @@
     </changeSet>
 
     <changeSet id="Create CONSTRAINTS for USERS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
-        <sql dbms="oracle" endDelimiter="\nGO" stripComments="true">
-            ALTER TABLE USERS ADD CONSTRAINT USER_LOGIN_CHECK CHECK (LENGTH(LOGIN) &gt; 4)
-        </sql>
-        <sql dbms="oracle" endDelimiter="\nGO" stripComments="true">
-            ALTER TABLE USERS ADD CONSTRAINT USER_PASSWORD_CHECK CHECK (LENGTH(PASSWORD) &gt; 4)
-        </sql>
-        <sql dbms="oracle" endDelimiter="\nGO" stripComments="true">
-            ALTER TABLE USERS ADD CONSTRAINT USER_ROLE_CHECK CHECK (LENGTH(ROLE) &gt; 3 AND ROLE IN ('USER', 'ADMIN'))
+        <sql dbms="oracle" stripComments="true">
+            ALTER TABLE USERS ADD CONSTRAINT USER_LOGIN_CHECK CHECK (LENGTH(LOGIN) &gt; 4);
+            ALTER TABLE USERS ADD CONSTRAINT USER_PASSWORD_CHECK CHECK (LENGTH(PASSWORD) &gt; 4);
+            ALTER TABLE USERS ADD CONSTRAINT USER_ROLE_CHECK CHECK (LENGTH(ROLE) &gt; 3 AND ROLE IN ('USER', 'ADMIN'));
         </sql>
         <sql dbms="postgresql" stripComments="true">
             ALTER TABLE USERS ADD CONSTRAINT USER_LOGIN_CHECK CHECK (LENGTH(LOGIN::TEXT) &gt; 4);
             ALTER TABLE USERS ADD CONSTRAINT USER_PASSWORD_CHECK CHECK (LENGTH(PASSWORD::TEXT) &gt; 4);
-            ALTER TABLE USERS ADD CONSTRAINT USER_ROLE_CHECK CHECK (LENGTH(ROLE::TEXT) &gt; 3 AND ROLE IN ('USER', 'ADMIN'));
+            ALTER TABLE USERS ADD CONSTRAINT USER_ROLE_CHECK CHECK (LENGTH(ROLE::TEXT) &gt; 3 AND ROLE IN ('USER',
+            'ADMIN'));
         </sql>
     </changeSet>
 
@@ -200,47 +209,75 @@
     </changeSet>
 
     <changeSet id="Create CONSTRAINTS for TOURS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
-        <sql dbms="oracle" endDelimiter="\nGO" stripComments="true">
-            ALTER TABLE TOURS ADD CONSTRAINT TOUR_COST_CHECK CHECK(COST > 0.0000)
-        </sql>
-        <sql dbms="oracle" endDelimiter="\nGO" stripComments="true">
+        <sql dbms="oracle" stripComments="true">
+            ALTER TABLE TOURS ADD CONSTRAINT TOUR_COST_CHECK CHECK(COST > 0.0000);
             ALTER TABLE TOURS ADD CONSTRAINT TOUR_TYPE_CHECK CHECK(TOUR_TYPE IN ('BUSINESS', 'ECOTOURISM', 'LEISURE',
-            'PILGRIMAGE', 'RURAL_TOURISM', 'SCIENTIFIC_EXPEDITION', 'SPORT_COMPETITION', 'TOURISM', 'TRAINING', 'TREATMENT'))
+            'PILGRIMAGE', 'RURAL_TOURISM', 'SCIENTIFIC_EXPEDITION', 'SPORT_COMPETITION', 'TOURISM', 'TRAINING',
+            'TREATMENT'));
         </sql>
-        <sql dbms="oracle" endDelimiter="\nGO" stripComments="true">
+        <sql dbms="oracle" endDelimiter="/" stripComments="true">
             CREATE OR REPLACE TRIGGER TOUR_CHECK_DATES_TRIGGER
-                BEFORE INSERT OR UPDATE ON TOURS FOR EACH ROW
+            BEFORE INSERT OR UPDATE ON TOURS FOR EACH ROW
             BEGIN
-                IF(:NEW.START_DATE &lt;= SYSTIMESTAMP)
-                THEN
-                    RAISE_APPLICATION_ERROR(-20001, 'INVALID TOUR START DATE: ' ||
-                    TO_CHAR(:NEW.START_DATE, 'YYYY-MM-DD HH24:MI:SS') ||
-                    '. START DATE MUST BE GREATER THAN THE CURRENT DATE: ' ||
-                    TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS'));
-                END IF;
-                IF(:NEW.END_DATE &lt;= SYSTIMESTAMP)
-                THEN
-                    RAISE_APPLICATION_ERROR(-20001, 'INVALID TOUR END DATE:' ||
-                    TO_CHAR(:NEW.END_DATE, 'YYYY-MM-DD HH24:MI:SS') ||
-                    ' END DATE MUST BE GREATER THAN THE CURRENT DATE: ' ||
-                    TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS'));
-                END IF;
-                IF(:NEW.END_DATE &lt; (:NEW.START_DATE + INTERVAL '1' DAY))
-                THEN
-                    RAISE_APPLICATION_ERROR(-20001, 'INVALID TOUR DURATION (START DATE - ' ||
-                    TO_CHAR(:NEW.START_DATE, 'YYYY-MM-DD HH24:MI:SS') ||
-                    ', END DATE - ' || TO_CHAR(:NEW.END_DATE, 'YYYY-MM-DD HH24:MI:SS' ) ||
-                    ': DURATION MUST BE MORE THAN 1 DAY');
-                END IF;
+            IF(:NEW.START_DATE &lt;= SYSTIMESTAMP) THEN
+            RAISE_APPLICATION_ERROR(-20001, 'INVALID TOUR START DATE: ' ||
+            TO_CHAR(:NEW.START_DATE, 'YYYY-MM-DD HH24:MI:SS') ||
+            '. START DATE MUST BE GREATER THAN THE CURRENT DATE: ' ||
+            TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS'));
+            END IF;
+            IF(:NEW.END_DATE &lt;= SYSTIMESTAMP) THEN
+            RAISE_APPLICATION_ERROR(-20001, 'INVALID TOUR END DATE:' ||
+            TO_CHAR(:NEW.END_DATE, 'YYYY-MM-DD HH24:MI:SS') ||
+            ' END DATE MUST BE GREATER THAN THE CURRENT DATE: ' ||
+            TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS'));
+            END IF;
+            IF(:NEW.END_DATE &lt; (:NEW.START_DATE + INTERVAL '1' DAY)) THEN
+            RAISE_APPLICATION_ERROR(-20001, 'INVALID TOUR DURATION (START DATE - ' ||
+            TO_CHAR(:NEW.START_DATE, 'YYYY-MM-DD HH24:MI:SS') ||
+            ', END DATE - ' || TO_CHAR(:NEW.END_DATE, 'YYYY-MM-DD HH24:MI:SS' ) ||
+            ': DURATION MUST BE MORE THAN 1 DAY');
+            END IF;
             END;
+            /
         </sql>
         <sql dbms="postgresql" stripComments="true">
             ALTER TABLE TOURS ADD CONSTRAINT TOUR_COST_CHECK CHECK (COST &gt; 0.0000);
-            ALTER TABLE TOURS ADD CONSTRAINT TOUR_END_DATE_CHECK CHECK (AGE(END_DATE, START_DATE) &gt;= '1 DAY'::INTERVAL);
+            ALTER TABLE TOURS ADD CONSTRAINT TOUR_END_DATE_CHECK CHECK (AGE(END_DATE, START_DATE) &gt;= '1
+            DAY'::INTERVAL);
             ALTER TABLE TOURS ADD CONSTRAINT TOUR_START_DATE_CHECK CHECK (START_DATE &gt;= NOW());
             ALTER TABLE TOURS ADD CONSTRAINT TOUR_TYPE_CHECK CHECK (TOUR_TYPE IN ('BUSINESS', 'ECOTOURISM', 'LEISURE',
-            'PILGRIMAGE', 'RURAL_TOURISM', 'SCIENTIFIC_EXPEDITION', 'SPORT_COMPETITION', 'TOURISM', 'TRAINING', 'TREATMENT'));
+            'PILGRIMAGE', 'RURAL_TOURISM', 'SCIENTIFIC_EXPEDITION', 'SPORT_COMPETITION', 'TOURISM', 'TRAINING',
+            'TREATMENT'));
         </sql>
+    </changeSet>
+
+    <changeSet id="Create INDEXES for TOURS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createIndex tableName="TOURS" indexName="TOUR_DATES_INDEX">
+            <column name="START_DATE"/>
+            <column name="END_DATE"/>
+        </createIndex>
+        <createIndex tableName="TOURS" indexName="TOUR_COST_INDEX">
+            <column name="COST"/>
+        </createIndex>
+        <createIndex tableName="TOURS" indexName="TOUR_COUNTRY_INDEX">
+            <column name="COUNTRY_ID"/>
+        </createIndex>
+        <createIndex tableName="TOURS" indexName="TOUR_HOTEL_INDEX">
+            <column name="HOTEL_ID"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="Create VIEWS for TOURS" author="Liquibase" dbms="oracle" runAlways="true" runOnChange="true" failOnError="true">
+        <createView viewName="TOUR_FUTURE_VIEW" fullDefinition="false" replaceIfExists="true">
+            SELECT T.TOUR_ID, T.PHOTO_PATH, T.START_DATE, T.END_DATE, T.DESCRIPTION, T.COST, T.TOUR_TYPE, T.COUNTRY_ID, T.HOTEL_ID
+            FROM TOURS T WHERE T.START_DATE &gt;= SYSTIMESTAMP
+        </createView>
+    </changeSet>
+    <changeSet id="Creatre VIEWS for TOURS" author="Liquibase" dbms="postgresql" runAlways="true" runOnChange="true" failOnError="true">
+        <createView viewName="TOUR_FUTURE_VIEW" fullDefinition="false" replaceIfExists="true">
+            SELECT T.TOUR_ID, T.PHOTO_PATH, T.START_DATE, T.END_DATE, T.DESCRIPTION, T.COST, T.TOUR_TYPE, T.COUNTRY_ID, T.HOTEL_ID
+            FROM TOURS T WHERE T.START_DATE &gt;= NOW()
+        </createView>
     </changeSet>
 
     <changeSet id="Create table USERS_TOURS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
@@ -259,6 +296,43 @@
         <addForeignKeyConstraint baseTableName="USERS_TOURS" baseColumnNames="TOUR_ID"
                                  constraintName="USER_TOUR_TOUR_ID_FK"
                                  referencedTableName="TOURS" referencedColumnNames="TOUR_ID"/>
+    </changeSet>
+
+    <changeSet id="Create FUNCTION for calculating time on vacation" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <sql dbms="oracle" endDelimiter="/" stripComments="true">
+            CREATE OR REPLACE FUNCTION CALCULATE_VACATION_TIME (USER_ID IN NUMBER)
+            RETURN DATE
+            IS
+            TOTAL_PERIOD DATE;
+            BEGIN
+            IF (USER_ID &gt; 0) THEN
+            SELECT TO_DATE(SUM(EXTRACT(SECOND FROM PERIOD)),'hh24:mi:ss') INTO TOTAL_PERIOD FROM
+            (SELECT T.END_DATE - T.START_DATE AS PERIOD FROM TOURS T
+            INNER JOIN USERS_TOURS U_T ON T.TOUR_ID = U_T.TOUR_ID
+            WHERE U_T.USER_ID = USER_ID);
+            RETURN TOTAL_PERIOD;
+            ELSE
+            RAISE_APPLICATION_ERROR(-20001, 'INVALID USER ID: ' || USER_ID);
+            END IF;
+            END;
+            /
+        </sql>
+        <sql dbms="postgresql" stripComments="true">
+            CREATE OR REPLACE FUNCTION CALCULATE_VACATION_TIME (IN USER_ID BIGINT)
+            RETURNS INTERVAL
+            AS
+            CURS CURSOR;
+            BEGIN
+            IF (USER_ID &gt; 0) THEN
+            RETURN SELECT SUM(T.END_DATE - T.START_DATE) FROM TOURS T
+            INNER JOIN USERS_TOURS U_T ON T.TOUR_ID = U_T.TOUR_ID
+            INNER JOIN USERS U ON U_T.USER_ID = U.USER_ID
+            WHERE U.USER_ID = USER_ID;
+            ELSE
+            RAISE_APPLICATION_ERROR(-20001, 'INVALID USER ID: ' || USER_ID);
+            END IF;
+            END;
+        </sql>
     </changeSet>
 
     <changeSet id="Create table REVIEWS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
@@ -286,21 +360,125 @@
     </changeSet>
 
     <changeSet id="Create CONSTRAINTS for REVIEWS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
-        <sql dbms="oracle" endDelimiter="\nGO" stripComments="true">
+        <sql dbms="oracle" endDelimiter="/" stripComments="true">
             CREATE OR REPLACE TRIGGER REVIEW_CHECK_DATE_TRIGGER
-                BEFORE INSERT OR UPDATE ON REVIEWS FOR EACH ROW
+            BEFORE INSERT OR UPDATE ON REVIEWS FOR EACH ROW
             BEGIN
-                IF( :NEW.REVIEW_DATE &lt;= SYSTIMESTAMP )
-                THEN
-                    RAISE_APPLICATION_ERROR( -20001, 'INVALID REVIEW DATE: ' ||
-                    TO_CHAR(:NEW.REVIEW_DATE, 'YYYY-MM-DD HH24:MI:SS') ||
-                    '. REVIEW DATE MUST BE GREATER THAN THE CURRENT DATE: ' ||
-                    TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS'));
-                END IF;
+            IF( :NEW.REVIEW_DATE &lt;= SYSTIMESTAMP ) THEN
+            RAISE_APPLICATION_ERROR(-20001, 'INVALID REVIEW DATE: ' ||
+            TO_CHAR(:NEW.REVIEW_DATE, 'YYYY-MM-DD HH24:MI:SS') ||
+            '. REVIEW DATE MUST BE GREATER THAN THE CURRENT DATE: ' ||
+            TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS'));
+            END IF;
             END;
+            /
         </sql>
         <sql dbms="postgresql" stripComments="true">
             ALTER TABLE REVIEWS ADD CONSTRAINT REVIEW_DATE_CHECK CHECK (REVIEW_DATE &gt;= NOW());
         </sql>
+    </changeSet>
+
+    <changeSet id="Create INDEXES for REVIEWS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createIndex tableName="REVIEWS" indexName="REVIEW_DATE_INDEX">
+            <column name="REVIEW_DATE"/>
+        </createIndex>
+        <createIndex tableName="REVIEWS" indexName="REVIEW_USER_INDEX">
+            <column name="USER_ID"/>
+        </createIndex>
+        <createIndex tableName="REVIEWS" indexName="REVIEW_TOUR_INDEX">
+            <column name="TOUR_ID"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="Create VIEWS for REVIEWS" author="Liquibase" dbms="oracle" runAlways="true" runOnChange="true" failOnError="true">
+        <createView viewName="REVIEW_FUTURE_VIEW" fullDefinition="false" replaceIfExists="true">
+            SELECT R.REVIEW_ID, R.REVIEW_DATE, R.REVIEW_TEXT, R.USER_ID, R.TOUR_ID FROM REVIEWS R
+            WHERE R.REVIEW_DATE &gt;= SYSTIMESTAMP
+        </createView>
+    </changeSet>
+    <changeSet id="Create VIEWS for REVIEWS" author="Liquibase" dbms="postgresql" runAlways="true" runOnChange="true" failOnError="true">
+        <createView viewName="REVIEW_FUTURE_VIEW" fullDefinition="false" replaceIfExists="true">
+            SELECT R.REVIEW_ID, R.REVIEW_DATE, R.REVIEW_TEXT, R.USER_ID, R.TOUR_ID FROM REVIEWS R
+            WHERE R.REVIEW_DATE &gt;= NOW()
+        </createView>
+    </changeSet>
+
+    <changeSet id="Create PROCEDURES for REVIEWS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createProcedure dbms="oracle" procedureName="DELETE_USER_REVIEWS">
+            CREATE OR REPLACE PROCEDURE DELETE_USER_REVIEWS (USER_ID IN NUMBER)
+            IS
+            BEGIN
+            IF (USER_ID &gt; 0) THEN
+            DELETE FROM REVIEWS R WHERE R.USER_ID = USER_ID;
+            ELSE
+            RAISE_APPLICATION_ERROR(-20001, 'INVALID USER ID: ' || USER_ID);
+            END IF;
+            END;
+        </createProcedure>
+        <createProcedure dbms="postgresql" procedureName="DELETE_USER_REVIEWS">
+            CREATE OR REPLACE PROCEDURE DELETE_USER_REVIEWS (IN USER_ID BIGINT)
+            LANGUAGE plpgsql
+            AS $$
+            BEGIN
+            IF (USER_ID &gt; 0) THEN
+            DELETE FROM REVIEWS R WHERE R.USER_ID = USER_ID;
+            ELSE
+            RAISE EXCEPTION 'INVALID USER ID: %', USER_ID;
+            END IF;
+            END;
+            $$;
+        </createProcedure>
+
+        <createProcedure dbms="oracle" procedureName="DELETE_TOUR_REVIEWS">
+            CREATE OR REPLACE PROCEDURE DELETE_TOUR_REVIEWS (TOUR_ID IN NUMBER)
+            IS
+            BEGIN
+            IF (TOUR_ID &gt; 0) THEN
+            DELETE FROM REVIEWS R WHERE R.TOUR_ID = TOUR_ID;
+            ELSE
+            RAISE_APPLICATION_ERROR(-20001, 'INVALID TOUR ID: ' || TOUR_ID);
+            END IF;
+            END;
+        </createProcedure>
+        <createProcedure dbms="postgresql" procedureName="DELETE_TOUR_REVIEWS">
+            CREATE OR REPLACE PROCEDURE DELETE_TOUR_REVIEWS (IN TOUR_ID BIGINT)
+            LANGUAGE plpgsql
+            AS $$
+            BEGIN
+            IF (TOUR_ID &gt; 0) THEN
+            DELETE FROM REVIEWS R WHERE R.TOUR_ID = TOUR_ID;
+            ELSE
+            RAISE EXCEPTION 'INVALID TOUR ID: %', TOUR_ID;
+            END IF;
+            END;
+            $$;
+        </createProcedure>
+
+        <createProcedure dbms="oracle" procedureName="MAKE_POSITIVE_REVIEWS">
+            CREATE OR REPLACE PROCEDURE MAKE_POSITIVE_REVIEWS (USER_ID IN NUMBER, TOUR_ID IN NUMBER)
+            IS
+            BEGIN
+            IF (USER_ID &gt; 0 AND TOUR_ID &gt; 0) THEN
+            UPDATE REVIEWS R SET R.REVIEW_TEXT = REGEXP_REPLACE(R.REVIEW_TEXT, '\s*bad\s*', 'good')
+            WHERE R.USER_ID = USER_ID AND REGEXP_LIKE(R.REVIEW_TEXT, '\s*bad\s*');
+            ELSE
+            RAISE_APPLICATION_ERROR(-20001, 'INVALID USER ID OR TOUR ID: ' || USER_ID || ' OR ' || TOUR_ID);
+            END IF;
+            END;
+        </createProcedure>
+        <createProcedure dbms="postgresql" procedureName="MAKE_POSITIVE_REVIEWS">
+            CREATE OR REPLACE PROCEDURE MAKE_POSITIVE_REVIEWS (IN USER_ID BIGINT, IN TOUR_ID BIGINT)
+            LANGUAGE plpgsql
+            AS $$
+            BEGIN
+            IF (USER_ID &gt; 0 AND TOUR_ID &gt; 0) THEN
+            UPDATE REVIEWS R SET R.REVIEW_TEXT = REGEXP_REPLACE(R.REVIEW_TEXT, '\s*bad\s*', 'good')
+            WHERE R.USER_ID = USER_ID AND REGEXP_LIKE(R.REVIEW_TEXT, '\s*bad\s*');
+            ELSE
+            RAISE EXCEPTION 'INVALID USER ID OR TOUR ID: % OR %', USER_ID, TOUR_ID;
+            END IF;
+            END;
+            $$;
+        </createProcedure>
     </changeSet>
 </databaseChangeLog>

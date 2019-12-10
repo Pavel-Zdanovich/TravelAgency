@@ -52,7 +52,7 @@ public class EntityManagerConfig {
         localContainerEntityManagerFactoryBean.setPersistenceUnitName("travel_agency");
         Properties properties = new Properties();
         properties.put(DIALECT, dialect.getClass().getTypeName());
-        properties.put(HBM2DDL_AUTO, Action.UPDATE);
+        properties.put(HBM2DDL_AUTO, Action.NONE);
         properties.put(SHOW_SQL, true);
         properties.put(FORMAT_SQL, true);
         localContainerEntityManagerFactoryBean.setJpaProperties(properties);

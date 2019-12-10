@@ -69,16 +69,14 @@ public class MigrationTest {
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("SELECT * FROM COUNTRIES")) {
-            StringBuilder countries = new StringBuilder("Countries : { ");
             while (resultSet.next()) {
-                countries.append(resultSet.getString("NAME"));
+                log.info(resultSet.getString("NAME"));
             }
-            log.info(countries.append("}").toString());
             log.info("isFirst: " + resultSet.isFirst());
             log.info("isBeforeFirst: " + resultSet.isBeforeFirst());
             log.info("isAfterLast: " + resultSet.isAfterLast());
             log.info("isLast: " + resultSet.isLast());
-            Assert.assertTrue(resultSet.isLast());
+            Assert.assertTrue(resultSet.isAfterLast());
         }
     }
 
@@ -87,12 +85,10 @@ public class MigrationTest {
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("SELECT * FROM HOTELS")) {
-            StringBuilder hotels = new StringBuilder("Hotels : { ");
             while (resultSet.next()) {
-                hotels.append(resultSet.getString("NAME"));
+                log.info(resultSet.getString("NAME"));
             }
-            log.info(hotels.append("}\n").toString());
-            Assert.assertTrue(resultSet.isLast());
+            Assert.assertTrue(resultSet.isAfterLast());
         }
     }
 
@@ -101,12 +97,10 @@ public class MigrationTest {
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("SELECT * FROM FEATURES")) {
-            StringBuilder features = new StringBuilder("Features : { ");
             while (resultSet.next()) {
-                features.append(resultSet.getString("NAME"));
+                log.info(resultSet.getString("NAME"));
             }
-            log.info(features.append("}\n").toString());
-            Assert.assertTrue(resultSet.isLast());
+            Assert.assertTrue(resultSet.isAfterLast());
         }
     }
 
@@ -115,15 +109,11 @@ public class MigrationTest {
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("SELECT * FROM HOTELS_FEATURES")) {
-            StringBuilder hotelsFeatures = new StringBuilder("Hotels Features : { ");
             while (resultSet.next()) {
-                hotelsFeatures.append(String.format("%d-%d",
-                        resultSet.getLong("HOTEL_ID"),
-                        resultSet.getLong("FEATURE_ID")
-                ));
+                log.info(String.format("%d-%d", resultSet.getLong("HOTEL_ID"),
+                        resultSet.getLong("FEATURE_ID")));
             }
-            log.info(hotelsFeatures.append("}\n").toString());
-            Assert.assertTrue(resultSet.isLast());
+            Assert.assertTrue(resultSet.isAfterLast());
         }
     }
 
@@ -132,12 +122,10 @@ public class MigrationTest {
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("SELECT * FROM USERS")) {
-            StringBuilder users = new StringBuilder("User : { ");
             while (resultSet.next()) {
-                users.append(resultSet.getString("LOGIN"));
+                log.info(resultSet.getString("LOGIN"));
             }
-            log.info(users.append("}\n").toString());
-            Assert.assertTrue(resultSet.isLast());
+            Assert.assertTrue(resultSet.isAfterLast());
         }
     }
 
@@ -146,12 +134,10 @@ public class MigrationTest {
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("SELECT * FROM TOURS")) {
-            StringBuilder tours = new StringBuilder("Tours : { ");
             while (resultSet.next()) {
-                tours.append(resultSet.getString("DESCRIPTION"));
+                log.info(resultSet.getString("DESCRIPTION"));
             }
-            log.info(tours.append("}\n").toString());
-            Assert.assertTrue(resultSet.isLast());
+            Assert.assertTrue(resultSet.isAfterLast());
         }
     }
 
@@ -160,12 +146,11 @@ public class MigrationTest {
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("SELECT * FROM USERS_TOURS")) {
-            StringBuilder usersTours = new StringBuilder("Users Tours : { ");
             while (resultSet.next()) {
-                usersTours.append(resultSet.next());
+                log.info(String.format("%d-%d", resultSet.getLong("USER_ID"),
+                        resultSet.getLong("TOUR_ID")));
             }
-            log.info(usersTours.append("}\n").toString());
-            Assert.assertTrue(resultSet.isLast());
+            Assert.assertTrue(resultSet.isAfterLast());
         }
     }
 
@@ -174,12 +159,10 @@ public class MigrationTest {
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("SELECT * FROM REVIEWS")) {
-            StringBuilder reviews = new StringBuilder("Reviews : { ");
             while (resultSet.next()) {
-                reviews.append(resultSet.getString("REVIEW_TEXT"));
+                log.info(resultSet.getString("REVIEW_TEXT"));
             }
-            log.info(reviews.append("}\n").toString());
-            Assert.assertTrue(resultSet.isLast());
+            Assert.assertTrue(resultSet.isAfterLast());
         }
     }
 

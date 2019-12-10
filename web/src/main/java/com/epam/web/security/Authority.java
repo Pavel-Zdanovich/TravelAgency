@@ -40,7 +40,7 @@ class Authority {
     }
 
     static Set<GrantedAuthority> getAuthority(UserRole userRole) {
-        return authorities.getOrDefault(userRole, authorities.get(GUEST_ROLE));
+        return authorities.getOrDefault(userRole.toString(), authorities.get(GUEST_ROLE));
     }
 
     static Set<GrantedAuthority> getAuthority(String userRole) {
