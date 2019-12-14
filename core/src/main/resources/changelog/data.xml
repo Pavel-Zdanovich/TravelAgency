@@ -4,13 +4,6 @@
 				   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-	<!--<changeSet id="Insert test" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
-		<insert tableName="COUNTRIES">
-			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
-			<column name="NAME" value="France"/>
-		</insert>
-	</changeSet>-->
-
 	<changeSet id="Insert into COUNTRIES" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
 		<insert tableName="COUNTRIES">
 			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
@@ -230,7 +223,7 @@
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="Park Hyatt Saigon"/>
 			<column name="WEBSITE" value="https://www.hyatt.com"/>
-			<column name="STARS" value="5"/>
+			<column name="STARS" value="4"/>
 			<column name="LATITUDE" value="10.7775637"/>
 			<column name="LONGITUDE" value="106.7034373"/>
 		</insert>
@@ -238,7 +231,7 @@
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="Hotel Nena"/>
 			<column name="WEBSITE" value="http://www.istanbulhotelnena.com"/>
-			<column name="STARS" value="5"/>
+			<column name="STARS" value="3"/>
 			<column name="LATITUDE" value="41.0079153"/>
 			<column name="LONGITUDE" value="28.9711302"/>
 		</insert>
@@ -246,7 +239,7 @@
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="Raffles Jakarta"/>
 			<column name="WEBSITE" value="https://www.raffles.ru"/>
-			<column name="STARS" value="5"/>
+			<column name="STARS" value="2"/>
 			<column name="LATITUDE" value="-6.2236500"/>
 			<column name="LONGITUDE" value="106.8215033"/>
 		</insert>
@@ -310,7 +303,7 @@
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="Hotel Continental"/>
 			<column name="WEBSITE" value="https://www.hotelcontinental.no"/>
-			<column name="STARS" value="5"/>
+			<column name="STARS" value="4"/>
 			<column name="LATITUDE" value="52.5070502"/>
 			<column name="LONGITUDE" value="13.3434453"/>
 		</insert>
@@ -318,7 +311,7 @@
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="Villa Maly"/>
 			<column name="WEBSITE" value="https://www.villa-maly.com"/>
-			<column name="STARS" value="5"/>
+			<column name="STARS" value="3"/>
 			<column name="LATITUDE" value="19.885176"/>
 			<column name="LONGITUDE" value="102.1293873"/>
 		</insert>
@@ -334,7 +327,7 @@
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="Beau-Rivage Palace"/>
 			<column name="WEBSITE" value="https://www.brp.ch"/>
-			<column name="STARS" value="5"/>
+			<column name="STARS" value="1"/>
 			<column name="LATITUDE" value="46.5080572"/>
 			<column name="LONGITUDE" value="6.6279638"/>
 		</insert>
@@ -390,7 +383,7 @@
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="One&amp;Only Cape Town"/>
 			<column name="WEBSITE" value="https://www.oneandonlyresorts.com"/>
-			<column name="STARS" value="3"/>
+			<column name="STARS" value="4"/>
 			<column name="LATITUDE" value="-33.9085275"/>
 			<column name="LONGITUDE" value="18.4142853"/>
 		</insert>
@@ -406,7 +399,7 @@
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="The Temple House"/>
 			<column name="WEBSITE" value="https://www.thetemplehousehotel.com/en/default"/>
-			<column name="STARS" value="5"/>
+			<column name="STARS" value="2"/>
 			<column name="LATITUDE" value="42.3551623"/>
 			<column name="LONGITUDE" value="-71.0642029"/>
 		</insert>
@@ -414,7 +407,7 @@
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="Inkaterra La Casona"/>
 			<column name="WEBSITE" value="https://www.inkaterra.com"/>
-			<column name="STARS" value="5"/>
+			<column name="STARS" value="1"/>
 			<column name="LATITUDE" value="-13.5151718"/>
 			<column name="LONGITUDE" value="-71.9796147"/>
 		</insert>
@@ -470,7 +463,7 @@
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="Ellerman House"/>
 			<column name="WEBSITE" value="https://www.ellerman.co.za"/>
-			<column name="STARS" value="5"/>
+			<column name="STARS" value="4"/>
 			<column name="LATITUDE" value="-33.9290255"/>
 			<column name="LONGITUDE" value="18.3753713"/>
 		</insert>
@@ -478,7 +471,7 @@
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="Gibb's Farm"/>
 			<column name="WEBSITE" value="https://www.gibbsfarm.com"/>
-			<column name="STARS" value="5"/>
+			<column name="STARS" value="3"/>
 			<column name="LATITUDE" value="-36.5198421"/>
 			<column name="LONGITUDE" value="174.4467866"/>
 		</insert>
@@ -486,7 +479,7 @@
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="Hôtel Métropole Monte-Carlo"/>
 			<column name="WEBSITE" value="https://www.metropole.com/en/home"/>
-			<column name="STARS" value="5"/>
+			<column name="STARS" value="2"/>
 			<column name="LATITUDE" value="43.7413946"/>
 			<column name="LONGITUDE" value="7.4259424"/>
 		</insert>
@@ -494,7 +487,7 @@
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="Birkenhead House"/>
 			<column name="WEBSITE" value="https://www.mrandmrssmith.com/luxury-hotels/birkenhead-house"/>
-			<column name="STARS" value="5"/>
+			<column name="STARS" value="1"/>
 			<column name="LATITUDE" value="-34.4099586"/>
 			<column name="LONGITUDE" value="19.2783663"/>
 		</insert>
@@ -502,7 +495,7 @@
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="La Residence"/>
 			<column name="WEBSITE" value="https://laresidencemykonos.com"/>
-			<column name="STARS" value="4"/>
+			<column name="STARS" value="5"/>
 			<column name="LATITUDE" value="-33.8982905"/>
 			<column name="LONGITUDE" value="19.1178439"/>
 		</insert>
@@ -510,7 +503,7 @@
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="Cotton House Hotel"/>
 			<column name="WEBSITE" value="https://www.hotelcottonhouse.com"/>
-			<column name="STARS" value="4"/>
+			<column name="STARS" value="5"/>
 			<column name="LATITUDE" value="41.3917635"/>
 			<column name="LONGITUDE" value="2.1695809"/>
 		</insert>
@@ -550,7 +543,7 @@
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="Capella Singapore"/>
 			<column name="WEBSITE" value="https://www.capellahotels.com/en"/>
-			<column name="STARS" value="5"/>
+			<column name="STARS" value="4"/>
 			<column name="LATITUDE" value="1.2496207"/>
 			<column name="LONGITUDE" value="103.8222185"/>
 		</insert>
@@ -558,7 +551,7 @@
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="Hacienda de San Antonio"/>
 			<column name="WEBSITE" value="https://haciendadesanantonio.com"/>
-			<column name="STARS" value="5"/>
+			<column name="STARS" value="3"/>
 			<column name="LATITUDE" value="19.4485900"/>
 			<column name="LONGITUDE" value="-103.7217947"/>
 		</insert>
@@ -566,7 +559,7 @@
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="Baur au Lac"/>
 			<column name="WEBSITE" value="https://www.bauraulac.ch"/>
-			<column name="STARS" value="5"/>
+			<column name="STARS" value="2"/>
 			<column name="LATITUDE" value="47.3673045"/>
 			<column name="LONGITUDE" value="8.5371692"/>
 		</insert>
@@ -574,7 +567,7 @@
 			<column name="HOTEL_ID" valueSequenceNext="HOTEL_SEQUENCE"/>
 			<column name="NAME" value="The Twelve Apostles Hotel and Spa"/>
 			<column name="WEBSITE" value="https://www.12apostleshotel.com"/>
-			<column name="STARS" value="5"/>
+			<column name="STARS" value="1"/>
 			<column name="LATITUDE" value="-33.9835217"/>
 			<column name="LONGITUDE" value="18.3567792"/>
 		</insert>
@@ -633,6 +626,14 @@
 			<column name="HOTEL_ID" value="1"/>
 			<column name="FEATURE_ID" value="3"/>
 		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="1"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="1"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
 
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="2"/>
@@ -645,6 +646,10 @@
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="2"/>
 			<column name="FEATURE_ID" value="4"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="2"/>
+			<column name="FEATURE_ID" value="5"/>
 		</insert>
 
 		<insert tableName="HOTELS_FEATURES">
@@ -668,22 +673,10 @@
 			<column name="HOTEL_ID" value="4"/>
 			<column name="FEATURE_ID" value="5"/>
 		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="4"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
 
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="5"/>
 			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="5"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="5"/>
-			<column name="FEATURE_ID" value="7"/>
 		</insert>
 
 		<insert tableName="HOTELS_FEATURES">
@@ -698,6 +691,14 @@
 			<column name="HOTEL_ID" value="6"/>
 			<column name="FEATURE_ID" value="8"/>
 		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="6"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="6"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
 
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="7"/>
@@ -710,6 +711,14 @@
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="7"/>
 			<column name="FEATURE_ID" value="9"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="7"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="7"/>
+			<column name="FEATURE_ID" value="1"/>
 		</insert>
 
 		<insert tableName="HOTELS_FEATURES">
@@ -724,6 +733,14 @@
 			<column name="HOTEL_ID" value="8"/>
 			<column name="FEATURE_ID" value="10"/>
 		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="8"/>
+			<column name="FEATURE_ID" value="1"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="8"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
 
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="9"/>
@@ -736,6 +753,14 @@
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="9"/>
 			<column name="FEATURE_ID" value="1"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="9"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="9"/>
+			<column name="FEATURE_ID" value="3"/>
 		</insert>
 
 		<insert tableName="HOTELS_FEATURES">
@@ -750,6 +775,14 @@
 			<column name="HOTEL_ID" value="10"/>
 			<column name="FEATURE_ID" value="2"/>
 		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="10"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="10"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
 
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="11"/>
@@ -757,198 +790,238 @@
 		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="11"/>
-			<column name="FEATURE_ID" value="2"/>
+			<column name="FEATURE_ID" value="3"/>
 		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="11"/>
-			<column name="FEATURE_ID" value="3"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="11"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="11"/>
+			<column name="FEATURE_ID" value="9"/>
 		</insert>
 
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="12"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="12"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="12"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="12"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="13"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="13"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="13"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="14"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="14"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="15"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="16"/>
 			<column name="FEATURE_ID" value="2"/>
 		</insert>
 		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="12"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="12"/>
+			<column name="HOTEL_ID" value="16"/>
 			<column name="FEATURE_ID" value="4"/>
 		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="13"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="13"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="13"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="14"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="14"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="14"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="15"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="15"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="15"/>
-			<column name="FEATURE_ID" value="7"/>
-		</insert>
-
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="16"/>
 			<column name="FEATURE_ID" value="6"/>
 		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="16"/>
-			<column name="FEATURE_ID" value="7"/>
+			<column name="FEATURE_ID" value="8"/>
 		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="16"/>
-			<column name="FEATURE_ID" value="8"/>
+			<column name="FEATURE_ID" value="10"/>
 		</insert>
 
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="17"/>
-			<column name="FEATURE_ID" value="7"/>
+			<column name="FEATURE_ID" value="1"/>
 		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="17"/>
-			<column name="FEATURE_ID" value="8"/>
+			<column name="FEATURE_ID" value="3"/>
 		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="17"/>
-			<column name="FEATURE_ID" value="9"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="17"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="17"/>
+			<column name="FEATURE_ID" value="6"/>
 		</insert>
 
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="18"/>
-			<column name="FEATURE_ID" value="8"/>
+			<column name="FEATURE_ID" value="1"/>
 		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="18"/>
-			<column name="FEATURE_ID" value="9"/>
+			<column name="FEATURE_ID" value="4"/>
 		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="18"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="19"/>
-			<column name="FEATURE_ID" value="9"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="19"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="19"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="20"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="20"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="20"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="21"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="21"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="21"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="22"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="22"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="22"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="23"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="23"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="23"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="24"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="24"/>
 			<column name="FEATURE_ID" value="5"/>
 		</insert>
 		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="24"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="25"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="25"/>
+			<column name="HOTEL_ID" value="18"/>
 			<column name="FEATURE_ID" value="6"/>
 		</insert>
 		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="25"/>
+			<column name="HOTEL_ID" value="18"/>
 			<column name="FEATURE_ID" value="7"/>
 		</insert>
 
 		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="26"/>
+			<column name="HOTEL_ID" value="19"/>
+			<column name="FEATURE_ID" value="1"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="19"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="19"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="19"/>
 			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="19"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="20"/>
+			<column name="FEATURE_ID" value="1"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="20"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="20"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="20"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="20"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="21"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="21"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="21"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="21"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="21"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="22"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="22"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="22"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="22"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="23"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="23"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="23"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="24"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="24"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="25"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="26"/>
+			<column name="FEATURE_ID" value="1"/>
 		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="26"/>
@@ -958,124 +1031,168 @@
 			<column name="HOTEL_ID" value="26"/>
 			<column name="FEATURE_ID" value="8"/>
 		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="26"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="26"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
 
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="27"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="27"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="27"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="27"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="27"/>
 			<column name="FEATURE_ID" value="7"/>
 		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="27"/>
-			<column name="FEATURE_ID" value="8"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="27"/>
-			<column name="FEATURE_ID" value="9"/>
-		</insert>
 
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="28"/>
-			<column name="FEATURE_ID" value="8"/>
+			<column name="FEATURE_ID" value="2"/>
 		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="28"/>
-			<column name="FEATURE_ID" value="9"/>
+			<column name="FEATURE_ID" value="5"/>
 		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="28"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="29"/>
-			<column name="FEATURE_ID" value="9"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="29"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="29"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="30"/>
-			<column name="FEATURE_ID" value="10"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="30"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="30"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="31"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="31"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="31"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="32"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="32"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="32"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="33"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="33"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="33"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="34"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="34"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="34"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="35"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="35"/>
 			<column name="FEATURE_ID" value="6"/>
 		</insert>
 		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="35"/>
+			<column name="HOTEL_ID" value="28"/>
 			<column name="FEATURE_ID" value="7"/>
 		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="28"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
 
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="29"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="29"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="29"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="29"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="29"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="30"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="30"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="30"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="30"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="30"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="31"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="31"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="31"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="31"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="31"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="32"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="32"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="32"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="32"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="33"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="33"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="33"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="34"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="34"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="35"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="36"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="36"/>
 			<column name="FEATURE_ID" value="6"/>
@@ -1088,7 +1205,15 @@
 			<column name="HOTEL_ID" value="36"/>
 			<column name="FEATURE_ID" value="8"/>
 		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="36"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
 
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="37"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="37"/>
 			<column name="FEATURE_ID" value="7"/>
@@ -1101,7 +1226,19 @@
 			<column name="HOTEL_ID" value="37"/>
 			<column name="FEATURE_ID" value="9"/>
 		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="37"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
 
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="38"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="38"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="38"/>
 			<column name="FEATURE_ID" value="8"/>
@@ -1117,98 +1254,114 @@
 
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="39"/>
-			<column name="FEATURE_ID" value="9"/>
+			<column name="FEATURE_ID" value="1"/>
 		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="39"/>
-			<column name="FEATURE_ID" value="10"/>
+			<column name="FEATURE_ID" value="4"/>
 		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="39"/>
-			<column name="FEATURE_ID" value="1"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="39"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="39"/>
+			<column name="FEATURE_ID" value="8"/>
 		</insert>
 
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="40"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="40"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="40"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="40"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="40"/>
 			<column name="FEATURE_ID" value="10"/>
 		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="40"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="40"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
 
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="41"/>
-			<column name="FEATURE_ID" value="1"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="41"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="41"/>
 			<column name="FEATURE_ID" value="3"/>
 		</insert>
-
 		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="42"/>
-			<column name="FEATURE_ID" value="2"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="42"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="42"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="43"/>
-			<column name="FEATURE_ID" value="3"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="43"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="43"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="44"/>
-			<column name="FEATURE_ID" value="4"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="44"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="44"/>
-			<column name="FEATURE_ID" value="6"/>
-		</insert>
-
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="45"/>
-			<column name="FEATURE_ID" value="5"/>
-		</insert>
-		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="45"/>
+			<column name="HOTEL_ID" value="41"/>
 			<column name="FEATURE_ID" value="6"/>
 		</insert>
 		<insert tableName="HOTELS_FEATURES">
-			<column name="HOTEL_ID" value="45"/>
+			<column name="HOTEL_ID" value="41"/>
 			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="41"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="41"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="42"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="42"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="42"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="42"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="43"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="43"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="43"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="44"/>
+			<column name="FEATURE_ID" value="3"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="44"/>
+			<column name="FEATURE_ID" value="8"/>
+		</insert>
+
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="45"/>
+			<column name="FEATURE_ID" value="6"/>
 		</insert>
 
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="46"/>
-			<column name="FEATURE_ID" value="6"/>
+			<column name="FEATURE_ID" value="3"/>
 		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="46"/>
@@ -1218,7 +1371,19 @@
 			<column name="HOTEL_ID" value="46"/>
 			<column name="FEATURE_ID" value="8"/>
 		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="46"/>
+			<column name="FEATURE_ID" value="9"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="46"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
 
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="47"/>
+			<column name="FEATURE_ID" value="4"/>
+		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="47"/>
 			<column name="FEATURE_ID" value="7"/>
@@ -1231,7 +1396,15 @@
 			<column name="HOTEL_ID" value="47"/>
 			<column name="FEATURE_ID" value="9"/>
 		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="47"/>
+			<column name="FEATURE_ID" value="10"/>
+		</insert>
 
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="48"/>
+			<column name="FEATURE_ID" value="5"/>
+		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="48"/>
 			<column name="FEATURE_ID" value="8"/>
@@ -1244,7 +1417,15 @@
 			<column name="HOTEL_ID" value="48"/>
 			<column name="FEATURE_ID" value="10"/>
 		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="48"/>
+			<column name="FEATURE_ID" value="1"/>
+		</insert>
 
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="49"/>
+			<column name="FEATURE_ID" value="6"/>
+		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="49"/>
 			<column name="FEATURE_ID" value="9"/>
@@ -1257,7 +1438,15 @@
 			<column name="HOTEL_ID" value="49"/>
 			<column name="FEATURE_ID" value="1"/>
 		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="49"/>
+			<column name="FEATURE_ID" value="2"/>
+		</insert>
 
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="50"/>
+			<column name="FEATURE_ID" value="7"/>
+		</insert>
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="50"/>
 			<column name="FEATURE_ID" value="10"/>
@@ -1269,6 +1458,10 @@
 		<insert tableName="HOTELS_FEATURES">
 			<column name="HOTEL_ID" value="50"/>
 			<column name="FEATURE_ID" value="2"/>
+		</insert>
+		<insert tableName="HOTELS_FEATURES">
+			<column name="HOTEL_ID" value="50"/>
+			<column name="FEATURE_ID" value="3"/>
 		</insert>
 	</changeSet>
 
@@ -1578,6 +1771,12 @@
 			<column name="LOGIN" value="DavidHilbert"/>
 			<column name="PASSWORD" value="HilbertSpace"/>
 			<column name="ROLE" value="USER"/>
+		</insert>
+		<insert tableName="USERS">
+			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
+			<column name="LOGIN" value="PavelZdanovich"/>
+			<column name="PASSWORD" value="ProgMathist3301"/>
+			<column name="ROLE" value="ADMIN"/>
 		</insert>
 	</changeSet>
 	
@@ -2030,7 +2229,7 @@
 			<column name="DESCRIPTION" value="lead trip"/>
 			<column name="COST" value="4100.0000"/>
 			<column name="TOUR_TYPE" value="BUSINESS"/>
-			<column name="HOTEL_ID" value="1"/>
+			<column name="HOTEL_ID" value="41"/>
 			<column name="COUNTRY_ID" value="1"/>
 		</insert>
 		<insert tableName="TOURS">
@@ -2041,7 +2240,7 @@
 			<column name="DESCRIPTION" value="mid trip"/>
 			<column name="COST" value="4200.0000"/>
 			<column name="TOUR_TYPE" value="ECOTOURISM"/>
-			<column name="HOTEL_ID" value="4"/>
+			<column name="HOTEL_ID" value="42"/>
 			<column name="COUNTRY_ID" value="4"/>
 		</insert>
 		<insert tableName="TOURS">
@@ -2052,7 +2251,7 @@
 			<column name="DESCRIPTION" value="med trip"/>
 			<column name="COST" value="4300.0000"/>
 			<column name="TOUR_TYPE" value="LEISURE"/>
-			<column name="HOTEL_ID" value="8"/>
+			<column name="HOTEL_ID" value="43"/>
 			<column name="COUNTRY_ID" value="8"/>
 		</insert>
 		<insert tableName="TOURS">
@@ -2063,7 +2262,7 @@
 			<column name="DESCRIPTION" value="mood trip"/>
 			<column name="COST" value="4400.0000"/>
 			<column name="TOUR_TYPE" value="PILGRIMAGE"/>
-			<column name="HOTEL_ID" value="12"/>
+			<column name="HOTEL_ID" value="44"/>
 			<column name="COUNTRY_ID" value="12"/>
 		</insert>
 		<insert tableName="TOURS">
@@ -2074,7 +2273,7 @@
 			<column name="DESCRIPTION" value="man trip"/>
 			<column name="COST" value="4500.0000"/>
 			<column name="TOUR_TYPE" value="RURAL_TOURISM"/>
-			<column name="HOTEL_ID" value="16"/>
+			<column name="HOTEL_ID" value="45"/>
 			<column name="COUNTRY_ID" value="16"/>
 		</insert>
 		<insert tableName="TOURS">
@@ -2085,7 +2284,7 @@
 			<column name="DESCRIPTION" value="male trip"/>
 			<column name="COST" value="4600.0000"/>
 			<column name="TOUR_TYPE" value="SCIENTIFIC_EXPEDITION"/>
-			<column name="HOTEL_ID" value="20"/>
+			<column name="HOTEL_ID" value="46"/>
 			<column name="COUNTRY_ID" value="20"/>
 		</insert>
 		<insert tableName="TOURS">
@@ -2096,7 +2295,7 @@
 			<column name="DESCRIPTION" value="small trip"/>
 			<column name="COST" value="4700.0000"/>
 			<column name="TOUR_TYPE" value="SPORT_COMPETITION"/>
-			<column name="HOTEL_ID" value="24"/>
+			<column name="HOTEL_ID" value="47"/>
 			<column name="COUNTRY_ID" value="24"/>
 		</insert>
 		<insert tableName="TOURS">
@@ -2107,7 +2306,7 @@
 			<column name="DESCRIPTION" value="fall trip"/>
 			<column name="COST" value="4800.0000"/>
 			<column name="TOUR_TYPE" value="TOURISM"/>
-			<column name="HOTEL_ID" value="28"/>
+			<column name="HOTEL_ID" value="48"/>
 			<column name="COUNTRY_ID" value="28"/>
 		</insert>
 		<insert tableName="TOURS">
@@ -2118,7 +2317,7 @@
 			<column name="DESCRIPTION" value="doll trip"/>
 			<column name="COST" value="4900.0000"/>
 			<column name="TOUR_TYPE" value="TRAINING"/>
-			<column name="HOTEL_ID" value="32"/>
+			<column name="HOTEL_ID" value="49"/>
 			<column name="COUNTRY_ID" value="32"/>
 		</insert>
 		<insert tableName="TOURS">
@@ -2129,7 +2328,7 @@
 			<column name="DESCRIPTION" value="goal trip"/>
 			<column name="COST" value="5000.0000"/>
 			<column name="TOUR_TYPE" value="TREATMENT"/>
-			<column name="HOTEL_ID" value="36"/>
+			<column name="HOTEL_ID" value="50"/>
 			<column name="COUNTRY_ID" value="36"/>
 		</insert>
 	</changeSet>

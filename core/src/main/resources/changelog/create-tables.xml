@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="Create table COUNTRIES" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createTable tableName="COUNTRIES">
+            <column name="COUNTRY_ID" type="BIGINT"/>
+            <column name="NAME" type="VARCHAR(50)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Create table HOTELS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createTable tableName="HOTELS">
+            <column name="HOTEL_ID" type="BIGINT"/>
+            <column name="NAME" type="VARCHAR(50)"/>
+            <column name="STARS" type="SMALLINT"/>
+            <column name="WEBSITE" type="VARCHAR(100)"/>
+            <column name="LATITUDE" type="DECIMAL(9,7)"/>
+            <column name="LONGITUDE" type="DECIMAL(10,7)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Create table FEATURES" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createTable tableName="FEATURES">
+            <column name="FEATURE_ID" type="BIGINT"/>
+            <column name="NAME" type="VARCHAR(30)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Create table HOTELS_FEATURES" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createTable tableName="HOTELS_FEATURES">
+            <column name="HOTEL_ID" type="BIGINT"/>
+            <column name="FEATURE_ID" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Create table USERS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createTable tableName="USERS">
+            <column name="USER_ID" type="BIGINT"/>
+            <column name="LOGIN" type="VARCHAR(30)"/>
+            <column name="PASSWORD" type="VARCHAR(30)"/>
+            <column name="ROLE" type="VARCHAR(10)" defaultValue="USER"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Create table TOURS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createTable tableName="TOURS">
+            <column name="TOUR_ID" type="BIGINT"/>
+            <column name="PHOTO_PATH" type="VARCHAR(250)"/>
+            <column name="START_DATE" type="TIMESTAMP"/>
+            <column name="END_DATE" type="TIMESTAMP"/>
+            <column name="DESCRIPTION" type="VARCHAR(1000)"/>
+            <column name="COST" type="DECIMAL(14,4)"/>
+            <column name="TOUR_TYPE" type="VARCHAR(30)"/>
+            <column name="COUNTRY_ID" type="BIGINT"/>
+            <column name="HOTEL_ID" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Create table USERS_TOURS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createTable tableName="USERS_TOURS">
+            <column name="USER_ID" type="BIGINT"/>
+            <column name="TOUR_ID" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Create table REVIEWS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createTable tableName="REVIEWS">
+            <column name="REVIEW_ID" type="BIGINT"/>
+            <column name="REVIEW_DATE" type="TIMESTAMP"/>
+            <column name="REVIEW_TEXT" type="VARCHAR(1000)"/>
+            <column name="USER_ID" type="BIGINT"/>
+            <column name="TOUR_ID" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

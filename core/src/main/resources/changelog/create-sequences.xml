@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="Create COUNTRY_SEQUENCE" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createSequence sequenceName="COUNTRY_SEQUENCE" startValue="1" cacheSize="0"/>
+    </changeSet>
+
+    <changeSet id="Create FEATURE_SEQUENCE" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createSequence sequenceName="FEATURE_SEQUENCE" startValue="1" cacheSize="0"/>
+    </changeSet>
+
+    <changeSet id="Create HOTEL_SEQUENCE" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createSequence sequenceName="HOTEL_SEQUENCE" startValue="1" cacheSize="0"/>
+    </changeSet>
+
+    <changeSet id="Create USER_SEQUENCE" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createSequence sequenceName="USER_SEQUENCE" startValue="1" cacheSize="0"/>
+    </changeSet>
+
+    <changeSet id="Create TOUR_SEQUENCE" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createSequence sequenceName="TOUR_SEQUENCE" startValue="1" cacheSize="0"/>
+    </changeSet>
+
+    <changeSet id="Create REVIEW_SEQUENCE" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createSequence sequenceName="REVIEW_SEQUENCE" startValue="1" cacheSize="0"/>
+    </changeSet>
+
+</databaseChangeLog>

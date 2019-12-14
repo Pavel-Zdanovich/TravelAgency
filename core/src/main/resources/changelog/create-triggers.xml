@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="Create TOUR_CHECK_DATES_TRIGGER" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <sql dbms="oracle" endDelimiter="/" stripComments="true">
+            CREATE OR REPLACE TRIGGER TOUR_CHECK_DATES_TRIGGER
+            BEFORE INSERT OR UPDATE ON TOURS FOR EACH ROW
+            BEGIN
+            IF(:NEW.START_DATE &lt;= SYSTIMESTAMP) THEN
+            RAISE_APPLICATION_ERROR(-20001, 'INVALID TOUR START DATE: ' ||
+            TO_CHAR(:NEW.START_DATE, 'YYYY-MM-DD HH24:MI:SS') ||
+            '. START DATE MUST BE GREATER THAN THE CURRENT DATE: ' ||
+            TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS'));
+            END IF;
+            IF(:NEW.END_DATE &lt;= SYSTIMESTAMP) THEN
+            RAISE_APPLICATION_ERROR(-20001, 'INVALID TOUR END DATE:' ||
+            TO_CHAR(:NEW.END_DATE, 'YYYY-MM-DD HH24:MI:SS') ||
+            ' END DATE MUST BE GREATER THAN THE CURRENT DATE: ' ||
+            TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS'));
+            END IF;
+            IF(:NEW.END_DATE &lt; (:NEW.START_DATE + INTERVAL '1' DAY)) THEN
+            RAISE_APPLICATION_ERROR(-20001, 'INVALID TOUR DURATION (START DATE - ' ||
+            TO_CHAR(:NEW.START_DATE, 'YYYY-MM-DD HH24:MI:SS') ||
+            ', END DATE - ' || TO_CHAR(:NEW.END_DATE, 'YYYY-MM-DD HH24:MI:SS' ) ||
+            ': DURATION MUST BE MORE THAN 1 DAY');
+            END IF;
+            END;
+            /
+        </sql>
+    </changeSet>
+
+    <changeSet id="Create REVIEW_CHECK_DATE_TRIGGER" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <sql dbms="oracle" endDelimiter="/" stripComments="true">
+            CREATE OR REPLACE TRIGGER REVIEW_CHECK_DATE_TRIGGER
+            BEFORE INSERT OR UPDATE ON REVIEWS FOR EACH ROW
+            BEGIN
+            IF( :NEW.REVIEW_DATE &lt;= SYSTIMESTAMP ) THEN
+            RAISE_APPLICATION_ERROR(-20001, 'INVALID REVIEW DATE: ' ||
+            TO_CHAR(:NEW.REVIEW_DATE, 'YYYY-MM-DD HH24:MI:SS') ||
+            '. REVIEW DATE MUST BE GREATER THAN THE CURRENT DATE: ' ||
+            TO_CHAR(SYSTIMESTAMP, 'YYYY-MM-DD HH24:MI:SS'));
+            END IF;
+            END;
+            /
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

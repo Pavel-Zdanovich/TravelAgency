@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="Create FUNCTION CALCULATE_VACATION_TIME" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <sql dbms="oracle" endDelimiter="/" stripComments="true">
+            CREATE OR REPLACE FUNCTION CALCULATE_VACATION_TIME (USER_ID IN NUMBER)
+            RETURN VARCHAR2
+            IS
+            TOTAL_PERIOD VARCHAR2(100);
+            BEGIN
+            IF (USER_ID &gt; 0) THEN
+            SELECT NUMTODSINTERVAL(SUM(((SYSDATE + PERIOD) - SYSDATE) * 24*60*60
+            + EXTRACT(SECOND FROM PERIOD) - TRUNC(EXTRACT(SECOND FROM PERIOD))), 'SECOND') INTO TOTAL_PERIOD FROM
+            (SELECT T.END_DATE - T.START_DATE AS PERIOD FROM TOURS T
+            INNER JOIN USERS_TOURS U_T ON T.TOUR_ID = U_T.TOUR_ID
+            WHERE U_T.USER_ID = USER_ID);
+            RETURN TOTAL_PERIOD;
+            ELSE
+            RAISE_APPLICATION_ERROR(-20001, 'INVALID USER ID: ' || USER_ID);
+            END IF;
+            END;
+            /
+        </sql>
+        <sql dbms="postgresql" endDelimiter="/" stripComments="true">
+            CREATE OR REPLACE FUNCTION CALCULATE_VACATION_TIME (IN USER_ID BIGINT)
+            RETURNS INTERVAL
+            LANGUAGE plpgsql
+            AS $$
+            BEGIN
+            IF (USER_ID > 0) THEN
+            RETURN (SELECT SUM(T.END_DATE - T.START_DATE) FROM TOURS T
+            INNER JOIN USERS_TOURS U_T ON T.TOUR_ID = U_T.TOUR_ID
+            WHERE U_T.USER_ID = USER_ID);
+            ELSE
+            RAISE EXCEPTION 'INVALID USER ID: %', USER_ID;
+            END IF;
+            END;
+            $$;
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

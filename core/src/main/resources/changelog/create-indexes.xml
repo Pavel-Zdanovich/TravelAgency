@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="Create INDEXES for HOTELS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createIndex tableName="HOTELS" indexName="HOTEL_COORDINATES_INDEX">
+            <column name="LONGITUDE"/>
+            <column name="LATITUDE"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="Create INDEXES for TOURS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createIndex tableName="TOURS" indexName="TOUR_DATES_INDEX">
+            <column name="START_DATE"/>
+            <column name="END_DATE"/>
+        </createIndex>
+        <createIndex tableName="TOURS" indexName="TOUR_COST_INDEX">
+            <column name="COST"/>
+        </createIndex>
+        <createIndex tableName="TOURS" indexName="TOUR_COUNTRY_INDEX">
+            <column name="COUNTRY_ID"/>
+        </createIndex>
+        <createIndex tableName="TOURS" indexName="TOUR_HOTEL_INDEX">
+            <column name="HOTEL_ID"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="Create INDEXES for REVIEWS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+        <createIndex tableName="REVIEWS" indexName="REVIEW_DATE_INDEX">
+            <column name="REVIEW_DATE"/>
+        </createIndex>
+        <createIndex tableName="REVIEWS" indexName="REVIEW_USER_INDEX">
+            <column name="USER_ID"/>
+        </createIndex>
+        <createIndex tableName="REVIEWS" indexName="REVIEW_TOUR_INDEX">
+            <column name="TOUR_ID"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>
