@@ -16,7 +16,7 @@
 
     <properties>
         <spring.jpa.version>2.1.8.RELEASE</spring.jpa.version>
-        <hibernate.validator.version>6.0.16.Final</hibernate.validator.version>
+        <hibernate.validator.version>6.1.0.Final</hibernate.validator.version>
         <flyway.version>5.2.4</flyway.version>
         <flyway.plugin.version>6.0.4</flyway.plugin.version>
         <liquibase.version>3.8.0</liquibase.version>
