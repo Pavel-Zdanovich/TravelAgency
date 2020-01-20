@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="Create CONSTRAINTS for COUNTRIES" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="true">
+        <addNotNullConstraint constraintName="COUNTRY_ID_NOT_NULL" tableName="COUNTRIES" columnName="COUNTRY_ID"/>
+        <addPrimaryKey constraintName="COUNTRIES_PK" tableName="COUNTRIES" columnNames="COUNTRY_ID"/>
+        <addNotNullConstraint constraintName="COUNTRY_NAME_NOT_NULL" tableName="COUNTRIES" columnName="NAME"/>
+        <addUniqueConstraint constraintName="COUNTRY_NAME_UNIQUE" tableName="COUNTRIES" columnNames="NAME"/>
+        <sql stripComments="true">
+            ALTER TABLE COUNTRIES ADD CONSTRAINT COUNTRY_NAME_CHECK CHECK (LENGTH(NAME) &gt; 2);
+        </sql>
+    </changeSet>
+
+    <changeSet id="Create CONSTRAINTS for HOTELS" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="true">
+        <addNotNullConstraint constraintName="HOTEL_ID_NOT_NULL" tableName="HOTELS" columnName="HOTEL_ID"/>
+        <addPrimaryKey constraintName="HOTELS_PK" tableName="HOTELS" columnNames="HOTEL_ID"/>
+        <addNotNullConstraint constraintName="HOTEL_NAME_NOT_NULL" tableName="HOTELS" columnName="NAME"/>
+        <addUniqueConstraint constraintName="HOTEL_NAME_UNIQUE" tableName="HOTELS" columnNames="NAME"/>
+        <addNotNullConstraint constraintName="HOTEL_STARS_NOT_NULL" tableName="HOTELS" columnName="STARS"/>
+        <addNotNullConstraint constraintName="HOTEL_WEBSITE_NOT_NULL" tableName="HOTELS" columnName="WEBSITE"/>
+        <addUniqueConstraint constraintName="HOTEL_WEBSITE_UNIQUE" tableName="HOTELS" columnNames="WEBSITE"/>
+        <addNotNullConstraint constraintName="HOTEL_LATITUDE_NOT_NULL" tableName="HOTELS" columnName="LATITUDE"/>
+        <addNotNullConstraint constraintName="HOTEL_LONGITUDE_NOT_NULL" tableName="HOTELS" columnName="LONGITUDE"/>
+        <sql stripComments="true">
+            ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_NAME_CHECK CHECK (LENGTH(NAME) &gt; 3);
+            ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_STARS_CHECK CHECK (STARS &gt; 0 AND STARS &lt; 6);
+            ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_LATITUDE_CHECK CHECK (LATITUDE &gt; -90.0000000 AND LATITUDE &lt;
+            90.0000000);
+            ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_LONGITUDE_CHECK CHECK (LONGITUDE &gt; -180.000000 AND LONGITUDE &lt;
+            180.000000);
+        </sql>
+        <sql dbms="oracle" stripComments="true">
+            ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_WEBSITE_REGEX_CHECK CHECK (REGEXP_LIKE(WEBSITE,
+            '^(https?:\/\/)?(www\.)?([a-z0-9\.\-]+)\.([a-z\.]{2,6})(\/[a-z0-9\.\-]*)*\/?$'));
+        </sql>
+        <sql dbms="postgresql" stripComments="true">
+            ALTER TABLE HOTELS ADD CONSTRAINT HOTEL_WEBSITE_REGEX_CHECK CHECK (WEBSITE::TEXT ~
+            '^(https?:\/\/)?(www\.)?([a-z0-9\.-]+)\.([a-z\.]{2,6})(\/[a-z0-9\.-]*)*\/?$'::TEXT);
+        </sql>
+    </changeSet>
+
+    <changeSet id="Create CONSTRAINTS for FEATURES" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="true">
+        <addNotNullConstraint constraintName="FEATURE_ID_NOT_NULL" tableName="FEATURES" columnName="FEATURE_ID"/>
+        <addPrimaryKey constraintName="FEATURES_PK" tableName="FEATURES" columnNames="FEATURE_ID"/>
+        <addNotNullConstraint constraintName="FEATURE_NAME_NOT_NULL" tableName="FEATURES" columnName="NAME"/>
+        <addUniqueConstraint constraintName="FEATURE_NAME_UNIQUE" tableName="FEATURES" columnNames="NAME"/>
+        <sql stripComments="true">
+            ALTER TABLE FEATURES ADD CONSTRAINT FEATURE_NAME_CHECK CHECK (LENGTH(NAME) &gt; 2)
+        </sql>
+    </changeSet>
+
+    <changeSet id="Create CONSTRAINTS for HOTELS_FEATURES" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="true">
+        <addNotNullConstraint constraintName="HOTEL_ID_NOT_NULL" tableName="HOTELS_FEATURES" columnName="HOTEL_ID"/>
+        <addNotNullConstraint constraintName="FEATURE_ID_NOT_NULL" tableName="HOTELS_FEATURES" columnName="FEATURE_ID"/>
+        <addPrimaryKey constraintName="HOTELS_FEATURES_PK" tableName="HOTELS_FEATURES"
+                       columnNames="HOTEL_ID, FEATURE_ID"/>
+        <addForeignKeyConstraint baseTableName="HOTELS_FEATURES" baseColumnNames="HOTEL_ID"
+                                 constraintName="HOTELS_FEATURES_HOTEL_ID_FK"
+                                 referencedTableName="HOTELS" referencedColumnNames="HOTEL_ID"/>
+        <addForeignKeyConstraint baseTableName="HOTELS_FEATURES" baseColumnNames="FEATURE_ID"
+                                 constraintName="HOTELS_FEATURES_FEATURE_ID_FK"
+                                 referencedTableName="FEATURES" referencedColumnNames="FEATURE_ID"/>
+    </changeSet>
+
+    <changeSet id="Create CONSTRAINTS for USERS" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="true">
+        <addNotNullConstraint constraintName="USER_ID_NOT_NULL" tableName="USERS" columnName="USER_ID"/>
+        <addPrimaryKey constraintName="USERS_PK" tableName="USERS" columnNames="USER_ID"/>
+        <addNotNullConstraint constraintName="LOGIN_NOT_NULL" tableName="USERS" columnName="LOGIN"/>
+        <addUniqueConstraint constraintName="LOGIN_UNIQUE" tableName="USERS" columnNames="LOGIN"/>
+        <addNotNullConstraint constraintName="PASSWORD_NOT_NULL" tableName="USERS" columnName="PASSWORD"/>
+        <addNotNullConstraint constraintName="ROLE_NOT_NULL" tableName="USERS" columnName="ROLE"/>
+        <sql stripComments="true">
+            ALTER TABLE USERS ADD CONSTRAINT USER_LOGIN_CHECK CHECK (LENGTH(LOGIN) &gt; 4);
+            ALTER TABLE USERS ADD CONSTRAINT USER_PASSWORD_CHECK CHECK (LENGTH(PASSWORD) &gt; 4);
+            ALTER TABLE USERS ADD CONSTRAINT USER_ROLE_CHECK CHECK (LENGTH(ROLE) &gt; 3 AND ROLE IN ('USER', 'ADMIN'));
+        </sql>
+    </changeSet>
+
+    <changeSet id="Create CONSTRAINTS for TOURS" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="true">
+        <addNotNullConstraint constraintName="TOUR_ID_NOT_NULL" tableName="TOURS" columnName="TOUR_ID"/>
+        <addPrimaryKey constraintName="TOURS_PK" tableName="TOURS" columnNames="TOUR_ID"/>
+        <addNotNullConstraint constraintName="TOUR_START_DATE_NOT_NULL" tableName="TOURS" columnName="START_DATE"/>
+        <addNotNullConstraint constraintName="TOUR_END_DATE_NOT_NULL" tableName="TOURS" columnName="END_DATE"/>
+        <addNotNullConstraint constraintName="TOUR_DESCRIPTION_NOT_NULL" tableName="TOURS" columnName="DESCRIPTION"/>
+        <addNotNullConstraint constraintName="TOUR_COST_NOT_NULL" tableName="TOURS" columnName="COST"/>
+        <addNotNullConstraint constraintName="TOUR_TYPE_NOT_NULL" tableName="TOURS" columnName="TOUR_TYPE"/>
+        <addForeignKeyConstraint baseTableName="TOURS" baseColumnNames="COUNTRY_ID"
+                                 constraintName="TOURS_COUNTRY_ID_FK"
+                                 referencedTableName="COUNTRIES" referencedColumnNames="COUNTRY_ID"/>
+        <addForeignKeyConstraint baseTableName="TOURS" baseColumnNames="COUNTRY_ID"
+                                 constraintName="TOURS_HOTEL_ID_FK"
+                                 referencedTableName="HOTELS" referencedColumnNames="HOTEL_ID"/>
+        <sql stripComments="true">
+            ALTER TABLE TOURS ADD CONSTRAINT TOUR_COST_CHECK CHECK(COST > 0.0000);
+            ALTER TABLE TOURS ADD CONSTRAINT TOUR_TYPE_CHECK CHECK(TOUR_TYPE IN ('BUSINESS', 'ECOTOURISM', 'LEISURE',
+            'PILGRIMAGE', 'RURAL_TOURISM', 'SCIENTIFIC_EXPEDITION', 'SPORT_COMPETITION', 'TOURISM', 'TRAINING',
+            'TREATMENT'));
+        </sql>
+        <sql dbms="postgresql" stripComments="true">
+            ALTER TABLE TOURS ADD CONSTRAINT TOUR_START_DATE_CHECK CHECK (START_DATE &gt;= NOW());
+            ALTER TABLE TOURS ADD CONSTRAINT TOUR_END_DATE_CHECK CHECK (AGE(END_DATE, START_DATE) &gt;= '1
+            DAY'::INTERVAL);
+        </sql>
+    </changeSet>
+
+    <changeSet id="Create CONSTRAINTS for USERS_TOURS" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="true">
+        <addNotNullConstraint constraintName="USER_ID_NOT_NULL" tableName="USERS_TOURS" columnName="USER_ID"/>
+        <addNotNullConstraint constraintName="TOUR_ID_NOT_NULL" tableName="USERS_TOURS" columnName="TOUR_ID"/>
+        <addPrimaryKey constraintName="USERS_TOURS_PK" tableName="USERS_TOURS" columnNames="USER_ID, TOUR_ID"/>
+        <addForeignKeyConstraint baseTableName="USERS_TOURS" baseColumnNames="USER_ID"
+                                 constraintName="USERS_TOURS_USER_ID_FK"
+                                 referencedTableName="USERS" referencedColumnNames="USER_ID"/>
+        <addForeignKeyConstraint baseTableName="USERS_TOURS" baseColumnNames="TOUR_ID"
+                                 constraintName="USERS_TOURS_TOUR_ID_FK"
+                                 referencedTableName="TOURS" referencedColumnNames="TOUR_ID"/>
+    </changeSet>
+
+    <changeSet id="Create CONSTRAINTS for REVIEWS" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="true">
+        <addNotNullConstraint constraintName="REVIEW_ID_NOT_NULL" tableName="REVIEWS" columnName="REVIEW_ID"/>
+        <addPrimaryKey constraintName="REVIEWS_PK" tableName="REVIEWS" columnNames="REVIEW_ID"/>
+        <addNotNullConstraint constraintName="REVIEW_DATE_NOT_NULL" tableName="REVIEWS" columnName="REVIEW_DATE"/>
+        <addNotNullConstraint constraintName="REVIEW_TEXT_NOT_NULL" tableName="REVIEWS" columnName="REVIEW_TEXT"/>
+        <addForeignKeyConstraint baseTableName="REVIEWS" baseColumnNames="USER_ID"
+                                 constraintName="REVIEWS_USER_ID_FK"
+                                 referencedTableName="USERS" referencedColumnNames="USER_ID"/>
+        <addForeignKeyConstraint baseTableName="REVIEWS" baseColumnNames="TOUR_ID"
+                                 constraintName="REVIEWS_TOUR_ID_FK"
+                                 referencedTableName="TOURS" referencedColumnNames="TOUR_ID"/>
+        <sql dbms="postgresql" stripComments="true">
+            ALTER TABLE REVIEWS ADD CONSTRAINT REVIEW_DATE_CHECK CHECK (REVIEW_DATE &gt;= NOW());
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

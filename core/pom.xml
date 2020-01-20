@@ -182,12 +182,24 @@
                 <version>3.0.2</version>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>-Dspring.profiles.active=${database}</argLine>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>${liquibase.version}</version>
                 <configuration>
+                    <driver>${database.driver}</driver>
+                    <url>${database.url}</url>
+                    <server>${database.serverName}</server>
+                    <username>${database.userName}</username>
+                    <password>${database.password}</password>
                     <propertyFile>${profile.propertyFile}</propertyFile>
-                    <changeLogFile>${basedir}/src/main/resources/changelog/changelog-master.xml</changeLogFile>
+                    <changeLogFile>${basedir}/src/main/resources/database/migration/changelog-master.xml</changeLogFile>
                     <verbose>true</verbose>
                     <logging>debug</logging>
                     <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
@@ -197,7 +209,6 @@
     </build>
 
     <profiles>
-        <!-- Development settings, -Denv=dev -->
         <profile>
             <id>oracle</id>
             <activation>
@@ -207,10 +218,17 @@
                 </property>
             </activation>
             <properties>
-                <profile.propertyFile>${basedir}\src\main\resources\oracle.properties</profile.propertyFile>
+                <database>oracle</database>
+                <database.driver>oracle.jdbc.Driver.OracleDriver</database.driver>
+                <database.url>jdbc:oracle:thin:@localhost:1521/xe</database.url>
+                <database.serverName>localhost</database.serverName>
+                <database.portNumber>1521</database.portNumber>
+                <database.dataBaseName>xe</database.dataBaseName>
+                <database.userName>oracle</database.userName>
+                <database.password>password</database.password>
+                <profile.propertyFile>${basedir}/src/main/resources/database/oracle.properties</profile.propertyFile>
             </properties>
         </profile>
-        <!-- Production settings, -Denv=prod -->
         <profile>
             <id>postgresql</id>
             <activation>
@@ -220,7 +238,15 @@
                 </property>
             </activation>
             <properties>
-                <profile.propertyFile>${basedir}\src\main\resources\postgresql.properties</profile.propertyFile>
+                <database>postgresql</database>
+                <database.driver>org.postgresql.Driver</database.driver>
+                <database.url>jdbc:postgresql://localhost:5432/travel_agency</database.url>
+                <database.serverName>localhost</database.serverName>
+                <database.portNumber>5432</database.portNumber>
+                <database.dataBaseName>travel_agency</database.dataBaseName>
+                <database.userName>postgres</database.userName>
+                <database.password>root</database.password>
+                <profile.propertyFile>${basedir}/src/main/resources/database/postgresql.properties</profile.propertyFile>
             </properties>
         </profile>
     </profiles>

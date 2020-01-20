@@ -20,7 +20,7 @@ import java.util.Objects;
 
 @Configuration
 @Profile(value = "dev")
-@PropertySource(value = {"classpath:postgresql.properties", "classpath:oracle.properties"})
+@PropertySource(value = {"classpath:database/postgresql.properties", "classpath:database/oracle.properties"})
 @Slf4j
 public class DataSourceConfig {
 
@@ -29,31 +29,31 @@ public class DataSourceConfig {
 
     @Bean
     @Profile(value = "postgresql")
-    Database postgresql() {
+    public Database postgresql() {
         return Database.POSTGRESQL;
     }
 
     @Bean
     @Profile(value = "oracle")
-    Database oracle() {
+    public Database oracle() {
         return Database.ORACLE;
     }
 
     @Bean
     @Profile(value = "postgresql")
-    Dialect postgresqlDialect() {
+    public Dialect postgresqlDialect() {
         return new PostgreSQL10Dialect();
     }
 
     @Bean
     @Profile(value = "oracle")
-    Dialect oracleDialect() {
+    public Dialect oracleDialect() {
         return new Oracle10gDialect();
     }
 
     @Bean
     @Profile(value = "postgresql")
-    DataSource realPostgreSQLDataSource() {
+    public DataSource realPostgreSQLDataSource() {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
         dataSource.setURL(environment.getProperty("postgresql.url"));
         dataSource.setServerName(environment.getProperty("postgresql.serverName"));
@@ -66,7 +66,7 @@ public class DataSourceConfig {
 
     @Bean
     @Profile(value = "oracle")
-    DataSource realOracleDataSource() {
+    public DataSource realOracleDataSource() {
         OracleDataSource dataSource = null;
         try {
             dataSource = new OracleDataSource();

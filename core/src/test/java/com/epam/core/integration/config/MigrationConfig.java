@@ -18,10 +18,10 @@ public class MigrationConfig {
     private DataSource dataSource;
 
     @Bean
-    SpringLiquibase liquibase() {
+    public SpringLiquibase liquibase() {
         SpringLiquibase liquibase = new SpringLiquibase();
         liquibase.setDataSource(dataSource);
-        liquibase.setChangeLog("db/migration/changelog-master.xml");
+        liquibase.setChangeLog("database/migration/changelog-master.xml");
         return liquibase;
     }
 

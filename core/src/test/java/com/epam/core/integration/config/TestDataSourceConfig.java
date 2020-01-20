@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.orm.jpa.vendor.Database;
 
 import javax.sql.DataSource;
-import java.sql.SQLException;
 
 @Configuration
 @Profile(value = "test")
@@ -42,7 +41,7 @@ public class TestDataSourceConfig {
     @Profile(value = "postgresql")
     public DataSource testPostgreSQLDataSource() {
         JdbcDataSource jdbcDataSource = new JdbcDataSource();
-        jdbcDataSource.setUrl("jdbc:h2:~/IdeaProjects/TravelAgency/core/src/test/resources/db/h2;MODE=PostgreSQL");
+        jdbcDataSource.setUrl("jdbc:h2:~/test;MODE=PostgreSQL");
         jdbcDataSource.setUser("sa");
         jdbcDataSource.setPassword("");
         return jdbcDataSource;
@@ -50,9 +49,9 @@ public class TestDataSourceConfig {
 
     @Bean
     @Profile(value = "oracle")
-    public DataSource testOracleDataSource() throws SQLException {
+    public DataSource testOracleDataSource() {
         JdbcDataSource jdbcDataSource = new JdbcDataSource();
-        jdbcDataSource.setUrl("jdbc:h2:~/IdeaProjects/TravelAgency/core/src/test/resources/db/h2;MODE=ORACLE");
+        jdbcDataSource.setUrl("jdbc:h2:~/test;MODE=ORACLE");
         jdbcDataSource.setUser("sa");
         jdbcDataSource.setPassword("");
         return jdbcDataSource;

@@ -59,36 +59,6 @@
         <dropIndex tableName="REVIEWS" indexName="REVIEW_TOUR_INDEX"/>
     </changeSet>
 
-    <changeSet id="Delete view HOTEL_5_STARS_VIEW" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
-        <dropView viewName="HOTEL_5_STARS_VIEW"/>
-    </changeSet>
-
-    <changeSet id="Delete view TOUR_FUTURE_VIEW" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
-        <dropView viewName="TOUR_FUTURE_VIEW"/>
-    </changeSet>
-
-    <changeSet id="Delete view REVIEW_FUTURE_VIEW" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
-        <dropView viewName="REVIEW_FUTURE_VIEW"/>
-    </changeSet>
-
-    <changeSet id="Delete procedure DELETE_USER_REVIEWS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
-        <dropProcedure procedureName="DELETE_USER_REVIEWS"/>
-    </changeSet>
-
-    <changeSet id="Delete procedure DELETE_TOUR_REVIEWS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
-        <dropProcedure procedureName="DELETE_TOUR_REVIEWS"/>
-    </changeSet>
-
-    <changeSet id="Delete procedure MAKE_POSITIVE_REVIEWS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
-        <dropProcedure procedureName="MAKE_POSITIVE_REVIEWS"/>
-    </changeSet>
-
-    <changeSet id="Delete function CALCULATE_VACATION_TIME" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
-        <sql stripComments="true">
-            DROP FUNCTION CALCULATE_VACATION_TIME;
-        </sql>
-    </changeSet>
-
     <changeSet id="Delete table COUNTRIES" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
         <dropTable tableName="COUNTRIES" cascadeConstraints="true"/>
     </changeSet>

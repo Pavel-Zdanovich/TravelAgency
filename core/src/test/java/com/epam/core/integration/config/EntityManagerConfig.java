@@ -43,7 +43,7 @@ public class EntityManagerConfig {
     private JpaVendorAdapter jpaVendorAdapter;
 
     @Bean
-    LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         localContainerEntityManagerFactoryBean.setDataSource(dataSource);
         localContainerEntityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
@@ -60,7 +60,7 @@ public class EntityManagerConfig {
     }
 
     @Bean
-    JpaVendorAdapter jpaVendorAdapter() {
+    public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
         hibernateJpaVendorAdapter.setShowSql(true);
         hibernateJpaVendorAdapter.setGenerateDdl(true);
@@ -70,7 +70,7 @@ public class EntityManagerConfig {
 
     @Bean
     @Autowired
-    PlatformTransactionManager jpaTransactionManager(EntityManagerFactory entityManagerFactory) {
+    public PlatformTransactionManager jpaTransactionManager(EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
 

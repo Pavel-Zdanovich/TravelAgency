@@ -4,22 +4,14 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <preConditions onError="WARN" onFail="WARN" onSqlOutput="IGNORE">
-        <or>
-            <dbms type="oracle"/>
-            <dbms type="postgresql"/>
-        </or>
-    </preConditions>
+    <preConditions onError="WARN" onFail="WARN" onSqlOutput="IGNORE"/>
 
     <include file="drop.xml" relativeToChangelogFile="true"/>
     <include file="create-tables.xml" relativeToChangelogFile="true"/>
     <include file="create-constraints.xml" relativeToChangelogFile="true"/>
     <include file="create-sequences.xml" relativeToChangelogFile="true"/>
     <include file="create-indexes.xml" relativeToChangelogFile="true"/>
-    <include file="create-views.xml" relativeToChangelogFile="true"/>
     <include file="create-triggers.xml" relativeToChangelogFile="true"/>
-    <include file="create-procedures.xml" relativeToChangelogFile="true"/>
-    <include file="create-functions.xml" relativeToChangelogFile="true"/>
     <include file="data.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
