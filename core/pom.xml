@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
@@ -172,6 +171,7 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <!--<configuration>
                     <annotationProcessors>
@@ -184,6 +184,7 @@
                 </configuration>-->
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.0.2</version>
             </plugin>
@@ -195,17 +196,17 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+            <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>${liquibase.version}</version>
                 <configuration>
                     <databaseClass>${liquibase.databaseClass}</databaseClass>
-                    <driver>${database.driverClassName}</driver>
-                    <url>${database.url}</url>
-                    <server>${database.serverName}</server>
-                    <username>${database.username}</username>
-                    <password>${database.password}</password>
-                    <propertyFile>${basedir}\src\main\resources\database\database.properties</propertyFile>
+                    <propertyFile>target\classes\database\database.properties</propertyFile>
+                    <propertyFileWillOverride>true</propertyFileWillOverride>
                     <changeLogFile>${basedir}\src\main\resources\database\migration\changelog-master.xml</changeLogFile>
                     <verbose>true</verbose>
                     <logging>debug</logging>
@@ -213,9 +214,6 @@
                 </configuration>
             </plugin>
         </plugins>
-        <filters>
-            <filter>${basedir}\src\main\resources\database\database.properties</filter>
-        </filters>
         <resources>
             <resource>
                 <directory>${basedir}\src\main\resources</directory>
