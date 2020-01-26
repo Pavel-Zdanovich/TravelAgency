@@ -1,6 +1,5 @@
 package com.epam.core.service.impl;
 
-import com.epam.core.config.DataSourceConfig;
 import com.epam.core.config.PersistenceConfig;
 import com.epam.core.entity.Feature;
 import com.epam.core.repository.FeatureRepository;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@Profile(value = "dev")
 public class FeatureService extends AbstractService<Feature, Long, FeatureRepository> {
 
     @Autowired
@@ -29,7 +27,7 @@ public class FeatureService extends AbstractService<Feature, Long, FeatureReposi
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.getEnvironment().setActiveProfiles("dev", "oracle");
-        context.register(DataSourceConfig.class, PersistenceConfig.class, FeatureRepository.class, FeatureService.class);
+        context.register(PersistenceConfig.class, FeatureRepository.class, FeatureService.class);
         context.refresh();
         FeatureService featureService = context.getBean(FeatureService.class);
         Feature feature = new Feature();

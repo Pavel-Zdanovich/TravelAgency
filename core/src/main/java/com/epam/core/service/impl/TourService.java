@@ -1,6 +1,5 @@
 package com.epam.core.service.impl;
 
-import com.epam.core.config.DataSourceConfig;
 import com.epam.core.config.PersistenceConfig;
 import com.epam.core.entity.Tour;
 import com.epam.core.entity.enums.TourType;
@@ -9,18 +8,20 @@ import com.epam.core.repository.TourRepository;
 import com.epam.core.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Timestamp;
 import java.util.List;
 
 @Service
-@Profile(value = "dev")
 public class TourService extends AbstractService<Tour, Long, TourRepository> {
 
     @Autowired
@@ -103,7 +104,7 @@ public class TourService extends AbstractService<Tour, Long, TourRepository> {
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.getEnvironment().setActiveProfiles("dev", "oracle");
-        context.register(DataSourceConfig.class, PersistenceConfig.class, TourRepository.class, TourService.class);
+        context.register(PersistenceConfig.class, TourRepository.class, TourService.class);
         context.refresh();
         TourService tourService = context.getBean(TourService.class);
         Tour tour = new Tour();

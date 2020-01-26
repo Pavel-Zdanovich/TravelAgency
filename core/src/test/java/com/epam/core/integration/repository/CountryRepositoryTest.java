@@ -1,15 +1,13 @@
 package com.epam.core.integration.repository;
 
+import com.epam.core.config.PersistenceConfig;
 import com.epam.core.entity.Country;
-import com.epam.core.integration.config.EntityManagerConfig;
-import com.epam.core.integration.config.MigrationConfig;
-import com.epam.core.integration.config.TestDataSourceConfig;
+import com.epam.core.config.MigrationConfig;
 import com.epam.core.repository.CountryRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -17,8 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TestDataSourceConfig.class, MigrationConfig.class, EntityManagerConfig.class, CountryRepository.class})
-@ActiveProfiles(profiles = {"test", "postgresql"})
+@ContextConfiguration(classes = {PersistenceConfig.class, MigrationConfig.class, CountryRepository.class})
 public class CountryRepositoryTest {
 
     @Autowired

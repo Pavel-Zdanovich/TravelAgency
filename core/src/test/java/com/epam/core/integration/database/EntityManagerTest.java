@@ -1,10 +1,7 @@
 package com.epam.core.integration.database;
 
-import com.epam.core.config.DataSourceConfig;
 import com.epam.core.config.PersistenceConfig;
-import com.epam.core.integration.config.EntityManagerConfig;
-import com.epam.core.integration.config.MigrationConfig;
-import com.epam.core.integration.config.TestDataSourceConfig;
+import com.epam.core.config.MigrationConfig;
 import liquibase.integration.spring.SpringLiquibase;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -22,9 +18,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {DataSourceConfig.class, PersistenceConfig.class, TestDataSourceConfig.class,
-        MigrationConfig.class, EntityManagerConfig.class})
-@ActiveProfiles(profiles = {"test", "oracle"})
+@ContextConfiguration(classes = {PersistenceConfig.class, MigrationConfig.class})
 public class EntityManagerTest {
 
     @Autowired

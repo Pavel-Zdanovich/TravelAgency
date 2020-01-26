@@ -11,7 +11,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {Country.class, Feature.class, Hotel.class, Review.class, Tour.class, User.class})
-@ActiveProfiles(profiles = "test")
 public class EntityConfigTest {
 
     @Autowired

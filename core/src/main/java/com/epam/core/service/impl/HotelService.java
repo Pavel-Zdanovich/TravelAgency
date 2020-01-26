@@ -1,15 +1,10 @@
 package com.epam.core.service.impl;
 
-import com.epam.core.config.DataSourceConfig;
 import com.epam.core.config.PersistenceConfig;
 import com.epam.core.entity.Country;
 import com.epam.core.entity.Feature;
 import com.epam.core.entity.Hotel;
-import com.epam.core.entity.Tour;
-import com.epam.core.entity.metamodel.Country_;
-import com.epam.core.entity.metamodel.Feature_;
 import com.epam.core.entity.metamodel.Hotel_;
-import com.epam.core.entity.metamodel.Tour_;
 import com.epam.core.repository.HotelRepository;
 import com.epam.core.service.AbstractService;
 import com.epam.core.service.specification.FindHotelByCountry;
@@ -32,7 +27,6 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-@Profile(value = "dev")
 public class HotelService extends AbstractService<Hotel, Long, HotelRepository> {
 
     @Autowired
@@ -99,7 +93,7 @@ public class HotelService extends AbstractService<Hotel, Long, HotelRepository> 
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.getEnvironment().setActiveProfiles("dev", "oracle");
-        context.register(DataSourceConfig.class, PersistenceConfig.class, HotelRepository.class, HotelService.class);
+        context.register(PersistenceConfig.class, HotelRepository.class, HotelService.class);
         context.refresh();
         HotelService hotelService = context.getBean(HotelService.class);
         Hotel hotel = new Hotel();

@@ -1,18 +1,21 @@
 package com.epam.core.integration.spring;
 
-import com.epam.core.repository.*;
+import com.epam.core.repository.CountryRepository;
+import com.epam.core.repository.FeatureRepository;
+import com.epam.core.repository.HotelRepository;
+import com.epam.core.repository.ReviewRepository;
+import com.epam.core.repository.TourRepository;
+import com.epam.core.repository.UserRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {CountryRepository.class, FeatureRepository.class, HotelRepository.class,
         ReviewRepository.class, TourRepository.class, UserRepository.class})
-@ActiveProfiles(profiles = {"dev"})
 public class RepositoryConfigTest {
 
     @Autowired

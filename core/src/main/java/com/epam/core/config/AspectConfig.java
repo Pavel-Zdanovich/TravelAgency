@@ -9,20 +9,14 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.Profile;
 
 import java.util.Arrays;
 
 @Configuration
-@Profile(value = "dev")
 @EnableAspectJAutoProxy
 @Aspect
 @Slf4j
 public class AspectConfig {
-
-    /*@Pointcut("execution(public * *(..))")//execution(public * com.epam.core.*.*(..))
-    void monitor() {
-    }*/
 
     @Pointcut("within(@org.springframework.stereotype.Repository *)" +
             " || within(@org.springframework.stereotype.Service *)" +

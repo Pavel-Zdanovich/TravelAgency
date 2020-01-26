@@ -1,6 +1,5 @@
 package com.epam.core.service.impl;
 
-import com.epam.core.config.DataSourceConfig;
 import com.epam.core.config.PersistenceConfig;
 import com.epam.core.entity.Country;
 import com.epam.core.repository.CountryRepository;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@Profile(value = "dev")
 public class CountryService extends AbstractService<Country, Long, CountryRepository> {
 
     @Autowired
@@ -29,8 +27,7 @@ public class CountryService extends AbstractService<Country, Long, CountryReposi
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.getEnvironment().setActiveProfiles("dev", "oracle");
-        context.register(DataSourceConfig.class, PersistenceConfig.class,
-                CountryRepository.class, CountryService.class);
+        context.register(PersistenceConfig.class, CountryRepository.class, CountryService.class);
         context.refresh();
         CountryService countryService = context.getBean(CountryService.class);
         Country country = new Country();

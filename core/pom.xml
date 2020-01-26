@@ -14,17 +14,23 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
+    <name>core</name>
+    <url>http://relax.epam.com</url>
+
     <properties>
         <spring.jpa.version>2.1.8.RELEASE</spring.jpa.version>
+        <!--hibernate-->
+        <hibernate.generate_ddl>true</hibernate.generate_ddl>
+        <hibernate.hbm2ddl.auto>none</hibernate.hbm2ddl.auto>
+        <hibernate.show_sql>true</hibernate.show_sql>
+        <hibernate.format_sql>true</hibernate.format_sql>
+
         <hibernate.validator.version>6.0.16.Final</hibernate.validator.version>
         <flyway.version>5.2.4</flyway.version>
         <flyway.plugin.version>6.0.4</flyway.plugin.version>
         <liquibase.version>3.8.0</liquibase.version>
         <h2.version>1.4.199</h2.version>
     </properties>
-
-    <name>core</name>
-    <url>http://relax.epam.com</url>
 
     <repositories>
         <repository>
@@ -193,19 +199,29 @@
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>${liquibase.version}</version>
                 <configuration>
-                    <driver>${database.driver}</driver>
+                    <databaseClass>${liquibase.databaseClass}</databaseClass>
+                    <driver>${database.driverClassName}</driver>
                     <url>${database.url}</url>
                     <server>${database.serverName}</server>
-                    <username>${database.userName}</username>
+                    <username>${database.username}</username>
                     <password>${database.password}</password>
-                    <propertyFile>${profile.propertyFile}</propertyFile>
-                    <changeLogFile>${basedir}/src/main/resources/database/migration/changelog-master.xml</changeLogFile>
+                    <propertyFile>${basedir}\src\main\resources\database\database.properties</propertyFile>
+                    <changeLogFile>${basedir}\src\main\resources\database\migration\changelog-master.xml</changeLogFile>
                     <verbose>true</verbose>
                     <logging>debug</logging>
                     <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
                 </configuration>
             </plugin>
         </plugins>
+        <filters>
+            <filter>${basedir}\src\main\resources\database\database.properties</filter>
+        </filters>
+        <resources>
+            <resource>
+                <directory>${basedir}\src\main\resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
     <profiles>
@@ -219,14 +235,16 @@
             </activation>
             <properties>
                 <database>oracle</database>
-                <database.driver>oracle.jdbc.Driver.OracleDriver</database.driver>
+                <hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</hibernate.dialect>
+                <liquibase.databaseClass>liquibase.database.core.OracleDatabase</liquibase.databaseClass>
+                <database.driverClassPath>${settings.localRepository}\com\oracle\ojdbc8\12.2.0.1\ojdbc8-12.2.0.1.jar</database.driverClassPath>
+                <database.driverClassName>oracle.jdbc.OracleDriver</database.driverClassName>
                 <database.url>jdbc:oracle:thin:@localhost:1521/xe</database.url>
                 <database.serverName>localhost</database.serverName>
                 <database.portNumber>1521</database.portNumber>
-                <database.dataBaseName>xe</database.dataBaseName>
-                <database.userName>oracle</database.userName>
+                <database.name>xe</database.name>
+                <database.username>oracle</database.username>
                 <database.password>password</database.password>
-                <profile.propertyFile>${basedir}/src/main/resources/database/oracle.properties</profile.propertyFile>
             </properties>
         </profile>
         <profile>
@@ -239,14 +257,39 @@
             </activation>
             <properties>
                 <database>postgresql</database>
-                <database.driver>org.postgresql.Driver</database.driver>
+                <hibernate.dialect>org.hibernate.dialect.PostgreSQL10Dialect</hibernate.dialect>
+                <liquibase.databaseClass>liquibase.database.core.PostgresDatabase</liquibase.databaseClass>
+                <database.driverClassPath>${settings.localRepository}\org\postgresql\postgresql\42.2.5\postgresql-42.2.5.jar</database.driverClassPath>
+                <database.driverClassName>org.postgresql.Driver</database.driverClassName>
                 <database.url>jdbc:postgresql://localhost:5432/travel_agency</database.url>
                 <database.serverName>localhost</database.serverName>
                 <database.portNumber>5432</database.portNumber>
-                <database.dataBaseName>travel_agency</database.dataBaseName>
-                <database.userName>postgres</database.userName>
+                <database.name>travel_agency</database.name>
+                <database.username>postgres</database.username>
                 <database.password>root</database.password>
-                <profile.propertyFile>${basedir}/src/main/resources/database/postgresql.properties</profile.propertyFile>
+            </properties>
+        </profile>
+        <profile>
+            <id>h2</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>database</name>
+                    <value>h2</value>
+                </property>
+            </activation>
+            <properties>
+                <database>h2</database>
+                <database.driverClassPath>${settings.localRepository}\com\h2database\h2\h2-1.4.199.jar</database.driverClassPath>
+                <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
+                <liquibase.databaseClass>liquibase.database.core.H2Database</liquibase.databaseClass>
+                <database.driverClassName>org.h2.Driver</database.driverClassName>
+                <database.url>jdbc:h2:~/test</database.url>
+                <database.serverName>~</database.serverName>
+                <database.portNumber></database.portNumber>
+                <database.name>test</database.name>
+                <database.username>sa</database.username>
+                <database.password></database.password>
             </properties>
         </profile>
     </profiles>

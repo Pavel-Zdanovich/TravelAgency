@@ -1,6 +1,5 @@
 package com.epam.core.service.impl;
 
-import com.epam.core.config.DataSourceConfig;
 import com.epam.core.config.PersistenceConfig;
 import com.epam.core.entity.*;
 import com.epam.core.entity.enums.TourType;
@@ -10,7 +9,6 @@ import com.epam.core.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Profile;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -20,7 +18,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Profile(value = "dev")
 public class ReviewService extends AbstractService<Review, Long, ReviewRepository> {
 
     @Autowired
@@ -100,7 +97,7 @@ public class ReviewService extends AbstractService<Review, Long, ReviewRepositor
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.getEnvironment().setActiveProfiles("dev", "oracle");
-        context.register(DataSourceConfig.class, PersistenceConfig.class, ReviewRepository.class, ReviewService.class);
+        context.register(PersistenceConfig.class, ReviewRepository.class, ReviewService.class);
         context.refresh();
         ReviewService reviewService = context.getBean(ReviewService.class);
         Review review = new Review();

@@ -1,15 +1,12 @@
 package com.epam.core.integration.database;
 
-import com.epam.core.integration.config.MigrationConfig;
-import com.epam.core.integration.config.TestDataSourceConfig;
+import com.epam.core.config.PersistenceConfig;
 import liquibase.integration.spring.SpringLiquibase;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -19,8 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {TestDataSourceConfig.class, MigrationConfig.class})
-@ActiveProfiles(value = {"test", "oracle"})
+@ContextConfiguration(classes = PersistenceConfig.class)
 @Slf4j
 public class MigrationTest {
 
