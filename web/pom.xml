@@ -26,7 +26,7 @@
 
         <freemarker.version>2.3.28</freemarker.version>
 
-        <jackson.version>2.9.8</jackson.version>
+        <jackson.version>2.10.3</jackson.version>
 
         <commons-fileupload.version>1.3.3</commons-fileupload.version>
     </properties>
