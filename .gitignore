@@ -1,5 +1,5 @@
-.idea/
-target/
-Main.java
-data/
-scripts/
+.idea
+target
+h2*
+node_modules
+generated

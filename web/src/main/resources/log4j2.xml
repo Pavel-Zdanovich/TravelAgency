@@ -6,26 +6,23 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="org.apache.catalina" level="info" additivity="false">
-            <AppenderRef ref="catalina" />
-        </Logger>
-        <Logger name="com.epam.travelAgency" level="trace" additivity="false">
+        <Logger name="com.zdanovich.travelAgency" level="info" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
-        <Logger name="com.epam.core" level="trace" additivity="false">
+        <Logger name="com.zdanovich.core" level="info" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
-        <Logger name="com.epam.web" level="trace" additivity="false">
+        <Logger name="com.zdanovich.web" level="info" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
-        <!--<Logger name="org.hibernate.SQL" level="debug" additivity="false">
-            <AppenderRef ref="Console"/>
-        </Logger>-->
         <Logger name="org.springframework" level="info" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
-        <Logger name="org.hibernate" level="debug" additivity="false">
+        <Logger name="org.hibernate" level="info" additivity="false">
             <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="org.apache.catalina" level="info" additivity="false">
+            <AppenderRef ref="catalina" />
         </Logger>
         <Root level="error">
             <AppenderRef ref="Console"/>

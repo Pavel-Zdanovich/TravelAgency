@@ -11,7 +11,7 @@
 		</insert>
 		<insert tableName="COUNTRIES">
 			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
-			<column name="NAME" value="SPAIN"/>
+			<column name="NAME" value="Spain"/>
 		</insert>
 		<insert tableName="COUNTRIES">
 			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
@@ -19,11 +19,11 @@
 		</insert>
 		<insert tableName="COUNTRIES">
 			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
-			<column name="NAME" value="Great Britain"/>
+			<column name="NAME" value="The Great Britain"/>
 		</insert>
 		<insert tableName="COUNTRIES">
 			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>
-			<column name="NAME" value="Netherlands"/>
+			<column name="NAME" value="The Netherlands"/>
 		</insert>
 		<insert tableName="COUNTRIES">
 			<column name="COUNTRY_ID" valueSequenceNext="COUNTRY_SEQUENCE"/>

@@ -2,82 +2,60 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
+        <groupId>com.zdanovich.travelAgency</groupId>
         <artifactId>travelAgency</artifactId>
-        <groupId>com.epam.travelAgency</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.epam.core</groupId>
+    <groupId>com.zdanovich.core</groupId>
     <artifactId>core</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>core</name>
-    <url>http://relax.epam.com</url>
 
     <properties>
-        <spring.jpa.version>2.1.8.RELEASE</spring.jpa.version>
-        <!--hibernate-->
+        <spring.data.version>2.1.8.RELEASE</spring.data.version>
+
+        <hibernate.version>5.4.14.Final</hibernate.version>
+
+        <!--hibernate configuration start-->
         <hibernate.generate_ddl>true</hibernate.generate_ddl>
         <hibernate.hbm2ddl.auto>none</hibernate.hbm2ddl.auto>
+        <hibernate.jdbc.batch_size>10</hibernate.jdbc.batch_size>
+        <hibernate.jdbc.batch_versioned_data>true</hibernate.jdbc.batch_versioned_data>
+        <org.hibernate.flushMode>COMMIT</org.hibernate.flushMode>
         <hibernate.show_sql>true</hibernate.show_sql>
         <hibernate.format_sql>true</hibernate.format_sql>
+        <!--hibernate configuration end-->
 
-        <hibernate.validator.version>6.0.16.Final</hibernate.validator.version>
-        <flyway.version>5.2.4</flyway.version>
-        <flyway.plugin.version>6.0.4</flyway.plugin.version>
+        <hibernate.validator.version>6.1.3.Final</hibernate.validator.version>
+
+        <javax.validation.version>2.0.1.Final</javax.validation.version>
+        <javax.el.version>3.0.1-b06</javax.el.version>
+        <org.glassfish.web.version>2.2.6</org.glassfish.web.version>
+
+        <aspectj.version>1.9.3</aspectj.version>
+
         <liquibase.version>3.8.0</liquibase.version>
+
+        <oracle.version>12.2.0.1</oracle.version>
+        <postgresql.version>42.2.5</postgresql.version>
         <h2.version>1.4.199</h2.version>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>maven.oracle.com</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <url>https://maven.oracle.com</url>
-            <layout>default</layout>
-        </repository>
-    </repositories>
-    <!--<pluginRepositories>
-        <pluginRepository>
-            <id>maven.oracle.com</id>
-            <url>https://maven.oracle.com</url>
-        </pluginRepository>
-    </pluginRepositories>-->
 
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
-        <dependency>
-            <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>${spring.version}</version>
         </dependency>
-        <!--https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa-->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <version>${spring.jpa.version}</version>
+            <version>${spring.data.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
@@ -87,84 +65,78 @@
             <artifactId>spring-aspects</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${aspectj.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>${hibernate.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-jpamodelgen -->
+
+        <!--Java bean validation API Specification (JSR 380)-->
         <!--<dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-jpamodelgen</artifactId>
-            <version>${hibernate.version}</version>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${javax.validation.version}</version>
         </dependency>-->
-        <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+        <!--Java bean validation API Implementation (JSR 380)-->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate.validator.version}</version>
         </dependency>
+        <!-- Verify validation annotations usage at compile time -->
         <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator-annotation-processor</artifactId>
+            <version>${hibernate.validator.version}</version>
+        </dependency>
+        <!--Expression Language Specification-->
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>${javax.el.version}</version>
+        </dependency>
+        <!--Expression Language Implementation-->
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>${org.glassfish.web.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjtools</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.oracle/ojdbc8 -->
-        <!--mvn install:install-file -Dfile=C:\Users\Zdan\.m2\repository\com\oracle\jdbc\ojdbc8\12.2.0.1\ojdbc8-12.2.0.1.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar-->
-        <dependency>
-            <groupId>com.oracle</groupId>
+            <groupId>com.oracle.jdbc</groupId>
             <artifactId>ojdbc8</artifactId>
-            <version>12.2.0.1</version>
+            <version>${oracle.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.5</version>
+            <version>${postgresql.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-maven-plugin -->
-        <!--<dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-maven-plugin</artifactId>
-            <version>${liquibase.version}</version>
-        </dependency>-->
-        <!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-core -->
-        <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
-            <version>${liquibase.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>${liquibase.version}</version>
         </dependency>
+
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
         </dependency>
     </dependencies>
 
@@ -173,15 +145,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <!--<configuration>
-                    <annotationProcessors>
-                        <annotationProcessor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor
-                        </annotationProcessor>
-                    </annotationProcessors>
-                    <compilerArguments>
-                        <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
-                    </compilerArguments>
-                </configuration>-->
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -191,6 +154,22 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>none</exclude>
+                            </excludes>
+                            <includes>
+                                <include>**/integration</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
                 <configuration>
                     <argLine>-Dspring.profiles.active=${database}</argLine>
                 </configuration>
@@ -235,7 +214,8 @@
                 <database>oracle</database>
                 <hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</hibernate.dialect>
                 <liquibase.databaseClass>liquibase.database.core.OracleDatabase</liquibase.databaseClass>
-                <database.driverClassPath>${settings.localRepository}\com\oracle\ojdbc8\12.2.0.1\ojdbc8-12.2.0.1.jar</database.driverClassPath>
+                <database.driverClassPath>${settings.localRepository}\com\oracle\ojdbc8\12.2.0.1\ojdbc8-12.2.0.1.jar
+                </database.driverClassPath>
                 <database.driverClassName>oracle.jdbc.OracleDriver</database.driverClassName>
                 <database.url>jdbc:oracle:thin:@localhost:1521/xe</database.url>
                 <database.serverName>localhost</database.serverName>
@@ -257,7 +237,9 @@
                 <database>postgresql</database>
                 <hibernate.dialect>org.hibernate.dialect.PostgreSQL10Dialect</hibernate.dialect>
                 <liquibase.databaseClass>liquibase.database.core.PostgresDatabase</liquibase.databaseClass>
-                <database.driverClassPath>${settings.localRepository}\org\postgresql\postgresql\42.2.5\postgresql-42.2.5.jar</database.driverClassPath>
+                <database.driverClassPath>
+                    ${settings.localRepository}\org\postgresql\postgresql\42.2.5\postgresql-42.2.5.jar
+                </database.driverClassPath>
                 <database.driverClassName>org.postgresql.Driver</database.driverClassName>
                 <database.url>jdbc:postgresql://localhost:5432/travel_agency</database.url>
                 <database.serverName>localhost</database.serverName>
@@ -278,11 +260,12 @@
             </activation>
             <properties>
                 <database>h2</database>
-                <database.driverClassPath>${settings.localRepository}\com\h2database\h2\h2-1.4.199.jar</database.driverClassPath>
+                <database.driverClassPath>${settings.localRepository}\com\h2database\h2\h2-1.4.199.jar
+                </database.driverClassPath>
                 <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
                 <liquibase.databaseClass>liquibase.database.core.H2Database</liquibase.databaseClass>
                 <database.driverClassName>org.h2.Driver</database.driverClassName>
-                <database.url>jdbc:h2:~/test</database.url>
+                <database.url>jdbc:h2:~/IdeaProjects/TravelAgency/core/src/test/resources/h2</database.url>
                 <database.serverName>~</database.serverName>
                 <database.portNumber></database.portNumber>
                 <database.name>test</database.name>
