@@ -1,7 +1,8 @@
 package com.zdanovich.core.integration.database;
 
-import com.zdanovich.core.config.MigrationConfig;
-import com.zdanovich.core.config.PersistenceConfig;
+import com.zdanovich.core.config.CoreModuleConfiguration;
+import com.zdanovich.core.config.MigrationConfiguration;
+import com.zdanovich.core.config.PersistenceConfiguration;
 import com.zdanovich.core.entity.Country;
 import com.zdanovich.core.entity.Feature;
 import com.zdanovich.core.entity.Hotel;
@@ -25,7 +26,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 @Test
-@ContextConfiguration(classes = {PersistenceConfig.class, MigrationConfig.class})
+@ContextConfiguration(classes = CoreModuleConfiguration.class)
 public class MigrationTest extends AbstractTestNGSpringContextTests {
 
     @Autowired

@@ -38,11 +38,21 @@
 
         <aspectj.version>1.9.3</aspectj.version>
 
-        <liquibase.version>3.8.0</liquibase.version>
+        <liquibase.version>3.8.8</liquibase.version>
+
+        <!--liquibase configuration start-->
+        <liquibase.changeLogFile>
+            ${basedir}\src\main\resources\database\migration\changelog-master.xml
+        </liquibase.changeLogFile>
+        <!--liquibase configuration end-->
 
         <oracle.version>12.2.0.1</oracle.version>
         <postgresql.version>42.2.5</postgresql.version>
-        <h2.version>1.4.199</h2.version>
+        <h2.version>1.4.200</h2.version>
+
+        <!--database configuration start-->
+        <database.properties>target\classes\database\database.properties</database.properties>
+        <!--database configuration end-->
     </properties>
 
     <dependencies>
@@ -125,7 +135,6 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -154,24 +163,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>integration-test</phase>
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
-                        <configuration>
-                            <excludes>
-                                <exclude>none</exclude>
-                            </excludes>
-                            <includes>
-                                <include>**/integration</include>
-                            </includes>
-                        </configuration>
-                    </execution>
-                </executions>
                 <configuration>
                     <argLine>-Dspring.profiles.active=${database}</argLine>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${basedir}\src\test\resources\unit-suite-testng.xml</suiteXmlFile>
+                        <suiteXmlFile>${basedir}\src\test\resources\integration-suite-testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
                 </configuration>
             </plugin>
             <plugin>
@@ -184,9 +181,9 @@
                 <version>${liquibase.version}</version>
                 <configuration>
                     <databaseClass>${liquibase.databaseClass}</databaseClass>
-                    <propertyFile>target\classes\database\database.properties</propertyFile>
+                    <propertyFile>${database.properties}</propertyFile>
                     <propertyFileWillOverride>true</propertyFileWillOverride>
-                    <changeLogFile>${basedir}\src\main\resources\database\migration\changelog-master.xml</changeLogFile>
+                    <changeLogFile>${liquibase.changeLogFile}</changeLogFile>
                     <verbose>true</verbose>
                     <logging>debug</logging>
                     <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
@@ -218,9 +215,6 @@
                 </database.driverClassPath>
                 <database.driverClassName>oracle.jdbc.OracleDriver</database.driverClassName>
                 <database.url>jdbc:oracle:thin:@localhost:1521/xe</database.url>
-                <database.serverName>localhost</database.serverName>
-                <database.portNumber>1521</database.portNumber>
-                <database.name>xe</database.name>
                 <database.username>oracle</database.username>
                 <database.password>password</database.password>
             </properties>
@@ -242,9 +236,6 @@
                 </database.driverClassPath>
                 <database.driverClassName>org.postgresql.Driver</database.driverClassName>
                 <database.url>jdbc:postgresql://localhost:5432/travel_agency</database.url>
-                <database.serverName>localhost</database.serverName>
-                <database.portNumber>5432</database.portNumber>
-                <database.name>travel_agency</database.name>
                 <database.username>postgres</database.username>
                 <database.password>root</database.password>
             </properties>
@@ -260,15 +251,12 @@
             </activation>
             <properties>
                 <database>h2</database>
-                <database.driverClassPath>${settings.localRepository}\com\h2database\h2\h2-1.4.199.jar
-                </database.driverClassPath>
                 <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
                 <liquibase.databaseClass>liquibase.database.core.H2Database</liquibase.databaseClass>
+                <database.driverClassPath>${settings.localRepository}\com\h2database\h2\h2-1.4.199.jar
+                </database.driverClassPath>
                 <database.driverClassName>org.h2.Driver</database.driverClassName>
                 <database.url>jdbc:h2:~/IdeaProjects/TravelAgency/core/src/test/resources/h2</database.url>
-                <database.serverName>~</database.serverName>
-                <database.portNumber></database.portNumber>
-                <database.name>test</database.name>
                 <database.username>sa</database.username>
                 <database.password></database.password>
             </properties>

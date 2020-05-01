@@ -46,5 +46,4 @@ class Authority {
     static Set<GrantedAuthority> getAuthority(String userRole) {
         return authorities.getOrDefault(userRole, authorities.get(GUEST_ROLE));
     }
-
 }

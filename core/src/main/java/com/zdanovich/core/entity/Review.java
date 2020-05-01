@@ -40,8 +40,8 @@ public class Review extends AbstractEntity {
     public static final String REVIEW_TEXT = "REVIEW_TEXT";
 
     @Column(name = REVIEW_DATE, nullable = false)
-    @FutureOrPresent(message = "{review.date.futureOrPresent}")
     @NotNull(message = "{review.date.notNull}")
+    @FutureOrPresent(message = "{review.date.futureOrPresent}")
     @Getter
     @Setter
     private Timestamp reviewDate;
