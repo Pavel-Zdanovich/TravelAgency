@@ -5,7 +5,7 @@ import com.zdanovich.core.entity.Feature;
 import com.zdanovich.core.entity.Hotel;
 import com.zdanovich.core.entity.metamodel.Hotel_;
 import com.zdanovich.core.service.specification.FindHotelByCoordinates;
-import com.zdanovich.core.utils.CoreConstants;
+import com.zdanovich.core.utils.Utils;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -54,11 +54,11 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         expected.setLongitude(BigDecimal.valueOf(123.4567890));
         Feature airConditioner = new Feature();
         airConditioner.setId(1L);
-        airConditioner.setName(CoreConstants.AIR_CONDITIONER);
+        airConditioner.setName(Utils.AIR_CONDITIONER);
         expected.addFeature(airConditioner);
         Feature cableTv = new Feature();
         cableTv.setId(2L);
-        cableTv.setName(CoreConstants.CABLE_TV);
+        cableTv.setName(Utils.CABLE_TV);
         expected.addFeature(cableTv);
 
         Hotel actual = hotelRepository.findByName(expected.getName()).orElse(null);
@@ -81,10 +81,10 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         expected.setStars(Short.valueOf("5"));
         expected.setLatitude(BigDecimal.valueOf(12.3456789));
         expected.setLongitude(BigDecimal.valueOf(123.4567890));
-        Feature airConditioner = featureRepository.findByName(CoreConstants.AIR_CONDITIONER).orElseThrow(() ->
+        Feature airConditioner = featureRepository.findByName(Utils.AIR_CONDITIONER).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'air conditioner'"));
         expected.addFeature(airConditioner);
-        Feature cableTv = featureRepository.findByName(CoreConstants.CABLE_TV).orElseThrow(() ->
+        Feature cableTv = featureRepository.findByName(Utils.CABLE_TV).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'cable TV'"));
         expected.addFeature(cableTv);
 
@@ -140,10 +140,10 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         expected1.setStars(Short.valueOf("5"));
         expected1.setLatitude(BigDecimal.valueOf(12.3456789));
         expected1.setLongitude(BigDecimal.valueOf(123.4567890));
-        Feature airConditioner = featureRepository.findByName(CoreConstants.AIR_CONDITIONER).orElseThrow(() ->
+        Feature airConditioner = featureRepository.findByName(Utils.AIR_CONDITIONER).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'air conditioner'"));
         expected1.addFeature(airConditioner);
-        Feature cableTv = featureRepository.findByName(CoreConstants.CABLE_TV).orElseThrow(() ->
+        Feature cableTv = featureRepository.findByName(Utils.CABLE_TV).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'cable TV'"));
         expected1.addFeature(cableTv);
         Hotel expected2 = new Hotel();
@@ -152,10 +152,10 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         expected2.setStars(Short.valueOf("5"));
         expected2.setLatitude(BigDecimal.valueOf(23.4567890));
         expected2.setLongitude(BigDecimal.valueOf(123.4567890));
-        Feature carRental = featureRepository.findByName(CoreConstants.CAR_RENTAL).orElseThrow(() ->
+        Feature carRental = featureRepository.findByName(Utils.CAR_RENTAL).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'car rental'"));
         expected1.addFeature(carRental);
-        Feature miniBar = featureRepository.findByName(CoreConstants.CABLE_TV).orElseThrow(() ->
+        Feature miniBar = featureRepository.findByName(Utils.CABLE_TV).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'mini-bar'"));
         expected1.addFeature(miniBar);
         List<Hotel> hotels = new ArrayList<>();
@@ -193,10 +193,10 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         expected.setStars(Short.valueOf("5"));
         expected.setLatitude(BigDecimal.valueOf(34.5678901));
         expected.setLongitude(BigDecimal.valueOf(123.4567890));
-        Feature airConditioner = featureRepository.findByName(CoreConstants.AIR_CONDITIONER).orElseThrow(() ->
+        Feature airConditioner = featureRepository.findByName(Utils.AIR_CONDITIONER).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'air conditioner'"));
         expected.addFeature(airConditioner);
-        Feature cableTv = featureRepository.findByName(CoreConstants.CABLE_TV).orElseThrow(() ->
+        Feature cableTv = featureRepository.findByName(Utils.CABLE_TV).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'cable TV'"));
         expected.addFeature(cableTv);
 
@@ -224,10 +224,10 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         hotel.setStars(Short.valueOf("5"));
         hotel.setLatitude(BigDecimal.valueOf(34.5678901));
         hotel.setLongitude(BigDecimal.valueOf(123.4567890));
-        Feature airConditioner = featureRepository.findByName(CoreConstants.AIR_CONDITIONER).orElseThrow(() ->
+        Feature airConditioner = featureRepository.findByName(Utils.AIR_CONDITIONER).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'air conditioner'"));
         hotel.addFeature(airConditioner);
-        Feature cableTv = featureRepository.findByName(CoreConstants.CABLE_TV).orElseThrow(() ->
+        Feature cableTv = featureRepository.findByName(Utils.CABLE_TV).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'cable TV'"));
         hotel.addFeature(cableTv);
 
@@ -306,10 +306,10 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
 
     @Test
     public void findByFeatures_Name() {
-        List<Hotel> hotels = hotelRepository.findByFeatures_Name(CoreConstants.AIR_CONDITIONER);
+        List<Hotel> hotels = hotelRepository.findByFeatures_Name(Utils.AIR_CONDITIONER);
         Assert.assertNotNull(hotels);
         Assert.assertFalse(hotels.isEmpty());
-        Assert.assertTrue(hotels.stream().allMatch(hotel -> hotel.containsFeature(CoreConstants.AIR_CONDITIONER)));
+        Assert.assertTrue(hotels.stream().allMatch(hotel -> hotel.containsFeature(Utils.AIR_CONDITIONER)));
     }
 
     @Test
@@ -618,10 +618,10 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         expected.setLongitude(BigDecimal.valueOf(123.4567890));
         expected.removeFeature(airConditioner);
         expected.removeFeature(cableTv);
-        Feature airConditioner = featureRepository.findByName(CoreConstants.AIR_CONDITIONER).orElseThrow(() ->
+        Feature airConditioner = featureRepository.findByName(Utils.AIR_CONDITIONER).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'air conditioner'"));
         hotel.addFeature(airConditioner);
-        Feature cableTv = featureRepository.findByName(CoreConstants.CABLE_TV).orElseThrow(() ->
+        Feature cableTv = featureRepository.findByName(Utils.CABLE_TV).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'cable TV'"));
         hotel.addFeature(cableTv);
         savedHotel = hotelRepository.save(expected);
@@ -641,11 +641,11 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         hotel.setLongitude(BigDecimal.valueOf(123.4567890));
         Feature airConditioner = new Feature();
         airConditioner.setId(1L);
-        airConditioner.setName(CoreConstants.AIR_CONDITIONER);
+        airConditioner.setName(Utils.AIR_CONDITIONER);
         hotel.addFeature(airConditioner);
         Feature cableTv = new Feature();
         cableTv.setId(1L);
-        cableTv.setName(CoreConstants.CABLE_TV);
+        cableTv.setName(Utils.CABLE_TV);
         hotel.addFeature(cableTv);
 
         Hotel actual = hotelRepository.findByName(hotel.getName()).orElse(null);
@@ -666,10 +666,10 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         expected.setLongitude(BigDecimal.valueOf(123.4567890));
         expected.removeFeature(airConditioner);
         expected.removeFeature(cableTv);
-        Feature carRental = featureRepository.findByName(CoreConstants.CAR_RENTAL).orElseThrow(() ->
+        Feature carRental = featureRepository.findByName(Utils.CAR_RENTAL).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'car rental'"));
         expected.addFeature(carRental);
-        Feature miniBar = featureRepository.findByName(CoreConstants.MINI_BAR).orElseThrow(() ->
+        Feature miniBar = featureRepository.findByName(Utils.MINI_BAR).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'mini-bar'"));
         expected.addFeature(miniBar);
         savedHotel = hotelRepository.save(expected);
@@ -712,10 +712,10 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         expected.setLongitude(BigDecimal.valueOf(123.4567890));
         expected.removeFeature(airConditioner);
         expected.removeFeature(cableTv);
-        Feature carRental = featureRepository.findByName(CoreConstants.CAR_RENTAL).orElseThrow(() ->
+        Feature carRental = featureRepository.findByName(Utils.CAR_RENTAL).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'car rental'"));
         expected.addFeature(carRental);
-        Feature miniBar = featureRepository.findByName(CoreConstants.MINI_BAR).orElseThrow(() ->
+        Feature miniBar = featureRepository.findByName(Utils.MINI_BAR).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'mini-bar'"));
         expected.addFeature(miniBar);
         savedHotel = hotelRepository.save(expected);
@@ -733,10 +733,10 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         hotel.setStars(Short.valueOf("5"));
         hotel.setLatitude(BigDecimal.valueOf(34.5678901));
         hotel.setLongitude(BigDecimal.valueOf(123.4567890));
-        Feature airConditioner = featureRepository.findByName(CoreConstants.AIR_CONDITIONER).orElseThrow(() ->
+        Feature airConditioner = featureRepository.findByName(Utils.AIR_CONDITIONER).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'air conditioner'"));
         hotel.addFeature(airConditioner);
-        Feature cableTv = featureRepository.findByName(CoreConstants.CABLE_TV).orElseThrow(() ->
+        Feature cableTv = featureRepository.findByName(Utils.CABLE_TV).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'cable TV'"));
         hotel.addFeature(cableTv);
 
@@ -755,10 +755,10 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
 
         Hotel deletedHotel = hotelRepository.findById(hotel.getId()).orElse(null);
         Assert.assertNull(deletedHotel);
-        airConditioner = featureRepository.findByName(CoreConstants.AIR_CONDITIONER).orElseThrow(() ->
+        airConditioner = featureRepository.findByName(Utils.AIR_CONDITIONER).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'air conditioner'"));
         Assert.assertNotNull(airConditioner);
-        cableTv = featureRepository.findByName(CoreConstants.CABLE_TV).orElseThrow(() ->
+        cableTv = featureRepository.findByName(Utils.CABLE_TV).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'cable TV'"));
         Assert.assertNotNull(cableTv);
     }
@@ -771,10 +771,10 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         hotel.setStars(Short.valueOf("5"));
         hotel.setLatitude(BigDecimal.valueOf(34.5678901));
         hotel.setLongitude(BigDecimal.valueOf(123.4567890));
-        Feature airConditioner = featureRepository.findByName(CoreConstants.AIR_CONDITIONER).orElseThrow(() ->
+        Feature airConditioner = featureRepository.findByName(Utils.AIR_CONDITIONER).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'air conditioner'"));
         hotel.addFeature(airConditioner);
-        Feature cableTv = featureRepository.findByName(CoreConstants.CABLE_TV).orElseThrow(() ->
+        Feature cableTv = featureRepository.findByName(Utils.CABLE_TV).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'cable TV'"));
         hotel.addFeature(cableTv);
 
@@ -793,10 +793,10 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
 
         Hotel deletedHotel = hotelRepository.findById(hotel.getId()).orElse(null);
         Assert.assertNull(deletedHotel);
-        airConditioner = featureRepository.findByName(CoreConstants.AIR_CONDITIONER).orElseThrow(() ->
+        airConditioner = featureRepository.findByName(Utils.AIR_CONDITIONER).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'air conditioner'"));
         Assert.assertNotNull(airConditioner);
-        cableTv = featureRepository.findByName(CoreConstants.CABLE_TV).orElseThrow(() ->
+        cableTv = featureRepository.findByName(Utils.CABLE_TV).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'cable TV'"));
         Assert.assertNotNull(cableTv);
     }
@@ -814,10 +814,10 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         hotel1.setStars(Short.valueOf("5"));
         hotel1.setLatitude(BigDecimal.valueOf(34.5678901));
         hotel1.setLongitude(BigDecimal.valueOf(123.4567890));
-        Feature airConditioner = featureRepository.findByName(CoreConstants.AIR_CONDITIONER).orElseThrow(() ->
+        Feature airConditioner = featureRepository.findByName(Utils.AIR_CONDITIONER).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'air conditioner'"));
         hotel1.addFeature(airConditioner);
-        Feature cableTv = featureRepository.findByName(CoreConstants.CABLE_TV).orElseThrow(() ->
+        Feature cableTv = featureRepository.findByName(Utils.CABLE_TV).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'cable TV'"));
         hotel1.addFeature(cableTv);
         Hotel hotel2 = new Hotel();
@@ -826,10 +826,10 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         hotel2.setStars(Short.valueOf("5"));
         hotel2.setLatitude(BigDecimal.valueOf(34.5678901));
         hotel2.setLongitude(BigDecimal.valueOf(123.4567890));
-        Feature carRental = featureRepository.findByName(CoreConstants.CAR_RENTAL).orElseThrow(() ->
+        Feature carRental = featureRepository.findByName(Utils.CAR_RENTAL).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'car rental'"));
         hotel2.addFeature(carRental);
-        Feature miniBar = featureRepository.findByName(CoreConstants.MINI_BAR).orElseThrow(() ->
+        Feature miniBar = featureRepository.findByName(Utils.MINI_BAR).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'mini-bar'"));
         hotel2.addFeature(miniBar);
         List<Hotel> hotels = new ArrayList<>();
@@ -859,19 +859,19 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
 
         Hotel deletedHotel = hotelRepository.findById(hotel1.getId()).orElse(null);
         Assert.assertNull(deletedHotel);
-        airConditioner = featureRepository.findByName(CoreConstants.AIR_CONDITIONER).orElseThrow(() ->
+        airConditioner = featureRepository.findByName(Utils.AIR_CONDITIONER).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'air conditioner'"));
         Assert.assertNotNull(airConditioner);
-        cableTv = featureRepository.findByName(CoreConstants.CABLE_TV).orElseThrow(() ->
+        cableTv = featureRepository.findByName(Utils.CABLE_TV).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'cable TV'"));
         Assert.assertNotNull(cableTv);
 
         deletedHotel = hotelRepository.findById(hotel2.getId()).orElse(null);
         Assert.assertNull(deletedHotel);
-        carRental = featureRepository.findByName(CoreConstants.CAR_RENTAL).orElseThrow(() ->
+        carRental = featureRepository.findByName(Utils.CAR_RENTAL).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'car rental'"));
         Assert.assertNotNull(carRental);
-        miniBar = featureRepository.findByName(CoreConstants.MINI_BAR).orElseThrow(() ->
+        miniBar = featureRepository.findByName(Utils.MINI_BAR).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'mini-bar'"));
         Assert.assertNotNull(miniBar);
     }
@@ -889,10 +889,10 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         hotel1.setStars(Short.valueOf("5"));
         hotel1.setLatitude(BigDecimal.valueOf(34.5678901));
         hotel1.setLongitude(BigDecimal.valueOf(123.4567890));
-        Feature airConditioner = featureRepository.findByName(CoreConstants.AIR_CONDITIONER).orElseThrow(() ->
+        Feature airConditioner = featureRepository.findByName(Utils.AIR_CONDITIONER).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'air conditioner'"));
         hotel1.addFeature(airConditioner);
-        Feature cableTv = featureRepository.findByName(CoreConstants.CABLE_TV).orElseThrow(() ->
+        Feature cableTv = featureRepository.findByName(Utils.CABLE_TV).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'cable TV'"));
         hotel1.addFeature(cableTv);
         Hotel hotel2 = new Hotel();
@@ -901,10 +901,10 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         hotel2.setStars(Short.valueOf("5"));
         hotel2.setLatitude(BigDecimal.valueOf(34.5678901));
         hotel2.setLongitude(BigDecimal.valueOf(123.4567890));
-        Feature carRental = featureRepository.findByName(CoreConstants.CAR_RENTAL).orElseThrow(() ->
+        Feature carRental = featureRepository.findByName(Utils.CAR_RENTAL).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'car rental'"));
         hotel2.addFeature(carRental);
-        Feature miniBar = featureRepository.findByName(CoreConstants.MINI_BAR).orElseThrow(() ->
+        Feature miniBar = featureRepository.findByName(Utils.MINI_BAR).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'mini-bar'"));
         List<Hotel> hotels = new ArrayList<>();
         hotels.add(hotel1);
@@ -935,19 +935,19 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
 
         Hotel deletedHotel = hotelRepository.findById(hotel1.getId()).orElse(null);
         Assert.assertNull(deletedHotel);
-        airConditioner = featureRepository.findByName(CoreConstants.AIR_CONDITIONER).orElseThrow(() ->
+        airConditioner = featureRepository.findByName(Utils.AIR_CONDITIONER).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'air conditioner'"));
         Assert.assertNotNull(airConditioner);
-        cableTv = featureRepository.findByName(CoreConstants.CABLE_TV).orElseThrow(() ->
+        cableTv = featureRepository.findByName(Utils.CABLE_TV).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'cable TV'"));
         Assert.assertNotNull(cableTv);
 
         deletedHotel = hotelRepository.findById(hotel2.getId()).orElse(null);
         Assert.assertNull(deletedHotel);
-        carRental = featureRepository.findByName(CoreConstants.CAR_RENTAL).orElseThrow(() ->
+        carRental = featureRepository.findByName(Utils.CAR_RENTAL).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'car rental'"));
         Assert.assertNotNull(carRental);
-        miniBar = featureRepository.findByName(CoreConstants.MINI_BAR).orElseThrow(() ->
+        miniBar = featureRepository.findByName(Utils.MINI_BAR).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'mini-bar'"));
         Assert.assertNotNull(miniBar);
     }

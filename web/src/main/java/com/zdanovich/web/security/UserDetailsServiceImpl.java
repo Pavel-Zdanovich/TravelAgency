@@ -14,13 +14,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserDetailsServiceImpl() {
-        System.out.println("\nUSER DETAILS SERVICE CREATED\n");
-    }
-
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("\nSEARCH USER IN DATABASE\n");
+    public UserDetails loadUserByUsername(String username) {
         UserDetails userDetails = null;
         Optional<User> optionalUser = userRepository.findByLogin(username);
         if (optionalUser.isPresent()) {

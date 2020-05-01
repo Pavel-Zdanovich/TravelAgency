@@ -1,7 +1,6 @@
 package com.zdanovich.core.integration.repository;
 
-import com.zdanovich.core.config.MigrationConfig;
-import com.zdanovich.core.config.PersistenceConfig;
+import com.zdanovich.core.config.CoreModuleConfiguration;
 import com.zdanovich.core.entity.Country;
 import com.zdanovich.core.entity.Feature;
 import com.zdanovich.core.entity.Hotel;
@@ -15,13 +14,13 @@ import com.zdanovich.core.repository.HotelRepository;
 import com.zdanovich.core.repository.ReviewRepository;
 import com.zdanovich.core.repository.TourRepository;
 import com.zdanovich.core.repository.UserRepository;
-import com.zdanovich.core.utils.CoreConstants;
+import com.zdanovich.core.utils.Utils;
 import liquibase.exception.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import javax.persistence.EntityManager;
@@ -34,8 +33,7 @@ import java.util.Set;
 import static org.hibernate.cfg.AvailableSettings.STATEMENT_BATCH_SIZE;
 
 @Test
-@ContextConfiguration(classes = {PersistenceConfig.class, MigrationConfig.class, CountryRepository.class,
-        FeatureRepository.class, HotelRepository.class, ReviewRepository.class, TourRepository.class, UserRepository.class})
+@ContextConfiguration(classes = CoreModuleConfiguration.class)
 public abstract class AbstractRepositoryTest extends AbstractTransactionalTestNGSpringContextTests {
 
     @Autowired
@@ -77,7 +75,7 @@ public abstract class AbstractRepositoryTest extends AbstractTransactionalTestNG
 
     private int batchSize;
 
-    @BeforeClass
+    @BeforeSuite
     @Transactional
     public void beforeClass() throws DatabaseException, NoSuchFieldException, IllegalAccessException {
         elonFirstTourReview = reviewRepository.findByUser_IdAndTour_Id(1L, 1L).orElseThrow(() ->
@@ -108,19 +106,19 @@ public abstract class AbstractRepositoryTest extends AbstractTransactionalTestNG
         Field hotelFeaturesField = Hotel.class.getDeclaredField(Hotel_.FEATURES);
         hotelFeaturesField.setAccessible(true);
         Set<Feature> features = (Set<Feature>) hotelFeaturesField.get(cromlixHotel);
-        airConditioner = features.stream().filter(feature -> feature.getName().equals(CoreConstants.AIR_CONDITIONER))
+        airConditioner = features.stream().filter(feature -> feature.getName().equals(Utils.AIR_CONDITIONER))
                 .findAny().orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
         //featureRepository.findByName(CoreConstants.AIR_CONDITIONER).orElseThrow(() -> new DatabaseException("Unable to find feature 'air conditioner'"));
-        cableTv = features.stream().filter(feature -> feature.getName().equals(CoreConstants.CABLE_TV))
+        cableTv = features.stream().filter(feature -> feature.getName().equals(Utils.CABLE_TV))
                 .findAny().orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
         //featureRepository.findByName(CoreConstants.CABLE_TV).orElseThrow(() -> new DatabaseException("Unable to find feature 'cable TV'"));
-        carRental = features.stream().filter(feature -> feature.getName().equals(CoreConstants.CAR_RENTAL))
+        carRental = features.stream().filter(feature -> feature.getName().equals(Utils.CAR_RENTAL))
                 .findAny().orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
         //featureRepository.findByName(CoreConstants.CAR_RENTAL).orElseThrow(() -> new DatabaseException("Unable to find feature 'car rental'"));
-        miniBar = features.stream().filter(feature -> feature.getName().equals(CoreConstants.MINI_BAR))
+        miniBar = features.stream().filter(feature -> feature.getName().equals(Utils.MINI_BAR))
                 .findAny().orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
         //featureRepository.findByName(CoreConstants.MINI_BAR).orElseThrow(() -> new DatabaseException("Unable to find feature 'mini-bar'"));
-        parking = features.stream().filter(feature -> feature.getName().equals(CoreConstants.PARKING))
+        parking = features.stream().filter(feature -> feature.getName().equals(Utils.PARKING))
                 .findAny().orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
         //featureRepository.findByName(CoreConstants.PARKING).orElseThrow(() -> new DatabaseException("Unable to find feature 'parking'"));
 
@@ -129,7 +127,7 @@ public abstract class AbstractRepositoryTest extends AbstractTransactionalTestNG
         entityManager.setProperty(STATEMENT_BATCH_SIZE, TEST_BATCH_SIZE);
     }
 
-    @AfterClass
+    @AfterSuite
     public void afterClass() {
         entityManager.setProperty(STATEMENT_BATCH_SIZE, batchSize);
     }

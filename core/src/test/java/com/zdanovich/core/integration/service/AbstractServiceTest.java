@@ -1,8 +1,6 @@
 package com.zdanovich.core.integration.service;
 
-import com.zdanovich.core.config.MigrationConfig;
-import com.zdanovich.core.config.PersistenceConfig;
-import com.zdanovich.core.integration.repository.AbstractRepositoryTest;
+import com.zdanovich.core.config.CoreModuleConfiguration;
 import com.zdanovich.core.service.impl.CountryService;
 import com.zdanovich.core.service.impl.FeatureService;
 import com.zdanovich.core.service.impl.HotelService;
@@ -14,9 +12,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.testng.annotations.Test;
 
 @Test
-@ContextConfiguration(classes = {PersistenceConfig.class, MigrationConfig.class, CountryService.class,
-        FeatureService.class, HotelService.class, ReviewService.class, TourService.class, UserService.class})
-public abstract class AbstractServiceTest extends AbstractRepositoryTest {
+@ContextConfiguration(classes = CoreModuleConfiguration.class)
+public abstract class AbstractServiceTest {
 
     @Autowired
     protected CountryService countryService;

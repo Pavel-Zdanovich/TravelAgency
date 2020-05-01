@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="integration" parallel="classes" thread-count="10">
+    <test name="migration" parallel="methods">
+        <packages>
+            <package name="com.zdanovich.core.integration.database"/>
+        </packages>
+    </test>
+
+    <test name="repository">
+        <packages>
+            <package name="com.zdanovich.core.integration.repository"/>
+        </packages>
+    </test>
+
+    <test name="service">
+        <packages>
+            <package name="com.zdanovich.core.integration.service"/>
+        </packages>
+    </test>
+</suite>

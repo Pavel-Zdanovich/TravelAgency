@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head lang="en">
+        <meta charset="UTF-8"/>
+        <title>TravelAgency</title>
+        <link rel="stylesheet" href="/main.css" />
+    </head>
+    <body>
+
+        <div id="root" th:utext="${content}"></div>
+
+        <script src="/bundle.js"></script>
+        <script th:inline="javascript">window.renderClient();</script>
+
+    </body>
+</html>
