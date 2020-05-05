@@ -1,8 +1,8 @@
 package com.zdanovich.core.integration.repository;
 
-import com.zdanovich.core.repository.CountryRepository;
 import com.zdanovich.core.entity.Country;
 import com.zdanovich.core.entity.metamodel.Country_;
+import com.zdanovich.core.repository.CountryRepository;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;

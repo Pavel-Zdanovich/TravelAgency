@@ -6,9 +6,7 @@ import com.zdanovich.core.repository.TourRepository;
 import com.zdanovich.core.service.impl.TourService;
 import com.zdanovich.web.controller.AbstractController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -76,29 +74,4 @@ public class TourController extends AbstractController<Tour, Long, TourRepositor
     public ResponseEntity<List<Tour>> findByTourType(@RequestParam TourType type) {
         return ResponseEntity.ok(service.findByTourType(type));
     }
-
-    @GetMapping(path = "/count")
-    public ResponseEntity<Long> count() {
-        return ResponseEntity.ok(service.count());
-    }
-
-    @DeleteMapping(params = "id")
-    public ResponseEntity<Long> deleteById(
-            @RequestParam
-            @NotNull(message = "{entity.id.notNull}") Long id) {
-        if (this.service.existsById(id)) {
-            this.service.deleteById(id);
-            return ResponseEntity.ok(id);
-        } else {
-            return new ResponseEntity<>(id, HttpStatus.NOT_FOUND);
-        }
-    }
-
-    /*@DeleteMapping
-    public ResponseEntity<Iterable<Tour>> deleteAll(
-            @RequestBody
-            @Valid Iterable<Tour> iterable) {
-        service.deleteAll(iterable);
-        return ResponseEntity.ok(iterable);
-    }*/
 }

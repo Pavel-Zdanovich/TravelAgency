@@ -1,21 +1,17 @@
 package com.zdanovich.web.controller.impl;
 
-import com.zdanovich.core.entity.Country;
 import com.zdanovich.core.entity.Hotel;
 import com.zdanovich.core.repository.HotelRepository;
 import com.zdanovich.core.service.impl.HotelService;
 import com.zdanovich.web.controller.AbstractController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
@@ -67,41 +63,14 @@ public class HotelController extends AbstractController<Hotel, Long, HotelReposi
 
     @GetMapping(params = "features")
     public ResponseEntity<List<Hotel>> findByFeatures(
-            @RequestParam
+            @RequestBody
             @NotEmpty(message = "{hotel.name.notEmpty}")
             @Size(min = 2, max = 50, message = "{hotel.name.size}") Set<String> features) {
         return ResponseEntity.ok(service.findByFeatures(features));
     }
 
-    /*@GetMapping
-    public ResponseEntity<List<Hotel>> findByCountry(
-            @RequestBody
-            @Valid Country country) {
-        return ResponseEntity.ok(service.findByCountry(country));
-    }*/
-
-    @GetMapping(path = "/count")
-    public ResponseEntity<Long> count() {
-        return ResponseEntity.ok(service.count());
+    @GetMapping(params = "countryName")
+    public ResponseEntity<List<Hotel>> findByCountry(@RequestParam String countryName) {
+        return ResponseEntity.ok(service.findByCountry(countryName));
     }
-
-    @DeleteMapping(params = "id")
-    public ResponseEntity<Long> deleteById(
-            @RequestParam
-            @NotNull(message = "{entity.id.notNull}") Long id) {
-        if (this.service.existsById(id)) {
-            this.service.deleteById(id);
-            return ResponseEntity.ok(id);
-        } else {
-            return new ResponseEntity<>(id, HttpStatus.NOT_FOUND);
-        }
-    }
-
-    /*@DeleteMapping
-    public ResponseEntity<Iterable<Hotel>> deleteAll(
-            @RequestBody
-            @Valid Iterable<Hotel> iterable) {
-        service.deleteAll(iterable);
-        return ResponseEntity.ok(iterable);
-    }*/
 }

@@ -1,5 +1,6 @@
 package com.zdanovich.web.config;
 
+import com.zdanovich.core.config.CoreModuleConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
@@ -21,9 +22,10 @@ public class WebApplicationInitializerImpl implements WebApplicationInitializer 
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-        AnnotationConfigWebApplicationContext context
-                = new AnnotationConfigWebApplicationContext();
-        context.setConfigLocations("com.zdanovich");
+        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+
+        context.register(CoreModuleConfiguration.class, WebModuleConfiguration.class);
+        context.refresh();
 
         servletContext.addListener(new ContextLoaderListener(context));
 

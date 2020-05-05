@@ -1,7 +1,9 @@
 package com.zdanovich.web.integration.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zdanovich.core.entity.Hotel;
 import com.zdanovich.web.controller.impl.HotelController;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -23,8 +25,11 @@ public class HotelControllerTest extends AbstractControllerTest {
         hotel.setLongitude(BigDecimal.valueOf(34));
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.post(path)).
-                andExpect(MockMvcResultMatchers.status().isOk()).
+                perform(MockMvcRequestBuilders.
+                        post(path).
+                        contentType(MediaType.APPLICATION_JSON).
+                        content(new ObjectMapper().writeValueAsString(hotel))).
+                andExpect(MockMvcResultMatchers.status().isCreated()).
                 andReturn();
     }
 
@@ -53,6 +58,26 @@ public class HotelControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    public void findByStars() {
+
+    }
+
+    @Test
+    public void findByArea() {
+
+    }
+
+    @Test
+    public void findByFeatures() {
+
+    }
+
+    @Test
+    public void findByCountry() {
+
+    }
+
+    @Test
     public void update() throws Exception {
         Hotel hotel = new Hotel();
         hotel.setName("TestHotelName1");
@@ -62,7 +87,10 @@ public class HotelControllerTest extends AbstractControllerTest {
         hotel.setLongitude(BigDecimal.valueOf(34));
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.put(path)).
+                perform(MockMvcRequestBuilders.
+                        put(path).
+                        contentType(MediaType.APPLICATION_JSON).
+                        content(new ObjectMapper().writeValueAsString(hotel))).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
     }
@@ -77,7 +105,10 @@ public class HotelControllerTest extends AbstractControllerTest {
         hotel.setLongitude(BigDecimal.valueOf(34));
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.delete(path)).
+                perform(MockMvcRequestBuilders.
+                        delete(path).
+                        contentType(MediaType.APPLICATION_JSON).
+                        content(new ObjectMapper().writeValueAsString(hotel))).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
     }
@@ -89,12 +120,4 @@ public class HotelControllerTest extends AbstractControllerTest {
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
     }
-
-    /*@Test
-    public void deleteAll() throws Exception {
-        MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.delete(path)).
-                andExpect(MockMvcResultMatchers.status().isOk()).
-                andReturn();
-    }*/
 }

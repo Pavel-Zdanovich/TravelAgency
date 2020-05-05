@@ -1,7 +1,9 @@
 package com.zdanovich.web.integration.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zdanovich.core.entity.Review;
 import com.zdanovich.web.controller.impl.ReviewController;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -20,8 +22,11 @@ public class ReviewControllerTest extends AbstractControllerTest {
         review.setReviewDate(Timestamp.valueOf("2020-12-12 00:00:00"));
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.post(path)).
-                andExpect(MockMvcResultMatchers.status().isOk()).
+                perform(MockMvcRequestBuilders.
+                        post(path).
+                        contentType(MediaType.APPLICATION_JSON).
+                        content(new ObjectMapper().writeValueAsString(review))).
+                andExpect(MockMvcResultMatchers.status().isCreated()).
                 andReturn();
     }
 
@@ -56,7 +61,10 @@ public class ReviewControllerTest extends AbstractControllerTest {
         review.setReviewDate(Timestamp.valueOf("2020-12-12 00:00:00"));
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.put(path)).
+                perform(MockMvcRequestBuilders.
+                        put(path).
+                        contentType(MediaType.APPLICATION_JSON).
+                        content(new ObjectMapper().writeValueAsString(review))).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
     }
@@ -68,7 +76,10 @@ public class ReviewControllerTest extends AbstractControllerTest {
         review.setReviewDate(Timestamp.valueOf("2020-12-12 00:00:00"));
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.delete(path)).
+                perform(MockMvcRequestBuilders.
+                        delete(path).
+                        contentType(MediaType.APPLICATION_JSON).
+                        content(new ObjectMapper().writeValueAsString(review))).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
     }

@@ -1,7 +1,9 @@
 package com.zdanovich.web.integration.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zdanovich.core.entity.Feature;
 import com.zdanovich.web.controller.impl.FeatureController;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -17,8 +19,11 @@ public class FeatureControllerTest extends AbstractControllerTest {
         feature.setName("TestFeatureName1");
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.post(path)).
-                andExpect(MockMvcResultMatchers.status().isOk()).
+                perform(MockMvcRequestBuilders.
+                        post(path).
+                        contentType(MediaType.APPLICATION_JSON).
+                        content(new ObjectMapper().writeValueAsString(feature))).
+                andExpect(MockMvcResultMatchers.status().isCreated()).
                 andReturn();
     }
 
@@ -52,7 +57,10 @@ public class FeatureControllerTest extends AbstractControllerTest {
         feature.setName("TestFeatureName1");
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.put(path)).
+                perform(MockMvcRequestBuilders.
+                        put(path).
+                        contentType(MediaType.APPLICATION_JSON).
+                        content(new ObjectMapper().writeValueAsString(feature))).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
     }
@@ -63,7 +71,10 @@ public class FeatureControllerTest extends AbstractControllerTest {
         feature.setName("TestFeatureName1");
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.delete(path)).
+                perform(MockMvcRequestBuilders.
+                        delete(path).
+                        contentType(MediaType.APPLICATION_JSON).
+                        content(new ObjectMapper().writeValueAsString(feature))).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
     }
@@ -75,12 +86,4 @@ public class FeatureControllerTest extends AbstractControllerTest {
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
     }
-
-    /*@Test
-    public void deleteAll() throws Exception {
-        MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.delete(path)).
-                andExpect(MockMvcResultMatchers.status().isOk()).
-                andReturn();
-    }*/
 }

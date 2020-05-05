@@ -1,8 +1,10 @@
 package com.zdanovich.web.integration.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zdanovich.core.entity.User;
 import com.zdanovich.core.entity.enums.UserRole;
 import com.zdanovich.web.controller.impl.UserController;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -20,8 +22,11 @@ public class UserControllerTest extends AbstractControllerTest {
         user.setRole(UserRole.USER);
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.post(path)).
-                andExpect(MockMvcResultMatchers.status().isOk()).
+                perform(MockMvcRequestBuilders.
+                        post(path).
+                        contentType(MediaType.APPLICATION_JSON).
+                        content(new ObjectMapper().writeValueAsString(user))).
+                andExpect(MockMvcResultMatchers.status().isCreated()).
                 andReturn();
     }
 
@@ -57,7 +62,10 @@ public class UserControllerTest extends AbstractControllerTest {
         user.setRole(UserRole.USER);
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.put(path)).
+                perform(MockMvcRequestBuilders.
+                        put(path).
+                        contentType(MediaType.APPLICATION_JSON).
+                        content(new ObjectMapper().writeValueAsString(user))).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
     }
@@ -70,7 +78,10 @@ public class UserControllerTest extends AbstractControllerTest {
         user.setRole(UserRole.USER);
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.delete(path)).
+                perform(MockMvcRequestBuilders.
+                        delete(path).
+                        contentType(MediaType.APPLICATION_JSON).
+                        content(new ObjectMapper().writeValueAsString(user))).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
     }

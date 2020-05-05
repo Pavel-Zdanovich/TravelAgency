@@ -19,8 +19,17 @@ import liquibase.exception.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
+import org.springframework.util.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterGroups;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeGroups;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import javax.persistence.EntityManager;
@@ -76,8 +85,29 @@ public abstract class AbstractRepositoryTest extends AbstractTransactionalTestNG
     private int batchSize;
 
     @BeforeSuite
+    public void beforeSuite() {
+        logger.info("<---------- Before suite ---------->");
+        if (entityManager != null) {
+            logger.info("Spring is started");
+        }
+    }
+
+    @BeforeGroups
+    public void beforeGroups() {
+        logger.info("<---------- Before groups ---------->");
+        if (entityManager != null) {
+            logger.info("Spring is started");
+        }
+    }
+
+    @BeforeClass
     @Transactional
     public void beforeClass() throws DatabaseException, NoSuchFieldException, IllegalAccessException {
+        logger.info("<---------- Before class ---------->");
+        if (entityManager != null) {
+            logger.info("Spring is started");
+        }
+
         elonFirstTourReview = reviewRepository.findByUser_IdAndTour_Id(1L, 1L).orElseThrow(() ->
                 new DatabaseException("Unable to find review 'sounds good'"));
 
@@ -127,9 +157,46 @@ public abstract class AbstractRepositoryTest extends AbstractTransactionalTestNG
         entityManager.setProperty(STATEMENT_BATCH_SIZE, TEST_BATCH_SIZE);
     }
 
+    @BeforeTest
+    public void beforeTest() {
+        logger.info("<---------- Before test ---------->");
+        if (entityManager != null) {
+            logger.info("Spring is started");
+        }
+    }
+
+    @BeforeMethod
+    public void beforeMethod() {
+        logger.info("<---------- Before method ---------->");
+        if (entityManager != null) {
+            logger.info("Spring is started");
+        }
+    }
+
     @AfterSuite
+    public void afterSuite() {
+        logger.info("<---------- After suite ---------->");
+    }
+
+    @AfterGroups
+    public void afterGroups() {
+        logger.info("<---------- After groups ---------->");
+    }
+
+    @AfterClass
     public void afterClass() {
+        logger.info("<---------- After class ---------->");
         entityManager.setProperty(STATEMENT_BATCH_SIZE, batchSize);
+    }
+
+    @AfterTest
+    public void afterTest() {
+        logger.info("<---------- After test ---------->");
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+        logger.info("<---------- After method ---------->");
     }
 
     protected void clearCache() {

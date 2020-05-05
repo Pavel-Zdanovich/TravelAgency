@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Optional;
 
 public abstract class AbstractController<E extends AbstractEntity, ID extends Serializable,
         R extends CommonRepository<E, ID>, S extends CommonService<E, ID, R>> implements CommonController<E, ID, R, S> {
@@ -33,7 +33,7 @@ public abstract class AbstractController<E extends AbstractEntity, ID extends Se
 
     @Override
     @GetMapping
-    public ResponseEntity<List<E>> findAll() {
+    public ResponseEntity<Iterable<E>> findAll() {
         return ResponseEntity.ok(this.service.findAll());
     }
 
@@ -62,6 +62,18 @@ public abstract class AbstractController<E extends AbstractEntity, ID extends Se
             return ResponseEntity.ok(entity);
         } else {
             return new ResponseEntity<>(entity, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @Override
+    @DeleteMapping(params = "id")
+    public ResponseEntity<E> deleteById(@RequestParam ID id) {
+        Optional<E> optionalEntity = this.service.findById(id);
+        if (optionalEntity.isPresent()) {
+            this.service.deleteById(id);
+            return ResponseEntity.ok(optionalEntity.get());
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

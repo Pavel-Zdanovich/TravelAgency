@@ -10,10 +10,16 @@ import java.io.Serializable;
 public interface CommonController<E extends AbstractEntity, ID extends Serializable, R extends CommonRepository<E, ID>,
         S extends CommonService<E, ID, R>> {
 
-    ResponseEntity save(E entity);
-    ResponseEntity findAll();
-    ResponseEntity findById(ID entityId);
-    ResponseEntity update(E entity);
-    ResponseEntity delete(E entity);
+    ResponseEntity<E> save(E entity);
+
+    ResponseEntity<Iterable<E>> findAll();
+
+    ResponseEntity<E> findById(ID entityId);
+
+    ResponseEntity<E> update(E entity);
+
+    ResponseEntity<E> delete(E entity);
+
+    ResponseEntity<E> deleteById(ID entityId);
 
 }

@@ -1,8 +1,10 @@
 package com.zdanovich.web.integration.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zdanovich.core.entity.Tour;
 import com.zdanovich.core.entity.enums.TourType;
 import com.zdanovich.web.controller.impl.TourController;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -26,8 +28,11 @@ public class TourControllerTest extends AbstractControllerTest {
         tour.setTourType(TourType.BUSINESS);
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.post(path)).
-                andExpect(MockMvcResultMatchers.status().isOk()).
+                perform(MockMvcRequestBuilders.
+                        post(path).
+                        contentType(MediaType.APPLICATION_JSON).
+                        content(new ObjectMapper().writeValueAsString(tour))).
+                andExpect(MockMvcResultMatchers.status().isCreated()).
                 andReturn();
     }
 
@@ -66,7 +71,10 @@ public class TourControllerTest extends AbstractControllerTest {
         tour.setTourType(TourType.BUSINESS);
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.put(path)).
+                perform(MockMvcRequestBuilders.
+                        put(path).
+                        contentType(MediaType.APPLICATION_JSON).
+                        content(new ObjectMapper().writeValueAsString(tour))).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
     }
@@ -82,7 +90,10 @@ public class TourControllerTest extends AbstractControllerTest {
         tour.setTourType(TourType.BUSINESS);
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.delete(path)).
+                perform(MockMvcRequestBuilders.
+                        delete(path).
+                        contentType(MediaType.APPLICATION_JSON).
+                        content(new ObjectMapper().writeValueAsString(tour))).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
     }

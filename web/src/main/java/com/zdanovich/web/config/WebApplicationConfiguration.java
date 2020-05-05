@@ -33,7 +33,6 @@ public class WebApplicationConfiguration implements WebMvcConfigurer {
 
         Properties exceptionMappings = new Properties();
 
-        exceptionMappings.put("net.petrikainulainen.spring.testmvc.todo.exception.TodoNotFoundException", "error/404");
         exceptionMappings.put("java.lang.Exception", "error/error");
         exceptionMappings.put("java.lang.RuntimeException", "error/error");
 

@@ -3,11 +3,13 @@ package com.zdanovich.core.service;
 import com.zdanovich.core.entity.AbstractEntity;
 import com.zdanovich.core.repository.CommonRepository;
 
+import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
-public class AbstractService<E extends AbstractEntity, ID extends Serializable, R extends CommonRepository<E, ID>>
+@Transactional
+public abstract class AbstractService<E extends AbstractEntity, ID extends Serializable, R extends CommonRepository<E, ID>>
         implements CommonService<E, ID, R> {
 
     protected final R repository;
@@ -18,7 +20,7 @@ public class AbstractService<E extends AbstractEntity, ID extends Serializable, 
 
     @Override
     public E save(E entity) {
-        return this.repository.save(entity);
+        return this.repository.saveAndFlush(entity);
     }
 
     @Override

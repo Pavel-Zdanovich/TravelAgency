@@ -17,14 +17,14 @@ import java.io.Serializable;
 @Setter
 public abstract class AbstractEntity implements Identifiable, Serializable {
 
-    public static final String ENTITY_SEQUENCE = "ENTITY_SEQUENCE";
+    public static final String ENTITY_GENERATOR = "ENTITY_GENERATOR";
     public static final String SEQUENCE_IDENTIFIER_GENERATOR_PATH = "com.zdanovich.core.entity.generator.SequenceIdentifierGenerator";
     public static final String ID = "id";
 
     @Column(name = ID)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = ENTITY_SEQUENCE)
-    @GenericGenerator(name = ENTITY_SEQUENCE, strategy = SEQUENCE_IDENTIFIER_GENERATOR_PATH)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = ENTITY_GENERATOR)
+    @GenericGenerator(name = ENTITY_GENERATOR, strategy = SEQUENCE_IDENTIFIER_GENERATOR_PATH)
     protected Long id;
 
 }

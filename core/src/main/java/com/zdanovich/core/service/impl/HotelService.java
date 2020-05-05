@@ -15,14 +15,14 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 @Service
+@Transactional
 public class HotelService extends AbstractService<Hotel, Long, HotelRepository> {
 
     @Autowired
@@ -50,8 +50,8 @@ public class HotelService extends AbstractService<Hotel, Long, HotelRepository> 
         return repository.findByStarsBetween(minStars, maxStars);
     }
 
-    public List<Hotel> findByArea(@DecimalMin("-90.0000000") BigDecimal minLatitude, @DecimalMax("90.0000000") BigDecimal maxLatitude,
-                                  @DecimalMin("-180.0000000") BigDecimal minLongitude, @DecimalMax("180.0000000") BigDecimal maxLongitude) {
+    public List<Hotel> findByArea(BigDecimal minLatitude, BigDecimal maxLatitude,
+                                  BigDecimal minLongitude, BigDecimal maxLongitude) {
         Specification<Hotel> hotelSpecification = new Specification<Hotel>() {
             @Override
             public Predicate toPredicate(Root<Hotel> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
@@ -81,5 +81,4 @@ public class HotelService extends AbstractService<Hotel, Long, HotelRepository> 
         Specification<Hotel> hotelSpecification = new FindHotelByCountry(countryName);
         return repository.findAll(hotelSpecification);
     }
-
 }

@@ -36,35 +36,13 @@ public class MigrationTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void checkMetaData() {
-        try (Connection connection = dataSource.getConnection();
-             ResultSet resultSet = connection.getMetaData().getClientInfoProperties()) {
+        try (Connection connection = dataSource.getConnection()) {
             DatabaseMetaData databaseMetaData = connection.getMetaData();
             logger.info(String.format("Connection URL: %s", databaseMetaData.getURL()));
             logger.info(String.format("Driver name: %s", databaseMetaData.getDriverName()));
             logger.info(String.format("Username: %s", databaseMetaData.getUserName()));
             logger.info(String.format("Catalog: %s", connection.getCatalog()));
             logger.info(String.format("Schema: %s", connection.getSchema()));
-            while (resultSet.next()) {
-                ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-                for (int i = 1; i <= resultSetMetaData.getColumnCount(); i++) {
-                    logger.info(String.format("%s (%s) %s", resultSetMetaData.getColumnTypeName(i),
-                            resultSetMetaData.getColumnClassName(i), resultSetMetaData.getColumnName(i)));
-                }
-            }
-        } catch (SQLException e) {
-            logger.error("SQLException: ", e);
-            Assert.fail("SQLException: ", e);
-        }
-    }
-
-    @Test
-    public void checkTableCreation() {
-        try (Connection connection = dataSource.getConnection();
-             ResultSet resultSet = connection.getMetaData()
-                     .getTables(null, null, "%", new String[]{"TABLE"})) {
-            while (resultSet.next()) {
-                logger.info(String.format("Table name : %s", resultSet.getString(3)));
-            }
         } catch (SQLException e) {
             logger.error("SQLException: ", e);
             Assert.fail("SQLException: ", e);
@@ -86,16 +64,23 @@ public class MigrationTest extends AbstractTestNGSpringContextTests {
 
     @Test(dataProvider = "tableNameDataProvider")
     public void checkDataMigration(String tableName) {
+        String query = String.format("SELECT * FROM %s", tableName);
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(String.format("SELECT * FROM %s", tableName))) {
+             ResultSet resultSet = statement.executeQuery(query)) {
+            logger.info(query);
             while (resultSet.next()) {
-                logger.info(resultSet.getObject(1, Long.class));
+                ResultSetMetaData metaData = resultSet.getMetaData();
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                    stringBuilder.
+                            append(metaData.getColumnName(i)).
+                            append(" [").append(metaData.getColumnTypeName(i)).
+                            append(" -> ").append(metaData.getColumnClassName(i)).append("] = ").
+                            append(resultSet.getObject(i)).append("; ");
+                }
+                logger.info(stringBuilder.toString());
             }
-            logger.info(String.format("isFirst: %s", resultSet.isFirst()));
-            logger.info(String.format("isBeforeFirst: %s", resultSet.isBeforeFirst()));
-            logger.info(String.format("isAfterLast: %s", resultSet.isAfterLast()));
-            logger.info(String.format("isLast: %s", resultSet.isLast()));
         } catch (SQLException e) {
             logger.error("SQLException: ", e);
             Assert.fail("SQLException: ", e);

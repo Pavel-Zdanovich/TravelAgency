@@ -14,11 +14,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
 @Service
+@Transactional
 public class TourService extends AbstractService<Tour, Long, TourRepository> {
 
     @Autowired
@@ -91,10 +93,6 @@ public class TourService extends AbstractService<Tour, Long, TourRepository> {
 
     public List<Tour> findByCostBetween(BigDecimal minCost, BigDecimal maxCost) {
         return repository.findByCostBetween(minCost, maxCost);
-    }
-
-    public List<Tour> findByTourType(String tourType) {
-        return findByTourType(TourType.valueOf(tourType));
     }
 
     public List<Tour> findByTourType(TourType tourType) {

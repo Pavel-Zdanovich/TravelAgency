@@ -29,8 +29,6 @@ import static com.zdanovich.core.utils.Utils.USERNAME;
 import static org.hibernate.cfg.AvailableSettings.SHOW_SQL;
 
 @Configuration
-@EnableJpaAuditing
-@EnableAspectJAutoProxy(proxyTargetClass = true)
 @EnableJpaRepositories(basePackages = PersistenceConfiguration.REPOSITORY_PACKAGE_PATH)
 @EnableTransactionManagement(proxyTargetClass = true)
 public class PersistenceConfiguration {

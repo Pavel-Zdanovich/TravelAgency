@@ -7,10 +7,12 @@ import com.zdanovich.core.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserService extends AbstractService<User, Long, UserRepository> {
 
     @Autowired
@@ -40,9 +42,5 @@ public class UserService extends AbstractService<User, Long, UserRepository> {
 
     public List<User> findByUserRole(UserRole userRole) {
         return repository.findByRole(userRole);
-    }
-
-    public List<User> findByUserRole(String userRole) {
-        return findByUserRole(UserRole.valueOf(userRole));
     }
 }
