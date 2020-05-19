@@ -1,7 +1,6 @@
 package com.zdanovich.core.entity;
 
 import com.zdanovich.core.entity.enums.UserRole;
-import com.zdanovich.core.entity.metamodel.Review_;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -76,7 +75,7 @@ public class User extends AbstractEntity {
     @Setter
     private UserRole role;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Tour.class, cascade = CascadeType.ALL)
     @JoinTable(name = "USERS_TOURS",
             joinColumns = @JoinColumn(name = USER_ID, referencedColumnName = USER_ID,
                     foreignKey = @ForeignKey(name = "USER_TOUR_USER_ID_FK")),
@@ -87,7 +86,8 @@ public class User extends AbstractEntity {
     @Getter
     private Set<Tour> tours = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = Review_.USER)
+    @OneToMany(targetEntity = Review.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = USER_ID)
     @Getter
     private List<Review> reviews = new ArrayList<>();
 

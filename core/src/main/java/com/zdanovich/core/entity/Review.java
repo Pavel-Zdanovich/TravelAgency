@@ -24,10 +24,12 @@ import java.sql.Timestamp;
 import static com.zdanovich.core.entity.AbstractEntity.ID;
 import static com.zdanovich.core.entity.Review.REVIEWS;
 import static com.zdanovich.core.entity.Review.REVIEW_ID;
+import static com.zdanovich.core.entity.Tour.TOUR_ID;
+import static com.zdanovich.core.entity.User.USER_ID;
 
 @Entity
 @Table(name = REVIEWS)
-@AttributeOverride(name = ID, column = @Column(name = REVIEW_ID, precision = 10))
+@AttributeOverride(name = ID, column = @Column(name = REVIEW_ID))
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @ToString
@@ -55,13 +57,13 @@ public class Review extends AbstractEntity {
 
     @ManyToOne(targetEntity = User.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = User.USER_ID, nullable = false, foreignKey = @ForeignKey(name = "REVIEW_USER_ID_FK"))
+    @JoinColumn(name = USER_ID, foreignKey = @ForeignKey(name = "REVIEW_USER_ID_FK"))
     @Getter
     private User user;
 
     @ManyToOne(targetEntity = Tour.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = Tour.TOUR_ID, nullable = false, foreignKey = @ForeignKey(name = "REVIEW_TOUR_ID_FK"))
+    @JoinColumn(name = TOUR_ID, foreignKey = @ForeignKey(name = "REVIEW_TOUR_ID_FK"))
     @Getter
     private Tour tour;
 

@@ -7,7 +7,6 @@ import com.zdanovich.core.entity.Hotel;
 import com.zdanovich.core.entity.Review;
 import com.zdanovich.core.entity.Tour;
 import com.zdanovich.core.entity.User;
-import com.zdanovich.core.entity.metamodel.Hotel_;
 import com.zdanovich.core.repository.CountryRepository;
 import com.zdanovich.core.repository.FeatureRepository;
 import com.zdanovich.core.repository.HotelRepository;
@@ -19,7 +18,6 @@ import liquibase.exception.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
-import org.springframework.util.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterGroups;
 import org.testng.annotations.AfterMethod;
@@ -36,8 +34,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.lang.reflect.Field;
-import java.util.Set;
 
 import static org.hibernate.cfg.AvailableSettings.STATEMENT_BATCH_SIZE;
 
@@ -109,7 +105,7 @@ public abstract class AbstractRepositoryTest extends AbstractTransactionalTestNG
         }
 
         elonFirstTourReview = reviewRepository.findByUser_IdAndTour_Id(1L, 1L).orElseThrow(() ->
-                new DatabaseException("Unable to find review 'sounds good'"));
+                new EntityNotFoundException("Unable to find review 'sounds good'"));
 
         elonMusk = elonFirstTourReview.getUser();
         //userRepository.findByLogin("ElonMusk").orElseThrow(() -> new DatabaseException("Unable to find user 'ElonMusk'"));
@@ -121,36 +117,27 @@ public abstract class AbstractRepositoryTest extends AbstractTransactionalTestNG
         //hotelRepository.findByName("Cromlix Hotel").orElseThrow(() -> new DatabaseException("Unable to find hotel 'Cromlix Hotel'"));
 
         parkHyattSaigon = hotelRepository.findByName("Park Hyatt Saigon").orElseThrow(() ->
-                new DatabaseException("Unable to find hotel 'Park Hyatt Saigon'"));
+                new EntityNotFoundException("Unable to find hotel 'Park Hyatt Saigon'"));
 
         france = firstTour.getCountry();
         //countryRepository.findByName("France").orElseThrow(() -> new DatabaseException("Unable to find country 'France'"));
 
         spain = countryRepository.findByName("Spain").orElseThrow(() ->
-                new DatabaseException("Unable to find country 'Spain'"));
+                new EntityNotFoundException("Unable to find country 'Spain'"));
         theGreatBritain = countryRepository.findByName("The Great Britain").orElseThrow(() ->
-                new DatabaseException("Unable to find country 'The Great Britain'"));
+                new EntityNotFoundException("Unable to find country 'The Great Britain'"));
         theNetherlands = countryRepository.findByName("The Netherlands").orElseThrow(() ->
-                new DatabaseException("Unable to find country 'The Netherlands'"));
+                new EntityNotFoundException("Unable to find country 'The Netherlands'"));
 
-        Field hotelFeaturesField = Hotel.class.getDeclaredField(Hotel_.FEATURES);
-        hotelFeaturesField.setAccessible(true);
-        Set<Feature> features = (Set<Feature>) hotelFeaturesField.get(cromlixHotel);
-        airConditioner = features.stream().filter(feature -> feature.getName().equals(Utils.AIR_CONDITIONER))
-                .findAny().orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
-        //featureRepository.findByName(CoreConstants.AIR_CONDITIONER).orElseThrow(() -> new DatabaseException("Unable to find feature 'air conditioner'"));
-        cableTv = features.stream().filter(feature -> feature.getName().equals(Utils.CABLE_TV))
-                .findAny().orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
-        //featureRepository.findByName(CoreConstants.CABLE_TV).orElseThrow(() -> new DatabaseException("Unable to find feature 'cable TV'"));
-        carRental = features.stream().filter(feature -> feature.getName().equals(Utils.CAR_RENTAL))
-                .findAny().orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
-        //featureRepository.findByName(CoreConstants.CAR_RENTAL).orElseThrow(() -> new DatabaseException("Unable to find feature 'car rental'"));
-        miniBar = features.stream().filter(feature -> feature.getName().equals(Utils.MINI_BAR))
-                .findAny().orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
-        //featureRepository.findByName(CoreConstants.MINI_BAR).orElseThrow(() -> new DatabaseException("Unable to find feature 'mini-bar'"));
-        parking = features.stream().filter(feature -> feature.getName().equals(Utils.PARKING))
-                .findAny().orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
-        //featureRepository.findByName(CoreConstants.PARKING).orElseThrow(() -> new DatabaseException("Unable to find feature 'parking'"));
+        airConditioner = cromlixHotel.getFeature(Utils.AIR_CONDITIONER).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
+
+        cableTv = cromlixHotel.getFeature(Utils.CABLE_TV).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
+
+        carRental = cromlixHotel.getFeature(Utils.CAR_RENTAL).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
+
+        miniBar = cromlixHotel.getFeature(Utils.MINI_BAR).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
+
+        parking = cromlixHotel.getFeature(Utils.PARKING).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
 
         Object object = entityManager.getProperties().get(STATEMENT_BATCH_SIZE);
         batchSize = object != null ? Integer.parseInt((String) object) : 10;

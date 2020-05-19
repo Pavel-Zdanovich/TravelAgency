@@ -1,8 +1,6 @@
 package com.zdanovich.core.entity;
 
 import com.zdanovich.core.entity.enums.TourType;
-import com.zdanovich.core.entity.metamodel.Review_;
-import com.zdanovich.core.entity.metamodel.User_;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +16,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -40,6 +39,7 @@ import static com.zdanovich.core.entity.Country.COUNTRY_ID;
 import static com.zdanovich.core.entity.Hotel.HOTEL_ID;
 import static com.zdanovich.core.entity.Tour.TOURS;
 import static com.zdanovich.core.entity.Tour.TOUR_ID;
+import static com.zdanovich.core.entity.User.USER_ID;
 
 @Entity
 @Table(name = TOURS)
@@ -99,7 +99,14 @@ public class Tour extends AbstractEntity {
     @Setter
     private TourType tourType;
 
-    @ManyToMany(targetEntity = User.class, cascade = CascadeType.ALL, mappedBy = User_.TOURS)
+    @ManyToMany(targetEntity = User.class, cascade = CascadeType.ALL)
+    @JoinTable(name = "USERS_TOURS",
+            joinColumns = @JoinColumn(name = TOUR_ID, referencedColumnName = TOUR_ID,
+                    foreignKey = @ForeignKey(name = "USER_TOUR_USER_ID_FK")),
+            foreignKey = @ForeignKey(name = "USER_TOUR_USER_ID_FK"),
+            inverseJoinColumns = @JoinColumn(name = USER_ID, referencedColumnName = USER_ID,
+                    foreignKey = @ForeignKey(name = "USER_TOUR_TOUR_ID_FK")),
+            inverseForeignKey = @ForeignKey(name = "USER_TOUR_TOUR_ID_FK"))
     @Getter
     private Set<User> users = new HashSet<>();
 
@@ -113,7 +120,8 @@ public class Tour extends AbstractEntity {
     @Getter
     private Country country;
 
-    @OneToMany(targetEntity = Review.class, cascade = CascadeType.ALL, mappedBy = Review_.TOUR)
+    @OneToMany(targetEntity = Review.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = TOUR_ID)
     @Getter
     private List<Review> reviews = new ArrayList<>();
 

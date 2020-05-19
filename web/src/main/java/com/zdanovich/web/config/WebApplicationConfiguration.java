@@ -1,9 +1,19 @@
 package com.zdanovich.web.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zdanovich.core.entity.Country;
+import com.zdanovich.core.entity.Feature;
+import com.zdanovich.core.entity.Hotel;
+import com.zdanovich.core.entity.Review;
+import com.zdanovich.core.entity.Tour;
+import com.zdanovich.core.entity.User;
+import com.zdanovich.web.serialization.AbstractEntityMixIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -15,9 +25,16 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Configuration
 @EnableWebMvc
 public class WebApplicationConfiguration implements WebMvcConfigurer {
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -25,6 +42,12 @@ public class WebApplicationConfiguration implements WebMvcConfigurer {
         registry.addResourceHandler("/html/**").addResourceLocations("/html/");
         registry.addResourceHandler("/image/**").addResourceLocations("/image/");
         registry.addResourceHandler("/js/**").addResourceLocations("/js/");
+    }
+
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        HttpMessageConverter<?> httpMessageConverter = new MappingJackson2HttpMessageConverter(objectMapper);
+        converters.add(httpMessageConverter);
     }
 
     /*@Bean

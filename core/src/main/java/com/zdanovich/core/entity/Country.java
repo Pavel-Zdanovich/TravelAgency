@@ -1,6 +1,5 @@
 package com.zdanovich.core.entity;
 
-import com.zdanovich.core.entity.metamodel.Tour_;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +11,7 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -46,7 +45,8 @@ public class Country extends AbstractEntity {
     @Setter
     private String name;
 
-    @OneToMany(targetEntity = Tour.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = Tour_.COUNTRY)
+    @OneToMany(targetEntity = Tour.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = COUNTRY_ID)
     @Getter
     private Set<Tour> tours = new HashSet<>();
 }

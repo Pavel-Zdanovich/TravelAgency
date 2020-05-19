@@ -1,17 +1,20 @@
 package com.zdanovich.web.integration.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zdanovich.core.entity.Tour;
 import com.zdanovich.core.entity.enums.TourType;
 import com.zdanovich.web.controller.impl.TourController;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.Period;
+import java.util.List;
 
 public class TourControllerTest extends AbstractControllerTest {
 
@@ -27,13 +30,12 @@ public class TourControllerTest extends AbstractControllerTest {
         tour.setCost(BigDecimal.valueOf(100));
         tour.setTourType(TourType.BUSINESS);
 
-        MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.
-                        post(path).
-                        contentType(MediaType.APPLICATION_JSON).
-                        content(new ObjectMapper().writeValueAsString(tour))).
-                andExpect(MockMvcResultMatchers.status().isCreated()).
-                andReturn();
+        MvcResult mvcResult = request(HttpMethod.POST, path, tour, HttpStatus.CREATED);
+
+        Tour savedTour = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Tour.class);
+        Assert.assertNotNull(savedTour);
+        tour.setId(savedTour.getId());
+        Assert.assertEquals(tour, savedTour);
     }
 
     @Test
@@ -42,22 +44,108 @@ public class TourControllerTest extends AbstractControllerTest {
                 perform(MockMvcRequestBuilders.get(path)).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
+
+        List<Tour> tours = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), List.class);
+        Assert.assertNotNull(tours);
+        Assert.assertNotEquals(0, tours.size());
     }
 
     @Test
     public void findById() throws Exception {
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(path).requestAttr("id", 1L)).
+                perform(MockMvcRequestBuilders.get(path).queryParam("id", "1")).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
+
+        Tour tour = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Tour.class);
+        Assert.assertNotNull(tour);
     }
 
     @Test
-    public void findByName() throws Exception {
+    public void findByStartDate() throws Exception {
+        Timestamp startDate = Timestamp.valueOf("2020-01-01 00:00:00");
+
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(path).requestAttr("name", "France")).
+                perform(MockMvcRequestBuilders.get(path).queryParam("startDate", startDate.toString())).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
+
+        List<Tour> tours = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), List.class);
+        Assert.assertNotNull(tours);
+        Assert.assertTrue(tours.stream().allMatch(tour -> tour.getStartDate().equals(startDate)));
+    }
+
+    @Test
+    public void findByEndDate() throws Exception {
+        Timestamp endDate = Timestamp.valueOf("2020-01-01 00:00:00");
+
+        MvcResult mvcResult = mockMvc.
+                perform(MockMvcRequestBuilders.get(path).queryParam("endDate", endDate.toString())).
+                andExpect(MockMvcResultMatchers.status().isOk()).
+                andReturn();
+
+        List<Tour> tours = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), List.class);
+        Assert.assertNotNull(tours);
+        Assert.assertTrue(tours.stream().allMatch(tour -> tour.getEndDate().equals(endDate)));
+    }
+
+    @Test
+    public void findByDuration() throws Exception {
+        Timestamp startDate = Timestamp.valueOf("2020-01-01 00:00:00");
+        Timestamp endDate = Timestamp.valueOf("2020-01-01 00:00:00");
+        Period period = Period.between(startDate.toLocalDateTime().toLocalDate(), endDate.toLocalDateTime().toLocalDate());
+
+        MvcResult mvcResult = mockMvc.
+                perform(MockMvcRequestBuilders.get(path).queryParam("duration", String.valueOf(period.getDays()))).
+                andExpect(MockMvcResultMatchers.status().isOk()).
+                andReturn();
+
+        List<Tour> tours = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), List.class);
+        Assert.assertNotNull(tours);
+        Assert.assertTrue(tours.stream().allMatch(tour -> Period.between(tour.getStartDate().toLocalDateTime().toLocalDate(),
+                        tour.getEndDate().toLocalDateTime().toLocalDate()).getDays() == period.getDays()));
+    }
+
+    @Test
+    public void findByDescription() throws Exception {
+        String description = "";
+
+        MvcResult mvcResult = mockMvc.
+                perform(MockMvcRequestBuilders.get(path).queryParam("description", description)).
+                andExpect(MockMvcResultMatchers.status().isOk()).
+                andReturn();
+
+        List<Tour> tours = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), List.class);
+        Assert.assertNotNull(tours);
+        Assert.assertTrue(tours.stream().allMatch(tour -> tour.getDescription().equals(description)));
+    }
+
+    @Test
+    public void findByCost() throws Exception {
+        BigDecimal cost = BigDecimal.valueOf(123);
+
+        MvcResult mvcResult = mockMvc.
+                perform(MockMvcRequestBuilders.get(path).queryParam("cost", cost.toString())).
+                andExpect(MockMvcResultMatchers.status().isOk()).
+                andReturn();
+
+        List<Tour> tours = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), List.class);
+        Assert.assertNotNull(tours);
+        Assert.assertTrue(tours.stream().allMatch(tour -> tour.getCost().equals(cost)));
+    }
+
+    @Test
+    public void findByTourType() throws Exception {
+        TourType type = TourType.BUSINESS;
+
+        MvcResult mvcResult = mockMvc.
+                perform(MockMvcRequestBuilders.get(path).queryParam("type", type.toString())).
+                andExpect(MockMvcResultMatchers.status().isOk()).
+                andReturn();
+
+        List<Tour> tours = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), List.class);
+        Assert.assertNotNull(tours);
+        Assert.assertTrue(tours.stream().allMatch(tour -> tour.getTourType().equals(type)));
     }
 
     @Test
@@ -70,13 +158,16 @@ public class TourControllerTest extends AbstractControllerTest {
         tour.setCost(BigDecimal.valueOf(100));
         tour.setTourType(TourType.BUSINESS);
 
-        MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.
-                        put(path).
-                        contentType(MediaType.APPLICATION_JSON).
-                        content(new ObjectMapper().writeValueAsString(tour))).
-                andExpect(MockMvcResultMatchers.status().isOk()).
-                andReturn();
+        MvcResult mvcResult = request(HttpMethod.POST, path, tour, HttpStatus.CREATED);
+
+        Tour savedTour = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Tour.class);
+        Assert.assertNotNull(savedTour);
+
+        mvcResult = request(HttpMethod.PUT, path, savedTour, HttpStatus.OK);
+
+        Tour updatedTour = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Tour.class);
+        Assert.assertNotNull(savedTour);
+        Assert.assertEquals(savedTour, updatedTour);
     }
 
     @Test
@@ -89,28 +180,38 @@ public class TourControllerTest extends AbstractControllerTest {
         tour.setCost(BigDecimal.valueOf(100));
         tour.setTourType(TourType.BUSINESS);
 
-        MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.
-                        delete(path).
-                        contentType(MediaType.APPLICATION_JSON).
-                        content(new ObjectMapper().writeValueAsString(tour))).
-                andExpect(MockMvcResultMatchers.status().isOk()).
-                andReturn();
+        MvcResult mvcResult = request(HttpMethod.POST, path, tour, HttpStatus.CREATED);
+
+        Tour savedTour = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Tour.class);
+        Assert.assertNotNull(savedTour);
+
+        mvcResult = request(HttpMethod.DELETE, path, savedTour, HttpStatus.OK);
+
+        Tour deletedTour = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Tour.class);
+        Assert.assertNotNull(deletedTour);
     }
 
     @Test
     public void deleteById() throws Exception {
-        MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.delete(path)).
-                andExpect(MockMvcResultMatchers.status().isOk()).
-                andReturn();
-    }
+        Tour tour = new Tour();
+        tour.setPhotoPath("");
+        tour.setStartDate(Timestamp.valueOf("2020-01-01 00:00:00"));
+        tour.setEndDate(Timestamp.valueOf("2020-01-01 00:00:00"));
+        tour.setDescription("TestTourDescription");
+        tour.setCost(BigDecimal.valueOf(100));
+        tour.setTourType(TourType.BUSINESS);
 
-    /*@Test
-    public void deleteAll() throws Exception {
-        MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.delete(path)).
+        MvcResult mvcResult = request(HttpMethod.POST, path, tour, HttpStatus.CREATED);
+
+        Tour savedTour = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Tour.class);
+        Assert.assertNotNull(savedTour);
+
+        mvcResult = mockMvc.
+                perform(MockMvcRequestBuilders.delete(path).queryParam("id", "1")).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
-    }*/
+
+        Tour deletedTour = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Tour.class);
+        Assert.assertNotNull(deletedTour);
+    }
 }

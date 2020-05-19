@@ -63,7 +63,7 @@ public class HotelController extends AbstractController<Hotel, Long, HotelReposi
 
     @GetMapping(params = "features")
     public ResponseEntity<List<Hotel>> findByFeatures(
-            @RequestBody
+            @RequestParam
             @NotEmpty(message = "{hotel.name.notEmpty}")
             @Size(min = 2, max = 50, message = "{hotel.name.size}") Set<String> features) {
         return ResponseEntity.ok(service.findByFeatures(features));
