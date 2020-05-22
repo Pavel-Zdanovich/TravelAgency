@@ -20,14 +20,9 @@ import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.zdanovich.core.entity.AbstractEntity.ID;
-import static com.zdanovich.core.entity.Country.COUNTRIES;
-import static com.zdanovich.core.entity.Country.COUNTRY_ID;
-import static com.zdanovich.core.entity.Country.NAME;
-
 @Entity
-@Table(name = COUNTRIES, uniqueConstraints = @UniqueConstraint(name = "COUNTRY_NAME_UNIQUE", columnNames = NAME))
-@AttributeOverride(name = ID, column = @Column(name = COUNTRY_ID))
+@Table(name = Country.COUNTRIES, uniqueConstraints = @UniqueConstraint(name = "COUNTRY_NAME_UNIQUE", columnNames = Country.NAME))
+@AttributeOverride(name = AbstractEntity.ID, column = @Column(name = Country.COUNTRY_ID))
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = "tours", callSuper = false)
 @ToString(exclude = "tours")

@@ -4,9 +4,12 @@ import com.zdanovich.core.entity.enums.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-class Authority {
+class Authorities {
 
     private static final Map<String, Set<GrantedAuthority>> authorities = Authority();
     private static final String GUEST_ROLE = "GUEST";

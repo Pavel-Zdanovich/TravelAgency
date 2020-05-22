@@ -22,15 +22,9 @@ import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.zdanovich.core.entity.AbstractEntity.ID;
-import static com.zdanovich.core.entity.Feature.FEATURES;
-import static com.zdanovich.core.entity.Feature.FEATURE_ID;
-import static com.zdanovich.core.entity.Feature.NAME;
-import static com.zdanovich.core.entity.Hotel.HOTEL_ID;
-
 @Entity
-@Table(name = FEATURES, uniqueConstraints = @UniqueConstraint(name = "FEATURE_NAME_UNIQUE", columnNames = NAME))
-@AttributeOverride(name = ID, column = @Column(name = FEATURE_ID))
+@Table(name = Feature.FEATURES, uniqueConstraints = @UniqueConstraint(name = "FEATURE_NAME_UNIQUE", columnNames = Feature.NAME))
+@AttributeOverride(name = AbstractEntity.ID, column = @Column(name = Feature.FEATURE_ID))
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = "hotels", callSuper = false)
 @ToString(exclude = "hotels")
@@ -53,7 +47,7 @@ public class Feature extends AbstractEntity {
             joinColumns = @JoinColumn(name = FEATURE_ID, referencedColumnName = FEATURE_ID,
                     foreignKey = @ForeignKey(name = "HOTEL_FEATURE_FEATURE_ID_FK")),
             foreignKey = @ForeignKey(name = "HOTEL_FEATURE_FEATURE_ID_FK"),
-            inverseJoinColumns = @JoinColumn(name = HOTEL_ID, referencedColumnName = HOTEL_ID,
+            inverseJoinColumns = @JoinColumn(name = Hotel.HOTEL_ID, referencedColumnName = Hotel.HOTEL_ID,
                     foreignKey = @ForeignKey(name = "HOTEL_FEATURE_HOTEL_ID_FK")),
             inverseForeignKey = @ForeignKey(name = "HOTEL_FEATURE_HOTEL_ID_FK"))
     @Getter

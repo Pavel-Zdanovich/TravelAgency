@@ -15,6 +15,7 @@ import com.zdanovich.core.repository.TourRepository;
 import com.zdanovich.core.repository.UserRepository;
 import com.zdanovich.core.utils.Utils;
 import liquibase.exception.DatabaseException;
+import org.hibernate.cfg.AvailableSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
@@ -34,8 +35,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-
-import static org.hibernate.cfg.AvailableSettings.STATEMENT_BATCH_SIZE;
 
 @Test
 @ContextConfiguration(classes = CoreModuleConfiguration.class)
@@ -139,9 +138,9 @@ public abstract class AbstractRepositoryTest extends AbstractTransactionalTestNG
 
         parking = cromlixHotel.getFeature(Utils.PARKING).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
 
-        Object object = entityManager.getProperties().get(STATEMENT_BATCH_SIZE);
+        Object object = entityManager.getProperties().get(AvailableSettings.STATEMENT_BATCH_SIZE);
         batchSize = object != null ? Integer.parseInt((String) object) : 10;
-        entityManager.setProperty(STATEMENT_BATCH_SIZE, TEST_BATCH_SIZE);
+        entityManager.setProperty(AvailableSettings.STATEMENT_BATCH_SIZE, TEST_BATCH_SIZE);
     }
 
     @BeforeTest
@@ -173,7 +172,7 @@ public abstract class AbstractRepositoryTest extends AbstractTransactionalTestNG
     @AfterClass
     public void afterClass() {
         logger.info("<---------- After class ---------->");
-        entityManager.setProperty(STATEMENT_BATCH_SIZE, batchSize);
+        entityManager.setProperty(AvailableSettings.STATEMENT_BATCH_SIZE, batchSize);
     }
 
     @AfterTest

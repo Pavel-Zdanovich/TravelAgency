@@ -3,6 +3,7 @@ package com.zdanovich.core.unit.validation;
 import com.zdanovich.core.entity.Review;
 import com.zdanovich.core.entity.Tour;
 import com.zdanovich.core.entity.User;
+import com.zdanovich.core.utils.Utils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -12,8 +13,6 @@ import java.lang.reflect.Method;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Set;
-
-import static com.zdanovich.core.utils.Utils.EMPTY_STRING;
 
 public class ReviewTest extends ValidationTest {
 
@@ -71,8 +70,8 @@ public class ReviewTest extends ValidationTest {
         Assert.assertEquals(1, constraintViolations.size());
         for (ConstraintViolation<Review> constraintViolation : constraintViolations) {
             Assert.assertNotNull(constraintViolation);
-            Assert.assertEquals(resourceBundle.getString("review.text.size").replaceAll(INTERPOLATE_REGEX, EMPTY_STRING),
-                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, EMPTY_STRING));
+            Assert.assertEquals(resourceBundle.getString("review.text.size").replaceAll(INTERPOLATE_REGEX, Utils.EMPTY_STRING),
+                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, Utils.EMPTY_STRING));
         }
     }
 

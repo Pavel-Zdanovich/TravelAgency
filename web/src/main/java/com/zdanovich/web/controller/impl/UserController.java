@@ -17,8 +17,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
 
-import static com.zdanovich.core.entity.User.ONE_WORD_REGEX;
-
 @RestController
 @RequestMapping(path = UserController.PATH)
 public class UserController extends AbstractController<User, Long, UserRepository, UserService> {
@@ -35,7 +33,7 @@ public class UserController extends AbstractController<User, Long, UserRepositor
             @RequestParam
             @NotNull(message = "{user.login.notNull}")
             @Size(min = 5, max = 30, message = "{user.login.size}")
-            @Pattern(regexp = ONE_WORD_REGEX, message = "{user.login.pattern}") String login) {
+            @Pattern(regexp = User.ONE_WORD_REGEX, message = "{user.login.pattern}") String login) {
         return ResponseEntity.of(service.findByLogin(login));
     }
 

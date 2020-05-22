@@ -1,6 +1,5 @@
 package com.zdanovich.web.integration.controller;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.zdanovich.core.entity.Hotel;
 import com.zdanovich.core.utils.Utils;
 import com.zdanovich.web.controller.impl.HotelController;

@@ -10,7 +10,6 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
@@ -21,25 +20,17 @@ public class WebApplicationInitializerImpl implements WebApplicationInitializer 
     private Properties properties;
 
     @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+    public void onStartup(ServletContext servletContext) {
+        AnnotationConfigWebApplicationContext webApplicationContext = new AnnotationConfigWebApplicationContext();
 
-        context.register(CoreModuleConfiguration.class, WebModuleConfiguration.class);
-        context.refresh();
+        webApplicationContext.register(CoreModuleConfiguration.class, WebModuleConfiguration.class);
 
-        servletContext.addListener(new ContextLoaderListener(context));
+        servletContext.addListener(new ContextLoaderListener(webApplicationContext));
 
         ServletRegistration.Dynamic dispatcher = servletContext.
-                addServlet("dispatcher", new DispatcherServlet(context));
+                addServlet("dispatcher", new DispatcherServlet(webApplicationContext));
 
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
-
-        FilterRegistration.Dynamic filterRegistration = servletContext.
-                addFilter("encodingFilter", CharacterEncodingFilter.class);
-
-        filterRegistration.setInitParameter("encoding", StandardCharsets.UTF_8.displayName());
-        filterRegistration.setInitParameter("forceEncoding", "true");
-        filterRegistration.addMappingForUrlPatterns(null, true, "/*");
     }
 }

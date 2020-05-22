@@ -34,16 +34,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.zdanovich.core.entity.AbstractEntity.ID;
-import static com.zdanovich.core.entity.Country.COUNTRY_ID;
-import static com.zdanovich.core.entity.Hotel.HOTEL_ID;
-import static com.zdanovich.core.entity.Tour.TOURS;
-import static com.zdanovich.core.entity.Tour.TOUR_ID;
-import static com.zdanovich.core.entity.User.USER_ID;
-
 @Entity
-@Table(name = TOURS)
-@AttributeOverride(name = ID, column = @Column(name = TOUR_ID))
+@Table(name = Tour.TOURS)
+@AttributeOverride(name = AbstractEntity.ID, column = @Column(name = Tour.TOUR_ID))
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {"users", "reviews"}, callSuper = false)
 @ToString(exclude = {"users", "reviews"})
@@ -104,19 +97,19 @@ public class Tour extends AbstractEntity {
             joinColumns = @JoinColumn(name = TOUR_ID, referencedColumnName = TOUR_ID,
                     foreignKey = @ForeignKey(name = "USER_TOUR_USER_ID_FK")),
             foreignKey = @ForeignKey(name = "USER_TOUR_USER_ID_FK"),
-            inverseJoinColumns = @JoinColumn(name = USER_ID, referencedColumnName = USER_ID,
+            inverseJoinColumns = @JoinColumn(name = User.USER_ID, referencedColumnName = User.USER_ID,
                     foreignKey = @ForeignKey(name = "USER_TOUR_TOUR_ID_FK")),
             inverseForeignKey = @ForeignKey(name = "USER_TOUR_TOUR_ID_FK"))
     @Getter
     private Set<User> users = new HashSet<>();
 
     @ManyToOne(targetEntity = Hotel.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = HOTEL_ID, foreignKey = @ForeignKey(name = "TOUR_HOTEL_ID_FK"))
+    @JoinColumn(name = Hotel.HOTEL_ID, foreignKey = @ForeignKey(name = "TOUR_HOTEL_ID_FK"))
     @Getter
     private Hotel hotel;
 
     @ManyToOne(targetEntity = Country.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = COUNTRY_ID, foreignKey = @ForeignKey(name = "TOUR_COUNTRY_ID_FK"))
+    @JoinColumn(name = Country.COUNTRY_ID, foreignKey = @ForeignKey(name = "TOUR_COUNTRY_ID_FK"))
     @Getter
     private Country country;
 

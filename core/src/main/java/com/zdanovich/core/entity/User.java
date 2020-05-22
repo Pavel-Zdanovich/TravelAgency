@@ -30,15 +30,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.zdanovich.core.entity.AbstractEntity.ID;
-import static com.zdanovich.core.entity.Tour.TOUR_ID;
-import static com.zdanovich.core.entity.User.LOGIN;
-import static com.zdanovich.core.entity.User.USERS;
-import static com.zdanovich.core.entity.User.USER_ID;
-
 @Entity
-@Table(name = USERS, uniqueConstraints = @UniqueConstraint(name = "USER_LOGIN_UNIQUE", columnNames = LOGIN))
-@AttributeOverride(name = ID, column = @Column(name = USER_ID))
+@Table(name = User.USERS, uniqueConstraints = @UniqueConstraint(name = "USER_LOGIN_UNIQUE", columnNames = User.LOGIN))
+@AttributeOverride(name = AbstractEntity.ID, column = @Column(name = User.USER_ID))
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {"tours", "reviews"}, callSuper = false)
 @ToString(exclude = {"tours", "reviews"})
@@ -80,7 +74,7 @@ public class User extends AbstractEntity {
             joinColumns = @JoinColumn(name = USER_ID, referencedColumnName = USER_ID,
                     foreignKey = @ForeignKey(name = "USER_TOUR_USER_ID_FK")),
             foreignKey = @ForeignKey(name = "USER_TOUR_USER_ID_FK"),
-            inverseJoinColumns = @JoinColumn(name = TOUR_ID, referencedColumnName = TOUR_ID,
+            inverseJoinColumns = @JoinColumn(name = Tour.TOUR_ID, referencedColumnName = Tour.TOUR_ID,
                     foreignKey = @ForeignKey(name = "USER_TOUR_TOUR_ID_FK")),
             inverseForeignKey = @ForeignKey(name = "USER_TOUR_TOUR_ID_FK"))
     @Getter

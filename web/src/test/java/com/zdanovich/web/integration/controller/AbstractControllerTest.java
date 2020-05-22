@@ -52,7 +52,6 @@ public abstract class AbstractControllerTest extends AbstractTransactionalTestNG
     @BeforeClass
     public void beforeClass() {
         mockMvc = MockMvcBuilders.
-                //webAppContextSetup(webApplicationContext).
                 standaloneSetup(
                         countryController,
                         featureController,
@@ -63,7 +62,6 @@ public abstract class AbstractControllerTest extends AbstractTransactionalTestNG
                 ).
                 setMessageConverters(new MappingJackson2HttpMessageConverter(objectMapper)).
                 alwaysDo(MockMvcResultHandlers.log()).build();
-        //_serializerFactory -> _factoryConfig -> _additionalSerializers
     }
 
     public MvcResult request(HttpMethod method, String uriTemplate, AbstractEntity entity, HttpStatus httpStatus) throws Exception {

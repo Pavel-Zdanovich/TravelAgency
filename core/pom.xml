@@ -44,6 +44,7 @@
         <liquibase.changeLogFile>
             ${basedir}\src\main\resources\database\migration\changelog-master.xml
         </liquibase.changeLogFile>
+        <liquibase.enabled>true</liquibase.enabled>
         <!--liquibase configuration end-->
 
         <oracle.version>12.2.0.1</oracle.version>
@@ -51,7 +52,7 @@
         <h2.version>1.4.200</h2.version>
 
         <!--database configuration start-->
-        <database.properties>target\classes\database\database.properties</database.properties>
+        <application.properties>target\classes\application.properties</application.properties>
         <!--database configuration end-->
     </properties>
 
@@ -196,7 +197,7 @@
                 <version>${liquibase.version}</version>
                 <configuration>
                     <databaseClass>${liquibase.databaseClass}</databaseClass>
-                    <propertyFile>${database.properties}</propertyFile>
+                    <propertyFile>${application.properties}</propertyFile>
                     <propertyFileWillOverride>true</propertyFileWillOverride>
                     <changeLogFile>${liquibase.changeLogFile}</changeLogFile>
                     <verbose>true</verbose>

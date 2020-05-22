@@ -33,17 +33,10 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static com.zdanovich.core.entity.AbstractEntity.ID;
-import static com.zdanovich.core.entity.Feature.FEATURE_ID;
-import static com.zdanovich.core.entity.Hotel.HOTELS;
-import static com.zdanovich.core.entity.Hotel.HOTEL_ID;
-import static com.zdanovich.core.entity.Hotel.NAME;
-import static com.zdanovich.core.entity.Hotel.WEBSITE;
-
 @Entity
-@Table(name = HOTELS, uniqueConstraints = {@UniqueConstraint(name = "HOTEL_NAME_UNIQUE", columnNames = NAME),
-        @UniqueConstraint(name = "HOTEL_WEBSITE_UNIQUE", columnNames = WEBSITE)})
-@AttributeOverride(name = ID, column = @Column(name = HOTEL_ID))
+@Table(name = Hotel.HOTELS, uniqueConstraints = {@UniqueConstraint(name = "HOTEL_NAME_UNIQUE", columnNames = Hotel.NAME),
+        @UniqueConstraint(name = "HOTEL_WEBSITE_UNIQUE", columnNames = Hotel.WEBSITE)})
+@AttributeOverride(name = AbstractEntity.ID, column = @Column(name = Hotel.HOTEL_ID))
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = "tours", callSuper = false)
 @ToString(exclude = "tours")
@@ -103,7 +96,7 @@ public class Hotel extends AbstractEntity {
             joinColumns = @JoinColumn(name = HOTEL_ID, referencedColumnName = HOTEL_ID,
                     foreignKey = @ForeignKey(name = "HOTEL_FEATURE_FEATURE_ID_FK")),
             foreignKey = @ForeignKey(name = "HOTEL_FEATURE_FEATURE_ID_FK"),
-            inverseJoinColumns = @JoinColumn(name = FEATURE_ID, referencedColumnName = FEATURE_ID,
+            inverseJoinColumns = @JoinColumn(name = Feature.FEATURE_ID, referencedColumnName = Feature.FEATURE_ID,
                     foreignKey = @ForeignKey(name = "HOTEL_FEATURE_HOTEL_ID_FK")),
             inverseForeignKey = @ForeignKey(name = "HOTEL_FEATURE_HOTEL_ID_FK"))
     @Getter

@@ -1,11 +1,11 @@
 package com.zdanovich.core.config;
 
+import com.zdanovich.core.utils.Utils;
+import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -19,14 +19,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
-
-import static com.zdanovich.core.utils.Utils.DATABASE;
-import static com.zdanovich.core.utils.Utils.DRIVER_CLASS_NAME;
-import static com.zdanovich.core.utils.Utils.HIBERNATE_GENERATE_DDL;
-import static com.zdanovich.core.utils.Utils.PASSWORD;
-import static com.zdanovich.core.utils.Utils.URL;
-import static com.zdanovich.core.utils.Utils.USERNAME;
-import static org.hibernate.cfg.AvailableSettings.SHOW_SQL;
 
 @Configuration
 @EnableJpaRepositories(basePackages = PersistenceConfiguration.REPOSITORY_PACKAGE_PATH)
@@ -55,8 +47,8 @@ public class PersistenceConfiguration {
     @Autowired
     public JpaVendorAdapter jpaVendorAdapter(Database database) {
         HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
-        hibernateJpaVendorAdapter.setShowSql(Boolean.parseBoolean(properties.getProperty(SHOW_SQL)));
-        hibernateJpaVendorAdapter.setGenerateDdl(Boolean.parseBoolean(properties.getProperty(HIBERNATE_GENERATE_DDL)));
+        hibernateJpaVendorAdapter.setShowSql(Boolean.parseBoolean(properties.getProperty(AvailableSettings.SHOW_SQL)));
+        hibernateJpaVendorAdapter.setGenerateDdl(Boolean.parseBoolean(properties.getProperty(Utils.HIBERNATE_GENERATE_DDL)));
         hibernateJpaVendorAdapter.setDatabase(database);
         return hibernateJpaVendorAdapter;
     }
@@ -73,15 +65,15 @@ public class PersistenceConfiguration {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(properties.getProperty(DRIVER_CLASS_NAME));
-        dataSource.setUrl(properties.getProperty(URL));
-        dataSource.setUsername(properties.getProperty(USERNAME));
-        dataSource.setPassword(properties.getProperty(PASSWORD));
+        dataSource.setDriverClassName(properties.getProperty(Utils.DRIVER_CLASS_NAME));
+        dataSource.setUrl(properties.getProperty(Utils.URL));
+        dataSource.setUsername(properties.getProperty(Utils.USERNAME));
+        dataSource.setPassword(properties.getProperty(Utils.PASSWORD));
         return dataSource;
     }
 
     @Bean
     public Database database() {
-        return Database.valueOf(properties.getProperty(DATABASE).toUpperCase());
+        return Database.valueOf(properties.getProperty(Utils.DATABASE).toUpperCase());
     }
 }

@@ -17,7 +17,7 @@
     <name>web</name>
 
     <properties>
-        <spring-security.version>5.1.5.RELEASE</spring-security.version>
+        <spring-security.version>5.3.2.RELEASE</spring-security.version>
 
         <servlet.version>4.0.1</servlet.version>
         <jsp.version>2.3.3</jsp.version>
@@ -52,11 +52,6 @@
             </exclusions>
         </dependency>
 
-        <!--<dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>${spring-security.version}</version>
-        </dependency>-->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
@@ -67,11 +62,6 @@
             <artifactId>spring-security-config</artifactId>
             <version>${spring-security.version}</version>
         </dependency>
-        <!--<dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-taglibs</artifactId>
-            <version>${spring-security.version}</version>
-        </dependency>-->
 
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -102,6 +92,11 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
         </dependency>
         <dependency>

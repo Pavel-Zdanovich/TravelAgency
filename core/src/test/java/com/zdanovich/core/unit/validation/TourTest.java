@@ -5,6 +5,7 @@ import com.zdanovich.core.entity.Hotel;
 import com.zdanovich.core.entity.Tour;
 import com.zdanovich.core.entity.User;
 import com.zdanovich.core.entity.enums.TourType;
+import com.zdanovich.core.utils.Utils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -15,8 +16,6 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Set;
-
-import static com.zdanovich.core.utils.Utils.EMPTY_STRING;
 
 public class TourTest extends ValidationTest {
 
@@ -136,8 +135,8 @@ public class TourTest extends ValidationTest {
         Set<ConstraintViolation<Tour>> constraintViolations = validator.validate(tour);
         Assert.assertEquals(1, constraintViolations.size());
         for (ConstraintViolation<Tour> constraintViolation : constraintViolations) {
-            Assert.assertEquals(resourceBundle.getString("tour.description.size").replaceAll(INTERPOLATE_REGEX, EMPTY_STRING),
-                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, EMPTY_STRING));
+            Assert.assertEquals(resourceBundle.getString("tour.description.size").replaceAll(INTERPOLATE_REGEX, Utils.EMPTY_STRING),
+                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, Utils.EMPTY_STRING));
         }
     }
 
@@ -168,8 +167,8 @@ public class TourTest extends ValidationTest {
         Set<ConstraintViolation<Tour>> constraintViolations = validator.validate(tour);
         Assert.assertEquals(1, constraintViolations.size());
         for (ConstraintViolation<Tour> constraintViolation : constraintViolations) {
-            Assert.assertEquals(resourceBundle.getString("tour.cost.min").replaceAll(INTERPOLATE_REGEX, EMPTY_STRING),
-                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, EMPTY_STRING));
+            Assert.assertEquals(resourceBundle.getString("tour.cost.min").replaceAll(INTERPOLATE_REGEX, Utils.EMPTY_STRING),
+                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, Utils.EMPTY_STRING));
         }
     }
 

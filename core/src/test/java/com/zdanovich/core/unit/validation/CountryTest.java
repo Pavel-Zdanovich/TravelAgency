@@ -1,13 +1,12 @@
 package com.zdanovich.core.unit.validation;
 
 import com.zdanovich.core.entity.Country;
+import com.zdanovich.core.utils.Utils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import javax.validation.ConstraintViolation;
 import java.util.Set;
-
-import static com.zdanovich.core.utils.Utils.EMPTY_STRING;
 
 public class CountryTest extends ValidationTest {
 
@@ -28,8 +27,8 @@ public class CountryTest extends ValidationTest {
         Set<ConstraintViolation<Country>> constraintViolations = validator.validate(country);
         Assert.assertEquals(1, constraintViolations.size());
         for (ConstraintViolation<Country> constraintViolation : constraintViolations) {
-            Assert.assertEquals(resourceBundle.getString("country.name.size").replaceAll(INTERPOLATE_REGEX, EMPTY_STRING),
-                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, EMPTY_STRING));
+            Assert.assertEquals(resourceBundle.getString("country.name.size").replaceAll(INTERPOLATE_REGEX, Utils.EMPTY_STRING),
+                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, Utils.EMPTY_STRING));
         }
     }
 
@@ -40,8 +39,8 @@ public class CountryTest extends ValidationTest {
         Set<ConstraintViolation<Country>> constraintViolations = validator.validate(country);
         Assert.assertEquals(1, constraintViolations.size());
         for (ConstraintViolation<Country> constraintViolation : constraintViolations) {
-            Assert.assertEquals(resourceBundle.getString("country.name.size").replaceAll(INTERPOLATE_REGEX, EMPTY_STRING),
-                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, EMPTY_STRING));
+            Assert.assertEquals(resourceBundle.getString("country.name.size").replaceAll(INTERPOLATE_REGEX, Utils.EMPTY_STRING),
+                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, Utils.EMPTY_STRING));
         }
     }
 }
