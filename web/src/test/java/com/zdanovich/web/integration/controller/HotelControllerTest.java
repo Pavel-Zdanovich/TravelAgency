@@ -21,8 +21,6 @@ import java.util.Set;
 
 public class HotelControllerTest extends AbstractControllerTest {
 
-    private String path = HotelController.PATH;
-
     @Test
     public void save() throws Exception {
         Hotel hotel = new Hotel();
@@ -32,7 +30,7 @@ public class HotelControllerTest extends AbstractControllerTest {
         hotel.setLatitude(BigDecimal.valueOf(12));
         hotel.setLongitude(BigDecimal.valueOf(34));
 
-        MvcResult mvcResult = request(HttpMethod.POST, path, hotel, HttpStatus.CREATED);
+        MvcResult mvcResult = request(HttpMethod.POST, HotelController.PATH, hotel, HttpStatus.CREATED);
 
         Hotel savedHotel = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Hotel.class);
         Assert.assertNotNull(savedHotel);
@@ -43,7 +41,7 @@ public class HotelControllerTest extends AbstractControllerTest {
     @Test
     public void findAll() throws Exception {
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(path)).
+                perform(MockMvcRequestBuilders.get(HotelController.PATH)).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 
@@ -55,7 +53,7 @@ public class HotelControllerTest extends AbstractControllerTest {
     @Test
     public void findById() throws Exception {
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(path).queryParam("id", "1")).
+                perform(MockMvcRequestBuilders.get(HotelController.PATH).queryParam("id", "1")).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 
@@ -66,7 +64,7 @@ public class HotelControllerTest extends AbstractControllerTest {
     @Test
     public void findByName() throws Exception {
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(path).queryParam("name", "Park Hyatt Saigon")).
+                perform(MockMvcRequestBuilders.get(HotelController.PATH).queryParam("name", "Park Hyatt Saigon")).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 
@@ -79,7 +77,7 @@ public class HotelControllerTest extends AbstractControllerTest {
         Short stars = Short.valueOf("5");
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(path).queryParam("stars", stars.toString())).
+                perform(MockMvcRequestBuilders.get(HotelController.PATH).queryParam("stars", stars.toString())).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 
@@ -96,7 +94,7 @@ public class HotelControllerTest extends AbstractControllerTest {
         BigDecimal maxLongitude = BigDecimal.valueOf(-3.9663499);
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(path).
+                perform(MockMvcRequestBuilders.get(HotelController.PATH).
                         queryParam("minLatitude", minLatitude.toString()).
                         queryParam("maxLatitude", maxLatitude.toString()).
                         queryParam("minLongitude", minLongitude.toString()).
@@ -123,7 +121,7 @@ public class HotelControllerTest extends AbstractControllerTest {
         multiValueMap.addAll("features", new ArrayList<>(features));
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(path).queryParams(multiValueMap)).
+                perform(MockMvcRequestBuilders.get(HotelController.PATH).queryParams(multiValueMap)).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 
@@ -146,14 +144,14 @@ public class HotelControllerTest extends AbstractControllerTest {
         hotel.setLatitude(BigDecimal.valueOf(23));
         hotel.setLongitude(BigDecimal.valueOf(45));
 
-        MvcResult mvcResult = request(HttpMethod.POST, path, hotel, HttpStatus.CREATED);
+        MvcResult mvcResult = request(HttpMethod.POST, HotelController.PATH, hotel, HttpStatus.CREATED);
 
         Hotel savedHotel = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Hotel.class);
         Assert.assertNotNull(savedHotel);
 
         savedHotel.setName("UpdatedHotelName");
 
-        mvcResult = request(HttpMethod.PUT, path, savedHotel, HttpStatus.OK);
+        mvcResult = request(HttpMethod.PUT, HotelController.PATH, savedHotel, HttpStatus.OK);
 
         Hotel updatedHotel = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Hotel.class);
         Assert.assertNotNull(updatedHotel);
@@ -169,12 +167,12 @@ public class HotelControllerTest extends AbstractControllerTest {
         hotel.setLatitude(BigDecimal.valueOf(34));
         hotel.setLongitude(BigDecimal.valueOf(56));
 
-        MvcResult mvcResult = request(HttpMethod.POST, path, hotel, HttpStatus.CREATED);
+        MvcResult mvcResult = request(HttpMethod.POST, HotelController.PATH, hotel, HttpStatus.CREATED);
 
         Hotel savedHotel = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Hotel.class);
         Assert.assertNotNull(savedHotel);
 
-        mvcResult = request(HttpMethod.DELETE, path, savedHotel, HttpStatus.OK);
+        mvcResult = request(HttpMethod.DELETE, HotelController.PATH, savedHotel, HttpStatus.OK);
 
         Hotel deletedHotel = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Hotel.class);
         Assert.assertNotNull(deletedHotel);
@@ -189,13 +187,13 @@ public class HotelControllerTest extends AbstractControllerTest {
         hotel.setLatitude(BigDecimal.valueOf(45));
         hotel.setLongitude(BigDecimal.valueOf(67));
 
-        MvcResult mvcResult = request(HttpMethod.POST, path, hotel, HttpStatus.CREATED);
+        MvcResult mvcResult = request(HttpMethod.POST, HotelController.PATH, hotel, HttpStatus.CREATED);
 
         Hotel savedHotel = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Hotel.class);
         Assert.assertNotNull(savedHotel);
 
         mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.delete(path).queryParam("id", String.valueOf(savedHotel.getId()))).
+                perform(MockMvcRequestBuilders.delete(HotelController.PATH).queryParam("id", String.valueOf(savedHotel.getId()))).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 

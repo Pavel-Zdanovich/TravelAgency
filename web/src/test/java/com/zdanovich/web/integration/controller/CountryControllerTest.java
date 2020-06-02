@@ -14,14 +14,12 @@ import java.util.List;
 
 public class CountryControllerTest extends AbstractControllerTest {
 
-    private String path = CountryController.PATH;
-
     @Test
     public void save() throws Exception {
         Country country = new Country();
         country.setName("TestCountryName1");
 
-        MvcResult mvcResult = request(HttpMethod.POST, path, country, HttpStatus.CREATED);
+        MvcResult mvcResult = request(HttpMethod.POST, CountryController.PATH, country, HttpStatus.CREATED);
 
         Country savedCountry = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Country.class);
         Assert.assertNotNull(savedCountry);
@@ -32,7 +30,7 @@ public class CountryControllerTest extends AbstractControllerTest {
     @Test
     public void findAll() throws Exception {
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(path)).
+                perform(MockMvcRequestBuilders.get(CountryController.PATH)).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 
@@ -44,7 +42,7 @@ public class CountryControllerTest extends AbstractControllerTest {
     @Test
     public void findById() throws Exception {
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(path).queryParam("id", "1")).
+                perform(MockMvcRequestBuilders.get(CountryController.PATH).queryParam("id", "1")).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 
@@ -55,7 +53,7 @@ public class CountryControllerTest extends AbstractControllerTest {
     @Test
     public void findByName() throws Exception {
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(path).queryParam("name", "France")).
+                perform(MockMvcRequestBuilders.get(CountryController.PATH).queryParam("name", "France")).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 
@@ -68,14 +66,14 @@ public class CountryControllerTest extends AbstractControllerTest {
         Country country = new Country();
         country.setName("TestCountryName2");
 
-        MvcResult mvcResult = request(HttpMethod.POST, path, country, HttpStatus.CREATED);
+        MvcResult mvcResult = request(HttpMethod.POST, CountryController.PATH, country, HttpStatus.CREATED);
 
         Country savedCountry = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Country.class);
         Assert.assertNotNull(savedCountry);
 
         savedCountry.setName("UpdatedCountryName");
 
-        mvcResult = request(HttpMethod.PUT, path, savedCountry, HttpStatus.OK);
+        mvcResult = request(HttpMethod.PUT, CountryController.PATH, savedCountry, HttpStatus.OK);
 
         Country updatedCountry = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Country.class);
         Assert.assertNotNull(updatedCountry);
@@ -87,12 +85,12 @@ public class CountryControllerTest extends AbstractControllerTest {
         Country country = new Country();
         country.setName("TestCountryName3");
 
-        MvcResult mvcResult = request(HttpMethod.POST, path, country, HttpStatus.CREATED);
+        MvcResult mvcResult = request(HttpMethod.POST, CountryController.PATH, country, HttpStatus.CREATED);
 
         Country savedCountry = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Country.class);
         Assert.assertNotNull(savedCountry);
 
-        mvcResult = request(HttpMethod.DELETE, path, savedCountry, HttpStatus.OK);
+        mvcResult = request(HttpMethod.DELETE, CountryController.PATH, savedCountry, HttpStatus.OK);
 
         Country deletedCountry = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Country.class);
         Assert.assertNotNull(deletedCountry);
@@ -103,13 +101,13 @@ public class CountryControllerTest extends AbstractControllerTest {
         Country country = new Country();
         country.setName("TestCountryName4");
 
-        MvcResult mvcResult = request(HttpMethod.POST, path, country, HttpStatus.CREATED);
+        MvcResult mvcResult = request(HttpMethod.POST, CountryController.PATH, country, HttpStatus.CREATED);
 
         Country savedCountry = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Country.class);
         Assert.assertNotNull(savedCountry);
 
         mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.delete(path).queryParam("id", String.valueOf(savedCountry.getId()))).
+                perform(MockMvcRequestBuilders.delete(CountryController.PATH).queryParam("id", String.valueOf(savedCountry.getId()))).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 

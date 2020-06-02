@@ -52,7 +52,7 @@ public class ReviewRepositoryTest extends AbstractRepositoryTest {
         elonMusk.setRole(UserRole.USER);
         Tour firstTour = new Tour();
         firstTour.setId(1L);
-        firstTour.setPhotoPath("src/main/resources/oracle.properties");
+        firstTour.setPhotoPath("src/main/resources/log4j2.xml");
         firstTour.setStartDate(Timestamp.valueOf("2021-01-01 00:00:00"));
         firstTour.setEndDate(Timestamp.valueOf("2021-01-02 00:00:00"));
         firstTour.setDescription("good TOUR");
@@ -108,7 +108,7 @@ public class ReviewRepositoryTest extends AbstractRepositoryTest {
         elonMusk.setPassword("Admin009");
         elonMusk.setRole(UserRole.USER);
         Tour firstTour = new Tour();
-        firstTour.setPhotoPath("src/main/resources/oracle.properties");
+        firstTour.setPhotoPath("src/main/resources/log4j2.xml");
         firstTour.setStartDate(Timestamp.valueOf("2021-01-01 00:00:00"));
         firstTour.setEndDate(Timestamp.valueOf("2021-01-02 00:00:00"));
         firstTour.setDescription("TestTourDescription");

@@ -31,6 +31,8 @@
         <hamcrest.version>2.2</hamcrest.version>
 
         <jsonpath.version>2.4.0</jsonpath.version>
+
+        <jsonwebtoken.version>0.9.1</jsonwebtoken.version>
     </properties>
 
     <dependencies>
@@ -122,6 +124,12 @@
             <artifactId>json-path</artifactId>
             <version>${jsonpath.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jsonwebtoken.version}</version>
         </dependency>
     </dependencies>
 

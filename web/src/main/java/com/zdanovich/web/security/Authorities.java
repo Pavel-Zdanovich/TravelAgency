@@ -42,11 +42,7 @@ class Authorities {
         return authorities;
     }
 
-    static Set<GrantedAuthority> getAuthority(UserRole userRole) {
+    static Set<? extends GrantedAuthority> getAuthority(UserRole userRole) {
         return authorities.getOrDefault(userRole.toString(), authorities.get(GUEST_ROLE));
-    }
-
-    static Set<GrantedAuthority> getAuthority(String userRole) {
-        return authorities.getOrDefault(userRole, authorities.get(GUEST_ROLE));
     }
 }

@@ -219,7 +219,7 @@ public class TourRepositoryTest extends AbstractRepositoryTest {
     public void update_Without_Hotel_Country_And_Tour() {
         Tour expected = tourRepository.findById(2L).orElse(null);
         Assert.assertNotNull(expected);
-        expected.setPhotoPath("src/main/resources/");
+        expected.setPhotoPath("src/main/resources/log4j2.xml");
         expected.setStartDate(Timestamp.valueOf("2020-01-02 00:00:00"));
         expected.setEndDate(Timestamp.valueOf("2020-01-03 00:00:00"));
         expected.setDescription("updatedDescription");

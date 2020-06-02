@@ -1,12 +1,10 @@
 package com.zdanovich.web.integration.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zdanovich.core.entity.User;
 import com.zdanovich.core.entity.enums.UserRole;
 import com.zdanovich.web.controller.impl.UserController;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -17,8 +15,6 @@ import java.util.List;
 
 public class UserControllerTest extends AbstractControllerTest {
 
-    private String path = UserController.PATH;
-
     @Test
     public void save() throws Exception {
         User user = new User();
@@ -26,7 +22,7 @@ public class UserControllerTest extends AbstractControllerTest {
         user.setPassword("TestUserPassword1");
         user.setRole(UserRole.USER);
 
-        MvcResult mvcResult = request(HttpMethod.POST, path, user, HttpStatus.CREATED);
+        MvcResult mvcResult = request(HttpMethod.POST, UserController.PATH, user, HttpStatus.CREATED);
 
         User savedUser = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), User.class);
         Assert.assertNotNull(savedUser);
@@ -37,11 +33,11 @@ public class UserControllerTest extends AbstractControllerTest {
     @Test
     public void findAll() throws Exception {
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(path)).
+                perform(MockMvcRequestBuilders.get(UserController.PATH)).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 
-        List<User> users = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), List.class);
+        List<User> users = objectMapper.readerForListOf(User.class).readValue(mvcResult.getResponse().getContentAsString());
         Assert.assertNotNull(users);
         Assert.assertNotEquals(0, users.size());
     }
@@ -51,7 +47,7 @@ public class UserControllerTest extends AbstractControllerTest {
         Long id = 1L;
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(path).queryParam("id", id.toString())).
+                perform(MockMvcRequestBuilders.get(UserController.PATH).queryParam("id", id.toString())).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 
@@ -65,7 +61,7 @@ public class UserControllerTest extends AbstractControllerTest {
         String login = "ElonMusk";
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(path).queryParam("login", login)).
+                perform(MockMvcRequestBuilders.get(UserController.PATH).queryParam("login", login)).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 
@@ -79,60 +75,70 @@ public class UserControllerTest extends AbstractControllerTest {
         UserRole role = UserRole.USER;
 
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(path).queryParam("role", role.toString())).
+                perform(MockMvcRequestBuilders.get(UserController.PATH).queryParam("role", role.toString())).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 
-        User user = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), User.class);
-        Assert.assertNotNull(user);
-        Assert.assertEquals(user.getRole(), role);
+        List<User> users = objectMapper.readerForListOf(User.class).readValue(mvcResult.getResponse().getContentAsString());
+        Assert.assertNotNull(users);
+        Assert.assertTrue(users.stream().allMatch(user -> user.getRole().equals(role)));
     }
 
     @Test
     public void update() throws Exception {
         User user = new User();
-        user.setLogin("TestUserLogin1");
-        user.setPassword("TestUserPassword1");
+        user.setLogin("TestUserLogin2");
+        user.setPassword("TestUserPassword2");
         user.setRole(UserRole.USER);
 
-        MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.
-                        put(path).
-                        contentType(MediaType.APPLICATION_JSON).
-                        content(new ObjectMapper().writeValueAsString(user))).
-                andExpect(MockMvcResultMatchers.status().isOk()).
-                andReturn();
+        MvcResult mvcResult = request(HttpMethod.POST, UserController.PATH, user, HttpStatus.CREATED);
+
+        User savedUser = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), User.class);
+        Assert.assertNotNull(savedUser);
+
+        mvcResult = request(HttpMethod.PUT, UserController.PATH, savedUser, HttpStatus.OK);
+
+        User updatedUser = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), User.class);
+        Assert.assertNotNull(updatedUser);
+        Assert.assertEquals(savedUser, updatedUser);
     }
 
     @Test
     public void delete() throws Exception {
         User user = new User();
-        user.setLogin("TestUserLogin1");
-        user.setPassword("TestUserPassword1");
+        user.setLogin("TestUserLogin3");
+        user.setPassword("TestUserPassword3");
         user.setRole(UserRole.USER);
 
-        MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.
-                        delete(path).
-                        contentType(MediaType.APPLICATION_JSON).
-                        content(new ObjectMapper().writeValueAsString(user))).
-                andExpect(MockMvcResultMatchers.status().isOk()).
-                andReturn();
+        MvcResult mvcResult = request(HttpMethod.POST, UserController.PATH, user, HttpStatus.CREATED);
+
+        User savedUser = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), User.class);
+        Assert.assertNotNull(savedUser);
+
+        mvcResult = request(HttpMethod.DELETE, UserController.PATH, savedUser, HttpStatus.OK);
+
+        User deletedUser = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), User.class);
+        Assert.assertNotNull(deletedUser);
     }
 
     @Test
     public void deleteById() throws Exception {
-        MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.delete(path)).
-                andExpect(MockMvcResultMatchers.status().isOk()).
-                andReturn();
-    }
+        User user = new User();
+        user.setLogin("TestUserLogin4");
+        user.setPassword("TestUserPassword4");
+        user.setRole(UserRole.USER);
 
-    /*@Test
-    public void deleteAll() throws Exception {
-        MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.delete(path)).
+        MvcResult mvcResult = request(HttpMethod.POST, UserController.PATH, user, HttpStatus.CREATED);
+
+        User savedUser = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), User.class);
+        Assert.assertNotNull(savedUser);
+
+        mvcResult = mockMvc.
+                perform(MockMvcRequestBuilders.delete(UserController.PATH).queryParam("id", "1")).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
-    }*/
+
+        User deletedUser = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), User.class);
+        Assert.assertNotNull(deletedUser);
+    }
 }

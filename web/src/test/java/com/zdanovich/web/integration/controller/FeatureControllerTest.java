@@ -15,14 +15,12 @@ import java.util.List;
 
 public class FeatureControllerTest extends AbstractControllerTest {
 
-    private String path = FeatureController.PATH;
-
     @Test
     public void save() throws Exception {
         Feature feature = new Feature();
         feature.setName("TestFeatureName1");
 
-        MvcResult mvcResult = request(HttpMethod.POST, path, feature, HttpStatus.CREATED);
+        MvcResult mvcResult = request(HttpMethod.POST, FeatureController.PATH, feature, HttpStatus.CREATED);
 
         Feature savedFeature = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Feature.class);
         Assert.assertNotNull(savedFeature);
@@ -33,7 +31,7 @@ public class FeatureControllerTest extends AbstractControllerTest {
     @Test
     public void findAll() throws Exception {
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(path)).
+                perform(MockMvcRequestBuilders.get(FeatureController.PATH)).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 
@@ -45,7 +43,7 @@ public class FeatureControllerTest extends AbstractControllerTest {
     @Test
     public void findById() throws Exception {
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(path).queryParam("id", "1")).
+                perform(MockMvcRequestBuilders.get(FeatureController.PATH).queryParam("id", "1")).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 
@@ -56,7 +54,7 @@ public class FeatureControllerTest extends AbstractControllerTest {
     @Test
     public void findByName() throws Exception {
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(path).queryParam("name", Utils.AIR_CONDITIONER)).
+                perform(MockMvcRequestBuilders.get(FeatureController.PATH).queryParam("name", Utils.AIR_CONDITIONER)).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 
@@ -69,14 +67,14 @@ public class FeatureControllerTest extends AbstractControllerTest {
         Feature feature = new Feature();
         feature.setName("TestFeatureName2");
 
-        MvcResult mvcResult = request(HttpMethod.POST, path, feature, HttpStatus.CREATED);
+        MvcResult mvcResult = request(HttpMethod.POST, FeatureController.PATH, feature, HttpStatus.CREATED);
 
         Feature savedFeature = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Feature.class);
         Assert.assertNotNull(savedFeature);
 
         savedFeature.setName("UpdatedFeatureName");
 
-        mvcResult = request(HttpMethod.PUT, path, savedFeature, HttpStatus.OK);
+        mvcResult = request(HttpMethod.PUT, FeatureController.PATH, savedFeature, HttpStatus.OK);
 
         Feature updatedFeature = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Feature.class);
         Assert.assertNotNull(updatedFeature);
@@ -88,12 +86,12 @@ public class FeatureControllerTest extends AbstractControllerTest {
         Feature feature = new Feature();
         feature.setName("TestFeatureName3");
 
-        MvcResult mvcResult = request(HttpMethod.POST, path, feature, HttpStatus.CREATED);
+        MvcResult mvcResult = request(HttpMethod.POST, FeatureController.PATH, feature, HttpStatus.CREATED);
 
         Feature savedFeature = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Feature.class);
         Assert.assertNotNull(savedFeature);
 
-        mvcResult = request(HttpMethod.DELETE, path, savedFeature, HttpStatus.OK);
+        mvcResult = request(HttpMethod.DELETE, FeatureController.PATH, savedFeature, HttpStatus.OK);
 
         Feature deletedFeature = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Feature.class);
         Assert.assertNotNull(deletedFeature);
@@ -104,13 +102,13 @@ public class FeatureControllerTest extends AbstractControllerTest {
         Feature feature = new Feature();
         feature.setName("TestFeatureName4");
 
-        MvcResult mvcResult = request(HttpMethod.POST, path, feature, HttpStatus.CREATED);
+        MvcResult mvcResult = request(HttpMethod.POST, FeatureController.PATH, feature, HttpStatus.CREATED);
 
         Feature savedFeature = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Feature.class);
         Assert.assertNotNull(savedFeature);
 
         mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.delete(path).queryParam("id", String.valueOf(savedFeature.getId()))).
+                perform(MockMvcRequestBuilders.delete(FeatureController.PATH).queryParam("id", String.valueOf(savedFeature.getId()))).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 
