@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -28,6 +29,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     public static final String DEFAULT_FILTER_PROCESSES_URL = "/**";
 
     @Autowired
+    private AuthenticationProvider jwtAuthenticationProvider;
+    @Autowired
     private UserDetailsService userDetailsServiceImpl;
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -42,12 +45,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();// BCryptPasswordEncoder TODO
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsServiceImpl).passwordEncoder(passwordEncoder);
+        auth.authenticationProvider(jwtAuthenticationProvider);
+        //auth.userDetailsService(userDetailsServiceImpl).passwordEncoder(passwordEncoder);
     }
 
     @Override
@@ -75,8 +79,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 
-                .logout().logoutUrl(AuthController.PATH + AuthController.LOGOUT)
-                .invalidateHttpSession(true).clearAuthentication(true).deleteCookies("JSESSIONID");
+                .logout().logoutUrl(AuthController.PATH + AuthController.LOGOUT);
+                //.invalidateHttpSession(true).clearAuthentication(true).deleteCookies("JSESSIONID");
     }
 
     @Override

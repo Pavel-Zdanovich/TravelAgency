@@ -40,7 +40,7 @@
         <createTable tableName="USERS">
             <column name="USER_ID" type="BIGINT"/>
             <column name="LOGIN" type="VARCHAR(30)"/>
-            <column name="PASSWORD" type="VARCHAR(30)"/>
+            <column name="PASSWORD" type="VARCHAR(100)"/>
             <column name="ROLE" type="VARCHAR(10)" defaultValue="USER"/>
         </createTable>
     </changeSet>

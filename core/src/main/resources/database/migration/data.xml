@@ -1469,307 +1469,307 @@
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="ElonMusk"/>
-			<column name="PASSWORD" value="SpaceXXX"/>
+			<column name="PASSWORD" value="$2y$10$86YC36gOd9XaivNdH1fUxuSo3aZtea6OIooO6QxpjvRKpG/imeyra"/><!--SpaceXXX-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="StefenHawking"/>
-			<column name="PASSWORD" value="StefenHawking"/>
+			<column name="PASSWORD" value="$2y$10$uPZUHZYbFT6S/WQOAGpGa.TtdOhuBFnm.rSqbEuRpltq9qXeAU2Oq"/><!--TheoryOfEverything-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="TeslaNicola"/>
-			<column name="PASSWORD" value="HighVoltage"/>
+			<column name="PASSWORD" value="$2y$10$kaSbVRb3ty6lDXOE9crOG.kea.588g/Mi/eM5sGAc78RzQv7VvX3u"/><!--HighVoltage-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="CharlesDarwin"/>
-			<column name="PASSWORD" value="Evolution"/>
+			<column name="PASSWORD" value="$2y$10$7PwO3M1F4pHJ/Ff7bXEDzOGcsJSrOVTdntnX0meZrkDHpYd7MmmOe"/><!--Evolution-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="AlbertEinstein"/>
-			<column name="PASSWORD" value="TheoryOfRelativity"/>
+			<column name="PASSWORD" value="$2y$10$UaiEl371dL2IOAox9TrY3.ATaXFgwmbSPoi.tosfF6QJlDMQHgoy6"/><!--TheoryOfRelativity-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="LeonardoDaVinci"/>
-			<column name="PASSWORD" value="MonaLisa"/>
+			<column name="PASSWORD" value="$2y$10$W8A6spJHvJWZ0KyyhOkG2ORTcQxxnAqnbOjB/gei4h6jG5C26OtEC"/><!--MonaLisa-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="MaxPlanck"/>
-			<column name="PASSWORD" value="Constant"/>
+			<column name="PASSWORD" value="$2y$10$U/qOWmg1eQk/NvbOvZ.WFeDG8Nj7ha1VmHznqdrp/6dkMvqVIcppG"/><!--Constant-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="MarieCurie"/>
-			<column name="PASSWORD" value="Radium"/>
+			<column name="PASSWORD" value="$2y$10$VQ20YXt1c0ihViXcmvX4sO7f9P5iEMP2SnQPcc8Em10xDpZJOuE/W"/><!--Radium-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="ThomasEdison"/>
-			<column name="PASSWORD" value="ElectricPower"/>
+			<column name="PASSWORD" value="$2y$10$DHRg99zhRW8GOCYlrUWFVegm8zx57J2UT9uFOPgTCqEW9FN2y7Lwa"/><!--ElectricPower-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="IsaacNEWton"/>
-			<column name="PASSWORD" value="Gravity"/>
+			<column name="PASSWORD" value="$2y$10$2ZwVHCjRanNL7/pJLoYayu3eXBQjU20HnH2UvB1JIYytoA0wrM8DO"/><!--Gravity-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="GalileoGalilei"/>
-			<column name="PASSWORD" value="SunSystem"/>
+			<column name="PASSWORD" value="$2y$10$Ual37Jsw9GUHS0TQxGcUfOhUT7yqCplEqU4LTjd8H7yL5CTAGtPvS"/><!--SunSystem-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="MichaelFaradey"/>
-			<column name="PASSWORD" value="ElectroChemistry"/>
+			<column name="PASSWORD" value="$2y$10$ZQavOQSbKL23ycvdJ5ntDuwb/mZo70ZNqHmYsKMzHfcQy/5BQ2Yay"/><!--ElectroChemistry-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="KarlMarx"/>
-			<column name="PASSWORD" value="Capital"/>
+			<column name="PASSWORD" value="$2y$10$vpin7VddU9BfaKvnkvHlHO6qft7yxpUkecsDzg3wucHwQg3gbR0uu"/><!--Capital-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="SigmundFreud"/>
-			<column name="PASSWORD" value="EgoAndIt"/>
+			<column name="PASSWORD" value="$2y$10$o7o5H67ceCH4glEZx57Sb.VgfPGNV5qm7AmiQSzm3cqzR/lH/vm.."/><!--EgoAndIt-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="Maxwell"/>
-			<column name="PASSWORD" value="ElectroMagnetism"/>
+			<column name="PASSWORD" value="$2y$10$YXneB8jDMyCjnMsucsT3gek9ph9G6/o4yfHLkPLe8L8Olwc8ndUEe"/><!--ElectroMagnetism-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="MichailLomonosov"/>
-			<column name="PASSWORD" value="Venus"/>
+			<column name="PASSWORD" value="$2y$10$IVgkB4.TVaFlewmr0sR/KONRtpUNSEI.C2eh1zRsyd1BugEklnuom"/><!--Venus-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="DmitriMendeleev"/>
-			<column name="PASSWORD" value="PeriodicTable"/>
+			<column name="PASSWORD" value="$2y$10$b.tX2hrRTbacASvJiIzPu.YHzka33q4QtWJ9V91JUioplbUqcJvum"/><!--PeriodicTable-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="NicolausCopernicus"/>
-			<column name="PASSWORD" value="Heliocentrism"/>
+			<column name="PASSWORD" value="$2y$10$qzpoV4sEO5XLtBLfUg1Q6.PF9O1M.kQiso1qXoltxTdvwnEDT5xiy"/><!--Heliocentrism-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="LouisPasteur"/>
-			<column name="PASSWORD" value="Vaccination"/>
+			<column name="PASSWORD" value="$2y$10$toSAO60rq8olsMvAXzHyUO8QHHPQ3EaT6dkHCVEoWP2qWiMf1pHbK"/><!--Vaccination-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="Aristotle"/>
-			<column name="PASSWORD" value="Philosophy"/>
+			<column name="PASSWORD" value="$2y$10$ZaQWks76jGI0ZFwWoFBt9ORAZShn6QCg1N5CmhO.krdKswm7qErzi"/><!--Philosophy-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="NeilsBohr"/>
-			<column name="PASSWORD" value="AtomStructure"/>
+			<column name="PASSWORD" value="$2y$10$OXU192rqWS9/9O1rSQ06NOrjLqSqlK1zy1eFjrXkiJb9v8/aekLRm"/><!--AtomStructure-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="AlexanderBell"/>
-			<column name="PASSWORD" value="Telephone"/>
+			<column name="PASSWORD" value="$2y$10$PS0WrrgHrV.VzPHK4pZxU.YpBrtcCdfnQs4ZDreqRZw0VkLneB9tu"/><!--Telephone-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="RosalindFranklin"/>
-			<column name="PASSWORD" value="Viruses"/>
+			<column name="PASSWORD" value="$2y$10$TQCyGkDgsQqhqdlLdWx8HO/nDkOI0m3FUDQcMWtfH0p1ZlZsPwBlq"/><!--Viruses-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="FrancisCrick"/>
-			<column name="PASSWORD" value="DNAMolecule"/>
+			<column name="PASSWORD" value="$2y$10$cjjN/o8fjLMi4Q0oN7Bw4uyL0NnR.Fz1Hb6bYWotuZMCaioh9EPfG"/><!--DNAMolecule-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="JamesWatson"/>
-			<column name="PASSWORD" value="DNAMolecule"/>
+			<column name="PASSWORD" value="$2y$10$b0EV5K3s0WETZnSk9J..0.kxwl/ux31fsE8hSNyq0h8iBT7GAasCy"/><!--DNAMolecule-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="Archimedes"/>
-			<column name="PASSWORD" value="Mathematic"/>
+			<column name="PASSWORD" value="$2y$10$6ogqZdRsX7tF8P4JiLEf4uBOjL66xdozfwfGqkCxFuCY7LfyjgkT."/><!--Mathematic-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="JohannesKepler"/>
-			<column name="PASSWORD" value="PlanetaryMotion"/>
+			<column name="PASSWORD" value="$2y$10$FYGZkdFNgQW/aTF.xmtHtOKMEg31YVJOZQsKi2Ugy3ehl0EmVzz1W"/><!--PlanetaryMotion-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="RichardFeynman"/>
-			<column name="PASSWORD" value="QuantumDinamics"/>
+			<column name="PASSWORD" value="$2y$10$3G2Y9Sk66UymKJr1pqdcl.eY736Z8VV3MC56PlDNNvBO6gQ2q7CY."/><!--QuantumDinamics-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="ErnestRutherford"/>
-			<column name="PASSWORD" value="NuclearPhisic"/>
+			<column name="PASSWORD" value="$2y$10$FfJ6YnPUPXnej.IBMM1JFungD2W2OKUBLVsPyrojStlXwgdcexAlq"/><!--NuclearPhisic-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="AlfredNobel"/>
-			<column name="PASSWORD" value="NobelPremium"/>
+			<column name="PASSWORD" value="$2y$10$urw5/aWQpgrxPdIxd1tx5OJUsvqgYs3cIH7gBeecjAcTly7FUvWHG"/><!--NobelPremium-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="GregorMendel"/>
-			<column name="PASSWORD" value="Genetic"/>
+			<column name="PASSWORD" value="$2y$10$od60v1WSO2RxPXF0wE1e9ePSCfMR3ISzwBUAKaottqPPVilnPNpCC"/><!--Genetic-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="AlexanderFleming"/>
-			<column name="PASSWORD" value="MicroBiology"/>
+			<column name="PASSWORD" value="$2y$10$fagj5OXSlAY76LgFR6BJqOh.KxKV/DKnaoznvelzw4qBDeDQLzmI2"/><!--MicroBiology-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="CarlSagan"/>
-			<column name="PASSWORD" value="Astonaut"/>
+			<column name="PASSWORD" value="$2y$10$746vHJgX/9y5KJrYkz5ygO0EIn5Z/iO8ZqYQsrs9.vWj8NnT6yInC"/><!--Astonaut-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="AdaLovelace"/>
-			<column name="PASSWORD" value="Analytical"/>
+			<column name="PASSWORD" value="$2y$10$rGP4L6vD0V1CCE3CttyS3Osugy.Q2wT4HireROUuNTP8vcG/lf00G"/><!--Analytical-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="EdwinHubble"/>
-			<column name="PASSWORD" value="Astonomer"/>
+			<column name="PASSWORD" value="$2y$10$x1IQHqQ2AIL9z4k0AeYx/O.U6hxPjr0odUi5taWUqE2tisEDj65/m"/><!--Astonomer-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="CarlLinnaeus"/>
-			<column name="PASSWORD" value="Taxonometry"/>
+			<column name="PASSWORD" value="$2y$10$yHUw2yz2yFbghzv2L5Iywesog5eO8wrvz3nvDocps9bDqMLY9t40S"/><!--Taxonometry-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="EnricoFermi"/>
-			<column name="PASSWORD" value="AtomicBomb"/>
+			<column name="PASSWORD" value="$2y$10$RV7jHTe0UAr8FHQF7HLvqe9AtyoU6SVP8dfJZ/4.6VAmMGFbx/Lk2"/><!--AtomicBomb-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="LuisAlvarez"/>
-			<column name="PASSWORD" value="Dinosaur"/>
+			<column name="PASSWORD" value="$2y$10$2mF23zZiUnCFyTBlOnXHGea3PA4OlVUcY6BGmKbaVoD2GHwqHRAfi"/><!--Dinosaur-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="AndreMarieAmpere"/>
-			<column name="PASSWORD" value="Ampere"/>
+			<column name="PASSWORD" value="$2y$10$oePiGxxRTpI0sHrNEwFcKuZu1Pq8CmbyzhkRIf1NJttfbkoY14QPO"/><!--Ampere-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="AmedeoAvogadro"/>
-			<column name="PASSWORD" value="Molecule"/>
+			<column name="PASSWORD" value="$2y$10$wQ6m/yOtN6L7I2ZkvIe7GOzZKaWKRp/x2LpnU81NwfJzI5AxkuAQ2"/><!--Molecule-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="DanielBernouli"/>
-			<column name="PASSWORD" value="RiskTheory"/>
+			<column name="PASSWORD" value="$2y$10$ROlR4u4J7/4zb2a7TarUuu4rbbMF1wn2VyY65ET22RE9F35rByere"/><!--RiskTheory-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="RobertBoyle"/>
-			<column name="PASSWORD" value="GasLaw"/>
+			<column name="PASSWORD" value="$2y$10$nt0nHoFssxQ.CzEkatg77OiYc/3GcRfCnjkw4yaQyhjZy2Nx/HuJS"/><!--GasLaw-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="JohnDalton"/>
-			<column name="PASSWORD" value="AtomicTheory"/>
+			<column name="PASSWORD" value="$2y$10$b4D2s6l0Sa5JFW26XCkMWuCiQC1NhJxjX8THiolEEzebeWZ2N.uA2"/><!--AtomicTheory-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="Democritus"/>
-			<column name="PASSWORD" value="MilkyWay"/>
+			<column name="PASSWORD" value="$2y$10$pUmEp3MGuBqo.n3VCrd6YOKDedswpCv.ewnjrCEOpFeXZhyn0LN/q"/><!--MilkyWay-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="ReneDescartes"/>
-			<column name="PASSWORD" value="AnalGeometry"/>
+			<column name="PASSWORD" value="$2y$10$wQtWfguJP3Knspez8a1lf.2sT8cQrZNDry3TBetxAsXExrWS8fDGy"/><!--AnalGeometry-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="LeonhardEuler"/>
-			<column name="PASSWORD" value="MATHEMATICS"/>
+			<column name="PASSWORD" value="$2y$10$dQGV0HW2YewJIJ6hZ7Rx1en08lFAKL1o4r2u6wk/OdzETcTfehTNC"/><!--MATHEMATICS-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="Fibonacci"/>
-			<column name="PASSWORD" value="Calculation"/>
+			<column name="PASSWORD" value="$2y$10$zLhi9DsW3jhBmXOCs66i6u5GV7RUEEuZ14CKaYFH4SJiqDEiG295K"/><!--Calculation-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="BenjaminFranklin"/>
-			<column name="PASSWORD" value="PositiveAndNegative"/>
+			<column name="PASSWORD" value="$2y$10$PSPb3Ph5tf0sUCBorMqpcOkJdy8Qhd1agq9Y4ou5EBBNkLv1Ndxv2"/><!--PositiveAndNegative-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="HeinrichHertz"/>
-			<column name="PASSWORD" value="PhotoElectric"/>
+			<column name="PASSWORD" value="$2y$10$OQKlTh9wEeHzsU75Qwxv8OSjUv7l.LRxHBTMrsoQuTA6Jyyo7v0dm"/><!--PhotoElectric-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="DavidHilbert"/>
-			<column name="PASSWORD" value="HilbertSpace"/>
+			<column name="PASSWORD" value="$2y$10$SGE8H6YJMi0shJFa5ZQYh.HOpmSBwwWzIcHxJTW4L9dSjeyxZss.e"/><!--HilbertSpace-->
 			<column name="ROLE" value="USER"/>
 		</insert>
 		<insert tableName="USERS">
 			<column name="USER_ID" valueSequenceNext="USER_SEQUENCE"/>
 			<column name="LOGIN" value="PavelZdanovich"/>
-			<column name="PASSWORD" value="ProgMathist3301"/>
+			<column name="PASSWORD" value="$2y$10$nNOvm2qITeYIE2xQQWvdae1qeW5Wrvx7idOqPcd9kYwAmEl/Wlr/q"/><!--Password-->
 			<column name="ROLE" value="ADMIN"/>
 		</insert>
 	</changeSet>

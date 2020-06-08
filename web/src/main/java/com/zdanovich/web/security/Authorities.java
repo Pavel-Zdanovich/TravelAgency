@@ -4,45 +4,49 @@ import com.zdanovich.core.entity.enums.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-class Authorities {
+public class Authorities {// AuthoritiesMapper, AuthoritiesUtils TODO
 
-    private static final Map<String, Set<GrantedAuthority>> authorities = Authority();
     private static final String GUEST_ROLE = "GUEST";
-    private static final GrantedAuthority CREATE = new SimpleGrantedAuthority("CREATE_PRIVILEGE");
-    private static final GrantedAuthority SEARCH = new SimpleGrantedAuthority("SEARCH_PRIVILEGE");
-    private static final GrantedAuthority UPDATE = new SimpleGrantedAuthority("UPDATE_PRIVILEGE");
-    private static final GrantedAuthority DELETE = new SimpleGrantedAuthority("DELETE_PRIVILEGE");
 
-    private static Map<String, Set<GrantedAuthority>> Authority() {
-        Map<String, Set<GrantedAuthority>> authorities = new HashMap<>();
-        authorities.put(GUEST_ROLE, new HashSet<GrantedAuthority>() {
-            {
-                add(SEARCH);
-            }
-        });
-        authorities.put(UserRole.USER.toString(), new HashSet<GrantedAuthority>() {
-            {
-                add(CREATE);
-                add(SEARCH);
-            }
-        });
-        authorities.put(UserRole.ADMIN.toString(), new HashSet<GrantedAuthority>() {
-            {
-                add(CREATE);
-                add(SEARCH);
-                add(UPDATE);
-                add(DELETE);
-            }
-        });
-        return authorities;
+    private static final GrantedAuthority CREATE_PRIVILEGE = new SimpleGrantedAuthority("CREATE_PRIVILEGE");
+    private static final GrantedAuthority READ_PRIVILEGE = new SimpleGrantedAuthority("READ_PRIVILEGE");
+    private static final GrantedAuthority UPDATE_PRIVILEGE = new SimpleGrantedAuthority("UPDATE_PRIVILEGE");
+    private static final GrantedAuthority DELETE_PRIVILEGE = new SimpleGrantedAuthority("DELETE_PRIVILEGE");
+
+    private static final Map<String, Set<GrantedAuthority>> AUTHORITIES_MAP = new HashMap<String, Set<GrantedAuthority>>() {
+        {
+            put(GUEST_ROLE, new HashSet<GrantedAuthority>() {
+                {
+                    add(READ_PRIVILEGE);
+                }
+            });
+            put(UserRole.USER.toString(), new HashSet<GrantedAuthority>() {
+                {
+                    add(CREATE_PRIVILEGE);
+                    add(READ_PRIVILEGE);
+                }
+            });
+            put(UserRole.ADMIN.toString(), new HashSet<GrantedAuthority>() {
+                {
+                    add(CREATE_PRIVILEGE);
+                    add(READ_PRIVILEGE);
+                    add(UPDATE_PRIVILEGE);
+                    add(DELETE_PRIVILEGE);
+                }
+            });
+        }
+    };
+
+    private Authorities() {
     }
 
-    static Set<? extends GrantedAuthority> getAuthority(UserRole userRole) {
-        return authorities.getOrDefault(userRole.toString(), authorities.get(GUEST_ROLE));
+    public static Collection<? extends GrantedAuthority> getFor(UserRole userRole) {
+        return AUTHORITIES_MAP.getOrDefault(userRole.toString(), AUTHORITIES_MAP.get(GUEST_ROLE));
     }
 }

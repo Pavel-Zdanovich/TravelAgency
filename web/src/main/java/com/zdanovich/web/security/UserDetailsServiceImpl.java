@@ -1,7 +1,7 @@
 package com.zdanovich.web.security;
 
 import com.zdanovich.core.entity.User;
-import com.zdanovich.core.service.impl.UserService;
+import com.zdanovich.core.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,16 +14,16 @@ import java.util.Optional;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UserService userService;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) {
         UserDetails userDetails = null;
-        Optional<User> optionalUser = userService.findByLogin(username);
+        Optional<User> optionalUser = userRepository.findByLogin(username);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             userDetails = new org.springframework.security.core.userdetails.User(
-                    user.getLogin(), user.getPassword(), Authorities.getAuthority(user.getRole()));
+                    user.getLogin(), user.getPassword(), Authorities.getFor(user.getRole()));
         } else {
             throw new UsernameNotFoundException(String.format("User with login '%s' not found", username));
         }
