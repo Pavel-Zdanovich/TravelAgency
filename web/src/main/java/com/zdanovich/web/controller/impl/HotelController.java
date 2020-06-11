@@ -4,10 +4,11 @@ import com.zdanovich.core.entity.Hotel;
 import com.zdanovich.core.repository.HotelRepository;
 import com.zdanovich.core.service.impl.HotelService;
 import com.zdanovich.web.controller.AbstractController;
+import com.zdanovich.web.security.Authorities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +36,7 @@ public class HotelController extends AbstractController<Hotel, Long, HotelReposi
     }
 
     @GetMapping(params = "name")
+    @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
     public ResponseEntity<Hotel> findByName(
             @RequestParam
             @NotEmpty(message = "{hotel.name.notEmpty}")
@@ -43,6 +45,7 @@ public class HotelController extends AbstractController<Hotel, Long, HotelReposi
     }
 
     @GetMapping(params = "stars")
+    @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
     public ResponseEntity<List<Hotel>> findByStars(
             @RequestParam
             @NotNull(message = "{hotel.stars.notNull}")
@@ -52,6 +55,7 @@ public class HotelController extends AbstractController<Hotel, Long, HotelReposi
     }
 
     @GetMapping(params = { "minLatitude", "maxLatitude", "minLongitude", "maxLongitude" })
+    @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
     public ResponseEntity<List<Hotel>> findByArea(
             @RequestParam @DecimalMin("-90.0000000") BigDecimal minLatitude,
             @RequestParam @DecimalMax("90.0000000") BigDecimal maxLatitude,
@@ -62,6 +66,7 @@ public class HotelController extends AbstractController<Hotel, Long, HotelReposi
 
 
     @GetMapping(params = "features")
+    @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
     public ResponseEntity<List<Hotel>> findByFeatures(
             @RequestParam
             @NotEmpty(message = "{hotel.name.notEmpty}")
@@ -70,6 +75,7 @@ public class HotelController extends AbstractController<Hotel, Long, HotelReposi
     }
 
     @GetMapping(params = "countryName")
+    @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
     public ResponseEntity<List<Hotel>> findByCountry(@RequestParam String countryName) {
         return ResponseEntity.ok(service.findByCountry(countryName));
     }

@@ -77,7 +77,7 @@ public class AuthService implements AuthenticationConverter {
                 }
             } else {
                 log.error("Authentication is missed");
-                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
                 return generate(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities(), request);
             }
         }
@@ -87,14 +87,14 @@ public class AuthService implements AuthenticationConverter {
         JsonNode jsonNode = obtain(request);
         String username = jsonNode.findValue(Utils.USERNAME).asText();
         String password = jsonNode.findValue(Utils.PASSWORD).asText();
-        if (userService.findByLogin(username).isPresent()) {
+        if (this.userService.findByLogin(username).isPresent()) {
             throw new AuthenticationServiceException(String.format("User '%s' is already registered", username));
         }
         User user = new User();
         user.setLogin(username);
-        user.setPassword(passwordEncoder.encode(password));
+        user.setPassword(this.passwordEncoder.encode(password));
         user.setRole(UserRole.USER);
-        userService.save(user);
+        this.userService.save(user);
         return generate(username, password, Authorities.getFor(UserRole.USER), request);
     }
 
@@ -108,7 +108,7 @@ public class AuthService implements AuthenticationConverter {
 
     private JsonNode obtain(HttpServletRequest request) {
         try {
-            return objectMapper.readTree(request.getReader());
+            return this.objectMapper.readTree(request.getReader());
         } catch (IOException e) {
             log.error("Error occurred during finding '%s' in the request");
         }
@@ -116,8 +116,8 @@ public class AuthService implements AuthenticationConverter {
     }
 
     private UserDetails checkInMemory(String username, String password) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        if (!passwordEncoder.matches(password, userDetails.getPassword())) {
+        UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+        if (!this.passwordEncoder.matches(password, userDetails.getPassword())) {
             throw new BadCredentialsException(String.format("Wrong password = '%s' for user '%s'", username, password));
         }
         return userDetails;
@@ -125,7 +125,7 @@ public class AuthService implements AuthenticationConverter {
 
     private Authentication generate(String username, String password, Collection<? extends GrantedAuthority> authorities, HttpServletRequest request) {
         JsonWebAuthenticationToken authentication = new JsonWebAuthenticationToken(username, password, authorities);
-        authentication.setDetails(authenticationDetailsSource.buildDetails(request));
+        authentication.setDetails(this.authenticationDetailsSource.buildDetails(request));
         return authentication;
     }
 

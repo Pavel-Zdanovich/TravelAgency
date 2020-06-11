@@ -10,16 +10,6 @@ public class JsonWebAuthenticationToken extends AbstractAuthenticationToken {
     private final Object principal;
     private Object credentials;
 
-    public JsonWebAuthenticationToken(Object principal) {
-        super(null);
-        this.principal = principal;
-    }
-
-    public JsonWebAuthenticationToken(Object principal, Collection<? extends GrantedAuthority> authorities) {
-        super(authorities);
-        this.principal = principal;
-    }
-
     public JsonWebAuthenticationToken(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.principal = principal;

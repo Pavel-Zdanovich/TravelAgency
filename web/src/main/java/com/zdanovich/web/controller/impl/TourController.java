@@ -5,8 +5,10 @@ import com.zdanovich.core.entity.enums.TourType;
 import com.zdanovich.core.repository.TourRepository;
 import com.zdanovich.core.service.impl.TourService;
 import com.zdanovich.web.controller.AbstractController;
+import com.zdanovich.web.security.Authorities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +36,7 @@ public class TourController extends AbstractController<Tour, Long, TourRepositor
     }
 
     @GetMapping(params = "startDate")
+    @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
     public ResponseEntity<List<Tour>> findByStartDate(
             @RequestParam
             @NotNull(message = "{tour.startDate.notNull}")
@@ -42,6 +45,7 @@ public class TourController extends AbstractController<Tour, Long, TourRepositor
     }
 
     @GetMapping(params = "endDate")
+    @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
     public ResponseEntity<List<Tour>> findByEndDate(
             @RequestParam
             @NotNull(message = "{tour.endDate.notNull}")
@@ -50,11 +54,13 @@ public class TourController extends AbstractController<Tour, Long, TourRepositor
     }
 
     @GetMapping(params = "days")
+    @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
     public ResponseEntity<List<Tour>> findByDuration(@RequestParam int days) {
         return ResponseEntity.ok(service.findByDuration(days));
     }
 
     @GetMapping(params = "description")
+    @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
     public ResponseEntity<List<Tour>> findByDescription(
             @RequestParam
             @NotEmpty(message = "{tour.description.notEmpty}")
@@ -63,6 +69,7 @@ public class TourController extends AbstractController<Tour, Long, TourRepositor
     }
 
     @GetMapping(params = "cost")
+    @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
     public ResponseEntity<List<Tour>> findByCost(
             @RequestParam
             @NotNull(message = "{tour.cost.notNull}")
@@ -71,6 +78,7 @@ public class TourController extends AbstractController<Tour, Long, TourRepositor
     }
 
     @GetMapping(params = "type")
+    @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
     public ResponseEntity<List<Tour>> findByTourType(@RequestParam TourType type) {
         return ResponseEntity.ok(service.findByTourType(type));
     }

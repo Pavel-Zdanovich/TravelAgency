@@ -19,7 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) {
         UserDetails userDetails = null;
-        Optional<User> optionalUser = userRepository.findByLogin(username);
+        Optional<User> optionalUser = this.userRepository.findByLogin(username);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             userDetails = new org.springframework.security.core.userdetails.User(

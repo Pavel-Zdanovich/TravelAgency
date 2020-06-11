@@ -31,14 +31,13 @@ public class AuthController {
     public ResponseEntity<Authentication> register(HttpServletRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null) {
-            authentication = authService.register(request);
-            authenticationManager.authenticate(authentication);
+            authentication = this.authService.register(request);
+            authentication = this.authenticationManager.authenticate(authentication);
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            String token = authService.generateToken(authentication.getName());
+            String token = this.authService.generateToken(authentication.getName());
             HttpHeaders headers = new HttpHeaders();
             headers.set(AuthService.TOKEN_HEADER, token);
-            //headers.set(HttpHeaders.AUTHORIZATION, token);
 
             return ResponseEntity.ok().headers(headers).build();
         } else {
@@ -50,14 +49,13 @@ public class AuthController {
     public ResponseEntity<Authentication> login(HttpServletRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null) {
-            authentication = authService.login(request);
-            authenticationManager.authenticate(authentication);
+            authentication = this.authService.login(request);
+            authentication = this.authenticationManager.authenticate(authentication);
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            String token = authService.generateToken(authentication.getName());
+            String token = this.authService.generateToken(authentication.getName());
             HttpHeaders headers = new HttpHeaders();
             headers.set(AuthService.TOKEN_HEADER, token);
-            //headers.set(HttpHeaders.AUTHORIZATION, token);
 
             return ResponseEntity.ok().headers(headers).build();
         } else {

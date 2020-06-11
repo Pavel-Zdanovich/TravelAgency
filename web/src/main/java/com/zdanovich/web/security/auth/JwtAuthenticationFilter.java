@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterChain;
@@ -25,19 +26,22 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     @Lazy
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(WebSecurityConfiguration.DEFAULT_FILTER_PROCESSES_URL);
-        setAuthenticationManager(authenticationManager);
-        setContinueChainBeforeSuccessfulAuthentication(true);
+        this.setAuthenticationManager(authenticationManager);
+        this.setAuthenticationSuccessHandler(new AuthenticationSuccessHandler() {
+            @Override
+            public void onAuthenticationSuccess(HttpServletRequest req, HttpServletResponse res, Authentication auth) {
+            }
+        });
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        Authentication authentication = authService.convert(request);
-        return this.getAuthenticationManager().authenticate(authentication);
+        return this.getAuthenticationManager().authenticate(authService.convert(request));
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        super.successfulAuthentication(request, response, chain, authResult);
-        chain.doFilter(request, response);
+    protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain, Authentication auth) throws IOException, ServletException {
+        super.successfulAuthentication(req, res, chain, auth);
+        chain.doFilter(req, res);
     }
 }

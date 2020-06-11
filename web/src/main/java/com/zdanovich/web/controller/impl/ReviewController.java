@@ -4,14 +4,15 @@ import com.zdanovich.core.entity.Review;
 import com.zdanovich.core.repository.ReviewRepository;
 import com.zdanovich.core.service.impl.ReviewService;
 import com.zdanovich.web.controller.AbstractController;
+import com.zdanovich.web.security.Authorities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -33,6 +34,7 @@ public class ReviewController extends AbstractController<Review, Long, ReviewRep
     }
 
     @GetMapping(params = "date")
+    @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
     public ResponseEntity<List<Review>> findByReviewDate(
             @RequestParam
             @NotNull(message = "{review.date.notNull}")
@@ -41,6 +43,7 @@ public class ReviewController extends AbstractController<Review, Long, ReviewRep
     }
 
     @GetMapping(params = "text")
+    @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
     public ResponseEntity<List<Review>> findByReviewText(
             @RequestParam
             @NotEmpty(message = "{review.text.notEmpty}")
@@ -49,6 +52,7 @@ public class ReviewController extends AbstractController<Review, Long, ReviewRep
     }
 
     @GetMapping(params = "user, tour")
+    @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
     public ResponseEntity<Iterable<Review>> findByUserAndTour(
             @RequestParam(required = false) Long userId,
             @RequestParam(required = false) Long tourId) {

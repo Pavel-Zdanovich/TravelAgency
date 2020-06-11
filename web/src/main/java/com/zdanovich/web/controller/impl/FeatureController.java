@@ -4,8 +4,10 @@ import com.zdanovich.core.entity.Feature;
 import com.zdanovich.core.repository.FeatureRepository;
 import com.zdanovich.core.service.impl.FeatureService;
 import com.zdanovich.web.controller.AbstractController;
+import com.zdanovich.web.security.Authorities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +28,7 @@ public class FeatureController extends AbstractController<Feature, Long, Feature
     }
 
     @GetMapping(params = "name")
+    @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
     public ResponseEntity<Feature> findByName(
             @RequestParam
             @NotEmpty(message = "{feature.name.notEmpty}")
