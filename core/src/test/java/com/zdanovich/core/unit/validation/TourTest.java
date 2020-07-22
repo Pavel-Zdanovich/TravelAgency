@@ -5,7 +5,7 @@ import com.zdanovich.core.entity.Hotel;
 import com.zdanovich.core.entity.Tour;
 import com.zdanovich.core.entity.User;
 import com.zdanovich.core.entity.enums.TourType;
-import com.zdanovich.core.utils.Utils;
+import com.zdanovich.core.utils.CoreUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -19,7 +19,7 @@ import java.util.Set;
 
 public class TourTest extends ValidationTest {
 
-    public static final String VALID_TOUR_PHOTO_PATH = "C:\\Users\\Zdan\\IdeaProjects\\TravelAgency\\core\\src\\main\\resources\\messages.properties";
+    public static final String VALID_TOUR_PHOTO_PATH = "C:\\Users\\Zdan\\IdeaProjects\\travelagency\\core\\src\\main\\resources\\messages.properties";
     public static final Timestamp VALID_TOUR_START_DATE = Timestamp.valueOf(LocalDateTime.of(2021, 1, 1, 0 ,0));
     public static final Timestamp VALID_TOUR_END_DATE = Timestamp.valueOf(LocalDateTime.of(2021, 1, 2, 0 ,0));
     public static final String VALID_TOUR_DESCRIPTION = "Valid description of the tour";
@@ -135,8 +135,8 @@ public class TourTest extends ValidationTest {
         Set<ConstraintViolation<Tour>> constraintViolations = validator.validate(tour);
         Assert.assertEquals(1, constraintViolations.size());
         for (ConstraintViolation<Tour> constraintViolation : constraintViolations) {
-            Assert.assertEquals(resourceBundle.getString("tour.description.size").replaceAll(INTERPOLATE_REGEX, Utils.EMPTY_STRING),
-                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, Utils.EMPTY_STRING));
+            Assert.assertEquals(resourceBundle.getString("tour.description.size").replaceAll(INTERPOLATE_REGEX, CoreUtils.EMPTY_STRING),
+                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, CoreUtils.EMPTY_STRING));
         }
     }
 
@@ -167,8 +167,8 @@ public class TourTest extends ValidationTest {
         Set<ConstraintViolation<Tour>> constraintViolations = validator.validate(tour);
         Assert.assertEquals(1, constraintViolations.size());
         for (ConstraintViolation<Tour> constraintViolation : constraintViolations) {
-            Assert.assertEquals(resourceBundle.getString("tour.cost.min").replaceAll(INTERPOLATE_REGEX, Utils.EMPTY_STRING),
-                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, Utils.EMPTY_STRING));
+            Assert.assertEquals(resourceBundle.getString("tour.cost.min").replaceAll(INTERPOLATE_REGEX, CoreUtils.EMPTY_STRING),
+                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, CoreUtils.EMPTY_STRING));
         }
     }
 

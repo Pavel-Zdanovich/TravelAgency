@@ -1,7 +1,7 @@
 package com.zdanovich.web.integration.controller;
 
 import com.zdanovich.core.entity.Hotel;
-import com.zdanovich.core.utils.Utils;
+import com.zdanovich.core.utils.CoreUtils;
 import com.zdanovich.web.controller.impl.HotelController;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -114,9 +114,9 @@ public class HotelControllerTest extends AbstractControllerTest {
     @Test
     public void findByFeatures() throws Exception {
         Set<String> features = new HashSet<>();
-        features.add(Utils.AIR_CONDITIONER);
-        features.add(Utils.CABLE_TV);
-        features.add(Utils.CAR_RENTAL);
+        features.add(CoreUtils.AIR_CONDITIONER);
+        features.add(CoreUtils.CABLE_TV);
+        features.add(CoreUtils.CAR_RENTAL);
         MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<>();
         multiValueMap.addAll("features", new ArrayList<>(features));
 

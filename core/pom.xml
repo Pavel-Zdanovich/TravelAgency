@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>com.zdanovich.travelAgency</groupId>
-        <artifactId>travelAgency</artifactId>
+        <groupId>com.zdanovich.travelagency</groupId>
+        <artifactId>travelagency</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -122,11 +122,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.oracle.jdbc</groupId>
             <artifactId>ojdbc8</artifactId>
             <version>${oracle.version}</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -206,12 +206,6 @@
                 </configuration>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>${basedir}\src\main\resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
     </build>
 
     <profiles>
@@ -272,7 +266,7 @@
                 <database.driverClassPath>${settings.localRepository}\com\h2database\h2\h2-1.4.199.jar
                 </database.driverClassPath>
                 <database.driverClassName>org.h2.Driver</database.driverClassName>
-                <database.url>jdbc:h2:~/IdeaProjects/TravelAgency/core/src/test/resources/h2</database.url>
+                <database.url>jdbc:h2:~/IdeaProjects/travelagency/core/src/test/resources/h2</database.url>
                 <database.username>sa</database.username>
                 <database.password></database.password>
             </properties>

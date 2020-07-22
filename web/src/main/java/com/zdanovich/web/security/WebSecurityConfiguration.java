@@ -1,7 +1,8 @@
 package com.zdanovich.web.security;
 
-import com.zdanovich.web.controller.auth.AuthController;
-import com.zdanovich.web.security.auth.JwtAuthenticationEntryPoint;
+import com.zdanovich.web.controller.system.AuthController;
+import com.zdanovich.web.openapi.OpenAPIConfiguration;
+import com.zdanovich.web.security.jwt.JsonWebAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import javax.servlet.Filter;
 
@@ -26,7 +28,7 @@ import javax.servlet.Filter;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {// TODO AuthConfiguration
 
-    public static final String DEFAULT_FILTER_PROCESSES_URL = "/**";
+    public static final String ANY_URL = "/**";
 
     @Autowired
     private AuthenticationProvider jwtAuthenticationProvider;
@@ -66,24 +68,28 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {// T
                 .none()
                 .and()*/
 
-                //csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()//TODO read about csrf token for React
+                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()//TODO read about csrf token for React
 
                 .authorizeRequests().antMatchers(AuthController.PATH).permitAll().and()
 
                 .authorizeRequests().anyRequest().authenticated().and()
 
-                .exceptionHandling().authenticationEntryPoint(new JwtAuthenticationEntryPoint()).and()
+                .exceptionHandling().authenticationEntryPoint(new JsonWebAuthenticationEntryPoint()).and()
 
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 
                 .logout().logoutUrl(AuthController.PATH + AuthController.LOGOUT);
-                //.invalidateHttpSession(true).clearAuthentication(true).deleteCookies("JSESSIONID");
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(AuthController.PATH + DEFAULT_FILTER_PROCESSES_URL);
+        web.ignoring().antMatchers(AuthController.PATH + AuthController.LOGIN,
+                AuthController.PATH + AuthController.REGISTER,
+                OpenAPIConfiguration.OPEN_API_PATH + ANY_URL,
+                OpenAPIConfiguration.SWAGGER_UI_PATH + ANY_URL,
+                OpenAPIConfiguration.SWAGGER_UI_PATH + ".html"
+        );
     }
 }

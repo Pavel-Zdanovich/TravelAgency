@@ -1,7 +1,7 @@
 package com.zdanovich.web.integration.controller;
 
 import com.zdanovich.core.entity.Feature;
-import com.zdanovich.core.utils.Utils;
+import com.zdanovich.core.utils.CoreUtils;
 import com.zdanovich.web.controller.impl.FeatureController;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -54,7 +54,7 @@ public class FeatureControllerTest extends AbstractControllerTest {
     @Test
     public void findByName() throws Exception {
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(FeatureController.PATH).queryParam("name", Utils.AIR_CONDITIONER)).
+                perform(MockMvcRequestBuilders.get(FeatureController.PATH).queryParam("name", CoreUtils.AIR_CONDITIONER)).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 

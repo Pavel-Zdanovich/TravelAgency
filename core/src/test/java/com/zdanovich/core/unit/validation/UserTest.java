@@ -3,7 +3,7 @@ package com.zdanovich.core.unit.validation;
 import com.zdanovich.core.entity.Tour;
 import com.zdanovich.core.entity.User;
 import com.zdanovich.core.entity.enums.UserRole;
-import com.zdanovich.core.utils.Utils;
+import com.zdanovich.core.utils.CoreUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -39,8 +39,8 @@ public class UserTest extends ValidationTest {
         Set<ConstraintViolation<User>> constraintViolations = validator.validate(user);
         Assert.assertEquals(1, constraintViolations.size());
         for (ConstraintViolation<User> constraintViolation : constraintViolations) {
-            Assert.assertEquals(resourceBundle.getString("user.login.size").replaceAll(INTERPOLATE_REGEX, Utils.EMPTY_STRING),
-                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, Utils.EMPTY_STRING));
+            Assert.assertEquals(resourceBundle.getString("user.login.size").replaceAll(INTERPOLATE_REGEX, CoreUtils.EMPTY_STRING),
+                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, CoreUtils.EMPTY_STRING));
         }
     }
 
@@ -78,8 +78,8 @@ public class UserTest extends ValidationTest {
         Set<ConstraintViolation<User>> constraintViolations = validator.validate(user);
         Assert.assertEquals(1, constraintViolations.size());
         for (ConstraintViolation<User> constraintViolation : constraintViolations) {
-            Assert.assertEquals(resourceBundle.getString("user.password.size").replaceAll(INTERPOLATE_REGEX, Utils.EMPTY_STRING),
-                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, Utils.EMPTY_STRING));
+            Assert.assertEquals(resourceBundle.getString("user.password.size").replaceAll(INTERPOLATE_REGEX, CoreUtils.EMPTY_STRING),
+                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, CoreUtils.EMPTY_STRING));
         }
     }
 

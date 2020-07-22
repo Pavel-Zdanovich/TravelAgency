@@ -1,6 +1,6 @@
 package com.zdanovich.core.config;
 
-import com.zdanovich.core.utils.Utils;
+import com.zdanovich.core.utils.CoreUtils;
 import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +14,7 @@ import java.util.Properties;
 public class MigrationConfiguration {
 
     @Autowired
-    private Properties properties;
+    private Properties coreProperties;
     @Autowired
     private DataSource dataSource;
 
@@ -23,8 +23,8 @@ public class MigrationConfiguration {
     public SpringLiquibase liquibase() {
         SpringLiquibase liquibase = new SpringLiquibase();
         liquibase.setDataSource(dataSource);
-        String changelog = properties.getProperty(Utils.LIQUIBASE_CHANGELOG_FILE);
-        liquibase.setChangeLog(Utils.absoluteToClasspath(changelog));
+        String changelog = coreProperties.getProperty(CoreUtils.LIQUIBASE_CHANGELOG_FILE);
+        liquibase.setChangeLog(CoreUtils.absoluteToClasspath(changelog));
         return liquibase;
     }
 }

@@ -1,11 +1,11 @@
 package com.zdanovich.web.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -25,7 +25,7 @@ import java.util.List;
 public class WebApplicationConfiguration implements WebMvcConfigurer {
 
     @Autowired
-    private ObjectMapper objectMapper;
+    private Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder;
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
@@ -34,7 +34,7 @@ public class WebApplicationConfiguration implements WebMvcConfigurer {
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.add(new MappingJackson2HttpMessageConverter(objectMapper));
+        //converters.add(new MappingJackson2HttpMessageConverter(jackson2ObjectMapperBuilder.build()));
     }
 
     @Bean

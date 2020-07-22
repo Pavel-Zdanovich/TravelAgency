@@ -5,12 +5,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.zdanovich.travelAgency</groupId>
-    <artifactId>travelAgency</artifactId>
+    <groupId>com.zdanovich.travelagency</groupId>
+    <artifactId>travelagency</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
-    <name>TravelAgency</name>
+    <name>travelagency</name>
+    <url>http://localhost:8080/travelagency</url>
+    <developers>
+        <developer>
+            <name>${user.name}</name>
+            <url>${user.email}</url>
+        </developer>
+    </developers>
 
     <modules>
         <module>core</module>
@@ -22,6 +29,8 @@
         <project.build.uriEncoding>UTF-8</project.build.uriEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <user.name>Pavel Zdanovich</user.name>
+        <user.email>PavelZdanovich3301@gmail.com</user.email>
 
         <spring.version>5.2.5.RELEASE</spring.version>
 
@@ -31,6 +40,9 @@
         <mockito.version>2.28.2</mockito.version>
 
         <lombok.version>1.18.8</lombok.version>
+
+        <node.version>v10.11.0</node.version>
+        <npm.version>6.4.1</npm.version>
     </properties>
 
     <dependencies>
@@ -55,19 +67,6 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-jul</artifactId>
         </dependency>
-
-        <!--<dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-        </dependency>-->
 
         <dependency>
             <groupId>org.testng</groupId>
@@ -106,22 +105,6 @@
                 <artifactId>log4j-jul</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
-
-            <!--<dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-annotations</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>-->
 
             <dependency>
                 <groupId>org.testng</groupId>
@@ -189,6 +172,13 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+
+        <resources>
+            <resource>
+                <directory>${pom.basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
 </project>

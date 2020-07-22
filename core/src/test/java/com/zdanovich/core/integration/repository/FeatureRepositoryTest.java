@@ -3,7 +3,7 @@ package com.zdanovich.core.integration.repository;
 import com.zdanovich.core.repository.FeatureRepository;
 import com.zdanovich.core.entity.Feature;
 import com.zdanovich.core.entity.metamodel.Feature_;
-import com.zdanovich.core.utils.Utils;
+import com.zdanovich.core.utils.CoreUtils;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
@@ -141,7 +141,7 @@ public class FeatureRepositoryTest extends AbstractRepositoryTest {
     @Test
     public void findOne_ByName() {
         Feature expected = new Feature();
-        expected.setName(Utils.AIR_CONDITIONER);
+        expected.setName(CoreUtils.AIR_CONDITIONER);
 
         Feature actual = featureRepository.findOne(Example.of(expected)).orElse(null);
         Assert.assertEquals(airConditioner, actual);

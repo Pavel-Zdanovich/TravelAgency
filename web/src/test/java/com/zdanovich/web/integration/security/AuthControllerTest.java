@@ -3,7 +3,7 @@ package com.zdanovich.web.integration.security;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zdanovich.core.config.CoreModuleConfiguration;
 import com.zdanovich.web.config.WebModuleConfiguration;
-import com.zdanovich.web.controller.auth.AuthController;
+import com.zdanovich.web.controller.system.AuthController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;

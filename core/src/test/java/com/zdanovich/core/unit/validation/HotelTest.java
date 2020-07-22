@@ -2,7 +2,7 @@ package com.zdanovich.core.unit.validation;
 
 import com.zdanovich.core.entity.Feature;
 import com.zdanovich.core.entity.Hotel;
-import com.zdanovich.core.utils.Utils;
+import com.zdanovich.core.utils.CoreUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -46,8 +46,8 @@ public class HotelTest extends ValidationTest {
         Set<ConstraintViolation<Hotel>> constraintViolations = validator.validate(hotel);
         Assert.assertEquals(1, constraintViolations.size());
         for (ConstraintViolation<Hotel> constraintViolation : constraintViolations) {
-            Assert.assertEquals(resourceBundle.getString("hotel.name.size").replaceAll(INTERPOLATE_REGEX, Utils.EMPTY_STRING),
-                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, Utils.EMPTY_STRING));
+            Assert.assertEquals(resourceBundle.getString("hotel.name.size").replaceAll(INTERPOLATE_REGEX, CoreUtils.EMPTY_STRING),
+                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, CoreUtils.EMPTY_STRING));
         }
     }
 
@@ -62,8 +62,8 @@ public class HotelTest extends ValidationTest {
         Set<ConstraintViolation<Hotel>> constraintViolations = validator.validate(hotel);
         Assert.assertEquals(1, constraintViolations.size());
         for (ConstraintViolation<Hotel> constraintViolation : constraintViolations) {
-            Assert.assertEquals(resourceBundle.getString("hotel.name.size").replaceAll(INTERPOLATE_REGEX, Utils.EMPTY_STRING),
-                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, Utils.EMPTY_STRING));
+            Assert.assertEquals(resourceBundle.getString("hotel.name.size").replaceAll(INTERPOLATE_REGEX, CoreUtils.EMPTY_STRING),
+                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, CoreUtils.EMPTY_STRING));
         }
     }
 
@@ -91,8 +91,8 @@ public class HotelTest extends ValidationTest {
         Set<ConstraintViolation<Hotel>> constraintViolations = validator.validate(hotel);
         Assert.assertEquals(1, constraintViolations.size());
         for (ConstraintViolation<Hotel> constraintViolation : constraintViolations) {
-            Assert.assertEquals(resourceBundle.getString("hotel.stars.min").replaceAll(INTERPOLATE_REGEX, Utils.EMPTY_STRING),
-                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, Utils.EMPTY_STRING));
+            Assert.assertEquals(resourceBundle.getString("hotel.stars.min").replaceAll(INTERPOLATE_REGEX, CoreUtils.EMPTY_STRING),
+                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, CoreUtils.EMPTY_STRING));
         }
     }
 
@@ -106,8 +106,8 @@ public class HotelTest extends ValidationTest {
         Set<ConstraintViolation<Hotel>> constraintViolations = validator.validate(hotel);
         Assert.assertEquals(1, constraintViolations.size());
         for (ConstraintViolation<Hotel> constraintViolation : constraintViolations) {
-            Assert.assertEquals(resourceBundle.getString("hotel.stars.max").replaceAll(INTERPOLATE_REGEX, Utils.EMPTY_STRING),
-                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, Utils.EMPTY_STRING));
+            Assert.assertEquals(resourceBundle.getString("hotel.stars.max").replaceAll(INTERPOLATE_REGEX, CoreUtils.EMPTY_STRING),
+                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, CoreUtils.EMPTY_STRING));
         }
     }
 
@@ -122,8 +122,8 @@ public class HotelTest extends ValidationTest {
         Set<ConstraintViolation<Hotel>> constraintViolations = validator.validate(hotel);
         Assert.assertEquals(1, constraintViolations.size());
         for (ConstraintViolation<Hotel> constraintViolation : constraintViolations) {
-            Assert.assertEquals(resourceBundle.getString("hotel.website.size").replaceAll(INTERPOLATE_REGEX, Utils.EMPTY_STRING),
-                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, Utils.EMPTY_STRING));
+            Assert.assertEquals(resourceBundle.getString("hotel.website.size").replaceAll(INTERPOLATE_REGEX, CoreUtils.EMPTY_STRING),
+                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, CoreUtils.EMPTY_STRING));
         }
     }
 
@@ -138,8 +138,8 @@ public class HotelTest extends ValidationTest {
         Set<ConstraintViolation<Hotel>> constraintViolations = validator.validate(hotel);
         Assert.assertEquals(1, constraintViolations.size());
         for (ConstraintViolation<Hotel> constraintViolation : constraintViolations) {
-            Assert.assertEquals(resourceBundle.getString("hotel.website.size").replaceAll(INTERPOLATE_REGEX, Utils.EMPTY_STRING),
-                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, Utils.EMPTY_STRING));
+            Assert.assertEquals(resourceBundle.getString("hotel.website.size").replaceAll(INTERPOLATE_REGEX, CoreUtils.EMPTY_STRING),
+                    constraintViolation.getMessage().replaceAll(NUMBER_REGEX, CoreUtils.EMPTY_STRING));
         }
     }
 

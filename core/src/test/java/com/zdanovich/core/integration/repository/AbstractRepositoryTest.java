@@ -13,7 +13,7 @@ import com.zdanovich.core.repository.HotelRepository;
 import com.zdanovich.core.repository.ReviewRepository;
 import com.zdanovich.core.repository.TourRepository;
 import com.zdanovich.core.repository.UserRepository;
-import com.zdanovich.core.utils.Utils;
+import com.zdanovich.core.utils.CoreUtils;
 import liquibase.exception.DatabaseException;
 import org.hibernate.cfg.AvailableSettings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,15 +128,15 @@ public abstract class AbstractRepositoryTest extends AbstractTransactionalTestNG
         theNetherlands = countryRepository.findByName("The Netherlands").orElseThrow(() ->
                 new EntityNotFoundException("Unable to find country 'The Netherlands'"));
 
-        airConditioner = cromlixHotel.getFeature(Utils.AIR_CONDITIONER).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
+        airConditioner = cromlixHotel.getFeature(CoreUtils.AIR_CONDITIONER).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
 
-        cableTv = cromlixHotel.getFeature(Utils.CABLE_TV).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
+        cableTv = cromlixHotel.getFeature(CoreUtils.CABLE_TV).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
 
-        carRental = cromlixHotel.getFeature(Utils.CAR_RENTAL).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
+        carRental = cromlixHotel.getFeature(CoreUtils.CAR_RENTAL).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
 
-        miniBar = cromlixHotel.getFeature(Utils.MINI_BAR).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
+        miniBar = cromlixHotel.getFeature(CoreUtils.MINI_BAR).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
 
-        parking = cromlixHotel.getFeature(Utils.PARKING).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
+        parking = cromlixHotel.getFeature(CoreUtils.PARKING).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
 
         Object object = entityManager.getProperties().get(AvailableSettings.STATEMENT_BATCH_SIZE);
         batchSize = object != null ? Integer.parseInt((String) object) : 10;

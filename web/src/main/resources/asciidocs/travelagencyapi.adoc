@@ -1,0 +1,150 @@
+= RESTful Notes API Guide
+Baeldung;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+[[overview]]
+== Overview
+
+[[overview-http-verbs]]
+== HTTP verbs
+
+RESTful notes tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP verbs.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+| `PUT`
+| Used to update an existing resource
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+RESTful notes tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP status codes.
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| The request completed successfully
+
+| `201 Created`
+| A new resource has been created successfully. The resource's URI is available from the response's
+`Location` header
+
+| `204 No Content`
+| An update to an existing resource has been applied successfully
+
+| `400 Bad Request`
+| The request was malformed. The response body will include an error providing further information
+
+| `404 Not Found`
+| The requested resource did not exist
+|===
+
+[[overview-hypermedia]]
+== Hypermedia
+
+RESTful Notes uses hypermedia and resources include links to other resources in their
+responses. Responses are in http://stateless.co/hal_specification.html[Hypertext Application
+from resource to resource.
+Language (HAL)] format. Links can be found beneath the `_links` key. Users of the API should
+not create URIs themselves, instead they should use the above-described links to navigate
+
+[[resources]]
+= Resources
+
+[[resources]]
+== REST Service
+
+The FOO provides the entry point into the service.
+
+[[resources-post]]
+=== Accessing the POST
+
+A `POST` request is used to access the resource create.
+
+==== Request structure
+
+include::{snippets}/save/http-request.adoc[]
+
+==== Example response
+
+include::{snippets}/save/http-response.adoc[]
+
+==== CURL request
+
+include::{snippets}/save/curl-request.adoc[]
+
+[[resources-get]]
+=== Accessing the GET
+
+A `GET` request is used to access the resource read.
+
+==== Request structure
+
+include::{snippets}/findAll/http-request.adoc[]
+
+==== Path Parameters
+include::{snippets}/findAll/path-parameters.adoc[]
+
+==== Example response
+
+include::{snippets}/findAll/http-response.adoc[]
+
+==== CURL request
+
+include::{snippets}/findAll/curl-request.adoc[]
+
+[[resources-put]]
+=== Accessing the PUT
+
+A `PUT` request is used to access the resource update.
+
+==== Request structure
+
+include::{snippets}/update/http-request.adoc[]
+
+==== Path Parameters
+include::{snippets}/update/path-parameters.adoc[]
+
+==== Example response
+
+include::{snippets}/update/http-response.adoc[]
+
+==== CURL request
+
+include::{snippets}/update/curl-request.adoc[]
+
+[[resources-delete]]
+=== Accessing the foo DELETE
+
+A `DELETE` request is used to access the resource delete.
+
+==== Request structure
+
+include::{snippets}/delete/http-request.adoc[]
+
+==== Path Parameters
+include::{snippets}/delete/path-parameters.adoc[]
+
+==== Example response
+
+include::{snippets}/delete/http-response.adoc[]
+
+==== CURL request
+
+include::{snippets}/delete/curl-request.adoc[]

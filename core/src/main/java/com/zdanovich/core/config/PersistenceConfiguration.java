@@ -1,6 +1,6 @@
 package com.zdanovich.core.config;
 
-import com.zdanovich.core.utils.Utils;
+import com.zdanovich.core.utils.CoreUtils;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class PersistenceConfiguration {
     public static final String ENTITY_PACKAGE_PATH = "com.zdanovich.core.entity";
 
     @Autowired
-    private Properties properties;
+    private Properties coreProperties;
 
     @Bean
     @Autowired
@@ -39,7 +39,7 @@ public class PersistenceConfiguration {
         localContainerEntityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         localContainerEntityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
         localContainerEntityManagerFactoryBean.setPackagesToScan(ENTITY_PACKAGE_PATH);
-        localContainerEntityManagerFactoryBean.setJpaProperties(properties);
+        localContainerEntityManagerFactoryBean.setJpaProperties(coreProperties);
         return localContainerEntityManagerFactoryBean;
     }
 
@@ -47,8 +47,8 @@ public class PersistenceConfiguration {
     @Autowired
     public JpaVendorAdapter jpaVendorAdapter(Database database) {
         HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
-        hibernateJpaVendorAdapter.setShowSql(Boolean.parseBoolean(properties.getProperty(AvailableSettings.SHOW_SQL)));
-        hibernateJpaVendorAdapter.setGenerateDdl(Boolean.parseBoolean(properties.getProperty(Utils.HIBERNATE_GENERATE_DDL)));
+        hibernateJpaVendorAdapter.setShowSql(Boolean.parseBoolean(coreProperties.getProperty(AvailableSettings.SHOW_SQL)));
+        hibernateJpaVendorAdapter.setGenerateDdl(Boolean.parseBoolean(coreProperties.getProperty(CoreUtils.HIBERNATE_GENERATE_DDL)));
         hibernateJpaVendorAdapter.setDatabase(database);
         return hibernateJpaVendorAdapter;
     }
@@ -65,15 +65,15 @@ public class PersistenceConfiguration {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(properties.getProperty(Utils.DRIVER_CLASS_NAME));
-        dataSource.setUrl(properties.getProperty(Utils.URL));
-        dataSource.setUsername(properties.getProperty(Utils.USERNAME));
-        dataSource.setPassword(properties.getProperty(Utils.PASSWORD));
+        dataSource.setDriverClassName(coreProperties.getProperty(CoreUtils.DRIVER_CLASS_NAME));
+        dataSource.setUrl(coreProperties.getProperty(CoreUtils.URL));
+        dataSource.setUsername(coreProperties.getProperty(CoreUtils.USERNAME));
+        dataSource.setPassword(coreProperties.getProperty(CoreUtils.PASSWORD));
         return dataSource;
     }
 
     @Bean
     public Database database() {
-        return Database.valueOf(properties.getProperty(Utils.DATABASE).toUpperCase());
+        return Database.valueOf(coreProperties.getProperty(CoreUtils.DATABASE).toUpperCase());
     }
 }
