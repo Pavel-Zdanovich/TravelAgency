@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -49,9 +49,14 @@ public abstract class AbstractControllerTest extends AbstractTransactionalTestNG
 
     protected MockMvc mockMvc;
 
+    @Autowired
+    private HttpMessageConverter<?> stringHttpMessageConverter;
+    @Autowired
+    private HttpMessageConverter<?> mappingJackson2HttpMessageConverter;
+
     @BeforeClass
     public void beforeClass() {
-        mockMvc = MockMvcBuilders.
+        this.mockMvc = MockMvcBuilders.
                 standaloneSetup(
                         countryController,
                         featureController,
@@ -60,7 +65,7 @@ public abstract class AbstractControllerTest extends AbstractTransactionalTestNG
                         tourController,
                         userController
                 ).
-                setMessageConverters(new MappingJackson2HttpMessageConverter(objectMapper)).
+                setMessageConverters(stringHttpMessageConverter, mappingJackson2HttpMessageConverter).
                 alwaysDo(MockMvcResultHandlers.log()).build();
     }
 

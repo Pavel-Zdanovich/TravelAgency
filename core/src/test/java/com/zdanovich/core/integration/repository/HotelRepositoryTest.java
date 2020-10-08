@@ -1,11 +1,12 @@
 package com.zdanovich.core.integration.repository;
 
-import com.zdanovich.core.repository.HotelRepository;
 import com.zdanovich.core.entity.Feature;
 import com.zdanovich.core.entity.Hotel;
 import com.zdanovich.core.entity.metamodel.Hotel_;
+import com.zdanovich.core.repository.HotelRepository;
 import com.zdanovich.core.service.specification.FindHotelByCoordinates;
 import com.zdanovich.core.utils.CoreUtils;
+import org.hibernate.engine.spi.ActionQueue;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -193,12 +194,14 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         expected.setStars(Short.valueOf("5"));
         expected.setLatitude(BigDecimal.valueOf(34.5678901));
         expected.setLongitude(BigDecimal.valueOf(123.4567890));
-        Feature airConditioner = featureRepository.findByName(CoreUtils.AIR_CONDITIONER).orElseThrow(() ->
-                new EntityNotFoundException("Unable to find feature 'air conditioner'"));
-        expected.addFeature(airConditioner);
-        Feature cableTv = featureRepository.findByName(CoreUtils.CABLE_TV).orElseThrow(() ->
-                new EntityNotFoundException("Unable to find feature 'cable TV'"));
-        expected.addFeature(cableTv);
+        Feature airConditioner = featureRepository.findByName(CoreUtils.AIR_CONDITIONER).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
+        expected.getFeatures().add(airConditioner);
+        Feature cableTv = featureRepository.findByName(CoreUtils.CABLE_TV).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'cable TV'"));
+        expected.getFeatures().add(cableTv);
+        /**
+         * duplicate executions in {@link ActionQueue } problem is related to cascade save many-to-one
+         * to resolve - remove bidirectional connect
+         */
 
         Hotel actual = hotelRepository.findByName(expected.getName()).orElse(null);
         Assert.assertNull(actual);
@@ -224,12 +227,14 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         hotel.setStars(Short.valueOf("5"));
         hotel.setLatitude(BigDecimal.valueOf(34.5678901));
         hotel.setLongitude(BigDecimal.valueOf(123.4567890));
-        Feature airConditioner = featureRepository.findByName(CoreUtils.AIR_CONDITIONER).orElseThrow(() ->
-                new EntityNotFoundException("Unable to find feature 'air conditioner'"));
-        hotel.addFeature(airConditioner);
-        Feature cableTv = featureRepository.findByName(CoreUtils.CABLE_TV).orElseThrow(() ->
-                new EntityNotFoundException("Unable to find feature 'cable TV'"));
-        hotel.addFeature(cableTv);
+        Feature airConditioner = featureRepository.findByName(CoreUtils.AIR_CONDITIONER).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'air conditioner'"));
+        hotel.getFeatures().add(airConditioner);
+        Feature cableTv = featureRepository.findByName(CoreUtils.CABLE_TV).orElseThrow(() -> new EntityNotFoundException("Unable to find feature 'cable TV'"));
+        hotel.getFeatures().add((cableTv));
+        /**
+         * duplicate executions in {@link ActionQueue } problem is related to cascade save many-to-one
+         * to resolve - remove bidirectional connect
+         */
 
         Hotel actual = hotelRepository.findByName(hotel.getName()).orElse(null);
         Assert.assertNull(actual);
@@ -242,7 +247,8 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         actual = hotelRepository.findById(hotel.getId()).orElse(null);
         Assert.assertEquals(hotel, actual);
 
-        /**{@link CrudRepository#findById(Object)} synchronized with cache, but
+        /**
+         * {@link CrudRepository#findById(Object)} synchronized with cache, but
          * {@link HotelRepository#findByName(String)} not synchronized and required flush
          */
 
@@ -393,7 +399,7 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
-    public void findAll_With_Sort_ById () {
+    public void findAll_With_Sort_ById() {
         List<Hotel> unsortedHotels = hotelRepository.findAll();
         Assert.assertNotNull(unsortedHotels);
         Assert.assertFalse(unsortedHotels.isEmpty());
@@ -407,7 +413,7 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
-    public void findAll_With_Sort_ByName () {
+    public void findAll_With_Sort_ByName() {
         List<Hotel> unsortedHotels = hotelRepository.findAll();
         Assert.assertNotNull(unsortedHotels);
         Assert.assertFalse(unsortedHotels.isEmpty());
@@ -421,7 +427,7 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
-    public void findAll_With_Sort_ByWebsite () {
+    public void findAll_With_Sort_ByWebsite() {
         List<Hotel> unsortedHotels = hotelRepository.findAll();
         Assert.assertNotNull(unsortedHotels);
         Assert.assertFalse(unsortedHotels.isEmpty());
@@ -435,7 +441,7 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
-    public void findAll_With_Sort_ByStars () {
+    public void findAll_With_Sort_ByStars() {
         List<Hotel> unsortedHotels = hotelRepository.findAll();
         Assert.assertNotNull(unsortedHotels);
         Assert.assertFalse(unsortedHotels.isEmpty());
@@ -449,7 +455,7 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
-    public void findAll_With_Sort_ByLatitude () {
+    public void findAll_With_Sort_ByLatitude() {
         List<Hotel> unsortedHotels = hotelRepository.findAll();
         Assert.assertNotNull(unsortedHotels);
         Assert.assertFalse(unsortedHotels.isEmpty());
@@ -463,7 +469,7 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
-    public void findAll_With_Sort_ByLongitude () {
+    public void findAll_With_Sort_ByLongitude() {
         List<Hotel> unsortedHotels = hotelRepository.findAll();
         Assert.assertNotNull(unsortedHotels);
         Assert.assertFalse(unsortedHotels.isEmpty());
@@ -891,10 +897,10 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         hotel1.setLongitude(BigDecimal.valueOf(123.4567890));
         Feature airConditioner = featureRepository.findByName(CoreUtils.AIR_CONDITIONER).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'air conditioner'"));
-        hotel1.addFeature(airConditioner);
+        hotel1.getFeatures().add(airConditioner);
         Feature cableTv = featureRepository.findByName(CoreUtils.CABLE_TV).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'cable TV'"));
-        hotel1.addFeature(cableTv);
+        hotel1.getFeatures().add(cableTv);
         Hotel hotel2 = new Hotel();
         hotel2.setName("TestHotelName16");
         hotel2.setWebsite("http://www.test-website-16.com");
@@ -903,9 +909,10 @@ public class HotelRepositoryTest extends AbstractRepositoryTest {
         hotel2.setLongitude(BigDecimal.valueOf(123.4567890));
         Feature carRental = featureRepository.findByName(CoreUtils.CAR_RENTAL).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'car rental'"));
-        hotel2.addFeature(carRental);
+        hotel2.getFeatures().add(carRental);
         Feature miniBar = featureRepository.findByName(CoreUtils.MINI_BAR).orElseThrow(() ->
                 new EntityNotFoundException("Unable to find feature 'mini-bar'"));
+        hotel2.getFeatures().add(miniBar);
         List<Hotel> hotels = new ArrayList<>();
         hotels.add(hotel1);
         hotels.add(hotel2);

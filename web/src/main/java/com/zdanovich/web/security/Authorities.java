@@ -54,4 +54,8 @@ public class Authorities {// AuthoritiesMapper, AuthoritiesUtils TODO
     public static Collection<? extends GrantedAuthority> getFor(UserRole userRole) {
         return AUTHORITIES_MAP.getOrDefault(userRole.toString(), AUTHORITIES_MAP.get(GUEST_ROLE));
     }
+
+    public static Collection<? extends GrantedAuthority> getFor(String userRole) {
+        return AUTHORITIES_MAP.getOrDefault(userRole, AUTHORITIES_MAP.get(GUEST_ROLE));
+    }
 }

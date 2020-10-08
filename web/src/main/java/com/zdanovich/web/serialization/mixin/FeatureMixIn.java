@@ -1,7 +1,14 @@
 package com.zdanovich.web.serialization.mixin;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.zdanovich.core.entity.Hotel;
 
-@JsonIgnoreProperties(value = {"hotels"})
+import java.util.Set;
+
+//@JsonIgnoreProperties(value = {"hotels"})
 public class FeatureMixIn {
+
+    @JsonBackReference
+    private Set<Hotel> hotels;
 }

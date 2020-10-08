@@ -1,72 +1,90 @@
 package com.zdanovich.web.service;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.POJONode;
 import com.zdanovich.core.entity.User;
 import com.zdanovich.core.entity.enums.UserRole;
 import com.zdanovich.core.service.impl.UserService;
 import com.zdanovich.core.utils.CoreUtils;
+import com.zdanovich.web.controller.system.AuthController;
 import com.zdanovich.web.security.Authorities;
+import com.zdanovich.web.security.jwt.JsonWebAuthenticationFilter;
 import com.zdanovich.web.security.jwt.JsonWebAuthenticationToken;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationConverter;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
 
 @Component
-@Log4j2
-public class AuthService implements AuthenticationConverter {
+public class AuthService extends DaoAuthenticationProvider {
 
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60 * 1000;
     public static final String TOKEN_HEADER = "JWTOKEN";
     private static final String SECRET = "secret";
 
-    private AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource = new WebAuthenticationDetailsSource();
+    private final AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource;
 
-    @Autowired
-    @Lazy
-    private PasswordEncoder passwordEncoder;
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
-    private UserDetailsService userDetailsService;
-    @Autowired
     private UserService userService;
 
+    private volatile String username;
+    private volatile String password;
+
+    public AuthService(UserDetailsServiceImpl userDetailsService) {
+        super();
+        this.setUserDetailsService(userDetailsService);
+        this.authenticationDetailsSource = new WebAuthenticationDetailsSource();
+    }
+
     @Override
-    public Authentication convert(HttpServletRequest request) {
+    protected Authentication createSuccessAuthentication(Object principal, Authentication authentication, UserDetails user) {
+        logger.info("Authentication success 1");
+        return authentication;
+    }
+
+    public Authentication filter(HttpServletRequest request) {
+        String servletPath = request.getServletPath();
+
+        if ((AuthController.PATH + AuthController.REGISTER).equals(servletPath)) {
+            return register(request);
+        }
+        if ((AuthController.PATH + AuthController.LOGIN).equals(servletPath)) {
+            return login(request);
+        }
+
         String jwtToken = request.getHeader(TOKEN_HEADER);
         if (jwtToken == null) {
             throw new AuthenticationServiceException(String.format("Header '%s' is not found", TOKEN_HEADER));
         } else {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            Jws<Claims> claimsJws = Jwts.parser().
-                    setSigningKey(SECRET).
-                    parseClaimsJws(jwtToken);
+            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(jwtToken);
             Claims claims = claimsJws.getBody();
             String username = claims.getSubject();
-            if (authentication != null) {
+            if (authentication == null) {
+                throw new AuthenticationServiceException("Authentication lost");
+            } else {
                 if (authentication.getName() == null) {
                     throw new AuthenticationServiceException("Authentication lost name");
                 }
@@ -76,69 +94,104 @@ public class AuthService implements AuthenticationConverter {
                 } else {
                     return authentication;
                 }
-            } else {
-                log.error("Authentication is missed");
-                UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-                return generate(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities(), request);
             }
         }
     }
 
     public Authentication register(HttpServletRequest request) {
-        JsonNode jsonNode = obtain(request);
-        String username = jsonNode.findValue(CoreUtils.USERNAME).asText();
-        String password = jsonNode.findValue(CoreUtils.PASSWORD).asText();
-        if (this.userService.findByLogin(username).isPresent()) {
-            throw new AuthenticationServiceException(String.format("User '%s' is already registered", username));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null && request.getAttribute(JsonWebAuthenticationFilter.ALREADY_FILTERED_ATTR_NAME) == null) {
+            this.obtain(request);
+            if (this.userService.findByLogin(username).isPresent()) {
+                throw new AuthenticationServiceException(String.format("User '%s' is already registered", username));
+            }
+            User user = save(username, password);
+            authentication = generate(username, password, Authorities.getFor(user.getRole()), request);
+            return this.authenticate(authentication);
+        } else {
+            return handleAuthentication(request, authentication, username, password);
         }
-        User user = new User();
-        user.setLogin(username);
-        user.setPassword(this.passwordEncoder.encode(password));
-        user.setRole(UserRole.USER);
-        this.userService.save(user);
-        return generate(username, password, Authorities.getFor(UserRole.USER), request);
     }
 
     public Authentication login(HttpServletRequest request) {
-        JsonNode jsonNode = obtain(request);
-        String username = jsonNode.findValue(CoreUtils.USERNAME).asText();
-        String password = jsonNode.findValue(CoreUtils.PASSWORD).asText();
-        UserDetails userDetails = checkInMemory(username, password);
-        return generate(username, password, userDetails.getAuthorities(), request);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null && request.getAttribute(JsonWebAuthenticationFilter.ALREADY_FILTERED_ATTR_NAME) == null) {
+            this.obtain(request);
+            authentication = generate(username, password, Authorities.getFor(UserRole.USER), request);
+            return this.authenticate(authentication);
+        } else {
+            return handleAuthentication(request, authentication, username, password);
+        }
     }
 
-    private JsonNode obtain(HttpServletRequest request) {
+    private Authentication handleAuthentication(HttpServletRequest request, Authentication authentication, String username, String password) {
+        if (authentication instanceof AnonymousAuthenticationToken) {
+            logger.info(String.format("Anonymous '%s' is going authorize", authentication.getName()));
+            authentication = generate(username, password, Authorities.getFor(UserRole.USER), request);
+            return this.authenticate(authentication);
+        }
+        if (authentication instanceof UsernamePasswordAuthenticationToken) {
+            logger.info("Authentication has already been done");
+            if (authentication.getName().equals(username)) {
+                if (authentication.getCredentials().equals(password)) {
+                    logger.info(String.format("Authentication has already been done, login as '%s' with a password '%s'", username, password));
+                    return authentication;
+                } else {
+                    throw new BadCredentialsException(messages.getMessage(
+                            "AbstractUserDetailsAuthenticationProvider.badCredentials",
+                            "Bad credentials"));
+                }
+            } else {
+                throw new UsernameNotFoundException(String.format("User '%s' is authorized, an attempt to login as '%s' with a password '%s'",
+                        authentication.getName(), username, password));
+            }
+
+        }
+
+        throw new AuthenticationServiceException(String.format("Unknown authentication: %s", authentication));
+    }
+
+    private void obtain(HttpServletRequest request) {
         try {
-            return this.objectMapper.readTree(request.getReader());
+            Map<String, String> map = this.objectMapper.readValue(request.getReader(), objectMapper.getTypeFactory().constructMapType(Map.class, String.class, String.class));
+            username = map.get(CoreUtils.USERNAME);
+            password = map.get(CoreUtils.PASSWORD);
         } catch (IOException e) {
-            log.error("Error occurred during finding '%s' in the request");
+            String error = "Error occurred during parse request body";
+            logger.error(error);
+            throw new AuthenticationServiceException(error, e);
         }
-        return new POJONode(null);
     }
 
-    private UserDetails checkInMemory(String username, String password) {
-        UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-        if (!this.passwordEncoder.matches(password, userDetails.getPassword())) {
-            throw new BadCredentialsException(String.format("Wrong password = '%s' for user '%s'", username, password));
+    private User save(String username, String password) {
+        try {
+            User user = new User();
+            user.setLogin(username);
+            user.setPassword(this.getPasswordEncoder().encode(password));
+            user.setRole(UserRole.USER);
+            return this.userService.save(user);
+        } catch (Exception e) {
+            String error = String.format("Registration of user '%s' failed due to: %s", username, e.getMessage());
+            logger.error(error);
+            throw new AuthenticationServiceException(error, e);
         }
-        return userDetails;
     }
 
     private Authentication generate(String username, String password, Collection<? extends GrantedAuthority> authorities, HttpServletRequest request) {
-        JsonWebAuthenticationToken authentication = new JsonWebAuthenticationToken(username, password, generateToken(username), authorities);
-        authentication.setDetails(this.authenticationDetailsSource.buildDetails(request));
-        return authentication;
+        JsonWebAuthenticationToken authenticationToken = new JsonWebAuthenticationToken(username, password, authorities, generateToken(username));
+        authenticationToken.setDetails(this.authenticationDetailsSource.buildDetails(request));
+        return authenticationToken;
     }
 
     private String generateToken(String username) {
-        return Jwts.
-                builder().
-                //setClaims(Jwts.claims()).
-                setSubject(username).
-                //setHeaderParam(Utils.PASSWORD, password).
-                setIssuedAt(new Date()).
-                //setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY)).
-                signWith(SignatureAlgorithm.HS512, SECRET).
-                compact();
+        return Jwts
+                .builder()
+                //.setClaims(Jwts.claims())
+                .setSubject(username)
+                //.setHeaderParam(Utils.PASSWORD, password)
+                .setIssuedAt(new Date())
+                //.setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY))
+                .signWith(SignatureAlgorithm.HS512, SECRET)
+                .compact();
     }
 }

@@ -58,7 +58,6 @@ public class User extends AbstractEntity {
     @Column(name = PASSWORD, nullable = false, length = 100)
     @NotNull(message = "{user.password.notNull}")
     @Size(min = 5, max = 100, message = "{user.password.size}")
-    @Pattern(regexp = ONE_WORD_REGEX, message = "{user.password.pattern}")
     @Getter
     @Setter
     private String password;

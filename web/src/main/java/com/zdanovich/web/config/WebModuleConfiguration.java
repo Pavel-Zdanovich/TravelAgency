@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.ConfigurableEnvironment;
 
-import java.io.FileNotFoundException;
+import javax.el.PropertyNotFoundException;
 import java.util.Properties;
 
 @Configuration
@@ -22,7 +22,11 @@ public class WebModuleConfiguration {
 
     @Bean
     @Autowired
-    public Properties webProperties(ConfigurableEnvironment environment) throws FileNotFoundException {
-        return CoreUtils.getPropertiesOutOf(environment, PROPERTY_SOURCE_NAME);
+    public Properties webProperties(ConfigurableEnvironment environment) {
+        Properties properties = CoreUtils.getPropertiesOutOf(environment, PROPERTY_SOURCE_NAME);
+        if (properties == null) {
+            throw new PropertyNotFoundException(String.format("Can't find properties file: %s", PROPERTY_SOURCE_NAME));
+        }
+        return properties;
     }
 }

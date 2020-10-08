@@ -3,6 +3,7 @@ package com.zdanovich.web.integration.serialization;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zdanovich.core.entity.enums.UserRole;
+import com.zdanovich.web.config.WebModuleConfiguration;
 import com.zdanovich.web.security.Authorities;
 import com.zdanovich.web.serialization.SerializationConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.math.BigDecimal;
 import java.util.Collection;
 
 @Test
-@ContextConfiguration(classes = SerializationConfiguration.class)
+@ContextConfiguration(classes = {WebModuleConfiguration.class, SerializationConfiguration.class})
 @WebAppConfiguration
 public class SerializationTest extends AbstractTestNGSpringContextTests {
 

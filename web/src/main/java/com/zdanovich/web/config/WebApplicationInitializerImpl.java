@@ -16,15 +16,6 @@ public class WebApplicationInitializerImpl implements WebApplicationInitializer 
         AnnotationConfigWebApplicationContext webApplicationContext = new AnnotationConfigWebApplicationContext();
 
         webApplicationContext.register(CoreModuleConfiguration.class, WebModuleConfiguration.class);
-        webApplicationContext.register(org.springdoc.webmvc.ui.SwaggerConfig.class,
-                org.springdoc.core.SpringDocConfiguration.class,
-                org.springdoc.core.SpringDocConfigProperties.class,
-                org.springdoc.core.SwaggerUiConfigParameters.class,
-                org.springdoc.core.SwaggerUiConfigProperties.class,
-                org.springdoc.core.SwaggerUiOAuthProperties.class,
-                org.springdoc.webmvc.core.SpringDocWebMvcConfiguration.class,
-                org.springdoc.webmvc.core.MultipleOpenApiSupportConfiguration.class,
-                org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration.class);
 
         servletContext.addListener(new ContextLoaderListener(webApplicationContext));
 

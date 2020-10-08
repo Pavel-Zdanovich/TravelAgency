@@ -1,8 +1,7 @@
 package com.zdanovich.core.integration.database;
 
 import com.zdanovich.core.config.CoreModuleConfiguration;
-import com.zdanovich.core.config.MigrationConfiguration;
-import com.zdanovich.core.config.PersistenceConfiguration;
+import com.zdanovich.core.config.MigrationCondition;
 import com.zdanovich.core.entity.Country;
 import com.zdanovich.core.entity.Feature;
 import com.zdanovich.core.entity.Hotel;
@@ -12,6 +11,7 @@ import com.zdanovich.core.entity.User;
 import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -27,6 +27,7 @@ import java.sql.Statement;
 
 @Test
 @ContextConfiguration(classes = CoreModuleConfiguration.class)
+@TestPropertySource(properties = {MigrationCondition.CONDITION_KEY + "=true"})
 public class MigrationTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
@@ -51,13 +52,13 @@ public class MigrationTest extends AbstractTestNGSpringContextTests {
 
     @DataProvider(name = "tableNameDataProvider")
     public Object[][] createData1() {
-        return new Object[][] {
-                { Country.COUNTRIES },
-                { Feature.FEATURES },
-                { Hotel.HOTELS },
-                { Review.REVIEWS },
-                { Tour.TOURS },
-                { User.USERS }
+        return new Object[][]{
+                {Country.COUNTRIES},
+                {Feature.FEATURES},
+                {Hotel.HOTELS},
+                {Review.REVIEWS},
+                {Tour.TOURS},
+                {User.USERS}
         };
     }
 

@@ -1,12 +1,10 @@
 package com.zdanovich.core.utils;
 
-import org.springframework.core.env.CompositePropertySource;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MutablePropertySources;
 import org.springframework.core.env.PropertySource;
-import org.springframework.core.io.support.ResourcePropertySource;
 
-import java.io.FileNotFoundException;
+import java.util.Map;
 import java.util.Properties;
 
 public class CoreUtils {
@@ -37,21 +35,27 @@ public class CoreUtils {
 
     public static final String EMPTY_STRING = "";
 
-    private CoreUtils() {}
-
-    public static PropertySource<?> getPropertySourceOutOf(ConfigurableEnvironment environment, String propertySourceName) throws FileNotFoundException {
-        MutablePropertySources mutablePropertySources = environment.getPropertySources();
-        PropertySource<?> propertySource = mutablePropertySources.get(propertySourceName);
-        if (propertySource == null) {
-            throw new FileNotFoundException(String.format("Can't find properties file: %s", propertySourceName));
-        }
-        return propertySource;
+    private CoreUtils() {
     }
 
-    public static Properties getPropertiesOutOf(ConfigurableEnvironment environment, String propertySourceName) throws FileNotFoundException {
-        Properties properties = new Properties();
-        PropertySource<?> propertySource = getPropertySourceOutOf(environment, propertySourceName);
-        if (propertySource instanceof CompositePropertySource) {
+    public static Properties getPropertiesOutOf(ConfigurableEnvironment environment, String propertySourceName) {
+        MutablePropertySources mutablePropertySources = environment.getPropertySources();
+        if (mutablePropertySources == null) {
+            return null;
+        }
+        PropertySource<?> propertySource = mutablePropertySources.get(propertySourceName);
+        if (propertySource == null) {
+            return null;
+        }
+        Map<String, Object> source = (Map<String, Object>) propertySource.getSource();
+        if (source == null) {
+            return null;
+        } else {
+            Properties properties = new Properties();
+            properties.putAll(source);
+            return properties;
+        }
+        /*if (propertySource instanceof CompositePropertySource) {
             CompositePropertySource compositePropertySource = (CompositePropertySource) propertySource;
             propertySource = compositePropertySource.getPropertySources().stream()
                     .filter(source -> source.getName().equals(propertySourceName))
@@ -62,7 +66,9 @@ public class CoreUtils {
             ResourcePropertySource resourcePropertySource = (ResourcePropertySource) propertySource;
             resourcePropertySource.getSource().forEach((key, value) -> properties.setProperty(key, String.valueOf(value)));
         }
-        return properties;
+        if (propertySource instanceof MapPropertySource) {
+            MapPropertySource mapPropertySource = (MapPropertySource) propertySource;
+        }*/
     }
 
     public static String absoluteToClasspath(String absolutePath) {

@@ -1,12 +1,9 @@
 package com.zdanovich.web.controller.system;
 
-import com.zdanovich.web.security.jwt.JsonWebAuthenticationToken;
 import com.zdanovich.web.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,42 +21,14 @@ public class AuthController {
 
     @Autowired
     private AuthService authService;
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
     @PostMapping(path = AuthController.REGISTER)
-    public ResponseEntity<JsonWebAuthenticationToken> register(HttpServletRequest request) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null) {
-            authentication = this.authService.register(request);
-            authentication = this.authenticationManager.authenticate(authentication);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            //JsonWebAuthenticationToken jsonWebAuthenticationToken = (JsonWebAuthenticationToken) authentication;
-            //HttpHeaders headers = new HttpHeaders();
-            //headers.set(AuthService.TOKEN_HEADER, jsonWebAuthenticationToken.getToken());
-
-            return ResponseEntity.ok((JsonWebAuthenticationToken) authentication);
-        } else {
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<Authentication> register(HttpServletRequest request) {
+        return ResponseEntity.ok(this.authService.register(request));
     }
 
     @PostMapping(path = AuthController.LOGIN)
-    public ResponseEntity<JsonWebAuthenticationToken> login(HttpServletRequest request) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null) {
-            authentication = this.authService.login(request);
-            authentication = this.authenticationManager.authenticate(authentication);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            //JsonWebAuthenticationToken jsonWebAuthenticationToken = (JsonWebAuthenticationToken) authentication;
-            //HttpHeaders headers = new HttpHeaders();
-            //headers.set(AuthService.TOKEN_HEADER, jsonWebAuthenticationToken.getToken());
-
-            return ResponseEntity.ok((JsonWebAuthenticationToken) authentication);
-        } else {
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<Authentication> login(HttpServletRequest request) {
+        return ResponseEntity.ok(this.authService.login(request));
     }
 }

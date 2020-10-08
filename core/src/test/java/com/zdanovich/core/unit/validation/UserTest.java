@@ -15,7 +15,7 @@ import java.util.Set;
 public class UserTest extends ValidationTest {
 
     public static final String VALID_USER_LOGIN = "ValidUserLogin123";
-    public static final String VALID_USER_PASSWORD = "ValidUserPassword123";
+    public static final String VALID_USER_PASSWORD = "ValidUserPassword123";//{bcrypt}$2a$10$0YrcSdpdZShTwBtBmSAKy.eHkPyN8cukY1NI2pB7cpm0RFb06jjRC
     public static final UserRole VALID_USER_ROLE = UserRole.USER;
 
     @Test
@@ -80,19 +80,6 @@ public class UserTest extends ValidationTest {
         for (ConstraintViolation<User> constraintViolation : constraintViolations) {
             Assert.assertEquals(resourceBundle.getString("user.password.size").replaceAll(INTERPOLATE_REGEX, CoreUtils.EMPTY_STRING),
                     constraintViolation.getMessage().replaceAll(NUMBER_REGEX, CoreUtils.EMPTY_STRING));
-        }
-    }
-
-    @Test
-    public void testValidation_User_Password_Pattern() {
-        User user = new User();
-        user.setLogin(VALID_USER_LOGIN);
-        user.setPassword("Invalid User Password");
-        user.setRole(VALID_USER_ROLE);
-        Set<ConstraintViolation<User>> constraintViolations = validator.validate(user);
-        Assert.assertEquals(1, constraintViolations.size());
-        for (ConstraintViolation<User> constraintViolation : constraintViolations) {
-            Assert.assertEquals(resourceBundle.getString("user.password.pattern"), constraintViolation.getMessage());
         }
     }
 
