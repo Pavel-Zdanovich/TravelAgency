@@ -1,14 +1,18 @@
 package com.zdanovich.web.openapi;
 
+import com.zdanovich.core.entity.User;
+import com.zdanovich.core.utils.CoreUtils;
 import com.zdanovich.web.controller.system.AuthController;
 import com.zdanovich.web.utils.WebUtils;
-import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.License;
-import io.swagger.v3.oas.models.security.OAuthFlow;
-import io.swagger.v3.oas.models.security.OAuthFlows;
-import io.swagger.v3.oas.models.security.Scopes;
+import io.swagger.v3.oas.models.media.Content;
+import io.swagger.v3.oas.models.media.MediaType;
+import io.swagger.v3.oas.models.media.ObjectSchema;
+import io.swagger.v3.oas.models.media.Schema;
+import io.swagger.v3.oas.models.media.StringSchema;
+import io.swagger.v3.oas.models.parameters.RequestBody;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springdoc.core.customizers.OpenApiCustomiser;
@@ -25,10 +29,7 @@ import java.util.List;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan(basePackages = {
-        "org.springdoc",
-        "org.springframework.boot.autoconfigure.jackson"
-})
+@ComponentScan(basePackages = {"org.springdoc", "org.springframework.boot.autoconfigure.jackson"})
 public class OpenAPIConfiguration {
 
     public static final String OPEN_API_PATH = "/v3/api-docs";
@@ -39,17 +40,45 @@ public class OpenAPIConfiguration {
 
     @Bean
     @Autowired
-    public OpenApiCustomiser openApiCustomiser(Contact contact, License license, Components components, List<SecurityRequirement> securityRequirements) {
+    public OpenApiCustomiser openApiCustomiser(Contact contact, License license, RequestBody requestBody, SecurityScheme securityScheme,
+                                               List<SecurityRequirement> securityRequirements) {
         return new OpenApiCustomiser() {
             @Override
             public void customise(OpenAPI openApi) {
                 openApi.getInfo()
+                        .title(webProperties.getProperty(WebUtils.OPEN_API_INFO_TITLE))
+                        .description(webProperties.getProperty(WebUtils.OPEN_API_INFO_DESCRIPTION))
                         .termsOfService(webProperties.getProperty(WebUtils.OPEN_API_INFO_TERMS_OF_SERVICE))
                         .contact(contact)
-                        .license(license);
+                        .license(license)
+                        .version(webProperties.getProperty(WebUtils.OPEN_API_INFO_VERSION));
 
-                openApi.components(components)
-                        .security(securityRequirements);
+                openApi.getPaths().forEach((path, pathItem) -> {
+                    pathItem.readOperations().forEach(operation -> {
+                        operation.setSecurity(securityRequirements);
+                        if (operation.getParameters() != null) {
+                            operation.getParameters().forEach(parameter -> {
+                                if (parameter != null) {
+                                    parameter.setRequired(Boolean.FALSE);
+                                }
+                            });
+                        }
+                    });
+                });
+
+                openApi.getPaths()
+                        .get(AuthController.PATH + AuthController.LOGIN)
+                        .getPost()
+                        .security(null)
+                        .setRequestBody(requestBody);
+                openApi.getPaths()
+                        .get(AuthController.PATH + AuthController.REGISTER)
+                        .getPost()
+                        .security(null)
+                        .setRequestBody(requestBody);//TODO remove username and password example
+
+                openApi.getComponents()
+                        .addSecuritySchemes(webProperties.getProperty(WebUtils.OPEN_API_SECURITY_SCHEMA), securityScheme);
             }
         };
     }
@@ -72,54 +101,55 @@ public class OpenAPIConfiguration {
     }
 
     @Bean
-    @Autowired
-    public Components components(SecurityScheme securityScheme) {
-        Components components = new Components();
-        components.addSecuritySchemes("json web token", securityScheme);
-        return components;
+    public RequestBody requestBody() {
+        RequestBody requestBody = new RequestBody();
+        requestBody.setDescription("Authentication request body");
+
+        Content content = new Content();
+
+        MediaType mediaType = new MediaType();
+
+        Schema<Object> authenticationSchema = new ObjectSchema();
+        authenticationSchema.addRequiredItem(CoreUtils.USERNAME);
+        authenticationSchema.addRequiredItem(CoreUtils.PASSWORD);
+
+        Schema<String> usernameSchema = new StringSchema();
+        usernameSchema.maxLength(30);
+        usernameSchema.minLength(5);
+        usernameSchema.setPattern(User.ONE_WORD_REGEX);
+        usernameSchema.setExample("ElonMusk");
+        authenticationSchema.addProperties(CoreUtils.USERNAME, usernameSchema);
+
+        Schema<String> passwordSchema = new StringSchema();
+        passwordSchema.maxLength(100);
+        passwordSchema.minLength(5);
+        passwordSchema.setExample("SpaceXXX");
+        authenticationSchema.addProperties(CoreUtils.PASSWORD, passwordSchema);
+
+        mediaType.setSchema(authenticationSchema);
+
+        content.addMediaType(org.springframework.http.MediaType.APPLICATION_JSON_VALUE, mediaType);
+
+        requestBody.setContent(content);
+
+        requestBody.setRequired(Boolean.TRUE);
+        return requestBody;
     }
 
     @Bean
-    @Autowired
-    public SecurityScheme securityScheme(OAuthFlows oAuthFlows) {
+    public SecurityScheme securityScheme() {
         SecurityScheme securityScheme = new SecurityScheme();
-        securityScheme.set$ref("$ref");
-        securityScheme.setBearerFormat("bearer format");
-        securityScheme.setDescription("description");
-
-        securityScheme.setFlows(oAuthFlows);
-
-        securityScheme.setName("security scheme name");
+        securityScheme.setType(SecurityScheme.Type.APIKEY);
+        securityScheme.setName(webProperties.getProperty(WebUtils.JWT_HEADER_NAME));
         securityScheme.setIn(SecurityScheme.In.HEADER);
-        securityScheme.setOpenIdConnectUrl("open id connect url");
-        securityScheme.setScheme("security scheme scheme");
-        securityScheme.setType(SecurityScheme.Type.OAUTH2);
         return securityScheme;
-    }
-
-    @Bean
-    public OAuthFlows oAuthFlows() {
-        OAuthFlows oAuthFlows = new OAuthFlows();
-
-        OAuthFlow oAuthFlow = new OAuthFlow();
-        oAuthFlow.setAuthorizationUrl(AuthController.PATH + AuthController.LOGIN);
-        oAuthFlow.setRefreshUrl("refresh url");
-        oAuthFlow.setScopes(new Scopes()
-                .addString("create", "access to create")
-                .addString("read", "access to read")
-                .addString("update", "access to update")
-                .addString("delete", "access to delete"));
-        oAuthFlow.setTokenUrl("token url");
-
-        oAuthFlows.authorizationCode(oAuthFlow);
-        return oAuthFlows;
     }
 
     @Bean
     public List<SecurityRequirement> securityRequirements() {
         List<SecurityRequirement> securityRequirements = new ArrayList<>();
         SecurityRequirement securityRequirement = new SecurityRequirement();
-        securityRequirement.addList("JWTSecurity", "read");
+        securityRequirement.addList(webProperties.getProperty(WebUtils.OPEN_API_SECURITY_SCHEMA));
         securityRequirements.add(securityRequirement);
         return securityRequirements;
     }

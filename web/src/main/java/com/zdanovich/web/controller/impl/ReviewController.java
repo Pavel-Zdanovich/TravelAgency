@@ -51,11 +51,11 @@ public class ReviewController extends AbstractController<Review, Long, ReviewRep
         return ResponseEntity.ok(service.findByReviewText(text));
     }
 
-    @GetMapping(params = "user, tour")
+    @GetMapping(params = "user_id, tour_id")
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
     public ResponseEntity<Iterable<Review>> findByUserAndTour(
-            @RequestParam(required = false) Long userId,
-            @RequestParam(required = false) Long tourId) {
+            @RequestParam(name = "user_id") Long userId,
+            @RequestParam(name = "tour_id") Long tourId) {
 
         List<Review> reviews = new ArrayList<>();
 

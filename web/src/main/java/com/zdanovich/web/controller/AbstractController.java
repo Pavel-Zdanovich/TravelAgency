@@ -61,18 +61,6 @@ public abstract class AbstractController<E extends AbstractEntity, ID extends Se
     }
 
     @Override
-    @DeleteMapping
-    @PreAuthorize(value = "hasAuthority('" + Authorities.DELETE_PRIVILEGE + "')")
-    public ResponseEntity<E> delete(@RequestBody E entity) {
-        if (this.service.existsById((ID) entity.getId())) {
-            this.service.delete(entity);
-            return ResponseEntity.ok(entity);
-        } else {
-            return new ResponseEntity<>(entity, HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @Override
     @DeleteMapping(params = "id")
     @PreAuthorize(value = "hasAuthority('" + Authorities.DELETE_PRIVILEGE + "')")
     public ResponseEntity<E> deleteById(@RequestParam ID id) {

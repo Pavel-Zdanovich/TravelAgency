@@ -18,8 +18,5 @@ public interface CommonController<E extends AbstractEntity, ID extends Serializa
 
     ResponseEntity<E> update(E entity);
 
-    ResponseEntity<E> delete(E entity);
-
     ResponseEntity<E> deleteById(ID entityId);
-
 }

@@ -9,7 +9,9 @@ import com.zdanovich.web.controller.system.AuthController;
 import com.zdanovich.web.security.Authorities;
 import com.zdanovich.web.security.jwt.JsonWebAuthenticationFilter;
 import com.zdanovich.web.security.jwt.JsonWebAuthenticationToken;
+import com.zdanovich.web.utils.WebUtils;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -24,26 +26,24 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Map;
+import java.util.Properties;
 
 @Component
 public class AuthService extends DaoAuthenticationProvider {
 
-    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60 * 1000;
-    public static final String TOKEN_HEADER = "JWTOKEN";
-    private static final String SECRET = "secret";
+    private final AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource = new WebAuthenticationDetailsSource();
 
-    private final AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource;
-
+    @Autowired
+    private Properties webProperties;
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
@@ -52,10 +52,10 @@ public class AuthService extends DaoAuthenticationProvider {
     private volatile String username;
     private volatile String password;
 
-    public AuthService(UserDetailsServiceImpl userDetailsService) {
-        super();
-        this.setUserDetailsService(userDetailsService);
-        this.authenticationDetailsSource = new WebAuthenticationDetailsSource();
+    @Override
+    @Autowired
+    public void setUserDetailsService(UserDetailsService userDetailsService) {
+        super.setUserDetailsService(userDetailsService);
     }
 
     @Override
@@ -74,12 +74,12 @@ public class AuthService extends DaoAuthenticationProvider {
             return login(request);
         }
 
-        String jwtToken = request.getHeader(TOKEN_HEADER);
+        String jwtToken = request.getHeader(webProperties.getProperty(WebUtils.JWT_HEADER_NAME));
         if (jwtToken == null) {
-            throw new AuthenticationServiceException(String.format("Header '%s' is not found", TOKEN_HEADER));
+            throw new AuthenticationServiceException(String.format("Header '%s' is not found", webProperties.getProperty(WebUtils.JWT_HEADER_NAME)));
         } else {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(jwtToken);
+            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(webProperties.getProperty(WebUtils.JWT_SERVICE_SECRET)).parseClaimsJws(jwtToken);
             Claims claims = claimsJws.getBody();
             String username = claims.getSubject();
             if (authentication == null) {
@@ -184,14 +184,13 @@ public class AuthService extends DaoAuthenticationProvider {
     }
 
     private String generateToken(String username) {
-        return Jwts
-                .builder()
-                //.setClaims(Jwts.claims())
+        return Jwts.builder()
+                //header
+                .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
+                //payload|claim
                 .setSubject(username)
-                //.setHeaderParam(Utils.PASSWORD, password)
-                .setIssuedAt(new Date())
-                //.setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY))
-                .signWith(SignatureAlgorithm.HS512, SECRET)
+                //signature
+                .signWith(SignatureAlgorithm.HS512, webProperties.getProperty(WebUtils.JWT_SERVICE_SECRET))
                 .compact();
     }
 }
