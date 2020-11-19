@@ -1,7 +1,12 @@
 package com.zdanovich.core.integration.repository;
 
+import com.zdanovich.core.entity.Country;
+import com.zdanovich.core.entity.Hotel;
 import com.zdanovich.core.entity.Tour;
+import com.zdanovich.core.entity.User;
 import com.zdanovich.core.entity.enums.TourType;
+import com.zdanovich.core.entity.enums.UserRole;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -14,22 +19,117 @@ public class TourRepositoryTest extends AbstractRepositoryTest {
 
     @Test
     public void save_Without_Hotel_Country_And_User() {
+        Tour expected = new Tour();
+        expected.setPhotoPath("src/main/resources/oracle.properties");
+        expected.setStartDate(Timestamp.valueOf("2021-01-01 00:00:00"));
+        expected.setEndDate(Timestamp.valueOf("2021-01-02 00:00:00"));
+        expected.setDescription("TestTourDescription1");
+        expected.setCost(BigDecimal.valueOf(100.0000));
+        expected.setTourType(TourType.ECOTOURISM);
+        //expected.addUser();
+        //expected.setHotel();
+        //expected.setCountry();
 
+        Tour actual = tourRepository.findByDescription(expected.getDescription()).stream().findAny().orElse(null);
+        Assert.assertNull(actual);
+
+        Tour savedTour = tourRepository.save(expected);
+        Assert.assertNotNull(savedTour);
+        expected.setId(savedTour.getId());
+        Assert.assertEquals(expected, savedTour);
+
+        actual = tourRepository.findById(expected.getId()).orElse(null);
+        Assert.assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expectedExceptions = InvalidDataAccessApiUsageException.class)
     public void save_With_Detached_Hotel_Country_And_User() {
+        Tour expected = new Tour();
+        expected.setPhotoPath("src/main/resources/oracle.properties");
+        expected.setStartDate(Timestamp.valueOf("2021-01-01 00:00:00"));
+        expected.setEndDate(Timestamp.valueOf("2021-01-02 00:00:00"));
+        expected.setDescription("TestTourDescription2");
+        expected.setCost(BigDecimal.valueOf(100.0000));
+        expected.setTourType(TourType.ECOTOURISM);
+        expected.addUser(elonMusk);
+        expected.setHotel(cromlixHotel);
+        expected.setCountry(france);
 
+        Tour actual = tourRepository.findByDescription(expected.getDescription()).stream().findAny().orElse(null);
+        Assert.assertNull(actual);
+
+        Tour savedTour = tourRepository.save(expected);
+        Assert.assertNotNull(savedTour);
+        expected.setId(savedTour.getId());
+        Assert.assertEquals(expected, savedTour);
+
+        actual = tourRepository.findById(expected.getId()).orElse(null);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void save_With_Attached_Hotel_Country_And_User() {
+        Tour expected = new Tour();
+        expected.setPhotoPath("src/main/resources/oracle.properties");
+        expected.setStartDate(Timestamp.valueOf("2021-01-01 00:00:00"));
+        expected.setEndDate(Timestamp.valueOf("2021-01-02 00:00:00"));
+        expected.setDescription("TestTourDescription3");
+        expected.setCost(BigDecimal.valueOf(100.0000));
+        expected.setTourType(TourType.ECOTOURISM);
+        User user = userRepository.findById(1L).orElse(null);
+        expected.addUser(user);
+        Hotel hotel = hotelRepository.findById(1L).orElse(null);
+        expected.setHotel(hotel);
+        Country country = countryRepository.findById(1L).orElse(null);
+        expected.setCountry(country);
 
+        Tour actual = tourRepository.findByDescription(expected.getDescription()).stream().findAny().orElse(null);
+        Assert.assertNull(actual);
+
+        Tour savedTour = tourRepository.save(expected);
+        Assert.assertNotNull(savedTour);
+        expected.setId(savedTour.getId());
+        Assert.assertEquals(expected, savedTour);
+
+        actual = tourRepository.findById(expected.getId()).orElse(null);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void save_With_New_Hotel_Country_And_User() {
+        Tour expected = new Tour();
+        expected.setPhotoPath("src/main/resources/oracle.properties");
+        expected.setStartDate(Timestamp.valueOf("2021-01-01 00:00:00"));
+        expected.setEndDate(Timestamp.valueOf("2021-01-02 00:00:00"));
+        expected.setDescription("TestTourDescription1");
+        expected.setCost(BigDecimal.valueOf(100.0000));
+        expected.setTourType(TourType.ECOTOURISM);
+        User user = new User();
+        user.setLogin("TestUserLogin");
+        user.setPassword("TestUserPassword");
+        user.setRole(UserRole.USER);
+        expected.addUser(user);
+        Hotel hotel = new Hotel();
+        hotel.setName("TestHotelName");
+        hotel.setStars(Short.valueOf("5"));
+        hotel.setWebsite("http://www.test-website.com");
+        hotel.setLatitude(BigDecimal.valueOf(12.3456789));
+        hotel.setLongitude(BigDecimal.valueOf(123.4567890));
+        expected.setHotel(hotel);
+        Country country = new Country();
+        country.setName("TestCountryName");
+        expected.setCountry(country);
 
+        Tour actual = tourRepository.findByStartDateAndEndDate(expected.getStartDate(), expected.getEndDate()).stream().findAny().orElse(null);
+        Assert.assertNull(actual);
+
+        Tour savedTour = tourRepository.save(expected);
+        Assert.assertNotNull(savedTour);
+        expected.setId(savedTour.getId());
+        Assert.assertEquals(expected, savedTour);
+
+        actual = tourRepository.findById(expected.getId()).orElse(null);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -178,7 +278,7 @@ public class TourRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
-    public void findAll_With_Sort () {
+    public void findAll_With_Sort() {
     }
 
     @Test

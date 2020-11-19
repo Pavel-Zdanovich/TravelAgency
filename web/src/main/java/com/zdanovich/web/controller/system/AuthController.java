@@ -31,4 +31,9 @@ public class AuthController {
     public ResponseEntity<Authentication> login(HttpServletRequest request) {
         return ResponseEntity.ok(this.authService.login(request));
     }
+
+    @RequestMapping(path = AuthController.LOGOUT)
+    public ResponseEntity<?> logout() {
+        return ResponseEntity.ok("Log out success");
+    }
 }

@@ -1,0 +1,11 @@
+.aside {
+    grid-area: left_bar;
+    justify-content: space-evenly; /*make search in center*/
+    align-items: center; /*vertical center for header*/
+    align-self: center;
+}
+
+.form {
+    display: grid;
+    justify-items: center;
+}

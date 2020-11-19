@@ -91,7 +91,7 @@ public class UserTest extends ValidationTest {
         user.setRole(VALID_USER_ROLE);
         Method addTour = User.class.getMethod("addTour", Tour.class);
         Method removeTour = User.class.getMethod("removeTour", Tour.class);
-        Object[] objects = { null };
+        Object[] objects = {null};
         ExecutableValidator executableValidator = validator.forExecutables();
         Set<ConstraintViolation<User>> constraintViolations = executableValidator.validateParameters(user, addTour, objects);
         constraintViolations.addAll(executableValidator.validateParameters(user, removeTour, objects));

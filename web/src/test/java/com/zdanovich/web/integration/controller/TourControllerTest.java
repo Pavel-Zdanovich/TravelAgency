@@ -101,7 +101,7 @@ public class TourControllerTest extends AbstractControllerTest {
         List<Tour> tours = objectMapper.readerForListOf(Tour.class).readValue(mvcResult.getResponse().getContentAsString());
         Assert.assertNotNull(tours);
         Assert.assertTrue(tours.stream().allMatch(tour -> Period.between(tour.getStartDate().toLocalDateTime().toLocalDate(),
-                        tour.getEndDate().toLocalDateTime().toLocalDate()).getDays() == period.getDays()));
+                tour.getEndDate().toLocalDateTime().toLocalDate()).getDays() == period.getDays()));
     }
 
     @Test

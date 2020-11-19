@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Web site created using create-react-app"/>
+        <title>TravelAgency</title>
+        <link rel="stylesheet" href="styles.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+    </head>
+    <body>
+        <header id="header">
+            <label id="title">TravelAgency</label>
+            <form id="search_form" action="layout.pdf" method="post">
+                <label for="search_input">SEARCH</label>
+                <input id="search_input" type="search" placeholder="SEARCH">
+            </form>
+            <div id="system">
+                <div id="l10n">L10N</div>
+                <div id="profile">PROFILE</div>
+                <div id="auth">AUTH</div>
+            </div>
+        </header>
+
+        <aside id="left_bar">
+            <form id="select_form" action="layout.pdf" method="post">
+                <label for="select_start_date">START DATE</label>
+                <input id="select_start_date" type="datetime-local">
+
+                <label for="select_end_date">END DATE</label>
+                <input id="select_end_date" type="datetime-local">
+
+                <label for="select_cost">COST</label>
+                <input id="select_cost" type="range" min="1" max="100">
+
+                <label for="select_stars">STARS</label>
+                <input id="select_stars" type="range" min="1" max="5">
+
+                <label for="select_features">FEATURES</label>
+                <select id="select_features" multiple>
+                    <option value="air conditioner" data-badge="">air conditioner</option>
+                    <option value="cable TV" data-badge="">cable TV</option>
+                    <option value="car rental" data-badge="">car rental</option>
+                    <option value="mini-bar" data-badge="">mini-bar</option>
+                    <option value="parking" data-badge="">parking</option>
+                    <option value="restaurant" data-badge="">restaurant</option>
+                    <option value="room service" data-badge="">room service</option>
+                    <option value="spa" data-badge="">spa</option>
+                    <option value="swimming pool" data-badge="">swimming pool</option>
+                    <option value="wi-fi" data-badge="">wi-fi</option>
+                </select>
+            </form>
+        </aside>
+
+        <map id="map">
+            <img src="map.jpg" alt="MAP">
+        </map>
+
+        <aside id="right_bar">
+            <div class="preview">
+                <label class="preview_label">
+                    Hotel#1
+                </label>
+                <div class="preview_gallery">
+                    <picture>
+                        <source type="image/png" srcset="house.png">
+                        <img class="gallery_image" src="house.png" alt="HOUSE">
+                    </picture>
+                </div>
+                <menu class="preview_menu">
+                    <li>
+                        <label for="preview_description">DESCRIPTION</label>
+                        <textarea id="preview_description">description description description description</textarea>
+                    </li>
+                    <li>
+                        <label for="preview_review">REVIEW</label>
+                        <textarea id="preview_review">review review review review review review review</textarea>
+                    </li>
+                </menu>
+            </div>
+        </aside>
+
+        <footer id="footer">
+            <div id="contact">CONTACT</div>
+            <div id="author">AUTHOR</div>
+            <div id="media">MEDIA</div>
+        </footer>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>

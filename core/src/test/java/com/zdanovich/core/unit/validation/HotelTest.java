@@ -263,7 +263,7 @@ public class HotelTest extends ValidationTest {
         hotel.setLongitude(VALID_HOTEL_LONGITUDE);
         Method removeFeature = Hotel.class.getMethod("removeFeature", String.class);
         Method containsFeature = Hotel.class.getMethod("containsFeature", String.class);
-        Object[] objects = { "" };
+        Object[] objects = {""};
         ExecutableValidator executableValidator = validator.forExecutables();
         Set<ConstraintViolation<Hotel>> constraintViolations = executableValidator.validateParameters(hotel, removeFeature, objects);
         constraintViolations.addAll(executableValidator.validateParameters(hotel, containsFeature, objects));
@@ -285,7 +285,7 @@ public class HotelTest extends ValidationTest {
         Method addFeature = Hotel.class.getMethod("addFeature", Feature.class);
         Method removeFeature = Hotel.class.getMethod("removeFeature", Feature.class);
         Method containsFeature = Hotel.class.getMethod("containsFeature", Feature.class);
-        Object[] objects = { null };
+        Object[] objects = {null};
         ExecutableValidator executableValidator = validator.forExecutables();
         Set<ConstraintViolation<Hotel>> constraintViolations = executableValidator.validateParameters(hotel, addFeature, objects);
         constraintViolations.addAll(executableValidator.validateParameters(hotel, removeFeature, objects));

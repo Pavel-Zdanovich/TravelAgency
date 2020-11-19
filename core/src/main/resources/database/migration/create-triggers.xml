@@ -4,7 +4,8 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet id="Create TOUR_CHECK_DATES_TRIGGER" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+    <changeSet id="Create TOUR_CHECK_DATES_TRIGGER" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="true">
         <sql dbms="oracle" endDelimiter="/" stripComments="true">
             CREATE OR REPLACE TRIGGER TOUR_CHECK_DATES_TRIGGER
             BEFORE INSERT OR UPDATE ON TOURS FOR EACH ROW
@@ -32,7 +33,8 @@
         </sql>
     </changeSet>
 
-    <changeSet id="Create REVIEW_CHECK_DATE_TRIGGER" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+    <changeSet id="Create REVIEW_CHECK_DATE_TRIGGER" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="true">
         <sql dbms="oracle" endDelimiter="/" stripComments="true">
             CREATE OR REPLACE TRIGGER REVIEW_CHECK_DATE_TRIGGER
             BEFORE INSERT OR UPDATE ON REVIEWS FOR EACH ROW

@@ -110,7 +110,7 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
-    public void findAll_With_Sort () {
+    public void findAll_With_Sort() {
     }
 
     @Test
@@ -152,13 +152,16 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
-    public void update_With_Detached_Tours() {}
+    public void update_With_Detached_Tours() {
+    }
 
     @Test
-    public void update_With_Attached_Tours() {}
+    public void update_With_Attached_Tours() {
+    }
 
     @Test
-    public void update_With_New_Tours() {}
+    public void update_With_New_Tours() {
+    }
 
     @Test
     public void delete() {

@@ -41,7 +41,7 @@ public class WebApplicationConfiguration implements WebMvcConfigurer {
 
     @Bean
     @Autowired
-    public ITemplateResolver templateResolver(ApplicationContext applicationContext){
+    public ITemplateResolver templateResolver(ApplicationContext applicationContext) {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("/WEB-INF/views/");
@@ -53,7 +53,7 @@ public class WebApplicationConfiguration implements WebMvcConfigurer {
 
     @Bean
     @Autowired
-    public SpringTemplateEngine templateEngine(ITemplateResolver templateResolver){
+    public SpringTemplateEngine templateEngine(ITemplateResolver templateResolver) {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
         templateEngine.setEnableSpringELCompiler(true);
@@ -62,11 +62,11 @@ public class WebApplicationConfiguration implements WebMvcConfigurer {
 
     @Bean
     @Autowired
-    public ViewResolver viewResolver(ISpringTemplateEngine templateEngine){
+    public ViewResolver viewResolver(ISpringTemplateEngine templateEngine) {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
         viewResolver.setTemplateEngine(templateEngine);
         viewResolver.setOrder(1);
-        viewResolver.setViewNames(new String [] { "*" });
+        viewResolver.setViewNames(new String[]{"*"});
         return viewResolver;
     }
 }

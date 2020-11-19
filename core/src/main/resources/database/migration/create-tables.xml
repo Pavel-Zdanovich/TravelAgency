@@ -29,7 +29,8 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="Create table HOTELS_FEATURES" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+    <changeSet id="Create table HOTELS_FEATURES" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="true">
         <createTable tableName="HOTELS_FEATURES">
             <column name="HOTEL_ID" type="BIGINT"/>
             <column name="FEATURE_ID" type="BIGINT"/>

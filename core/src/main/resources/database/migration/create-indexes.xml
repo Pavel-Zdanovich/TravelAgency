@@ -28,7 +28,8 @@
         </createIndex>
     </changeSet>
 
-    <changeSet id="Create INDEXES for REVIEWS" author="Liquibase" runAlways="true" runOnChange="true" failOnError="true">
+    <changeSet id="Create INDEXES for REVIEWS" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="true">
         <createIndex tableName="REVIEWS" indexName="REVIEW_DATE_INDEX">
             <column name="REVIEW_DATE"/>
         </createIndex>

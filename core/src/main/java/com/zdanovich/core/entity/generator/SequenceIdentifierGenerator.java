@@ -31,7 +31,7 @@ public class SequenceIdentifierGenerator implements IdentifierGenerator, Configu
                 SequenceStyleGenerator.CONFIG_SEQUENCE_PER_ENTITY_SUFFIX, params, DEFAULT_ENTITY_SEQUENCE_SUFFIX);
 
         boolean preferSequencePerEntity = ConfigurationHelper.getBoolean(
-                SequenceStyleGenerator.CONFIG_PREFER_SEQUENCE_PER_ENTITY, params,true);
+                SequenceStyleGenerator.CONFIG_PREFER_SEQUENCE_PER_ENTITY, params, true);
 
         final String defaultSequenceName = preferSequencePerEntity
                 ? params.getProperty(JPA_ENTITY_NAME).toUpperCase().concat(sequencePerEntitySuffix)
@@ -43,13 +43,13 @@ public class SequenceIdentifierGenerator implements IdentifierGenerator, Configu
 
     @Override
     public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
-        if(object instanceof Identifiable) {
+        if (object instanceof Identifiable) {
             Identifiable identifiable = (Identifiable) object;
             Serializable id = identifiable.getId();
-            if(id != null) {
+            if (id != null) {
                 return id;
             }
         }
-        return  ((Number) session.createNativeQuery(sequenceNextValString).uniqueResult()).longValue();
+        return ((Number) session.createNativeQuery(sequenceNextValString).uniqueResult()).longValue();
     }
 }

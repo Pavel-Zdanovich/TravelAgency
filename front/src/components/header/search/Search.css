@@ -1,0 +1,9 @@
+.label {
+    display: none;
+}
+
+.input {
+    height: 50%;
+    width: 100%;
+    border-radius: 100em;
+}

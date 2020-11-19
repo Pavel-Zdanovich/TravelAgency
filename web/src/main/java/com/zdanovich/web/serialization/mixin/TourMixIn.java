@@ -1,7 +1,6 @@
 package com.zdanovich.web.serialization.mixin;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.zdanovich.core.entity.Country;
 import com.zdanovich.core.entity.Hotel;

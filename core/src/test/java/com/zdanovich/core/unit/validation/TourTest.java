@@ -20,8 +20,8 @@ import java.util.Set;
 public class TourTest extends ValidationTest {
 
     public static final String VALID_TOUR_PHOTO_PATH = "C:\\Users\\Zdan\\IdeaProjects\\travelagency\\core\\src\\main\\resources\\messages.properties";
-    public static final Timestamp VALID_TOUR_START_DATE = Timestamp.valueOf(LocalDateTime.of(2021, 1, 1, 0 ,0));
-    public static final Timestamp VALID_TOUR_END_DATE = Timestamp.valueOf(LocalDateTime.of(2021, 1, 2, 0 ,0));
+    public static final Timestamp VALID_TOUR_START_DATE = Timestamp.valueOf(LocalDateTime.of(2021, 1, 1, 0, 0));
+    public static final Timestamp VALID_TOUR_END_DATE = Timestamp.valueOf(LocalDateTime.of(2021, 1, 2, 0, 0));
     public static final String VALID_TOUR_DESCRIPTION = "Valid description of the tour";
     public static final BigDecimal VALID_TOUR_COST = BigDecimal.valueOf(0.1234);
     public static final TourType VALID_TOUR_TYPE = TourType.BUSINESS;
@@ -182,7 +182,7 @@ public class TourTest extends ValidationTest {
         tour.setCost(VALID_TOUR_COST);
         tour.setTourType(VALID_TOUR_TYPE);
         Method setHotel = Tour.class.getMethod("setHotel", Hotel.class);
-        Object[] objects = { null };
+        Object[] objects = {null};
         ExecutableValidator executableValidator = validator.forExecutables();
         Set<ConstraintViolation<Tour>> constraintViolations = executableValidator.validateParameters(tour, setHotel, objects);
         constraintViolations.addAll(executableValidator.validateParameters(tour, setHotel, objects));
@@ -203,7 +203,7 @@ public class TourTest extends ValidationTest {
         tour.setCost(VALID_TOUR_COST);
         tour.setTourType(VALID_TOUR_TYPE);
         Method setCountry = Tour.class.getMethod("setCountry", Country.class);
-        Object[] objects = { null };
+        Object[] objects = {null};
         ExecutableValidator executableValidator = validator.forExecutables();
         Set<ConstraintViolation<Tour>> constraintViolations = executableValidator.validateParameters(tour, setCountry, objects);
         constraintViolations.addAll(executableValidator.validateParameters(tour, setCountry, objects));
@@ -225,7 +225,7 @@ public class TourTest extends ValidationTest {
         tour.setTourType(VALID_TOUR_TYPE);
         Method addUser = Tour.class.getMethod("addUser", User.class);
         Method removeUser = Tour.class.getMethod("removeUser", User.class);
-        Object[] objects = { null };
+        Object[] objects = {null};
         ExecutableValidator executableValidator = validator.forExecutables();
         Set<ConstraintViolation<Tour>> constraintViolations = executableValidator.validateParameters(tour, addUser, objects);
         constraintViolations.addAll(executableValidator.validateParameters(tour, removeUser, objects));

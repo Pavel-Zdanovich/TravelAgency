@@ -45,7 +45,7 @@ public class HotelControllerTest extends AbstractControllerTest {
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
 
-        List<Hotel> hotels = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), List.class);
+        List<Hotel> hotels = objectMapper.readerForListOf(Hotel.class).readValue(mvcResult.getResponse().getContentAsString());
         Assert.assertNotNull(hotels);
         Assert.assertNotEquals(0, hotels.size());
     }
@@ -105,7 +105,7 @@ public class HotelControllerTest extends AbstractControllerTest {
         List<Hotel> hotels = objectMapper.readerForListOf(Hotel.class).readValue(mvcResult.getResponse().getContentAsString());
         Assert.assertNotNull(hotels);
         Assert.assertTrue(hotels.stream().allMatch(hotel ->
-                        hotel.getLatitude().compareTo(minLatitude) >= 0 &&
+                hotel.getLatitude().compareTo(minLatitude) >= 0 &&
                         hotel.getLatitude().compareTo(maxLatitude) <= 0 &&
                         hotel.getLongitude().compareTo(minLongitude) >= 0 &&
                         hotel.getLongitude().compareTo(maxLongitude) <= 0));
@@ -131,7 +131,7 @@ public class HotelControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    public void findByCountry() throws Exception {
+    public void findByCountry() {
 
     }
 

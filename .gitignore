@@ -2,7 +2,7 @@
 .idea
 
 # dependencies
-node
+node_modules
 
 # testing
 coverage
@@ -11,7 +11,7 @@ coverage
 h2*
 
 # production
-build
+dist
 target
 
 # misc
@@ -21,6 +21,5 @@ target
 .env.test.local
 .env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+npm*
+yarn*

@@ -1,8 +1,8 @@
 package com.zdanovich.core.integration.repository;
 
-import com.zdanovich.core.repository.FeatureRepository;
 import com.zdanovich.core.entity.Feature;
 import com.zdanovich.core.entity.metamodel.Feature_;
+import com.zdanovich.core.repository.FeatureRepository;
 import com.zdanovich.core.utils.CoreUtils;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -170,7 +170,7 @@ public class FeatureRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
-    public void findAll_With_Sort_ById () {
+    public void findAll_With_Sort_ById() {
         List<Feature> unsortedFeatures = featureRepository.findAll();
         Assert.assertNotNull(unsortedFeatures);
         Assert.assertFalse(unsortedFeatures.isEmpty());
@@ -184,7 +184,7 @@ public class FeatureRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
-    public void findAll_With_Sort_ByName () {
+    public void findAll_With_Sort_ByName() {
         List<Feature> unsortedFeatures = featureRepository.findAll();
         Assert.assertNotNull(unsortedFeatures);
         Assert.assertFalse(unsortedFeatures.isEmpty());

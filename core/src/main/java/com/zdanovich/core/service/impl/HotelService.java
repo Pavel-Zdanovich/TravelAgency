@@ -63,7 +63,7 @@ public class HotelService extends AbstractService<Hotel, Long, HotelRepository> 
         return repository.findAll(hotelSpecification);
     }
 
-//    SELECT H.HOTEL_ID, H.NAME, H.WEBSITE, H.STARS, H.LATITUDE, H.LONGITUDE FROM HOTELS H
+    //    SELECT H.HOTEL_ID, H.NAME, H.WEBSITE, H.STARS, H.LATITUDE, H.LONGITUDE FROM HOTELS H
 //    INNER JOIN HOTELS_FEATURES HF ON H.HOTEL_ID = HF.HOTEL_ID
 //    INNER JOIN FEATURES F ON HF.FEATURE_ID = F.FEATURE_ID
 //    WHERE F.NAME IN ('air conditioner', 'car rental')

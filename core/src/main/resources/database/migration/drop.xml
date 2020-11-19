@@ -3,59 +3,73 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet id="Delete sequence COUNTRY_SEQUENCE" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
+    <changeSet id="Delete sequence COUNTRY_SEQUENCE" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="false">
         <dropSequence sequenceName="COUNTRY_SEQUENCE" startValue="1" cacheSize="0"/>
     </changeSet>
 
-    <changeSet id="Delete sequence FEATURE_SEQUENCE" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
+    <changeSet id="Delete sequence FEATURE_SEQUENCE" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="false">
         <dropSequence sequenceName="FEATURE_SEQUENCE" startValue="1" cacheSize="0"/>
     </changeSet>
 
-    <changeSet id="Delete sequence HOTEL_SEQUENCE" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
+    <changeSet id="Delete sequence HOTEL_SEQUENCE" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="false">
         <dropSequence sequenceName="HOTEL_SEQUENCE" startValue="1" cacheSize="0"/>
     </changeSet>
 
-    <changeSet id="Delete sequence USER_SEQUENCE" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
+    <changeSet id="Delete sequence USER_SEQUENCE" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="false">
         <dropSequence sequenceName="USER_SEQUENCE" startValue="1" cacheSize="0"/>
     </changeSet>
 
-    <changeSet id="Delete sequence TOUR_SEQUENCE" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
+    <changeSet id="Delete sequence TOUR_SEQUENCE" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="false">
         <dropSequence sequenceName="TOUR_SEQUENCE" startValue="1" cacheSize="0"/>
     </changeSet>
 
-    <changeSet id="Delete sequence REVIEW_SEQUENCE" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
+    <changeSet id="Delete sequence REVIEW_SEQUENCE" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="false">
         <dropSequence sequenceName="REVIEW_SEQUENCE" startValue="1" cacheSize="0"/>
     </changeSet>
 
-    <changeSet id="Delete index HOTEL_COORDINATES_INDEX" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
+    <changeSet id="Delete index HOTEL_COORDINATES_INDEX" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="false">
         <dropIndex tableName="HOTELS" indexName="HOTEL_COORDINATES_INDEX"/>
     </changeSet>
 
-    <changeSet id="Delete index TOUR_DATES_INDEX" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
+    <changeSet id="Delete index TOUR_DATES_INDEX" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="false">
         <dropIndex tableName="TOURS" indexName="TOUR_DATES_INDEX"/>
     </changeSet>
 
-    <changeSet id="Delete index TOUR_COST_INDEX" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
+    <changeSet id="Delete index TOUR_COST_INDEX" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="false">
         <dropIndex tableName="TOURS" indexName="TOUR_COST_INDEX"/>
     </changeSet>
 
-    <changeSet id="Delete index TOUR_COUNTRY_INDEX" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
+    <changeSet id="Delete index TOUR_COUNTRY_INDEX" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="false">
         <dropIndex tableName="TOURS" indexName="TOUR_COUNTRY_INDEX"/>
     </changeSet>
 
-    <changeSet id="Delete index TOUR_HOTEL_INDEX" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
+    <changeSet id="Delete index TOUR_HOTEL_INDEX" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="false">
         <dropIndex tableName="TOURS" indexName="TOUR_HOTEL_INDEX"/>
     </changeSet>
 
-    <changeSet id="Delete index REVIEW_DATE_INDEX" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
+    <changeSet id="Delete index REVIEW_DATE_INDEX" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="false">
         <dropIndex tableName="REVIEWS" indexName="REVIEW_DATE_INDEX"/>
     </changeSet>
 
-    <changeSet id="Delete index REVIEW_USER_INDEX" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
+    <changeSet id="Delete index REVIEW_USER_INDEX" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="false">
         <dropIndex tableName="REVIEWS" indexName="REVIEW_USER_INDEX"/>
     </changeSet>
 
-    <changeSet id="Delete index REVIEW_TOUR_INDEX" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
+    <changeSet id="Delete index REVIEW_TOUR_INDEX" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="false">
         <dropIndex tableName="REVIEWS" indexName="REVIEW_TOUR_INDEX"/>
     </changeSet>
 
@@ -71,7 +85,8 @@
         <dropTable tableName="HOTELS" cascadeConstraints="true"/>
     </changeSet>
 
-    <changeSet id="Delete table HOTELS_FEATURES" author="Liquibase" runAlways="true" runOnChange="true" failOnError="false">
+    <changeSet id="Delete table HOTELS_FEATURES" author="Liquibase" runAlways="true" runOnChange="true"
+               failOnError="false">
         <dropTable tableName="HOTELS_FEATURES" cascadeConstraints="true"/>
     </changeSet>
 

@@ -71,9 +71,9 @@ public abstract class AbstractControllerTest extends AbstractTransactionalTestNG
 
     public MvcResult request(HttpMethod method, String uriTemplate, AbstractEntity entity, HttpStatus httpStatus) throws Exception {
         return mockMvc.perform(MockMvcRequestBuilders.
-                        request(method, uriTemplate).
-                        contentType(MediaType.APPLICATION_JSON).
-                        content(objectMapper.writeValueAsString((entity)))).
+                request(method, uriTemplate).
+                contentType(MediaType.APPLICATION_JSON).
+                content(objectMapper.writeValueAsString((entity)))).
                 andExpect(MockMvcResultMatchers.status().is(httpStatus.value())).
                 andReturn();
     }

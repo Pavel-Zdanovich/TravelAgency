@@ -1,0 +1,28 @@
+.footer {
+    grid-area: footer;
+    display: flex;
+    justify-content: space-evenly; /*make search in center*/
+    align-items: center; /*vertical center for header*/
+    align-self: center;
+}
+
+.contact {
+    width: 29.125%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.author {
+    width: 41.75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.media {
+    width: 29.125%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

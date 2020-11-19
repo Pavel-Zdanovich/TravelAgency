@@ -54,7 +54,7 @@ public class HotelController extends AbstractController<Hotel, Long, HotelReposi
         return ResponseEntity.ok(service.findByStars(stars));
     }
 
-    @GetMapping(params = { "minLatitude", "maxLatitude", "minLongitude", "maxLongitude" })
+    @GetMapping(params = {"minLatitude", "maxLatitude", "minLongitude", "maxLongitude"})
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
     public ResponseEntity<List<Hotel>> findByArea(
             @RequestParam @DecimalMin("-90.0000000") BigDecimal minLatitude,

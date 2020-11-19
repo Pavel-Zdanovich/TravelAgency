@@ -81,7 +81,7 @@ public class ReviewTest extends ValidationTest {
         review.setReviewText("");
         review.setReviewDate(VALID_REVIEW_DATE);
         Method setUser = Review.class.getMethod("setUser", User.class);
-        Object[] objects = { null };
+        Object[] objects = {null};
         ExecutableValidator executableValidator = validator.forExecutables();
         Set<ConstraintViolation<Review>> constraintViolations = executableValidator.validateParameters(review, setUser, objects);
         Assert.assertEquals(1, constraintViolations.size());
@@ -97,7 +97,7 @@ public class ReviewTest extends ValidationTest {
         review.setReviewText("");
         review.setReviewDate(VALID_REVIEW_DATE);
         Method setTour = Review.class.getMethod("setTour", Tour.class);
-        Object[] objects = { null };
+        Object[] objects = {null};
         ExecutableValidator executableValidator = validator.forExecutables();
         Set<ConstraintViolation<Review>> constraintViolations = executableValidator.validateParameters(review, setTour, objects);
         constraintViolations.addAll(executableValidator.validateParameters(review, setTour, objects));

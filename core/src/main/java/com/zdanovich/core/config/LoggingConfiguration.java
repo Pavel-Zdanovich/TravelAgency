@@ -77,6 +77,6 @@ public class LoggingConfiguration extends ConfigurationFactory {
 
     @Override
     protected String[] getSupportedTypes() {
-        return new String[] { "*" };
+        return new String[]{"*"};
     }
 }

@@ -12,11 +12,17 @@ import java.util.Optional;
 public interface HotelRepository extends CommonRepository<Hotel, Long>, JpaSpecificationExecutor<Hotel> {
 
     Optional<Hotel> findByName(String name);
+
     List<Hotel> findByStars(Short stars);
+
     List<Hotel> findByStarsLessThanEqual(Short stars);
+
     List<Hotel> findByStarsGreaterThanEqual(Short stars);
+
     List<Hotel> findByStarsBetween(Short minStars, Short maxStars);
+
     List<Hotel> findByFeatures_Name(String featureName);
+
     List<Hotel> findByTours_Country(Country country);
 
 }

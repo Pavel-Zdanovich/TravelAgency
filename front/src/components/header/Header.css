@@ -1,0 +1,48 @@
+.header {
+    display: flex;
+    justify-content: space-evenly; /*make search in center*/
+    align-items: center; /*vertical center for header*/
+    align-self: center;
+}
+
+.label {
+    width: 29.125%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search {
+    width: 41.75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.system {
+    width: 29.125%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lang {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

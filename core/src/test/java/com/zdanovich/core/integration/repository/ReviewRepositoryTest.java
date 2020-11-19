@@ -1,11 +1,11 @@
 package com.zdanovich.core.integration.repository;
 
-import com.zdanovich.core.repository.ReviewRepository;
 import com.zdanovich.core.entity.Review;
 import com.zdanovich.core.entity.Tour;
 import com.zdanovich.core.entity.User;
 import com.zdanovich.core.entity.enums.TourType;
 import com.zdanovich.core.entity.enums.UserRole;
+import com.zdanovich.core.repository.ReviewRepository;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.data.domain.Example;
 import org.springframework.data.repository.CrudRepository;
@@ -390,12 +390,12 @@ public class ReviewRepositoryTest extends AbstractRepositoryTest {
     }
 
     @Test
-    public void findAll_With_Sort_ById () {
+    public void findAll_With_Sort_ById() {
 
     }
 
     @Test
-    public void findAll_With_Sort_ByReviewDate () {
+    public void findAll_With_Sort_ByReviewDate() {
 
     }
 
