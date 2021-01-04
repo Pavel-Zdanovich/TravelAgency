@@ -5,18 +5,65 @@
     "es2017": true
   },
   "extends": [
+    "prettier",
+    "airbnb-base",
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "ignorePatterns": ["dist", "node_modules"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "tsconfig.json",
     "tsconfigRootDir": "."
   },
   "plugins": [
+    "prettier",
     "@typescript-eslint"
   ],
-  "rules": {}
+  "rules": {
+    "max-len": [
+      "error",
+      {
+        "ignoreUrls": true,
+        "code": 80
+      }
+    ],
+    "prefer-template": "off",
+    "indent": ["error", 2],
+    "object-curly-spacing": ["error", "always"],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxEOF": 1
+      }
+    ],
+    "no-var": "error",
+    "one-var": ["error", "never"],
+    "camelcase": "error",
+    "no-multi-assign": "error",
+    "quotes": ["error", "single"],
+    "no-array-constructor": "error",
+    "no-new-object": "error",
+    "no-new-wrappers": "error",
+    "no-nested-ternary": "error",
+    "no-console": [
+      "error",
+      {
+        "allow": ["error"]
+      }
+    ],
+    "no-template-curly-in-string": "error",
+    "no-self-compare": "error",
+    "func-names": ["error", "as-needed"],
+    "semi": [2, "never"],
+    "import/no-extraneous-dependencies": ["off", { "devDependencies": false }]
+  },
+  "settings": { "import/resolver": "webpack" }
 }

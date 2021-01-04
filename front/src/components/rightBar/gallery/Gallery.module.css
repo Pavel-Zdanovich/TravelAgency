@@ -1,0 +1,11 @@
+.gallery {
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image {
+    width: fit-content;
+    height: auto;
+}

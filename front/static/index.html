@@ -6,12 +6,11 @@
         <meta name="description" content="Web site created using create-react-app"/>
         <title>TravelAgency</title>
         <link rel="stylesheet" href="styles.css">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
     </head>
     <body>
         <header id="header">
             <label id="title">TravelAgency</label>
-            <form id="search_form" action="layout.pdf" method="post">
+            <form id="search_form" action="../layout.pdf" method="post">
                 <label for="search_input">SEARCH</label>
                 <input id="search_input" type="search" placeholder="SEARCH">
             </form>
@@ -23,7 +22,7 @@
         </header>
 
         <aside id="left_bar">
-            <form id="select_form" action="layout.pdf" method="post">
+            <form id="select_form" action="../layout.pdf" method="post">
                 <label for="select_start_date">START DATE</label>
                 <input id="select_start_date" type="datetime-local">
 
@@ -67,16 +66,18 @@
                         <img class="gallery_image" src="house.png" alt="HOUSE">
                     </picture>
                 </div>
-                <menu class="preview_menu">
-                    <li>
-                        <label for="preview_description">DESCRIPTION</label>
-                        <textarea id="preview_description">description description description description</textarea>
-                    </li>
-                    <li>
-                        <label for="preview_review">REVIEW</label>
-                        <textarea id="preview_review">review review review review review review review</textarea>
-                    </li>
-                </menu>
+                <div class="preview_content">
+                    <div class="content_tabs">
+                        <button class="tab_button" onclick="select(event, 'content_description')" onload="select(event, 'content_description')">DESCRIPTION</button>
+                        <button class="tab_button" onclick="select(event, 'content_review')">REVIEW</button>
+                    </div>
+                    <div id="content_description" class="content_area">
+                        DESCRIPTION, DESCRIPTION, DESCRIPTION, DESCRIPTION, DESCRIPTION
+                    </div>
+                    <div id="content_review" class="content_area">
+                        REVIEW, REVIEW, REVIEW, REVIEW, REVIEW, REVIEW, REVIEW, REVIEW
+                    </div>
+                </div>
             </div>
         </aside>
 
@@ -86,8 +87,6 @@
             <div id="media">MEDIA</div>
         </footer>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
         <script src="index.js"></script>
     </body>
 </html>

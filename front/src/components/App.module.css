@@ -1,0 +1,9 @@
+.app {
+    display: grid;
+    grid-template:
+            "header header header"
+            "left_bar map right_bar"
+            "footer footer footer";
+    grid-template-columns: 3.5fr 5fr 3.5fr; /*12*/
+    grid-template-rows: 1fr 7fr 1fr; /*9*/
+}

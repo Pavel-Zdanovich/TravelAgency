@@ -1,0 +1,6 @@
+.map {
+    grid-area: map;
+    justify-content: space-evenly; /*make search in center*/
+    align-items: center; /*vertical center for header*/
+    align-self: center;
+}

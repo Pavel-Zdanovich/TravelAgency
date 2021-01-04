@@ -1,215 +1,61 @@
 {
   "compilerOptions": {
-
     //Allow JavaScript files to be compiled.
     "allowJs": true,
-
     //module === "system" or esModuleInterop. Allow default imports from modules with no default export. This does not affect code emit, just typechecking.
     "allowSyntheticDefaultImports": true,
-
-    //Allow accessing UMD globals from modules.
-    //"allowUmdGlobalAccess": false,
-
-    //Do not report errors on unused labels.
-    //"allowUnusedLabels": false,
-
-    //Parse in strict mode and emit "use strict" for each source file
-    //"alwaysStrict": false,
-
-    //Have recompiles in incremental and watch assume that changes within a file will only affect files directly depending on it
-    //"assumeRChangesOnlyAffectDirectDependencies": false,
-
-    //Base directory to resolve non-relative module names. See Module Resolution documentation for more details.
-    //"baseUrl": "string",
-
-    //Builds this project and all of its dependencies specified by Project References. Note that this flag is not compatible with others on this page. See more here
-    //"build": false,
-
-    //The character set of the input files.
-    //"charset": "utf8",
-
-    //Report errors in .js files. Use in conjunction with allowJs.
-    //"checkJs": true,
-
     //Ensure TypeScript can determine where to find the outputs of the referenced project to compile project.
-    "composite": true,
+    //"composite": true,
 
     //Generates corresponding .d.ts file.
     "declaration": true,
-
-    //Output directory for generated declaration files.
-    //"declarationDir": "./src",
-
-    //Generates a sourcemap for each corresponding .d.ts file.
-    //"declarationMap": false,
-
-    //Show diagnostic information.
-    //"diagnostics": false,
-
-    //Disable size limitation on JavaScript project.
-    //"disableSizeLimit": false,
-
-    //Provide full support for iterables in for..of, spread and destructuring when targeting ES5 or ES3.
-    //"downlevelIteration": false,
-
-    //Emit a UTF-8 Byte Order Mark (BOM) in the beginning of output files.
-    //"emitBOM": false,
-
-    //Only emit .d.ts declaration files.
-    //"emitDeclarationOnly": false,
-
-    //Emit design-type metadata for decorated declarations in source. See issue #2577 for details.
-    //"emitDecoratorMetadata": false,
-
     //Emit __importStar and __importDefault helpers for runtime babel ecosystem compatibility and enable allowSyntheticDefaultImports for typesystem compatibility.
     "esModuleInterop": true,
-
-    //Enables experimental support for ES decorators.
-    //"experimentalDecorators": false,
-
-    //Show verbose diagnostic information
-    //"extendedDiagnostics": false,
-
     //Disallow inconsistently-cased references to the same file.
-    "forceConsistentCasingInFileNames": true,
-
-    //profile.cpuprofile	Generates a cpu profile at the given path. Passing an existing directory name instead of a file path will cause a timestamp-named profile to be generated in that directory instead.
-    //"generateCpuProfile": "string",
-
-    //Import emit helpers (e.g. __extends, __rest, etc..) from tslib
-    //"importHelpers": false,
-
+    //"forceConsistentCasingInFileNames": true,
     //if composite is on, false. Enable incremental compilation by reading/writing information from prior compilations to a file on disk. This file is controlled by the tsBuildInfoFile flag.
-    "incremental": true,
-
-    //Emit a single file with source maps instead of having a separate file.
-    //"inlineSourceMap": false,
-
-    //Emit the source alongside the sourcemaps within a single file; requires inlineSourceMap or sourceMap to be set.
-    //"inlineSources": false,
-
-    //Initializes a TypeScript project and creates a tsconfig.json file.
-    //"init": "string",
+    //"incremental": true,
 
     //Perform additional checks to ensure that separate compilation (such as with transpileModule or @babel/plugin-transform-typescript) would be safe.
     "isolatedModules": true,
-
     //"react", "preserve", "react-native". See JSX.
     "jsx": "react",
-
-    //"React.createElement"	Specify the JSX factory function to use when targeting react JSX emit, e.g. React.createElement or h.
-    //"jsxFactory": "string",
-
-    //"React.Fragment"	Specify the JSX fragment factory function to use when targeting react JSX emit, e.g. Fragment.
-    //"jsxFragmentFactory": "string",
-
-    //Resolve keyof to string valued property names only (no numbers or symbols).
-    //"keyofStringsOnly": false,
-
     //List of library files to be included in the compilation.
-    "lib": ["dom", "dom.iterable", "esnext"],
-
-    //Print names of generated files part of the compilation.
-    //"listEmittedFiles": false,
-
-    //Print names of files part of the compilation.
-    //"listFiles": false,
-
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     //(platform specific)	The locale to use to show error messages, e.g. en-us.
     "locale": "en",
-
-    //Specifies the location where debugger should locate map files instead of generated locations. Use this flag if the .map files will be located at run-time in a different location than the .js files. The location specified will be embedded in the sourceMap to direct the debugger where the map files will be located. This flag will not create the specified path and generate the map files in that location. Instead, create a post build step that moves the files to the specified path.
-    //"mapRoot": "string",
-
-    //The maximum dependency depth to search under node_modules and load JavaScript files. Only applicable with allowJs.
-    //"maxNodeModuleJsDepth": 0,
-
     //Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'.
     "module": "ESNext",
-
     //module === "AMD" or "UMD" or "System" or "ES6" ? "Classic" : "Node"	Determine how modules get resolved. Either "Node" for Node.js/io.js style resolution, or "Classic". See Module Resolution documentation for more details.
     "moduleResolution": "node",
-
     //(platform specific)	Use the specified end of line sequence to be used when emitting files: "crlf" (windows) or "lf" (unix).”
-    "newLine": "crlf",
+    //"newLine": "crlf",
 
     //Do not emit outputs.
-    "noEmit": true,
-
-    //Do not generate custom helper functions like __extends in compiled output.
-    //"noEmitHelpers": false,
-
-    //Do not emit outputs if any errors were reported.
-    //"noEmitOnError": false,
-
-    //Do not truncate error messages.
-    //"noErrorTruncation": false,
-
-    //Report errors for fallthrough cases in switch statement.
-    //"noFallthroughCasesInSwitch": false,
+    //"noEmit": true,
 
     //Raise error on expressions and declarations with an implied any type.
     "noImplicitAny": true,
-
     //Report an error when not all code paths in function return a value.
     "noImplicitReturns": true,
-
     //Raise error on this expressions with an implied any type.
     "noImplicitThis": true,
-
-    //Do not emit "use strict" directives in module output.
-    //"noImplicitUseStrict": false,
-
-    //Do not include the default library file (lib.d.ts).
-    //"noLib": false,
-
-    //Do not add triple-slash references or module import targets to the list of compiled files.
-    //"noResolve": false,
-
-    //Disable strict checking of generic signatures in function types.
-    //"noStrictGenericChecks": false,
-
     //Report errors on unused locals.
     "noUnusedLocals": true,
-
     //Report errors on unused parameters.
     "noUnusedParameters": true,
-
     //Redirect output structure to the directory.
     "outDir": "./dist",
-
-    //Concatenate and emit output to single file. The order of concatenation is determined by the list of files passed to the compiler on the command line along with triple-slash references and imports. See output file order documentation for more details.
-    //"outFile": "string",
-
-    //List of path mapping entries for module names to locations relative to the baseUrl. See Module Resolution documentation for more details.
-    //"paths": [],
-
-    //Do not erase const enum declarations in generated code. See const enums documentation for more details.
-    //"preserveConstEnums": false,
-
-    //Do not resolve symlinks to their real path; treat a symlinked file like a real one.
-    //"preserveSymlinks": false,
-
-    //Keep outdated console output in watch mode instead of clearing the screen
-    //"preserveWatchOutput": false,
-
-    //unless piping to another program or redirecting output to a file	Stylize errors and messages using color and context.
-    "pretty": true,
-
-    //Compile a project given a valid configuration file.
-    //"project": "string",
-
-    //Remove all comments except copy-right header comments beginning with!
-    //"removeComments": false,
-
+    //unless piping to another program or redirecting output to a file. Stylize errors and messages using color and context.
+    //"pretty": true,
     //Include modules imported with .json extension.
     "resolveJsonModule": true,
-
     //(common root directory is computed from the list of input files)	Specifies the root directory of input files. Only use to control the output directory structure with outDir.
-    "rootDir": "src",
-
-    //List of root folders whose combined content represent the structure of the project at runtime. See Module Resolution documentation for more details.
-    //"rootDirs": [],
+    //"rootDir": "src",
 
     //Rather than actually execute a build with the other input options and config files, show the final implied config file in the output.
     //"showConfig": false,
@@ -219,72 +65,25 @@
 
     //Generates corresponding .map file.
     "sourceMap": true,
-
-    //Specifies the location where debugger should locate TypeScript files instead of source locations. Use this flag if the sources will be located at run-time in a different location than that at design-time. The location specified will be embedded in the sourceMap to direct the debugger where the source files will be located.
-    //"sourceRoot": "string",
-
     //Enable all strict type checking options.
     "strict": true,
-
-    //Enable stricter checking of the bind, call, and apply methods on functions.
-    //"strictBindCallApply": false,
-
-    //Disable bivariant parameter checking for function types.
-    //"strictFunctionTypes": false,
-
-    //Ensure non-undefined class properties are initialized in the constructor. This option requires strictNullChecks be enabled in order to take effect.
-    //"strictPropertyInitialization": false,
-
     //In strict null checking mode, the null and undefined values are not in the domain of every type and are only assignable to themselves and any (the one exception being that undefined is also assignable to void).
-    //"strictNullChecks": false,
-
-    //Suppress excess property checks for object literals.
-    //"suppressExcessPropertyErrors": false,
-
-    //Suppress noImplicitAny errors for indexing objects lacking index signatures. See issue #1232 for more details.
-    //"suppressImplicitAnyIndexErrors": false,
-
+    "strictNullChecks": true,
     //Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'.
     "target": "ESNext",
-
-    //Report module resolution log messages.
-    //"traceResolution": false,
-
-    //.tsbuildinfo	Specify what file to store incremental build information in.
-    //"tsBuildInfoFile": "string",
-
-    //List of names of type definitions to include. See @types, —typeRoots and —types for more details.
-    //"types": [],
-
-    //List of folders to include type definitions from. See @types, —typeRoots and —types for more details.
-    //"typeRoots": [],
-
-    //Emit class fields with ECMAScript-standard semantics.
-    //"useDefineForClassFields": false,
-
-    //Print the compiler’s version.
-    //"version": "string",
-
     //Run the compiler in watch mode. Watch input files and trigger recompilation on changes. The implementation of watching files and directories can be configured using environment variable. See configuring watch for more details.
-    "watch": true,
-
+    //"watch": true,
     "plugins": [
       {
         "name": "typescript-plugin-css-modules"
       }
     ]
   },
-
-  /*"files": [
-    "index.tsx",
-    "App.tsx"
-  ],*/
-
   "include": [
-    "src/**/*"
+    "./src/**/*"
   ],
-
   "exclude": [
+    "dist",
     "node_modules",
     "**/*.spec.ts"
   ]
