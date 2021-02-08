@@ -1,0 +1,209 @@
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 41.666%;
+    height: 50%;
+}
+
+.form {
+    display: grid;
+    grid-template-areas:
+            "secret heading heading close"
+            "username_label username_label username_label username_label"
+            "username_input username_input username_input username_input"
+            "password_label password_label password_label password_label"
+            "password_input password_input password_input password_input"
+            "sign_in sign_in sign_up with"
+            "remember remember forgot forgot";
+    grid-template-columns: 1.5fr 4.5fr 4.5fr 1.5fr; /*12*/
+}
+
+.secret {
+    grid-area: secret;
+    visibility: hidden;
+}
+
+.heading {
+    grid-area: heading;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close {
+    grid-area: close;
+}
+
+.username_label {
+    grid-area: username_label;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.username_input {
+    grid-area: username_input;
+}
+
+.password_label {
+    grid-area: password_label;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.password_input {
+    grid-area: password_input;
+}
+
+.sign_in {
+    grid-area: sign_in;
+}
+
+.sign_up {
+    grid-area: sign_up;
+}
+
+.with {
+    grid-area: with;
+}
+
+.with [class^="with__clear-indicator"] {
+}
+
+.with [class^="with__container"] {
+    justify-content: center;
+    padding: 0;
+}
+
+.with [class^="with__control"] {
+
+}
+
+.with [class^="with__dropdown-indicator"] {
+    /*same as with__indicator*/
+}
+
+.with [class^="with__group"] {
+
+}
+
+.with [class^="with__group-heading"] {
+
+}
+
+.with [class^="with__indicators"] {
+
+}
+
+.with [class^="with__indicators-container"] {
+
+}
+
+.with [class^="with__indicator"] {
+    /*same as with__indicator-dropdown*/
+}
+
+.with [class^="with__indicator-separator"] {
+
+}
+
+.with [class^="with__input"] {
+    width: 100%;
+}
+
+.with [class$="-Input"] {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.with [class^="with__loading-indicator"] {
+
+}
+
+.with [class^="with__loading-message"] {
+
+}
+
+.with [class^="with__menu"] {
+    position: initial;
+    margin: 0;
+}
+
+.with [class^="with__menu-list"] {
+}
+
+.with [class^="with__menu-portal"] {
+}
+
+.with div:not([class]) {
+    display: none;
+}
+
+.with [class^="with__multi-value"] {
+}
+
+.with [class$="with__multi-value__label"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.with [class^="with__multi-value-remove"] {
+}
+
+.with [class^="with__no-options-message"] {
+}
+
+.with [class^="with__option"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.with [class^="with__placeholder"] {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.with [class^="with__single-value"] {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.with [class^="with__value-container"] {
+    padding: 0;
+}
+
+.remember {
+    grid-area: remember;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.remember_input {
+    width: 2em;
+}
+
+.remember_label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.forgot {
+    grid-area: forgot;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

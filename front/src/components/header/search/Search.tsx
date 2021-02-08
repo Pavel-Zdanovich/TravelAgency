@@ -1,20 +1,38 @@
-import React from 'react';
+import React from "react";
 
-import styles from './Search.module.css';
+import Async from "react-select/async";
 
-interface ISearch {
-    name: string
-}
+import styles from "./Search.module.css";
 
-export type {ISearch};
+const Search: React.FC = () => {
+  const name = "SEARCH";
 
-const Search: React.FC<ISearch> = ({name}: ISearch) => {
-    return (
-        <form className={styles.search}>
-            <label className={styles.label} htmlFor={"search_input"}>{name}</label>
-            <input className={styles.input} type={"search"} placeholder={name}/>
-        </form>
-    );
-}
+  const url = "http://localhost:8080/travelagency/hotels";
+
+  const initRequest: RequestInit = {
+    method: "GET",
+    headers: [[""]],
+  };
+
+  const promiseOptions = (inputValue: string) => {
+    initRequest["body"] = inputValue;
+    return fetch(url, initRequest);
+  };
+
+  return (
+    <form className={styles.form}>
+      <Async
+        className={styles.search}
+        classNamePrefix={"search"}
+        components={{
+          IndicatorsContainer: () => null,
+        }}
+        name={name}
+        placeholder={name}
+        loadOptions={promiseOptions}
+      />
+    </form>
+  );
+};
 
 export default Search;

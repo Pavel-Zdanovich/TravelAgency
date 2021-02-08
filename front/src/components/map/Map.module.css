@@ -3,4 +3,10 @@
     justify-content: space-evenly; /*make search in center*/
     align-items: center; /*vertical center for header*/
     align-self: center;
+
+    overflow: hidden;
+}
+
+.image {
+    min-width: 100%;
 }

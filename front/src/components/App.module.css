@@ -1,6 +1,6 @@
 .app {
     display: grid;
-    grid-template:
+    grid-template-areas:
             "header header header"
             "left_bar map right_bar"
             "footer footer footer";

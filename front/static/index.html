@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <header id="header">
+        <header class="header">
             <label id="title">TravelAgency</label>
             <form id="search_form" action="../layout.pdf" method="post">
                 <label for="search_input">SEARCH</label>
@@ -21,7 +21,7 @@
             </div>
         </header>
 
-        <aside id="left_bar">
+        <aside class="left_bar">
             <form id="select_form" action="../layout.pdf" method="post">
                 <label for="select_start_date">START DATE</label>
                 <input id="select_start_date" type="datetime-local">
@@ -51,19 +51,19 @@
             </form>
         </aside>
 
-        <map id="map">
-            <img src="map.jpg" alt="MAP">
+        <map class="map">
+            <img src="../src/assets/map.jpg" alt="MAP">
         </map>
 
-        <aside id="right_bar">
+        <aside class="right_bar">
             <div class="preview">
                 <label class="preview_label">
                     Hotel#1
                 </label>
                 <div class="preview_gallery">
                     <picture>
-                        <source type="image/png" srcset="house.png">
-                        <img class="gallery_image" src="house.png" alt="HOUSE">
+                        <source type="image/png" srcset="../src/assets/house.png">
+                        <img class="gallery_image" src="../src/assets/house.png" alt="HOUSE">
                     </picture>
                 </div>
                 <div class="preview_content">
@@ -81,7 +81,7 @@
             </div>
         </aside>
 
-        <footer id="footer">
+        <footer class="footer">
             <div id="contact">CONTACT</div>
             <div id="author">AUTHOR</div>
             <div id="media">MEDIA</div>

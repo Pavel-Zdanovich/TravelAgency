@@ -10,7 +10,6 @@
     margin: 0; /*make full screen*/
     padding: 0; /*make full screen*/
     height: 100%; /*make full screen*/
-    overflow: hidden; /*make full screen*/
 }
 
 body {

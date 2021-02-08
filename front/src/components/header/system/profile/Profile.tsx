@@ -1,17 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import styles from './Profile.module.css';
+import styles from "./Profile.module.css";
 
-interface IProfile {
-    name: string
-}
+const Profile: React.FC = () => {
+  const name = "PROF";
 
-export type {IProfile};
-
-const Profile: React.FC<IProfile> = ({name}: IProfile) => {
-    return (
-        <div className={styles.profile}>{name}</div>
-    );
-}
+  return <div className={styles.profile}>{name}</div>;
+};
 
 export default Profile;

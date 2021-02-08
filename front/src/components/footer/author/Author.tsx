@@ -1,17 +1,11 @@
-import React from 'react';
+import React from "react";
 
 import styles from "./Author.module.css";
 
-interface IAuthor {
-    name: string
-}
+const Author: React.FC = () => {
+  const name = "AUTHOR";
 
-export type {IAuthor};
-
-const Author: React.FC<IAuthor> = ({name}: IAuthor) => {
-    return (
-        <div className={styles.author}>{name}</div>
-    );
-}
+  return <div className={styles.author}>{name}</div>;
+};
 
 export default Author;

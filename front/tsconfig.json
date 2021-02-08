@@ -4,18 +4,12 @@
     "allowJs": true,
     //module === "system" or esModuleInterop. Allow default imports from modules with no default export. This does not affect code emit, just typechecking.
     "allowSyntheticDefaultImports": true,
-    //Ensure TypeScript can determine where to find the outputs of the referenced project to compile project.
-    //"composite": true,
-
+    //Base directory to resolve non-relative module names
+    "baseUrl": "src",
     //Generates corresponding .d.ts file.
     "declaration": true,
     //Emit __importStar and __importDefault helpers for runtime babel ecosystem compatibility and enable allowSyntheticDefaultImports for typesystem compatibility.
     "esModuleInterop": true,
-    //Disallow inconsistently-cased references to the same file.
-    //"forceConsistentCasingInFileNames": true,
-    //if composite is on, false. Enable incremental compilation by reading/writing information from prior compilations to a file on disk. This file is controlled by the tsBuildInfoFile flag.
-    //"incremental": true,
-
     //Perform additional checks to ensure that separate compilation (such as with transpileModule or @babel/plugin-transform-typescript) would be safe.
     "isolatedModules": true,
     //"react", "preserve", "react-native". See JSX.
@@ -30,45 +24,37 @@
     "locale": "en",
     //Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'.
     "module": "ESNext",
-    //module === "AMD" or "UMD" or "System" or "ES6" ? "Classic" : "Node"	Determine how modules get resolved. Either "Node" for Node.js/io.js style resolution, or "Classic". See Module Resolution documentation for more details.
+    //module === "AMD" or "UMD" or "System" or "ES6" ? "Classic" : "Node". Determine how modules get resolved. Either "Node" for Node.js/io.js style resolution, or "Classic". See Module Resolution documentation for more details.
     "moduleResolution": "node",
-    //(platform specific)	Use the specified end of line sequence to be used when emitting files: "crlf" (windows) or "lf" (unix).”
-    //"newLine": "crlf",
-
-    //Do not emit outputs.
-    //"noEmit": true,
-
-    //Raise error on expressions and declarations with an implied any type.
-    "noImplicitAny": true,
+    //Report errors for fallthrough cases in switch statements. Ensures that any non-empty case inside a switch statement includes either break or return
+    "noFallthroughCasesInSwitch": true,
     //Report an error when not all code paths in function return a value.
     "noImplicitReturns": true,
-    //Raise error on this expressions with an implied any type.
-    "noImplicitThis": true,
+    //TypeScript has a way to describe objects which have unknown keys but known values on an object, via index signatures
+    "noUncheckedIndexedAccess": true,
     //Report errors on unused locals.
     "noUnusedLocals": true,
     //Report errors on unused parameters.
     "noUnusedParameters": true,
     //Redirect output structure to the directory.
-    "outDir": "./dist",
-    //unless piping to another program or redirecting output to a file. Stylize errors and messages using color and context.
-    //"pretty": true,
+    "outDir": "dist",
+    //List of path mapping entries for module names to locations relative to the baseUrl
+    /*"paths": {
+      "*": [
+        "src",
+        "node_modules"
+      ],
+    },*/
     //Include modules imported with .json extension.
     "resolveJsonModule": true,
     //(common root directory is computed from the list of input files)	Specifies the root directory of input files. Only use to control the output directory structure with outDir.
-    //"rootDir": "src",
-
-    //Rather than actually execute a build with the other input options and config files, show the final implied config file in the output.
-    //"showConfig": false,
-
+    "rootDir": "src",
     //Skip type checking of all declaration files (*.d.ts).
     "skipLibCheck": true,
-
     //Generates corresponding .map file.
     "sourceMap": true,
     //Enable all strict type checking options.
     "strict": true,
-    //In strict null checking mode, the null and undefined values are not in the domain of every type and are only assignable to themselves and any (the one exception being that undefined is also assignable to void).
-    "strictNullChecks": true,
     //Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'.
     "target": "ESNext",
     //Run the compiler in watch mode. Watch input files and trigger recompilation on changes. The implementation of watching files and directories can be configured using environment variable. See configuring watch for more details.
@@ -78,13 +64,5 @@
         "name": "typescript-plugin-css-modules"
       }
     ]
-  },
-  "include": [
-    "./src/**/*"
-  ],
-  "exclude": [
-    "dist",
-    "node_modules",
-    "**/*.spec.ts"
-  ]
+  }
 }

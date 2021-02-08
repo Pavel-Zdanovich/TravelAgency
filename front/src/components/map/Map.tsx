@@ -1,20 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import styles from './Map.module.css';
+import mapImage from "assets/map.jpg";
 
-interface IMap {
-    name: string,
-    src: any
-}
+import styles from "./Map.module.css";
 
-export type {IMap};
+const Map: React.FC = () => {
+  const name = "MAP";
 
-const Map: React.FC<IMap> = ({src, name}: IMap) => {
-    return (
-        <div className={styles.map}>
-            <img src={src} alt={name}/>
-        </div>
-    );
-}
+  return (
+    <div className={styles.map}>
+      <img className={styles.image} src={mapImage} alt={name} />
+    </div>
+  );
+};
 
 export default Map;

@@ -1,0 +1,124 @@
+.l10n {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lang {
+    width: 100%;
+}
+
+.lang [class^="lang__clear-indicator"] {
+}
+
+.lang [class^="lang__container"] {
+    justify-content: center;
+    padding: 0;
+}
+
+.lang [class^="lang__control"] {
+    width: 100%;
+}
+
+.lang [class^="lang__dropdown-indicator"] {
+    /*same as lang__indicator*/
+}
+
+.lang [class^="lang__group"] {
+
+}
+
+.lang [class^="lang__group-heading"] {
+
+}
+
+.lang [class^="lang__indicators"] {
+
+}
+
+.lang [class^="lang__indicators-container"] {
+
+}
+
+.lang [class^="lang__indicator"] {
+    /*same as lang__indicator-dropdown*/
+}
+
+.lang [class^="lang__indicator-separator"] {
+
+}
+
+.lang [class^="lang__input"] {
+    width: 100%;
+}
+
+.lang [class$="-Input"] {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.lang [class^="lang__loading-indicator"] {
+
+}
+
+.lang [class^="lang__loading-message"] {
+
+}
+
+.lang [class^="lang__menu"] {
+    position: initial;
+    margin: 0;
+}
+
+.lang [class^="lang__menu-list"] {
+}
+
+.lang [class^="lang__menu-portal"] {
+}
+
+.lang div:not([class]) {
+    display: none;
+}
+
+.lang [class^="lang__multi-value"] {
+}
+
+.lang [class$="lang__multi-value__label"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lang [class^="lang__multi-value-remove"] {
+}
+
+.lang [class^="lang__no-options-message"] {
+}
+
+.lang [class^="lang__option"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lang [class^="lang__placeholder"] {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lang [class^="lang__single-value"] {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lang [class^="lang__value-container"] {
+    padding: 0;
+}

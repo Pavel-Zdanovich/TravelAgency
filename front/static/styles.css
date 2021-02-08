@@ -15,7 +15,7 @@
 
 body {
     display: grid;
-    grid-template:
+    grid-template-areas:
             "header header header"
             "left_bar map right_bar"
             "footer footer footer";
@@ -23,7 +23,7 @@ body {
     grid-template-rows: 1fr 7fr 1fr; /*9*/
 }
 
-header[id="header"] {
+.header {
     grid-area: header;
     display: flex;
     justify-content: space-evenly; /*make search in center*/
@@ -83,7 +83,7 @@ header[id="header"] {
             align-items: center;
         }
 
-aside[id="left_bar"] {
+.left_bar {
     grid-area: left_bar;
     justify-content: space-evenly; /*make search in center*/
     align-items: center; /*vertical center for header*/
@@ -143,14 +143,14 @@ aside[id="left_bar"] {
                 display: inline-block;
             }
 
-map[id="map"] {
+.map {
     grid-area: map;
     justify-content: space-evenly; /*make search in center*/
     align-items: center; /*vertical center for header*/
     align-self: center;
 }
 
-aside[id="right_bar"] {
+.right_bar {
     grid-area: right_bar;
     justify-content: space-evenly; /*make search in center*/
     align-items: center; /*vertical center for header*/
@@ -215,7 +215,7 @@ aside[id="right_bar"] {
                 display: none;
             }
 
-footer[id="footer"] {
+.footer {
     grid-area: footer;
     display: flex;
     justify-content: space-evenly; /*make search in center*/

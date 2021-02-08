@@ -1,26 +1,19 @@
 import React from "react";
 
-import styles from "./System.module.css";
-import Lang from "./lang/Lang";
+import L10n from "./l10n/L10n";
 import Profile from "./profile/Profile";
 import Auth from "./auth/Auth";
 
-interface ISystem {
-    lang: string,
-    prof: string,
-    auth: string
-}
+import styles from "./System.module.css";
 
-export type {ISystem};
-
-const System: React.FC<ISystem> = ({lang, prof, auth}: ISystem) => {
-    return (
-        <div className={styles.system}>
-            <Lang name={lang}/>
-            <Profile name={prof}/>
-            <Auth name={auth}/>
-        </div>
-    );
-}
+const System: React.FC = () => {
+  return (
+    <div className={styles.system}>
+      <L10n />
+      <Profile />
+      <Auth />
+    </div>
+  );
+};
 
 export default System;

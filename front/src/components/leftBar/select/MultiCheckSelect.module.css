@@ -1,23 +1,111 @@
-.label {
+.select {
+    width: 75%;
+    display: grid;
+}
+
+.select [class^="select__clear-indicator"] {
+}
+
+.select [class^="select__container"] {
+
+}
+
+.select [class^="select__control"] {
+
+}
+
+.select [class^="select__dropdown-indicator"] {
+    /*same as select__indicator*/
+}
+
+.select [class^="select__group"] {
+
+}
+
+.select [class^="select__group-heading"] {
+
+}
+
+.select [class^="select__indicators"] {
+
+}
+
+.select [class^="select__indicators-container"] {
+
+}
+
+.select [class^="select__indicator"] {
+    /*same as select__indicator-dropdown*/
+}
+
+.select [class^="select__indicator-separator"] {
+
+}
+
+.select [class^="select__input"] {
+    width: 100%;
+}
+
+.select [class$="-Input"] {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.select [class^="select__loading-indicator"] {
+
+}
+
+.select [class^="select__loading-message"] {
+
+}
+
+.select [class^="select__menu"] {
+    position: initial;
+    margin: 0;
+}
+
+.select [class^="select__menu-list"] {
+}
+
+.select [class^="select__menu-portal"] {
+}
+
+.select div:not([class]) {
+    display: none;
+}
+
+.select [class^="select__multi-value"] {
+}
+
+.select [class$="select__multi-value__label"] {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.select2-container {
+.select [class^="select__multi-value-remove"] {
+}
+
+.select [class^="select__no-options-message"] {
+}
+
+.select [class^="select__option"] {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.select2-results__option:before {
-    content: "";
-    display: inline-block;
-    position: relative;
-    vertical-align: middle;
+.select [class^="select__placeholder"] {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.select2-results__option[aria-selected=true]:before {
-    content: "\f00c";
-    display: inline-block;
+.select [class^="select__single-value"] {
+}
+
+.select [class^="select__value-container"] {
+    padding: 0;
 }

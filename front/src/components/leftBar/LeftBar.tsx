@@ -1,31 +1,41 @@
-import React from 'react';
+import React from "react";
+
 import DateInput from "./dateInput/DateInput";
 import RangeInput from "./rangeInput/RangeInput";
 import MultiCheckSelect from "./select/MultiCheckSelect";
 
-import styles from './LeftBar.module.css';
+import styles from "./LeftBar.module.css";
 
-interface ILeftBar {
-}
+const LeftBar: React.FC = () => {
+  const startDate = "START DATE";
+  const endDate = "END DATE";
+  const cost = {
+    name: "COST",
+    min: 1,
+    max: 100,
+  };
+  const stars = {
+    name: "STARS",
+    min: 1,
+    max: 5,
+  };
+  const features = "FEATURES";
 
-export type {ILeftBar};
+  return (
+    <aside className={styles.aside}>
+      <form className={styles.form}>
+        <DateInput name={startDate} />
 
-const LeftBar: React.FC<ILeftBar> = ({}: ILeftBar) => {
-    return (
-        <aside className={styles.aside}>
-            <form className={styles.form}>
-                <DateInput name={"START DATE"}/>
+        <DateInput name={endDate} />
 
-                <DateInput name={"END DATE"}/>
+        <RangeInput name={cost.name} min={cost.min} max={cost.max} />
 
-                <RangeInput name={"COST"} min={1} max={100}/>
+        <RangeInput name={stars.name} min={stars.min} max={stars.max} />
 
-                <RangeInput name={"STARS"} min={1} max={5}/>
-
-                <MultiCheckSelect name={"FEATURES"}/>
-            </form>
-        </aside>
-    );
-}
+        <MultiCheckSelect name={features} />
+      </form>
+    </aside>
+  );
+};
 
 export default LeftBar;

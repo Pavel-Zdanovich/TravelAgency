@@ -1,53 +1,72 @@
-// For CSS
+declare namespace NodeJS {
+  interface ProcessEnv {
+    readonly NODE_ENV: "development" | "production" | "test";
+    readonly PUBLIC_URL: string;
+  }
+}
+
 declare module "*.module.css" {
-    const styles: { [key: string]: string };
-    export default styles;
+  const styles: { readonly [key: string]: string };
+  export default styles;
 }
 
-// For LESS
-declare module "*.module.less" {
-    const styles: { [key: string]: string };
-    export default styles;
-}
-
-// For SASS
 declare module "*.module.sass" {
-    const styles: { [key: string]: string };
-    export default styles;
+  const styles: { readonly [key: string]: string };
+  export default styles;
 }
 
-// For SCSS
 declare module "*.module.scss" {
-    const styles: { [key: string]: string };
-    export default styles;
+  const styles: { readonly [key: string]: string };
+  export default styles;
 }
 
-// For GIF
+declare module "*.module.less" {
+  const styles: { readonly [key: string]: string };
+  export default styles;
+}
+
+declare module "*.avif" {
+  const src: string;
+  export default src;
+}
+
+declare module "*.bmp" {
+  const src: string;
+  export default src;
+}
+
 declare module "*.gif" {
-    const value: any;
-    export = value;
+  const src: string;
+  export default src;
 }
 
-// For JPG
 declare module "*.jpg" {
-    const value: any;
-    export = value;
+  const src: string;
+  export default src;
 }
 
-// For JPEG
 declare module "*.jpeg" {
-    const value: any;
-    export = value;
+  const src: string;
+  export default src;
 }
 
-// For PNG
 declare module "*.png" {
-    const value: any;
-    export = value;
+  const src: string;
+  export default src;
 }
 
-// For SVG
+declare module "*.webp" {
+  const src: string;
+  export default src;
+}
+
 declare module "*.svg" {
-    const value: any;
-    export = value;
+  import * as React from "react";
+
+  export const ReactComponent: React.FunctionComponent<
+    React.SVGProps<SVGSVGElement> & { title?: string }
+  >;
+
+  const src: string;
+  export default src;
 }

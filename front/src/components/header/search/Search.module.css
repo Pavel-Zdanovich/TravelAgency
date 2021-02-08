@@ -1,16 +1,103 @@
-.search {
+.form {
     width: 41.75%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.label {
-    display: none;
+.search {
+    width: 100%;
+    height: 50%;
 }
 
-.input {
-    height: 50%;
+.search [class^="search__clear-indicator"] {
+}
+
+.search [class^="search__container"] {
+    justify-content: center;
+    padding: 0;
+}
+
+.search [class^="search__control"] {
+    border-radius: 5em; /*need to be >= 5*/
+}
+
+.search [class^="search__dropdown-indicator"] {
+    /*same as search__indicator*/
+}
+
+.search [class^="search__group"] {
+}
+
+.search [class^="search__group-heading"] {
+}
+
+.search [class^="search__indicators"] {
+}
+
+.search [class^="search__indicators-container"] {
+}
+
+.search [class^="search__indicator"] {
+    /*same as search__indicator-dropdown*/
+}
+
+.search [class^="search__indicator-separator"] {
+
+}
+
+.search [class^="search__input"] {
     width: 100%;
-    border-radius: 100em;
+}
+
+.search [class$="-Input"] {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.search [class^="search__loading-indicator"] {
+}
+
+.search [class^="search__loading-message"] {
+}
+
+.search [class^="search__menu"] {
+    position: initial;
+    margin: 0;
+}
+
+.search [class^="search__menu-list"] {
+}
+
+.search [class^="search__menu-portal"] {
+}
+
+.search [class^="search__multi-value"] {
+}
+
+.search [class$="search__multi-value__label"] {
+}
+
+.search [class^="search__multi-value-remove"] {
+}
+
+.search [class^="search__no-options-message"] {
+}
+
+.search [class^="search__option"] {
+}
+
+.search [class^="search__placeholder"] {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search [class^="search__single-value"] {
+}
+
+.search [class^="search__value-container"] {
+    padding: 0;
 }

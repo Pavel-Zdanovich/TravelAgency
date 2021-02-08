@@ -1,17 +1,26 @@
-import React from 'react';
+import React from "react";
 
-import styles from './Auth.module.css';
+import Form from "./form/Form";
 
-interface IAuth {
-    name: string
-}
+import styles from "./Auth.module.css";
 
-export type {IAuth};
+const Auth: React.FC = () => {
+  const name = "AUTH";
 
-const Auth: React.FC<IAuth> = ({name}: IAuth) => {
-    return (
-        <div className={styles.auth}>{name}</div>
-    );
-}
+  const [activeAuth, setActiveAuth] = React.useState<any>();
+
+  const handleAuth = () => {
+    setActiveAuth(<Form handleClose={() => setActiveAuth(undefined)} />);
+  };
+
+  return (
+    <>
+      <div className={styles.auth} onClick={handleAuth}>
+        {name}
+      </div>
+      {activeAuth}
+    </>
+  );
+};
 
 export default Auth;

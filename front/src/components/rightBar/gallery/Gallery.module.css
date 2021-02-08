@@ -3,9 +3,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    overflow: hidden;
 }
 
 .image {
-    width: fit-content;
+    width: 100%;
     height: auto;
 }

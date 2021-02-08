@@ -2,16 +2,10 @@ import React from "react";
 
 import styles from "./Contact.module.css";
 
-interface IContact {
-    name: string
-}
+const Contact: React.FC = () => {
+  const name = "CONTACT";
 
-export type {IContact};
-
-const Contact: React.FC<IContact> = ({name}: IContact) => {
-    return (
-        <div className={styles.contact}>{name}</div>
-    );
-}
+  return <div className={styles.contact}>{name}</div>;
+};
 
 export default Contact;
