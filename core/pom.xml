@@ -44,7 +44,7 @@
         <liquibase.changeLogFile>
             ${basedir}\src\main\resources\database\migration\changelog-master.xml
         </liquibase.changeLogFile>
-        <liquibase.enabled>true</liquibase.enabled>
+        <liquibase.enabled>false</liquibase.enabled>
         <!--liquibase configuration end-->
 
         <oracle.version>12.2.0.1</oracle.version>

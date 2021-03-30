@@ -1,21 +1,29 @@
 import React from "react";
-
 import Select, { OptionsType, OptionTypeBase } from "react-select";
 
-import cross from "assets/cross-icon.svg";
+import { IUser } from "../../../../../store/components/auth/types";
+import { ErrorType } from "../../../../../store/components/types";
+
+import crossIcon from "assets/cross-icon.svg";
 
 import styles from "./Form.module.css";
 
-interface IForm {
-  handleClose: () => void;
+interface IFormProps {
+  close: () => void;
+  authorize: (signType: string, user: IUser) => void;
+  error?: ErrorType;
 }
 
-export type { IForm };
+export type { IFormProps };
 
-const Form: React.FC<IForm> = ({ handleClose }: IForm) => {
+const Form: React.FC<IFormProps> = ({
+  close,
+  authorize,
+  error,
+}: IFormProps) => {
   const secret = "->[]";
-  const authorize = "AUTHORIZE";
-  const close = <img src={cross} alt={"X"} />;
+  const authorization = "AUTHORIZATION";
+  const cross = <img src={crossIcon} alt={"X"} />;
   const username = "USERNAME";
   const password = "PASSWORD";
   const signIn = "SIGN IN";
@@ -31,34 +39,85 @@ const Form: React.FC<IForm> = ({ handleClose }: IForm) => {
   const remember = "REMEMBER ME";
   const forgot = "FORGOT A PASSWORD";
 
+  const [signType, setSignType] = React.useState<string>("sign_in");
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const user: IUser = {
+      username: formData.get("username") as string,
+      password: formData.get("password") as string,
+      with: formData.get("with") as string,
+      remember: formData.get("remember") as string,
+    };
+
+    authorize(signType, user);
+  };
+
   return (
     <div className={styles.modal}>
-      <form className={styles.form}>
-        <div className={styles.secret}>{secret}</div>
-        <div className={styles.heading}>{authorize}</div>
-        <button className={styles.close} type={"button"} onClick={handleClose}>
-          {close}
+      <form className={styles.form} noValidate={true} onSubmit={handleSubmit}>
+        <div
+          className={styles.secret}
+          onClick={() =>
+            authorize("sign_in", {
+              username: "PavelZdanovich",
+              password: "Password",
+            })
+          }
+        >
+          {secret}
+        </div>
+        <div className={styles.heading}>{authorization}</div>
+        <button className={styles.close} type={"button"} onClick={close}>
+          {cross}
         </button>
-        <label className={styles.username_label} htmlFor={"username"}>
+        <label
+          className={styles.username_label}
+          htmlFor={username.toLowerCase()}
+        >
           {username}
         </label>
         <input
           className={styles.username_input}
           type={"email"}
-          id={"username"}
+          id={username.toLowerCase()}
+          name={username.toLowerCase()}
         />
-        <label className={styles.password_label} htmlFor={"password"}>
+        <label
+          className={styles.password_label}
+          htmlFor={password.toLowerCase()}
+        >
           {password}
         </label>
         <input
           className={styles.password_input}
           type={"password"}
-          id={"password"}
+          id={password.toLowerCase()}
+          name={password.toLowerCase()}
         />
-        <button className={styles.sign_in} type={"submit"}>
+        <button
+          className={styles.sign_in}
+          type={"submit"}
+          id={"sign_in"}
+          name={"sign_in"}
+          onClick={() => {
+            setSignType("sign_in");
+          }}
+        >
           {signIn}
         </button>
-        <button className={styles.sign_up} type={"submit"}>
+        <button
+          className={styles.sign_up}
+          type={"submit"}
+          id={"sign_up"}
+          name={"sign_up"}
+          onClick={() => {
+            setSignType("sign_up");
+          }}
+        >
           {signUp}
         </button>
         <Select
@@ -67,10 +126,8 @@ const Form: React.FC<IForm> = ({ handleClose }: IForm) => {
           components={{
             IndicatorsContainer: () => null,
           }}
-          name={signUpWith}
-          //value={multiValue}
+          name={signUpWith.toLowerCase()}
           options={withOptions}
-          //onChange={handleChange}
           defaultValue={defaultValue}
         />
         <div className={styles.remember}>
@@ -78,6 +135,7 @@ const Form: React.FC<IForm> = ({ handleClose }: IForm) => {
             className={styles.remember_input}
             type={"checkbox"}
             id={"remember"}
+            name={"remember"}
           />
           <label className={styles.remember_label} htmlFor={"remember"}>
             {remember}
@@ -87,6 +145,7 @@ const Form: React.FC<IForm> = ({ handleClose }: IForm) => {
           {forgot}
         </a>
       </form>
+      {error}
     </div>
   );
 };

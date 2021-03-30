@@ -107,6 +107,17 @@ module.exports = (env, options) => {
       contentBase: settings.distPath,
       filename: "[name].bundle.js",
       port: 9000,
+      /*proxy: {
+        "/api": {
+          changeOrigin: true,
+          cookieDomainRewrite: "localhost",
+          target: "http://some.endpoint.com",
+        },
+      },
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true,
+      },*/
       compress: true,
       historyApiFallback: true,
       watchContentBase: true,

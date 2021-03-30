@@ -2,13 +2,13 @@ import React from "react";
 
 import styles from "./Review.module.css";
 
-interface IReview {
+interface IReviewProps {
   name: string;
 }
 
-export type { IReview };
+export type { IReviewProps };
 
-const Review: React.FC<IReview> = ({ name }: IReview) => {
+const Review: React.FC<IReviewProps> = ({ name }: IReviewProps) => {
   const description = "Description";
   const comment = "Comment";
 

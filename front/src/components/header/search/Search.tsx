@@ -1,22 +1,28 @@
 import React from "react";
 
 import Async from "react-select/async";
+import { OptionsType, OptionTypeBase } from "react-select";
 
 import styles from "./Search.module.css";
 
 const Search: React.FC = () => {
   const name = "SEARCH";
 
-  const url = "http://localhost:8080/travelagency/hotels";
+  const options: OptionsType<OptionTypeBase> = [
+    { value: "country", label: "COUNTRY" },
+    { value: "feature", label: "FEATURE" },
+    { value: "hotel", label: "HOTEL" },
+    { value: "review", label: "REVIEW" },
+    { value: "tour", label: "TOUR" },
+    { value: "user", label: "USER" },
+  ];
 
-  const initRequest: RequestInit = {
-    method: "GET",
-    headers: [[""]],
-  };
-
-  const promiseOptions = (inputValue: string) => {
-    initRequest["body"] = inputValue;
-    return fetch(url, initRequest);
+  const loadOptions = (
+    inputValue: string,
+    callback: (options: OptionsType<OptionTypeBase>) => void,
+  ) => {
+    console.log(inputValue);
+    callback(options);
   };
 
   return (
@@ -29,7 +35,7 @@ const Search: React.FC = () => {
         }}
         name={name}
         placeholder={name}
-        loadOptions={promiseOptions}
+        loadOptions={loadOptions}
       />
     </form>
   );

@@ -67,10 +67,10 @@ public class AuthService extends DaoAuthenticationProvider {
     public Authentication filter(HttpServletRequest request) {
         String servletPath = request.getServletPath();
 
-        if ((AuthController.PATH + AuthController.REGISTER).equals(servletPath)) {
+        if ((AuthController.PATH + AuthController.SIGN_UP).equals(servletPath)) {
             return register(request);
         }
-        if ((AuthController.PATH + AuthController.LOGIN).equals(servletPath)) {
+        if ((AuthController.PATH + AuthController.SIGN_IN).equals(servletPath)) {
             return login(request);
         }
 

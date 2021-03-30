@@ -2,15 +2,19 @@ import React from "react";
 
 import styles from "./RangeInput.module.css";
 
-interface IRangeInput {
+interface IRangeInputProps {
   name: string;
   min: number;
   max: number;
 }
 
-export type { IRangeInput };
+export type { IRangeInputProps };
 
-const RangeInput: React.FC<IRangeInput> = ({ name, min, max }: IRangeInput) => {
+const RangeInput: React.FC<IRangeInputProps> = ({
+  name,
+  min,
+  max,
+}: IRangeInputProps) => {
   const id = "select_" + name;
 
   return (

@@ -61,7 +61,7 @@ public class AuthControllerTest extends AbstractTransactionalTestNGSpringContext
 
         MvcResult mvcResult = mockMvc.
                 perform(MockMvcRequestBuilders.
-                        post(String.format("%s%s", AuthController.PATH, AuthController.REGISTER)).
+                        post(String.format("%s%s", AuthController.PATH, AuthController.SIGN_UP)).
                         contentType(MediaType.APPLICATION_JSON).
                         content(objectMapper.writeValueAsString((user)))).
                 andExpect(MockMvcResultMatchers.status().isOk()).
@@ -74,7 +74,7 @@ public class AuthControllerTest extends AbstractTransactionalTestNGSpringContext
 
         MvcResult mvcResult = mockMvc.
                 perform(MockMvcRequestBuilders.
-                        post(String.format("%s%s", AuthController.PATH, AuthController.LOGIN)).
+                        post(String.format("%s%s", AuthController.PATH, AuthController.SIGN_IN)).
                         contentType(MediaType.APPLICATION_JSON).
                         content(objectMapper.writeValueAsString((user)))).
                 andExpect(MockMvcResultMatchers.status().isOk()).
@@ -84,7 +84,7 @@ public class AuthControllerTest extends AbstractTransactionalTestNGSpringContext
     @Test
     public void logout() throws Exception {
         MvcResult mvcResult = mockMvc.
-                perform(MockMvcRequestBuilders.get(String.format("%s%s", AuthController.PATH, AuthController.LOGOUT))).
+                perform(MockMvcRequestBuilders.get(String.format("%s%s", AuthController.PATH, AuthController.SIGN_OUT))).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andReturn();
     }

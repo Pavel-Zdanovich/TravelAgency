@@ -1,7 +1,8 @@
 import React from "react";
 
-import styles from "./L10n.module.css";
 import Select, { OptionsType, OptionTypeBase } from "react-select";
+
+import styles from "./L10n.module.css";
 
 const L10n: React.FC = () => {
   const lang = "LANG";

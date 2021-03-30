@@ -67,12 +67,12 @@ public class OpenAPIConfiguration {
                 });
 
                 openApi.getPaths()
-                        .get(AuthController.PATH + AuthController.LOGIN)
+                        .get(AuthController.PATH + AuthController.SIGN_IN)
                         .getPost()
                         .security(null)
                         .setRequestBody(requestBody);
                 openApi.getPaths()
-                        .get(AuthController.PATH + AuthController.REGISTER)
+                        .get(AuthController.PATH + AuthController.SIGN_UP)
                         .getPost()
                         .security(null)
                         .setRequestBody(requestBody);//TODO remove username and password example

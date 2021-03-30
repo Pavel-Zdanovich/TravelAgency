@@ -2,13 +2,13 @@ import React from "react";
 
 import styles from "./DateInput.module.css";
 
-interface IDateInput {
+interface IDateInputProps {
   name: string;
 }
 
-export type { IDateInput };
+export type { IDateInputProps };
 
-const DateInput: React.FC<IDateInput> = ({ name }: IDateInput) => {
+const DateInput: React.FC<IDateInputProps> = ({ name }: IDateInputProps) => {
   const id = "select_" + name;
 
   return (

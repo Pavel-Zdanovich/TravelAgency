@@ -1,29 +1,40 @@
 import React from "react";
-
 import Select, { OptionsType, OptionTypeBase, ValueType } from "react-select";
+
+import {
+  connector,
+  IFeaturesConnectedProps,
+} from "../../../store/components/features/actions";
+import { IFeatures } from "../../../store/components/features/types";
 
 import styles from "./MultiCheckSelect.module.css";
 
-interface IMultiCheckSelect {
+interface IMultiCheckSelectProps extends IFeaturesConnectedProps {
   name: string;
 }
 
-export type { IMultiCheckSelect };
+export type { IMultiCheckSelectProps };
 
-const MultiCheckSelect: React.FC<IMultiCheckSelect> = ({
+const MultiCheckSelect: React.FC<IMultiCheckSelectProps> = ({
   name,
-}: IMultiCheckSelect) => {
-  const options: OptionsType<OptionTypeBase> = [
-    { value: "foo", label: "Foo" },
-    { value: "bar", label: "Bar" },
-    { value: "bat", label: "Bat" },
-  ];
+  ...props
+}: IMultiCheckSelectProps) => {
+  const features: IFeatures = props.features;
 
-  /*const [multiValue, setMultiValue] = React.useState<OptionsType<OptionTypeBase>>();
+  const options: OptionsType<OptionTypeBase> = features
+    ? features.map((feature) => {
+        return {
+          value: feature.name,
+          label: feature.name,
+        };
+      })
+    : [];
+
+  const [value, setValue] = React.useState<OptionsType<OptionTypeBase>>();
 
   const handleChange = (value: ValueType<OptionTypeBase, true>) => {
-    setMultiValue(value as OptionsType<OptionTypeBase>);
-  };*/
+    setValue(value as OptionsType<OptionTypeBase>);
+  };
 
   return (
     <>
@@ -36,9 +47,9 @@ const MultiCheckSelect: React.FC<IMultiCheckSelect> = ({
         }}
         name={name}
         placeholder={name}
-        //value={multiValue}
         options={options}
-        //onChange={handleChange}
+        value={value}
+        onChange={handleChange}
         isMulti={true}
         closeMenuOnSelect={false}
         menuIsOpen={true}
@@ -48,4 +59,4 @@ const MultiCheckSelect: React.FC<IMultiCheckSelect> = ({
   );
 };
 
-export default MultiCheckSelect;
+export default connector(MultiCheckSelect);

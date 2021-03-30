@@ -15,24 +15,24 @@ import javax.servlet.http.HttpServletRequest;
 public class AuthController {
 
     public static final String PATH = "/auth";
-    public static final String REGISTER = "/signup";
-    public static final String LOGIN = "/signin";
-    public static final String LOGOUT = "/signout";
+    public static final String SIGN_UP = "/signup"; //register
+    public static final String SIGN_IN = "/signin"; //enter
+    public static final String SIGN_OUT = "/signout"; //exit
 
     @Autowired
     private AuthService authService;
 
-    @PostMapping(path = AuthController.REGISTER)
+    @PostMapping(path = AuthController.SIGN_UP)
     public ResponseEntity<Authentication> register(HttpServletRequest request) {
         return ResponseEntity.ok(this.authService.register(request));
     }
 
-    @PostMapping(path = AuthController.LOGIN)
+    @PostMapping(path = AuthController.SIGN_IN)
     public ResponseEntity<Authentication> login(HttpServletRequest request) {
         return ResponseEntity.ok(this.authService.login(request));
     }
 
-    @RequestMapping(path = AuthController.LOGOUT)
+    @RequestMapping(path = AuthController.SIGN_OUT)
     public ResponseEntity<?> logout() {
         return ResponseEntity.ok("Log out success");
     }

@@ -2,11 +2,11 @@ import React from "react";
 
 import styles from "./Label.module.css";
 
-interface ILabel {
+interface ILabelProps {
   name: string;
 }
 
-const Label: React.FC<ILabel> = ({ name }: ILabel) => {
+const Label: React.FC<ILabelProps> = ({ name }: ILabelProps) => {
   return <label className={styles.label}>{name}</label>;
 };
 
