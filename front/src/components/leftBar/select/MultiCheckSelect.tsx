@@ -1,6 +1,10 @@
 import React from "react";
 import Select, { OptionsType, OptionTypeBase, ValueType } from "react-select";
+import { useSelector } from "react-redux";
 
+import { State } from "../../../store/state";
+import { StatusType } from "../../../store/components/state";
+import { IAuth } from "../../../store/components/auth/types";
 import {
   connector,
   IFeaturesConnectedProps,
@@ -19,7 +23,13 @@ const MultiCheckSelect: React.FC<IMultiCheckSelectProps> = ({
   name,
   ...props
 }: IMultiCheckSelectProps) => {
-  const features: IFeatures = props.features;
+  const auth: IAuth = useSelector((state: State) => state.auth.payload);
+
+  if (auth && props.features.status == StatusType.IDLE) {
+    props.readAllFeatures(auth.token);
+  }
+
+  const features: IFeatures = props.features.payload;
 
   const options: OptionsType<OptionTypeBase> = features
     ? features.map((feature) => {

@@ -8,7 +8,6 @@ const requestReducer = <S extends IState<any>, A extends RequestAction<any>>(
   state: S,
   action: A,
 ): S => {
-  console.log("auth");
   switch (action.type.replace(state.subType + "/", "")) {
     case RequestActionTypes.REQUEST_IDLE: {
       return {

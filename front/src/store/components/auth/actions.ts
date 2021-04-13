@@ -125,17 +125,21 @@ export const signIn: ActionCreator<ThunkAction<any, any, any, any>> = (
   };
 };
 
-export const signOut: ActionCreator<ThunkAction<any, any, any, any>> = () => {
-  return (dispatch, getState) => {
+export const signOut: ActionCreator<ThunkAction<any, any, any, any>> = (
+  token?: string,
+) => {
+  return (dispatch) => {
     batch(() => {
-      const state = getState();
+      const headers: HeadersInit = token
+        ? {
+            "Json-Web-Token": token,
+          }
+        : {};
 
       const request: IRequest = {
         method: "POST",
         path: "auth/signout",
-        headers: {
-          "Json-Web-Token": state.auth.payload.token,
-        },
+        headers: headers,
       };
 
       console.log("request"); //TODO dispatch fetch started

@@ -35,19 +35,21 @@ export const featuresReadAllFeatures: ActionCreator<IFeatureAction> = (
   };
 };
 
-export const readAllFeatures: ActionCreator<
-  ThunkAction<any, any, any, any>
-> = () => {
-  return (dispatch, getState) => {
+export const readAllFeatures: ActionCreator<ThunkAction<any, any, any, any>> = (
+  token?: string,
+) => {
+  return (dispatch) => {
     batch(() => {
-      const state = getState();
+      const headers: HeadersInit = token
+        ? {
+            "Json-Web-Token": token,
+          }
+        : {};
 
       const request: IRequest = {
-        method: "POST",
+        method: "GET",
         path: "features",
-        headers: {
-          "Json-Web-Token": state.auth.payload.token,
-        },
+        headers: headers,
       };
 
       console.log("request"); //TODO dispatch fetch started
@@ -75,7 +77,7 @@ export const readAllFeatures: ActionCreator<
 };
 
 const mapStateToProps: MapStateToProps<any, any, State> = (state) => ({
-  features: state.features.payload,
+  features: state.features,
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (

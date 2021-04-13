@@ -10,6 +10,7 @@ export interface IRequest {
   headers?: HeadersInit;
   body?: BodyInit;
   mode?: RequestMode;
+  credentials?: RequestCredentials;
 }
 
 function request({
@@ -18,6 +19,7 @@ function request({
   headers,
   body,
   mode = "cors",
+  credentials = "omit",
 }: IRequest): Promise<Response> {
   const input: RequestInfo = `${url}/${path}`;
   const init: RequestInit = {
@@ -25,6 +27,7 @@ function request({
     body: body,
     headers: headers,
     mode: mode,
+    credentials: credentials,
   };
   console.groupCollapsed(`${init.method} ${input}`);
   console.log(init);

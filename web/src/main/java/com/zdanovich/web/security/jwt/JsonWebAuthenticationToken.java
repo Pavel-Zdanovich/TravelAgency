@@ -20,6 +20,6 @@ public class JsonWebAuthenticationToken extends UsernamePasswordAuthenticationTo
     }
 
     public String getToken() {
-        return token;
+        return this.token;
     }
 }

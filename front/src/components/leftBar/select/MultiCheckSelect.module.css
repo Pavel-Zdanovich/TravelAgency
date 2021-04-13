@@ -75,7 +75,8 @@
     display: none;
 }
 
-.select [class^="select__multi-value"] {
+.select [class~="select__multi-value"] {
+    height: 25%;
 }
 
 .select [class$="select__multi-value__label"] {
@@ -94,6 +95,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 10%;
 }
 
 .select [class^="select__placeholder"] {

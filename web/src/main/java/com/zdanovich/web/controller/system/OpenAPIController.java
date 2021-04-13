@@ -1,7 +1,6 @@
 package com.zdanovich.web.controller.system;
 
 import com.zdanovich.web.openapi.OpenAPIConfiguration;
-import lombok.extern.log4j.Log4j2;
 import org.springdoc.webmvc.api.OpenApiResource;
 import org.springdoc.webmvc.ui.SwaggerWelcome;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@Log4j2
 public class OpenAPIController {
 
     @Autowired

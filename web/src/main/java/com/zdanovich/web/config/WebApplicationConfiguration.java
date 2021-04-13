@@ -39,7 +39,7 @@ public class WebApplicationConfiguration implements WebMvcConfigurer {
         converters.add(mappingJackson2HttpMessageConverter);
     }
 
-    @Bean
+    /*@Bean
     @Autowired
     public ITemplateResolver templateResolver(ApplicationContext applicationContext) {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
@@ -68,5 +68,5 @@ public class WebApplicationConfiguration implements WebMvcConfigurer {
         viewResolver.setOrder(1);
         viewResolver.setViewNames(new String[]{"*"});
         return viewResolver;
-    }
+    }*/
 }

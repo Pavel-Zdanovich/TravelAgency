@@ -10,7 +10,6 @@ const reducer: Reducer<IFeatureState, IFeatureAction> = (
   state = initialState,
   action,
 ) => {
-  console.log("features");
   switch (action.type) {
     case FeatureActionTypes.FEATURES_READ_ALL_FEATURES: {
       return {

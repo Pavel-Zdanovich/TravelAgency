@@ -1,4 +1,5 @@
 import React from "react";
+import { Route, useHistory, useLocation } from "react-router-dom";
 
 import { StatusType } from "../../../../store/components/state";
 import {
@@ -13,25 +14,20 @@ import styles from "./Auth.module.css";
 
 type IAuthProps = IAuthConnectedProps;
 
-enum FormStatus {
-  OPEN = "OPEN",
-  CLOSE = "CLOSE",
-}
-
 const Auth: React.FC<IAuthProps> = ({ ...props }: IAuthProps) => {
   const signInUp = "SIGN IN/UP";
   const signOut = "SIGN OUT";
 
-  const [formStatus, setFormStatus] = React.useState<FormStatus>(
-    FormStatus.CLOSE,
-  );
+  const history = useHistory();
+  const location = useLocation();
+
   const [name, setName] = React.useState<string>(signInUp);
 
   const openForm = () => {
-    setFormStatus(FormStatus.OPEN);
+    history.push("/auth");
   };
   const closeForm = () => {
-    setFormStatus(FormStatus.CLOSE);
+    history.push("/");
   };
 
   const handleClick = () => {
@@ -41,8 +37,8 @@ const Auth: React.FC<IAuthProps> = ({ ...props }: IAuthProps) => {
         break;
       }
       case signOut: {
-        props.signOut();
-        closeForm();
+        props.signOut(props.auth.token);
+        history.push("/auth/sign_out");
         break;
       }
       default: {
@@ -55,10 +51,12 @@ const Auth: React.FC<IAuthProps> = ({ ...props }: IAuthProps) => {
     switch (signType) {
       case "sign_up": {
         props.signUp(user);
+        history.push("/auth/sign_up");
         break;
       }
       case "sign_in": {
         props.signIn(user);
+        history.push("/auth/sign_in");
         break;
       }
       default: {
@@ -67,8 +65,59 @@ const Auth: React.FC<IAuthProps> = ({ ...props }: IAuthProps) => {
     }
   };
 
-  const form = <Form close={closeForm} authorize={authorize} />;
-  const spinner = <div className={styles.spinner}>SPINNER</div>;
+  const renderModal = () => {
+    const form = <Form close={closeForm} authorize={authorize} />;
+    const spinner = <div className={styles.spinner}>SPINNER</div>;
+    const authStatus: StatusType = props.auth.status;
+    switch (authStatus) {
+      case StatusType.IDLE: {
+        return location.pathname == "/auth" ? form : null;
+      }
+      case StatusType.LOADING: {
+        if (
+          location.pathname == "/auth/sign_in" ||
+          location.pathname == "/auth/sign_up"
+        ) {
+          return (
+            <>
+              {form}
+              {spinner}
+            </>
+          );
+        } else {
+          return spinner;
+        }
+      }
+      case StatusType.SUCCEEDED: {
+        if (location.pathname == "/auth") {
+          return form;
+        } else {
+          return null;
+        }
+      }
+      case StatusType.FAILED: {
+        if (
+          location.pathname == "/auth/sign_in" ||
+          location.pathname == "/auth/sign_up"
+        ) {
+          return (
+            <Form
+              close={closeForm}
+              authorize={authorize}
+              error={props.auth.error}
+            />
+          );
+        } else {
+          console.error(props.auth.error);
+          return null;
+        }
+      }
+      default: {
+        console.log(`Unknown auth status: ${authStatus}`);
+        return null;
+      }
+    }
+  };
 
   React.useEffect(() => {
     const authStatus: StatusType = props.auth.status;
@@ -80,11 +129,10 @@ const Auth: React.FC<IAuthProps> = ({ ...props }: IAuthProps) => {
         break;
       }
       case StatusType.SUCCEEDED: {
-        if (props.auth.payload != null && formStatus == FormStatus.OPEN) {
-          setFormStatus(FormStatus.CLOSE);
+        history.push("/");
+        if (props.auth.payload != null) {
           setName(signOut);
-        }
-        if (props.auth.payload == null && formStatus == FormStatus.CLOSE) {
+        } else {
           setName(signInUp);
         }
         break;
@@ -93,52 +141,17 @@ const Auth: React.FC<IAuthProps> = ({ ...props }: IAuthProps) => {
         break;
       }
       default: {
-        break;
-      }
-    }
-  }, [props.auth]);
-
-  const renderModal = () => {
-    const authStatus: StatusType = props.auth.status;
-    switch (authStatus) {
-      case StatusType.IDLE: {
-        return formStatus == FormStatus.OPEN ? form : null;
-      }
-      case StatusType.LOADING: {
-        return formStatus == FormStatus.OPEN ? (
-          <>
-            <>{form}</>
-            <>{spinner}</>
-          </>
-        ) : (
-          spinner
-        );
-      }
-      case StatusType.SUCCEEDED: {
-        return formStatus == FormStatus.OPEN ? form : null;
-      }
-      case StatusType.FAILED: {
-        return (
-          <Form
-            close={closeForm}
-            authorize={authorize}
-            error={props.auth.error}
-          />
-        );
-      }
-      default: {
         console.log(`Unknown auth status: ${authStatus}`);
-        return null;
       }
     }
-  };
+  }, [props.auth, history]);
 
   return (
     <>
       <div className={styles.auth} onClick={handleClick}>
         {name}
       </div>
-      {renderModal()}
+      <Route path="/auth" render={renderModal} />
     </>
   );
 };

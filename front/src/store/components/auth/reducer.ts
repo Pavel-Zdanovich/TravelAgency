@@ -10,7 +10,6 @@ const reducer: Reducer<IAuthState, IAuthAction> = (
   state = initialState,
   action,
 ) => {
-  console.log("auth");
   switch (action.type) {
     case AuthActionTypes.AUTH_SIGN_IN: {
       return {
