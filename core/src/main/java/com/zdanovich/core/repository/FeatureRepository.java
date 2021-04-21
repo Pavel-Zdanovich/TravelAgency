@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Optional;
 
 @Repository
-public interface FeatureRepository extends CommonRepository<Feature, Long> {
+public interface FeatureRepository extends CommonRepository<Long, Feature> {
 
     Optional<Feature> findByName(@NotEmpty String name);
 

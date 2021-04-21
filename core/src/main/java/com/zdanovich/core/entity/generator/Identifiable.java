@@ -1,8 +1,10 @@
 package com.zdanovich.core.entity.generator;
 
-@FunctionalInterface
-public interface Identifiable {
+import java.io.Serializable;
 
-    Long getId();
+@FunctionalInterface
+public interface Identifiable<ID extends Serializable > {
+
+    ID getId();
 
 }

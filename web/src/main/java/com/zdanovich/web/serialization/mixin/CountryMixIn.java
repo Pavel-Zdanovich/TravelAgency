@@ -5,9 +5,8 @@ import com.zdanovich.core.entity.Tour;
 
 import java.util.Set;
 
-//@JsonIgnoreProperties(value = {"tours"})
 public class CountryMixIn {
 
     @JsonBackReference
-    private Set<Tour> tours;
+    private Set<Tour> tours; //TODO return in Detailed
 }

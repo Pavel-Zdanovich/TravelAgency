@@ -24,7 +24,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path = ReviewController.PATH)
-public class ReviewController extends AbstractController<Review, Long, ReviewRepository, ReviewService> {
+public class ReviewController extends AbstractController<Long, Review, ReviewRepository, ReviewService> {
 
     public static final String PATH = "/reviews";
 
@@ -35,25 +35,25 @@ public class ReviewController extends AbstractController<Review, Long, ReviewRep
 
     @GetMapping(params = "date")
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
-    public ResponseEntity<List<Review>> findByReviewDate(
+    public ResponseEntity<?> findByReviewDate(
             @RequestParam
             @NotNull(message = "{review.date.notNull}")
             @FutureOrPresent(message = "{review.date.futureOrPresent}") Timestamp date) {
-        return ResponseEntity.ok(service.findByReviewDate(date));
+        return ResponseEntity.ok(this.service.findByReviewDate(date));
     }
 
     @GetMapping(params = "text")
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
-    public ResponseEntity<List<Review>> findByReviewText(
+    public ResponseEntity<?> findByReviewText(
             @RequestParam
             @NotEmpty(message = "{review.text.notEmpty}")
             @Size(max = 1000, message = "{review.text.size}") String text) {
-        return ResponseEntity.ok(service.findByReviewText(text));
+        return ResponseEntity.ok(this.service.findByReviewText(text));
     }
 
     @GetMapping(params = "user_id, tour_id")
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
-    public ResponseEntity<Iterable<Review>> findByUserAndTour(
+    public ResponseEntity<?> findByUserAndTour(
             @RequestParam(name = "user_id") Long userId,
             @RequestParam(name = "tour_id") Long tourId) {
 
@@ -61,7 +61,7 @@ public class ReviewController extends AbstractController<Review, Long, ReviewRep
 
         if (userId != null && tourId != null) {
 
-            Optional<Review> optionalReview = service.findByUser_UserId_And_Tour_TourId(userId, tourId);
+            Optional<Review> optionalReview = this.service.findByUser_UserId_And_Tour_TourId(userId, tourId);
 
             if (optionalReview.isPresent()) {
                 reviews.add(optionalReview.get());
@@ -72,7 +72,7 @@ public class ReviewController extends AbstractController<Review, Long, ReviewRep
 
         } else if (userId != null) {
 
-            reviews = service.findByUser_Id(userId);
+            reviews = this.service.findByUser_Id(userId);
             if (reviews != null && !reviews.isEmpty()) {
                 return ResponseEntity.ok(reviews);
             } else {
@@ -81,7 +81,7 @@ public class ReviewController extends AbstractController<Review, Long, ReviewRep
 
         } else {
 
-            reviews = service.findByTour_TourId(tourId);
+            reviews = this.service.findByTour_TourId(tourId);
             if (reviews != null && !reviews.isEmpty()) {
                 return ResponseEntity.ok(reviews);
             } else {

@@ -28,7 +28,7 @@ import java.sql.Timestamp;
 @EqualsAndHashCode(callSuper = false)
 @ToString
 @Validated
-public class Review extends AbstractEntity {
+public class Review extends AbstractEntity<Long> {
 
     public static final String REVIEWS = "REVIEWS";
     public static final String REVIEW_ID = "REVIEW_ID";
@@ -61,33 +61,11 @@ public class Review extends AbstractEntity {
     @Getter
     private Tour tour;
 
-    public boolean setUser(@NotNull(message = "{user.notNull}") User user) {
+    public void setUser(@NotNull(message = "{user.notNull}") User user) {
         this.user = user;
-        return this.user.getReviews().add(this);
     }
 
-    public boolean removeUser() {
-        if (this.user != null) {
-            if (this.user.getReviews().remove(this)) {
-                this.user = null;
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean setTour(@NotNull(message = "{tour.notNull}") Tour tour) {
+    public void setTour(@NotNull(message = "{tour.notNull}") Tour tour) {
         this.tour = tour;
-        return this.tour.getReviews().add(this);
-    }
-
-    public boolean removeTour() {
-        if (this.tour != null) {
-            if (this.tour.getReviews().remove(this)) {
-                this.user = null;
-                return true;
-            }
-        }
-        return false;
     }
 }

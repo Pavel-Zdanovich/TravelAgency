@@ -7,8 +7,8 @@ import com.zdanovich.core.entity.User;
 public class ReviewMixIn {
 
     @JsonManagedReference
-    private User user;
+    private User user; //Brief
 
     @JsonManagedReference
-    private Tour tour;
+    private Tour tour; //TODO serialize tour as brief
 }

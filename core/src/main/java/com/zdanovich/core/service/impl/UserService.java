@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class UserService extends AbstractService<User, Long, UserRepository> {
+public class UserService extends AbstractService<Long, User, UserRepository> {
 
     @Autowired
     public UserService(UserRepository repository) {

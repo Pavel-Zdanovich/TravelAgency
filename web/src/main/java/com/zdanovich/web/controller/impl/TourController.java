@@ -26,7 +26,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = TourController.PATH)
-public class TourController extends AbstractController<Tour, Long, TourRepository, TourService> {
+public class TourController extends AbstractController<Long, Tour, TourRepository, TourService> {
 
     public static final String PATH = "/tours";
 
@@ -37,49 +37,49 @@ public class TourController extends AbstractController<Tour, Long, TourRepositor
 
     @GetMapping(params = "startDate")
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
-    public ResponseEntity<List<Tour>> findByStartDate(
+    public ResponseEntity<?> findByStartDate(
             @RequestParam
             @NotNull(message = "{tour.startDate.notNull}")
             @FutureOrPresent(message = "{tour.startDate.futureOrPresent}") Timestamp startDate) {
-        return ResponseEntity.ok(service.findByStartDate(startDate));
+        return ResponseEntity.ok(this.service.findByStartDate(startDate));
     }
 
     @GetMapping(params = "endDate")
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
-    public ResponseEntity<List<Tour>> findByEndDate(
+    public ResponseEntity<?> findByEndDate(
             @RequestParam
             @NotNull(message = "{tour.endDate.notNull}")
             @Future(message = "{tour.endDate.future}") Timestamp endDate) {
-        return ResponseEntity.ok(service.findByEndDate(endDate));
+        return ResponseEntity.ok(this.service.findByEndDate(endDate));
     }
 
     @GetMapping(params = "days")
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
-    public ResponseEntity<List<Tour>> findByDuration(@RequestParam int days) {
-        return ResponseEntity.ok(service.findByDuration(days));
+    public ResponseEntity<?> findByDuration(@RequestParam int days) {
+        return ResponseEntity.ok(this.service.findByDuration(days));
     }
 
     @GetMapping(params = "description")
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
-    public ResponseEntity<List<Tour>> findByDescription(
+    public ResponseEntity<?> findByDescription(
             @RequestParam
             @NotEmpty(message = "{tour.description.notEmpty}")
             @Size(max = 1000, message = "{tour.description.size}") String description) {
-        return ResponseEntity.ok(service.findByDescription(description));
+        return ResponseEntity.ok(this.service.findByDescription(description));
     }
 
     @GetMapping(params = "cost")
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
-    public ResponseEntity<List<Tour>> findByCost(
+    public ResponseEntity<?> findByCost(
             @RequestParam
             @NotNull(message = "{tour.cost.notNull}")
             @DecimalMin(value = "0.0000", message = "{tour.cost.min}") BigDecimal cost) {
-        return ResponseEntity.ok(service.findByCost(cost));
+        return ResponseEntity.ok(this.service.findByCost(cost));
     }
 
     @GetMapping(params = "type")
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
-    public ResponseEntity<List<Tour>> findByTourType(@RequestParam TourType type) {
-        return ResponseEntity.ok(service.findByTourType(type));
+    public ResponseEntity<?> findByTourType(@RequestParam TourType type) {
+        return ResponseEntity.ok(this.service.findByTourType(type));
     }
 }

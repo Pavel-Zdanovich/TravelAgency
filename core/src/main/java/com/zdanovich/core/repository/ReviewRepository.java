@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ReviewRepository extends CommonRepository<Review, Long> {
+public interface ReviewRepository extends CommonRepository<Long, Review> {
 
     Optional<Review> findByUserAndTour(User user, Tour tour);
 

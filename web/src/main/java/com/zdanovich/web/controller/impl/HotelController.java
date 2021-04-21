@@ -26,7 +26,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping(path = HotelController.PATH)
-public class HotelController extends AbstractController<Hotel, Long, HotelRepository, HotelService> {
+public class HotelController extends AbstractController<Long, Hotel, HotelRepository, HotelService> {
 
     public static final String PATH = "/hotels";
 
@@ -37,46 +37,46 @@ public class HotelController extends AbstractController<Hotel, Long, HotelReposi
 
     @GetMapping(params = "name")
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
-    public ResponseEntity<Hotel> findByName(
+    public ResponseEntity<?> findByName(
             @RequestParam
             @NotEmpty(message = "{hotel.name.notEmpty}")
             @Size(min = 2, max = 50, message = "{hotel.name.size}") String name) {
-        return ResponseEntity.of(service.findByName(name));
+        return ResponseEntity.of(this.service.findByName(name));
     }
 
     @GetMapping(params = "stars")
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
-    public ResponseEntity<List<Hotel>> findByStars(
+    public ResponseEntity<?> findByStars(
             @RequestParam
             @NotNull(message = "{hotel.stars.notNull}")
             @Min(value = 1, message = "{hotel.stars.min}")
             @Max(value = 5, message = "{hotel.stars.max}") Short stars) {
-        return ResponseEntity.ok(service.findByStars(stars));
+        return ResponseEntity.ok(this.service.findByStars(stars));
     }
 
     @GetMapping(params = {"minLatitude", "maxLatitude", "minLongitude", "maxLongitude"})
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
-    public ResponseEntity<List<Hotel>> findByArea(
+    public ResponseEntity<?> findByArea(
             @RequestParam @DecimalMin("-90.0000000") BigDecimal minLatitude,
             @RequestParam @DecimalMax("90.0000000") BigDecimal maxLatitude,
             @RequestParam @DecimalMin("-180.0000000") BigDecimal minLongitude,
             @RequestParam @DecimalMax("180.0000000") BigDecimal maxLongitude) {
-        return ResponseEntity.ok(service.findByArea(minLatitude, maxLatitude, minLongitude, maxLongitude));
+        return ResponseEntity.ok(this.service.findByArea(minLatitude, maxLatitude, minLongitude, maxLongitude));
     }
 
 
     @GetMapping(params = "features")
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
-    public ResponseEntity<List<Hotel>> findByFeatures(
+    public ResponseEntity<?> findByFeatures(
             @RequestParam
             @NotEmpty(message = "{hotel.name.notEmpty}")
             @Size(min = 2, max = 50, message = "{hotel.name.size}") Set<String> features) {
-        return ResponseEntity.ok(service.findByFeatures(features));
+        return ResponseEntity.ok(this.service.findByFeatures(features));
     }
 
     @GetMapping(params = "countryName")
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
-    public ResponseEntity<List<Hotel>> findByCountry(@RequestParam String countryName) {
-        return ResponseEntity.ok(service.findByCountry(countryName));
+    public ResponseEntity<?> findByCountry(@RequestParam String countryName) {
+        return ResponseEntity.ok(this.service.findByCountry(countryName));
     }
 }

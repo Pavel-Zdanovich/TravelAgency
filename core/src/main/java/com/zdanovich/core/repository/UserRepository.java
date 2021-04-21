@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends CommonRepository<User, Long> {
+public interface UserRepository extends CommonRepository<Long, User> {
 
     Optional<User> findByLogin(String login);
 

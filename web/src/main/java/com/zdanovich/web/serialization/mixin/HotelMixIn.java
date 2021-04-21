@@ -6,12 +6,11 @@ import com.zdanovich.core.entity.Tour;
 
 import java.util.Set;
 
-//@JsonIgnoreProperties(value = {"tours"})
 public class HotelMixIn {
 
     @JsonBackReference
-    private Set<Feature> features;
+    private Set<Feature> features; //TODO return in Brief
 
     @JsonBackReference
-    private Set<Tour> tours;
+    private Set<Tour> tours; //TODO return in Detailed
 }

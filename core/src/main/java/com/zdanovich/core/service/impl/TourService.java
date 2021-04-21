@@ -21,7 +21,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class TourService extends AbstractService<Tour, Long, TourRepository> {
+public class TourService extends AbstractService<Long, Tour, TourRepository> {
 
     @Autowired
     public TourService(TourRepository repository) {

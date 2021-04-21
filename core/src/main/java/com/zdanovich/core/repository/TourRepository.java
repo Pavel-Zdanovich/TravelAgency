@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
-public interface TourRepository extends CommonRepository<Tour, Long>, JpaSpecificationExecutor<Tour> {
+public interface TourRepository extends CommonRepository<Long, Tour>, JpaSpecificationExecutor<Tour> {
 
     List<Tour> findByStartDate(Timestamp startDate);
 

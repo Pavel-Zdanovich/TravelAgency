@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
 
 @RestController
 @RequestMapping(path = FeatureController.PATH)
-public class FeatureController extends AbstractController<Feature, Long, FeatureRepository, FeatureService> {
+public class FeatureController extends AbstractController<Long, Feature, FeatureRepository, FeatureService> {
 
     public static final String PATH = "/features";
 
@@ -29,10 +29,16 @@ public class FeatureController extends AbstractController<Feature, Long, Feature
 
     @GetMapping(params = "name")
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
-    public ResponseEntity<Feature> findByName(
+    public ResponseEntity<?> findByName(
             @RequestParam
             @NotEmpty(message = "{feature.name.notEmpty}")
             @Size(min = 3, max = 30, message = "{feature.name.size}") String name) {
         return ResponseEntity.of(this.service.findByName(name));
+    }
+
+    @GetMapping
+    @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
+    public ResponseEntity<?> findAll() {
+        return ResponseEntity.ok(this.service.findAll());
     }
 }

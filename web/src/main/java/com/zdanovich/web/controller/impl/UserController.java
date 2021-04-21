@@ -21,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = UserController.PATH)
-public class UserController extends AbstractController<User, Long, UserRepository, UserService> {
+public class UserController extends AbstractController<Long, User, UserRepository, UserService> {
 
     public static final String PATH = "/users";
 
@@ -32,17 +32,17 @@ public class UserController extends AbstractController<User, Long, UserRepositor
 
     @GetMapping(params = "login")
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
-    public ResponseEntity<User> findByLogin(
+    public ResponseEntity<?> findByLogin(
             @RequestParam
             @NotNull(message = "{user.login.notNull}")
             @Size(min = 5, max = 30, message = "{user.login.size}")
             @Pattern(regexp = User.ONE_WORD_REGEX, message = "{user.login.pattern}") String login) {
-        return ResponseEntity.of(service.findByLogin(login));
+        return ResponseEntity.of(this.service.findByLogin(login));
     }
 
     @GetMapping(params = "role")
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
-    public ResponseEntity<List<User>> findByUserRole(@RequestParam UserRole role) {
-        return ResponseEntity.ok(service.findByUserRole(role));
+    public ResponseEntity<?> findByUserRole(@RequestParam UserRole role) {
+        return ResponseEntity.ok(this.service.findByUserRole(role));
     }
 }

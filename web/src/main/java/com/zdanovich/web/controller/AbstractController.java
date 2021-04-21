@@ -1,6 +1,6 @@
 package com.zdanovich.web.controller;
 
-import com.zdanovich.core.entity.AbstractEntity;
+import com.zdanovich.core.entity.generator.Identifiable;
 import com.zdanovich.core.repository.CommonRepository;
 import com.zdanovich.core.service.CommonService;
 import com.zdanovich.web.security.Authorities;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.Serializable;
 import java.util.Optional;
 
-public abstract class AbstractController<E extends AbstractEntity, ID extends Serializable,
-        R extends CommonRepository<E, ID>, S extends CommonService<E, ID, R>> implements CommonController<E, ID, R, S> {
+public abstract class AbstractController<ID extends Serializable, E extends Identifiable<ID>,
+        R extends CommonRepository<ID, E>, S extends CommonService<ID, E, R>> implements CommonController<ID, E, R, S> {
 
     protected final S service;
 
@@ -29,29 +29,22 @@ public abstract class AbstractController<E extends AbstractEntity, ID extends Se
     @Override
     @PostMapping
     @PreAuthorize(value = "hasAuthority('" + Authorities.CREATE_PRIVILEGE + "')")
-    public ResponseEntity<E> save(@RequestBody E entity) {
+    public ResponseEntity<?> save(@RequestBody E entity) {
         E savedEntity = this.service.save(entity);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEntity);
     }
 
     @Override
-    @GetMapping
-    @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
-    public ResponseEntity<Iterable<E>> findAll() {
-        return ResponseEntity.ok(this.service.findAll());
-    }
-
-    @Override
     @GetMapping(params = "id")
     @PreAuthorize(value = "hasAuthority('" + Authorities.READ_PRIVILEGE + "')")
-    public ResponseEntity<E> findById(@RequestParam ID id) {
+    public ResponseEntity<?> findById(@RequestParam ID id) {
         return ResponseEntity.of(this.service.findById(id));
     }
 
     @Override
     @PutMapping
     @PreAuthorize(value = "hasAuthority('" + Authorities.UPDATE_PRIVILEGE + "')")
-    public ResponseEntity<E> update(@RequestBody E entity) {
+    public ResponseEntity<?> update(@RequestBody E entity) {
         if (this.service.existsById((ID) entity.getId())) {
             E updatedEntity = this.service.save(entity);
             return ResponseEntity.ok(updatedEntity);
@@ -63,7 +56,7 @@ public abstract class AbstractController<E extends AbstractEntity, ID extends Se
     @Override
     @DeleteMapping(params = "id")
     @PreAuthorize(value = "hasAuthority('" + Authorities.DELETE_PRIVILEGE + "')")
-    public ResponseEntity<E> deleteById(@RequestParam ID id) {
+    public ResponseEntity<?> deleteById(@RequestParam ID id) {
         Optional<E> optionalEntity = this.service.findById(id);
         if (optionalEntity.isPresent()) {
             this.service.deleteById(id);

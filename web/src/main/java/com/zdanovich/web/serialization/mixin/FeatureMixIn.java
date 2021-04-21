@@ -5,9 +5,8 @@ import com.zdanovich.core.entity.Hotel;
 
 import java.util.Set;
 
-//@JsonIgnoreProperties(value = {"hotels"})
 public class FeatureMixIn {
 
     @JsonBackReference
-    private Set<Hotel> hotels;
+    private Set<Hotel> hotels; //TODO return in Detailed
 }

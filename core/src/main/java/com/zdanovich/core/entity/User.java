@@ -19,25 +19,22 @@ import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = User.USERS, uniqueConstraints = @UniqueConstraint(name = "USER_LOGIN_UNIQUE", columnNames = User.LOGIN))
 @AttributeOverride(name = AbstractEntity.ID, column = @Column(name = User.USER_ID))
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"tours", "reviews"}, callSuper = false)
-@ToString(exclude = {"tours", "reviews"})
+@EqualsAndHashCode(exclude = {"tours"}, callSuper = false)
+@ToString(exclude = {"tours"})
 @Validated
-public class User extends AbstractEntity {
+public class User extends AbstractEntity<Long> {
 
     public static final String USERS = "USERS";
     public static final String USER_ID = "USER_ID";
@@ -78,17 +75,4 @@ public class User extends AbstractEntity {
             inverseForeignKey = @ForeignKey(name = "USER_TOUR_TOUR_ID_FK"))
     @Getter
     private Set<Tour> tours = new HashSet<>();
-
-    @OneToMany(targetEntity = Review.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = USER_ID)
-    @Getter
-    private List<Review> reviews = new ArrayList<>();
-
-    public boolean addTour(@NotNull(message = "{tour.notNull}") Tour tour) {
-        return this.tours.add(tour) ? tour.getUsers().add(this) : false;
-    }
-
-    public boolean removeTour(@NotNull(message = "{tour.notNull}") Tour tour) {
-        return this.tours.remove(tour) ? tour.getUsers().remove(this) : false;
-    }
 }

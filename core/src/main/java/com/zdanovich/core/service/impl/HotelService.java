@@ -1,6 +1,5 @@
 package com.zdanovich.core.service.impl;
 
-import com.zdanovich.core.entity.Country;
 import com.zdanovich.core.entity.Hotel;
 import com.zdanovich.core.entity.metamodel.Hotel_;
 import com.zdanovich.core.repository.HotelRepository;
@@ -23,7 +22,7 @@ import java.util.Set;
 
 @Service
 @Transactional
-public class HotelService extends AbstractService<Hotel, Long, HotelRepository> {
+public class HotelService extends AbstractService<Long, Hotel, HotelRepository> {
 
     @Autowired
     public HotelService(HotelRepository repository) {
@@ -71,10 +70,6 @@ public class HotelService extends AbstractService<Hotel, Long, HotelRepository> 
     public List<Hotel> findByFeatures(Set<String> featureNames) {
         Specification<Hotel> hotelSpecification = new FindHotelByFeatureNames(featureNames);
         return repository.findAll(hotelSpecification);
-    }
-
-    public List<Hotel> findByCountry(Country country) {
-        return repository.findByTours_Country(country);
     }
 
     public List<Hotel> findByCountry(String countryName) {

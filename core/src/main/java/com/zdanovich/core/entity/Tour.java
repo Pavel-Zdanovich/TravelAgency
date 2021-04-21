@@ -16,10 +16,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Future;
@@ -29,19 +27,17 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = Tour.TOURS)
 @AttributeOverride(name = AbstractEntity.ID, column = @Column(name = Tour.TOUR_ID))
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"users", "reviews"}, callSuper = false)
-@ToString(exclude = {"users", "reviews"})
+@EqualsAndHashCode(exclude = {"users"}, callSuper = false)
+@ToString(exclude = {"users"})
 @Validated
-public class Tour extends AbstractEntity {
+public class Tour extends AbstractEntity<Long> {
 
     public static final String TOURS = "TOURS";
     public static final String TOUR_ID = "TOUR_ID";
@@ -92,14 +88,7 @@ public class Tour extends AbstractEntity {
     @Setter
     private TourType tourType;
 
-    @ManyToMany(targetEntity = User.class, cascade = CascadeType.ALL)
-    @JoinTable(name = "USERS_TOURS",
-            joinColumns = @JoinColumn(name = TOUR_ID, referencedColumnName = TOUR_ID,
-                    foreignKey = @ForeignKey(name = "USER_TOUR_USER_ID_FK")),
-            foreignKey = @ForeignKey(name = "USER_TOUR_USER_ID_FK"),
-            inverseJoinColumns = @JoinColumn(name = User.USER_ID, referencedColumnName = User.USER_ID,
-                    foreignKey = @ForeignKey(name = "USER_TOUR_TOUR_ID_FK")),
-            inverseForeignKey = @ForeignKey(name = "USER_TOUR_TOUR_ID_FK"))
+    @ManyToMany(targetEntity = User.class, cascade = CascadeType.ALL, mappedBy = "tours")
     @Getter
     private Set<User> users = new HashSet<>();
 
@@ -113,46 +102,19 @@ public class Tour extends AbstractEntity {
     @Getter
     private Country country;
 
-    @OneToMany(targetEntity = Review.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = TOUR_ID)
-    @Getter
-    private List<Review> reviews = new ArrayList<>();
-
     public boolean addUser(@NotNull(message = "{user.notNull}") User user) {
-        return user.addTour(this);
+        return this.users.add(user) && user.getTours().add(this);
     }
 
     public boolean removeUser(@NotNull(message = "{user.notNull}") User user) {
-        return user.removeTour(this);
+        return this.users.remove(user) && user.getTours().remove(this);
     }
 
-    public boolean setHotel(@NotNull(message = "{hotel.notNull}") Hotel hotel) {
+    public void setHotel(@NotNull(message = "{hotel.notNull}") Hotel hotel) {
         this.hotel = hotel;
-        return this.hotel.getTours().add(this);
     }
 
-    public boolean removeHotel() {
-        if (this.hotel != null) {
-            if (this.hotel.getTours().remove(this)) {
-                this.hotel = null;
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean setCountry(@NotNull(message = "{country.notNull}") Country country) {
+    public void setCountry(@NotNull(message = "{country.notNull}") Country country) {
         this.country = country;
-        return this.country.getTours().add(this);
-    }
-
-    public boolean removeCountry() {
-        if (this.country != null) {
-            if (this.country.getTours().remove(this)) {
-                this.country = null;
-                return true;
-            }
-        }
-        return false;
     }
 }

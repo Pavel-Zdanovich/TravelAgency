@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class JsonWebAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+public class JsonWebAuthenticationFilter extends AbstractAuthenticationProcessingFilter { //TODO OncePerRequestFilter, because no authenticationManager.authenticate needed
 
     public static final String FILTER_APPLIED = JsonWebAuthenticationFilter.class.getName().concat(".APPLIED");
 

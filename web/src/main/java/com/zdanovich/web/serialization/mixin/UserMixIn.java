@@ -7,12 +7,11 @@ import com.zdanovich.core.entity.Tour;
 import java.util.List;
 import java.util.Set;
 
-//@JsonIgnoreProperties(value = {"tours", "reviews"})
 public class UserMixIn {
 
     @JsonBackReference
-    private Set<Tour> tours;
+    private Set<Tour> tours; //TODO return in Detailed
 
     @JsonBackReference
-    private List<Review> reviews;
+    private List<Review> reviews; //TODO return in Detailed
 }

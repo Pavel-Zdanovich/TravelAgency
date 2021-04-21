@@ -146,7 +146,7 @@ public class AuthService extends DaoAuthenticationProvider {
 
     private Map<String, String> obtain(HttpServletRequest request) {
         try {
-            return this.objectMapper.readValue(request.getReader(), objectMapper.getTypeFactory().constructMapType(Map.class, String.class, String.class));
+            return this.objectMapper.readValue(request.getReader(), this.objectMapper.getTypeFactory().constructMapType(Map.class, String.class, String.class));
         } catch (IOException e) {
             String error = "Error occurred during parse request body";
             logger.error(error);

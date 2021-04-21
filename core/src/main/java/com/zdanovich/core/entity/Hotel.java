@@ -12,12 +12,10 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
@@ -38,10 +36,10 @@ import java.util.Set;
         @UniqueConstraint(name = "HOTEL_WEBSITE_UNIQUE", columnNames = Hotel.WEBSITE)})
 @AttributeOverride(name = AbstractEntity.ID, column = @Column(name = Hotel.HOTEL_ID))
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = "tours", callSuper = false)
-@ToString(exclude = "tours")
+@EqualsAndHashCode(callSuper = false)
+@ToString
 @Validated
-public class Hotel extends AbstractEntity {
+public class Hotel extends AbstractEntity<Long> {
 
     public static final String HOTELS = "HOTELS";
     public static final String HOTEL_ID = "HOTEL_ID";
@@ -90,8 +88,7 @@ public class Hotel extends AbstractEntity {
     @Setter
     private BigDecimal longitude;
 
-    @ManyToMany(targetEntity = Feature.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-            CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = Feature.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(name = "HOTELS_FEATURES",
             joinColumns = @JoinColumn(name = HOTEL_ID, referencedColumnName = HOTEL_ID,
                     foreignKey = @ForeignKey(name = "HOTEL_FEATURE_FEATURE_ID_FK")),
@@ -102,13 +99,8 @@ public class Hotel extends AbstractEntity {
     @Getter
     private Set<Feature> features = new HashSet<>();
 
-    @OneToMany(targetEntity = Tour.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = HOTEL_ID)
-    @Getter
-    private Set<Tour> tours = new HashSet<>();
-
     public boolean addFeature(@NotNull(message = "{feature.notNull}") @Valid Feature feature) {
-        return this.features.add(feature) ? feature.getHotels().add(this) : false;
+        return this.features.add(feature);
     }
 
     public Optional<Feature> getFeature(String featureName) {
@@ -120,7 +112,7 @@ public class Hotel extends AbstractEntity {
     }
 
     public boolean removeFeature(@NotNull(message = "{feature.notNull}") @Valid Feature feature) {
-        return this.features.remove(feature) ? feature.getHotels().remove(this) : false;
+        return this.features.remove(feature);
     }
 
     public boolean containsFeature(@NotEmpty(message = "{feature.name.notEmpty}") String featureName) {

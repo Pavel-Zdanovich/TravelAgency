@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class ReviewService extends AbstractService<Review, Long, ReviewRepository> {
+public class ReviewService extends AbstractService<Long, Review, ReviewRepository> {
 
     @Autowired
     public ReviewService(ReviewRepository repository) {
