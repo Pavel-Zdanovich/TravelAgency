@@ -10,6 +10,9 @@ coverage
 # database
 h2*
 
+#index
+index
+
 # production
 dist
 target

@@ -7,7 +7,27 @@
     overflow: hidden;
 }
 
+.angle {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+[class$="left"] {
+    left: 10%;
+}
+
+[class$="right"] {
+    right: 10%;
+}
+
 .image {
+    display: none;
     width: 100%;
     height: auto;
+}
+
+[class$="active"] {
+    display: block;
 }

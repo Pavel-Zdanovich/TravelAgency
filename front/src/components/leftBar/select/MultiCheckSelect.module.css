@@ -63,6 +63,7 @@
 .select [class^="select__menu"] {
     position: initial;
     margin: 0;
+    z-index: 0;
 }
 
 .select [class^="select__menu-list"] {

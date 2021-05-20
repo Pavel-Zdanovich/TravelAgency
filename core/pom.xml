@@ -18,7 +18,7 @@
     <properties>
         <spring.data.version>2.1.8.RELEASE</spring.data.version>
 
-        <hibernate.version>5.4.14.Final</hibernate.version>
+        <hibernate.version>5.4.30.Final</hibernate.version>
 
         <!--hibernate configuration start-->
         <hibernate.generate_ddl>true</hibernate.generate_ddl>
@@ -30,7 +30,7 @@
         <hibernate.format_sql>true</hibernate.format_sql>
         <!--hibernate configuration end-->
 
-        <hibernate.validator.version>6.1.3.Final</hibernate.validator.version>
+        <hibernate.validator.version>6.2.0.Final</hibernate.validator.version>
 
         <javax.validation.version>2.0.1.Final</javax.validation.version>
         <javax.el.version>3.0.1-b06</javax.el.version>
@@ -38,7 +38,7 @@
 
         <aspectj.version>1.9.3</aspectj.version>
 
-        <liquibase.version>3.8.8</liquibase.version>
+        <liquibase.version>4.3.5</liquibase.version>
 
         <!--liquibase configuration start-->
         <liquibase.changeLogFile>
@@ -52,7 +52,7 @@
         <h2.version>1.4.200</h2.version>
 
         <!--database configuration start-->
-        <application.properties>target\classes\application.properties</application.properties>
+        <application.properties>target\classes\core-application.properties</application.properties>
         <!--database configuration end-->
     </properties>
 
