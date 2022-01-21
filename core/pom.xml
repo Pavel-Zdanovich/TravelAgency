@@ -49,7 +49,7 @@
 
         <oracle.version>12.2.0.1</oracle.version>
         <postgresql.version>42.2.5</postgresql.version>
-        <h2.version>1.4.200</h2.version>
+        <h2.version>2.1.210</h2.version>
 
         <!--database configuration start-->
         <application.properties>target\classes\core-application.properties</application.properties>
