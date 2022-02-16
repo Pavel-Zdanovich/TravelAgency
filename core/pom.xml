@@ -48,7 +48,7 @@
         <!--liquibase configuration end-->
 
         <oracle.version>12.2.0.1</oracle.version>
-        <postgresql.version>42.2.5</postgresql.version>
+        <postgresql.version>42.3.3</postgresql.version>
         <h2.version>1.4.200</h2.version>
 
         <!--database configuration start-->
