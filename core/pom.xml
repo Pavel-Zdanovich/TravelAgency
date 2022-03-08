@@ -38,7 +38,7 @@
 
         <aspectj.version>1.9.3</aspectj.version>
 
-        <liquibase.version>4.3.5</liquibase.version>
+        <liquibase.version>4.8.0</liquibase.version>
 
         <!--liquibase configuration start-->
         <liquibase.changeLogFile>
