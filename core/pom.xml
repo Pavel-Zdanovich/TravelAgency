@@ -16,7 +16,7 @@
     <name>core</name>
 
     <properties>
-        <spring.data.version>2.1.8.RELEASE</spring.data.version>
+        <spring.data.version>2.1.9.RELEASE</spring.data.version>
 
         <hibernate.version>5.4.30.Final</hibernate.version>
 
