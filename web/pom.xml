@@ -24,7 +24,7 @@
         <jstl.version>1.2.1</jstl.version>
         <taglibs.version>1.1.2</taglibs.version>
 
-        <jackson.version>2.11.0</jackson.version>
+        <jackson.version>2.13.4.1</jackson.version>
 
         <jsonwebtoken.version>0.9.1</jsonwebtoken.version>
 
